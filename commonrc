@@ -1,0 +1,47 @@
+alias ls="ls -G"
+alias lsa="ls -a"
+alias ll="ls -lh"
+alias lla="ls -alh"
+alias grep="grep --colour"
+alias todo="grep TODO -r *"
+alias tigs="tig status"
+alias git-conflict="$EDITOR $(git status | grep both | cut -d ':' -f 2 | xargs -0)"
+alias ru="rackup"
+alias v="vim"
+alias vim='~/Applications/MacVim.app/Contents/MacOS/Vim'
+
+
+alias rss="rspec spec/serializers"
+alias rsc="rspec spec/controllers"
+alias rsm="rspec spec/models"
+alias rsa="rspec spec"
+
+
+PATH="/usr/local/bin:$PATH:$HOME/Applications:/opt/local/bin"
+export PATH="$PATH:/Applications/Postgres.app/Contents/Versions/9.3/bin"
+export EDITOR=mvim
+
+
+
+# Permissions when creating new files/folder will be :
+#    - file :   644
+#    - folder : 755
+# This is needed for Homebrew to deal properly with my
+# different users.
+
+umask 002
+
+
+# When running altagem/web karma.sh (javascript test runner),
+# I get errors if I don't modify this settings (concurrent access
+# to files, I believe)
+
+# TODO: Not sure it belongs here. Should be read only once per session,
+#       and not for every console I fire up ?
+
+ulimit -Sn 512
+
+
+# Conflicts between ZSH and GIT HEAD^ resulting in "no matches found" error
+# when trying to use HEAD^ in a git command
+setopt NO_NOMATCH

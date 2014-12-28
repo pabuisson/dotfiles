@@ -1,0 +1,11 @@
+--type-set=log=.log
+--type-set=haml=.haml
+--type-set=coffee=.coffee
+--type-set=sass=.sass
+--type-set=scss=.scss
+
+--ignore-dir=vendor
+--ignore-dir=node_modules
+--ignore-dir=tmp
+
+--pager=less
