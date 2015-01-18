@@ -19,13 +19,17 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 Plugin 'gmarik/Vundle.vim'  " required
 " --- Color schemes ---
-Plugin 'jonathanfilip/vim-lucius'
-Plugin 'morhetz/gruvbox'
-Plugin 'crusoexia/vim-monokai'
-Plugin 'w0ng/vim-hybrid'
 Plugin 'altercation/vim-colors-solarized'
-Plugin 'chriskempson/base16-vim'
+Plugin 'morhetz/gruvbox'
+Plugin 'w0ng/vim-hybrid'
+Plugin 'crusoexia/vim-monokai'
+Plugin 'jonathanfilip/vim-lucius'
 Plugin 'larssmit/vim-getafe'
+Plugin 'noahfrederick/vim-noctu'
+Plugin 'rainux/vim-desert-warm-256'
+Plugin 'freeo/vim-kalisi'
+Plugin 'abra/vim-abra'
+Plugin 'junegunn/seoul256.vim'
 " --- Filetype related ---
 Plugin 'slim-template/vim-slim'
 " --- Plugins ---
@@ -46,6 +50,7 @@ Plugin 'tpope/vim-repeat'
 Plugin 'Lokaltog/vim-easymotion'
 Plugin 'Raimondi/delimitMate'
 Plugin 'terryma/vim-multiple-cursors'
+Plugin 'Yggdroot/indentLine'
 Plugin 'scrooloose/syntastic'
 
 call vundle#end()           " required
@@ -58,6 +63,7 @@ filetype plugin indent on   " required
 
 " <Leader> set to , instead of \
 let mapleader = ","
+
 
 " ----- vim-bookmarks -----
 let g:bookmark_auto_save_file = '$HOME/.vim/bookmarks'
@@ -184,7 +190,7 @@ set vb              "visual bell instead of audio
 set encoding=utf-8
 set linebreak       "don't cut words at the end of lines
 set nowrap          "don't wrap long lines
-set colorcolumn=90
+set colorcolumn=85
 set foldcolumn=1    "always enable foldcolumn
 let g:netrw_list_hide= '\.DS_Store$, *\.scssc$, *\.sassc$, \.sass-cache\/'
 set nrformats=      "interpret all digits as decimals (even when prefixed with 0)
@@ -255,19 +261,6 @@ autocmd BufWrite * :call ReplaceNonUnicodeWhitespaces()
 " === FILE SPECIFIC SETTINGS ===
 " ==============================
 
-" Settings depending on filetype
-autocmd FileType coffee       set commentstring=#\ %s
-autocmd FileType haml         set commentstring=/\ %s
-autocmd FileType slim         set commentstring=/\ %s
-"
-autocmd FileType coffee,sass  match Error /;/
-autocmd FileType coffee       map <leader>cl iconsole.log()<ESC>i
-autocmd FileType gitcommit    call setpos('.', [0, 1, 1, 0])
-autocmd FileType gitcommit    set tw=80
-autocmd FileType javascript   map <leader>cl console.log()<ESC>i
-autocmd FileType markdown     set sw=4 ts=4 sts=4 et wrap
-autocmd FileType sass         match Error /\w:\S/
-
 " Specific filetype settings
 autocmd BufRead,BufNewFile *.md     set ft=markdown
 autocmd BufRead,BufNewFile *.todo   set ft=todo
@@ -275,6 +268,19 @@ autocmd BufRead,BufNewFile *.scss   set ft=scss
 autocmd BufRead,BufNewFile *.sass   set ft=sass
 autocmd BufRead,BufNewFile *.coffee set ft=coffee
 autocmd BufRead,BufNewFile Gemfile* set ft=ruby
+
+" Settings depending on filetype
+autocmd FileType coffee       set commentstring=#\ %s
+autocmd FileType haml         set commentstring=/\ %s
+autocmd FileType slim         set commentstring=/\ %s
+"
+autocmd FileType coffee,sass  match Error /;/
+" Removes all autocommands for BufEnter on commit messages (au!) and set
+" cursor position on the first char
+autocmd FileType gitcommit    au! BufEnter COMMIT_EDITMSG call setpos('.', [0, 1, 1, 0])
+autocmd FileType gitcommit    set tw=80
+autocmd FileType markdown     set sw=4 ts=4 sts=4 et wrap
+autocmd FileType sass         match Error /\w:\S/
 
 " ===============================
 " === SHORTCUTS CONFIGURATION ===
@@ -302,7 +308,6 @@ nmap <C-h> :bp<cr>
 imap <C-h> <esc>:bp<cr>
 
 " Wrapping the current word
-" TODO: Test me !
 nmap " bi"<ESC>ea"<ESC>
 nmap ' bi'<ESC>ea'<ESC>
 nmap ( bi(<ESC>ea)<ESC>
@@ -333,7 +338,7 @@ autocmd ColorScheme * highlight clear SignColumn
 
 
 " Default colorscheme
-colorscheme IR_black
+colorscheme Kolor
 set bg=dark
 
 if has("gui_running")
@@ -341,8 +346,7 @@ if has("gui_running")
   " Default GUI colorscheme
   " colorscheme base16-eighties
   " colorscheme lucius
-colorscheme Gruvbox
-  " set bg=light
+  colorscheme base16-flat
 
   set columns=120 lines=60
 
