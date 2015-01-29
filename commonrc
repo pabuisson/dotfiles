@@ -22,7 +22,6 @@ export PATH="$PATH:/Applications/Postgres.app/Contents/Versions/9.3/bin"
 export EDITOR=mvim
 
 
-
 # Permissions when creating new files/folder will be :
 #    - file :   644
 #    - folder : 755
@@ -32,16 +31,10 @@ export EDITOR=mvim
 umask 002
 
 
-# When running altagem/web karma.sh (javascript test runner),
-# I get errors if I don't modify this settings (concurrent access
-# to files, I believe)
-
-# TODO: Not sure it belongs here. Should be read only once per session,
-#       and not for every console I fire up ?
-
-ulimit -Sn 512
-
-
 # Conflicts between ZSH and GIT HEAD^ resulting in "no matches found" error
 # when trying to use HEAD^ in a git command
 setopt NO_NOMATCH
+
+
+# Initialize FASD
+eval "$(fasd --init auto)"
