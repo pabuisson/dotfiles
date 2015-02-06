@@ -9,6 +9,9 @@ alias git-conflict="$EDITOR $(git status | grep both | cut -d ':' -f 2 | xargs -
 alias ru="rackup"
 alias v="vim"
 alias vim='~/Applications/MacVim.app/Contents/MacOS/Vim'
+alias rs="rails server"
+alias rc="rails console"
+alias mm="middleman"
 
 
 alias rss="rspec spec/serializers"
