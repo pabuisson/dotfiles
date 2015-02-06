@@ -79,7 +79,7 @@ map <Leader>rsa :call RunAllSpecs()<CR>
 " ----- Ctrlp -----
 " Updates the file list only once the user stops typing
 let g:ctrlp_lazy_update = 1
-let g:ctrlp_custom_ignore = '\v[\/](\.git|.sass-cache|node_modules)$'
+let g:ctrlp_custom_ignore = '\v[\/](\.git|.sass-cache|node_modules|tmp|log)$'
 nmap <C-b> :CtrlPBuffer<CR>
 imap <C-b> <ESC>:CtrlPBuffer<CR>
 " Don't open files in plugin windows
@@ -212,6 +212,7 @@ au BufWinLeave ?* mkview
 au BufWinEnter ?* silent loadview
 " === SPECIFIC SYNTAX HIGHLIGHTS ===
 match Todo /debugger\|console.log\|binding.pry/
+match Todo /REFACTOR/
 
 
 
@@ -290,7 +291,7 @@ nnoremap <leader>s :w<CR>
 " File explorer
 nnoremap <leader>e :Explore<CR>
 " Undo last search (to remove the highlighting)
-nnoremap <leader>su :silent! /astringthatwontbefoundinmydocuments#&?<CR>
+nnoremap <leader>su :nohlsearch<CR>
 " Copy current file name to the clipboard
 nnoremap <leader>yf :let @+ = expand("%:p")<CR>
 
@@ -304,6 +305,8 @@ nmap <C-l> :bn<cr>
 imap <C-l> <esc>:bn<cr>
 nmap <C-h> :bp<cr>
 imap <C-h> <esc>:bp<cr>
+
+
 
 " Wrapping the current word
 nmap " bi"<ESC>ea"<ESC>
@@ -336,7 +339,7 @@ autocmd ColorScheme * highlight clear SignColumn
 
 
 " Default colorscheme
-colorscheme Kolor
+colorscheme Tomorrow-Night
 set bg=dark
 
 if has("gui_running")
