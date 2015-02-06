@@ -25,11 +25,9 @@ Plugin 'w0ng/vim-hybrid'
 Plugin 'crusoexia/vim-monokai'
 Plugin 'jonathanfilip/vim-lucius'
 Plugin 'larssmit/vim-getafe'
-Plugin 'noahfrederick/vim-noctu'
 Plugin 'rainux/vim-desert-warm-256'
 Plugin 'freeo/vim-kalisi'
 Plugin 'abra/vim-abra'
-Plugin 'junegunn/seoul256.vim'
 " --- Filetype related ---
 Plugin 'slim-template/vim-slim'
 " --- Plugins ---
