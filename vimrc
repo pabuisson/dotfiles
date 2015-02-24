@@ -19,15 +19,14 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 Plugin 'gmarik/Vundle.vim'  " required
 " --- Color schemes ---
-Plugin 'altercation/vim-colors-solarized'
 Plugin 'morhetz/gruvbox'
 Plugin 'w0ng/vim-hybrid'
 Plugin 'crusoexia/vim-monokai'
 Plugin 'jonathanfilip/vim-lucius'
 Plugin 'larssmit/vim-getafe'
-Plugin 'rainux/vim-desert-warm-256'
-Plugin 'freeo/vim-kalisi'
 Plugin 'abra/vim-abra'
+Plugin 'zenorocha/dracula-theme', { 'rtp': 'vim/' }
+Plugin 'raphamorim/lucario', { 'rtp': 'vim/' }
 " --- Filetype related ---
 Plugin 'slim-template/vim-slim'
 " --- Plugins ---
@@ -38,18 +37,17 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'itchyny/lightline.vim'
 Plugin 'techlivezheng/vim-plugin-minibufexpl'
 Plugin 'tpope/vim-surround'
-Plugin 'tpope/vim-rails'
 Plugin 'godlygeek/tabular.git'
-Plugin 'myusuf3/numbers.vim'
 Plugin 'tpope/vim-commentary'
 Plugin 'tpope/vim-eunuch'
-Plugin 'vim-bookmarks'
+" Plugin 'vim-bookmarks'
 Plugin 'tpope/vim-repeat'
-Plugin 'Lokaltog/vim-easymotion'
+" Plugin 'Lokaltog/vim-easymotion'
 Plugin 'Raimondi/delimitMate'
 Plugin 'terryma/vim-multiple-cursors'
-Plugin 'Yggdroot/indentLine'
+" Plugin 'Yggdroot/indentLine'
 Plugin 'scrooloose/syntastic'
+" Plugin 'jeetsukumaran/vim-markology'
 
 call vundle#end()           " required
 filetype plugin indent on   " required
@@ -62,12 +60,19 @@ filetype plugin indent on   " required
 " <Leader> set to , instead of \
 let mapleader = ","
 
+" ----- indentLine -----
+" Is deemed to solved some performance issues I sometimes encountered because
+" of this plugin. Still in testing, I may have to remove the plugin
+let g:indentLine_faster = 1
+
+" ----- syntastic -----
+" let g:syntastic_ruby_checkers = [ 'rubylint' ]
 
 " ----- vim-bookmarks -----
-let g:bookmark_auto_save_file = '$HOME/.vim/bookmarks'
-nmap ff <Plug>BookmarkToggle
-nmap fj <Plug>BookmarkNext
-nmap fk <Plug>BookmarkPrev
+" let g:bookmark_auto_save_file = '$HOME/.vim/bookmarks'
+" nmap ff <Plug>BookmarkToggle
+" nmap fj <Plug>BookmarkNext
+" nmap fk <Plug>BookmarkPrev
 
 " ----- vim-rspec -----
 let g:rspec_runner = "os_x_iterm"
@@ -88,10 +93,6 @@ let g:ctrlp_reuse_window = 'netrw\|help\|quickfix'
 " 0i: do not open any new tab or window, and open additionnal files in hidden buffers
 let g:ctrlp_open_multiple_files = '0i'
 let g:ctrlp_extensions = ['undo', 'changes', 'bookmarkdir']
-
-" ----- numbers.vim -----
-let g:numbers_exclude = ['minibufexpl']
-nnoremap <F3> :NumbersToggle<CR>
 
 " ----- vim commentary -----
 nmap <leader>c gcc
