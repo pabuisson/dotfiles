@@ -257,7 +257,22 @@ autocmd BufWrite * :call StripTrailingWhitespaces()
 autocmd BufWrite * :call ReplaceNonUnicodeWhitespaces()
 
 
+" ===============================================
+" === Open URIs with default Mac OS behaviour ===
+" ===============================================
+" FIXME: Doesn't work for md links because of parentheses
 
+function! HandleURI()
+  let s:uri = matchstr(getline("."), '[a-z]*:\/\/[^ >,;:]*')
+  echo s:uri
+  if s:uri != ""
+	  exec "!open \"" . s:uri . "\""
+  else
+	  echo "No URI found in line."
+  endif
+endfunction
+
+map <Leader>w :call HandleURI()<CR>
 
 
 
