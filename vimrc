@@ -179,7 +179,8 @@ endfunction
 
 syntax on
 set ai
-set nu
+set number
+set relativenumber
 set undolevels=100
 set nobackup        "don't write backup files
 set noswapfile      "don't write swap files (careful, all text will be in memory !)
@@ -209,11 +210,14 @@ set incsearch   "show matchs as I type
 " === STATUS LINE ===
 set laststatus=2    "always display status line
 " === LOAD/SAVE VIEWS ===
+set viewoptions="cursor,fold"
 au BufWinLeave ?* mkview
 au BufWinEnter ?* silent loadview
 " === SPECIFIC SYNTAX HIGHLIGHTS ===
 match Todo /debugger\|console.log\|binding.pry/
 match Todo /REFACTOR/
+" ====
+set sessionoptions="buffers,curdir,folds,resize"
 
 
 
@@ -307,17 +311,23 @@ imap <C-l> <esc>:bn<cr>
 nmap <C-h> :bp<cr>
 imap <C-h> <esc>:bp<cr>
 
+" Move current line down/up
+" <Alt-k>
+vmap Ï :m .+1<CR>
+nmap Ï :m .+1<CR>
+" <Alt-j>
+vmap È :m .-2<CR>
+nmap È :m .-2<CR>
 
 
 " Wrapping the current word
 nmap " bi"<ESC>ea"<ESC>
-nmap ' bi'<ESC>ea'<ESC>
+" nmap ' bi'<ESC>ea'<ESC>
 nmap ( bi(<ESC>ea)<ESC>
 
-"Goes 1l down even with wrap enabled
-nnoremap j gj
-"Goes 1l up even with wrap enabled
+"Goes 1l up/down even with wrap enabled
 nnoremap k gk
+nnoremap j gj
 
 " Abbreviations
 iab bgrep background-repeat
@@ -340,21 +350,22 @@ autocmd ColorScheme * highlight clear SignColumn
 
 
 " Default colorscheme
-colorscheme Tomorrow-Night
+colorscheme IR_Black
 set bg=dark
 
 if has("gui_running")
 
   " Default GUI colorscheme
   " colorscheme base16-eighties
-  " colorscheme lucius
-  colorscheme base16-flat
+  colorscheme dracula
+  " colorscheme lucario
 
   set columns=120 lines=60
+  set linespace=1           " +1px between lines
 
   if has('mac')
-    "set guifont=Inconsolata\ for\ Powerline:h14
-    set guifont=Meslo\ LG\ M\ DZ\ for\ Powerline:h11
+    set guifont=Inconsolata\ for\ Powerline:h14
+    " set guifont=Meslo\ LG\ M\ DZ\ for\ Powerline:h11
   elseif has('unix')
     set guifont=Inconsolata\ 11
   endif
