@@ -19,6 +19,7 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 Plugin 'gmarik/Vundle.vim'  " required
 " --- Color schemes ---
+Plugin 'altercation/vim-colors-solarized'
 Plugin 'morhetz/gruvbox'
 Plugin 'w0ng/vim-hybrid'
 Plugin 'crusoexia/vim-monokai'
@@ -371,9 +372,11 @@ set bg=dark
 if has("gui_running")
 
   " Default GUI colorscheme
-  " colorscheme base16-eighties
-  colorscheme dracula
-  " colorscheme lucario
+  let g:solarized_contrast="high"
+  let g:solarized_visibility="low"
+  set bg=dark
+  colorscheme solarized
+
 
   set columns=120 lines=60
   set linespace=1           " +1px between lines
