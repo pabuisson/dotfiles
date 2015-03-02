@@ -299,7 +299,7 @@ autocmd FileType coffee,sass  match Error /;/
 " cursor position on the first char
 autocmd FileType gitcommit    au! BufEnter COMMIT_EDITMSG call setpos('.', [0, 1, 1, 0])
 autocmd FileType gitcommit    set tw=80
-autocmd FileType markdown     set sw=4 ts=4 sts=4 et wrap
+autocmd FileType markdown     set sw=4 ts=4 sts=4 et nolist wrap
 autocmd FileType sass         match Error /\w:\S/
 
 " ===============================
