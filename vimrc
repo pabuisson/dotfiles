@@ -28,6 +28,11 @@ Plugin 'larssmit/vim-getafe'
 Plugin 'abra/vim-abra'
 Plugin 'zenorocha/dracula-theme', { 'rtp': 'vim/' }
 Plugin 'raphamorim/lucario', { 'rtp': 'vim/' }
+Plugin 'freeo/vim-kalisi'
+Plugin 'chriskempson/vim-tomorrow-theme'
+Plugin 'cdmedia/itg_flat_vim'
+Plugin 'sjl/badwolf'
+Plugin 'cocopon/iceberg.vim'
 " --- Filetype related ---
 Plugin 'slim-template/vim-slim'
 " --- Plugins ---
