@@ -19,20 +19,18 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 Plugin 'gmarik/Vundle.vim'  " required
 " --- Color schemes ---
+Plugin 'chriskempson/vim-tomorrow-theme'
 Plugin 'altercation/vim-colors-solarized'
-Plugin 'morhetz/gruvbox'
 Plugin 'w0ng/vim-hybrid'
-Plugin 'crusoexia/vim-monokai'
-Plugin 'jonathanfilip/vim-lucius'
-Plugin 'larssmit/vim-getafe'
+Plugin 'morhetz/gruvbox'
+Plugin 'kristijanhusak/vim-hybrid-material'
+Plugin 'NLKNguyen/papercolor-theme'
 Plugin 'abra/vim-abra'
 Plugin 'zenorocha/dracula-theme', { 'rtp': 'vim/' }
-Plugin 'raphamorim/lucario', { 'rtp': 'vim/' }
-Plugin 'freeo/vim-kalisi'
-Plugin 'chriskempson/vim-tomorrow-theme'
-Plugin 'cdmedia/itg_flat_vim'
-Plugin 'sjl/badwolf'
-Plugin 'cocopon/iceberg.vim'
+" Plugin 'crusoexia/vim-monokai'
+" Plugin 'jonathanfilip/vim-lucius'
+" Plugin 'raphamorim/lucario', { 'rtp': 'vim/' }
+" Plugin 'ronny/birds-of-paradise.vim'
 " --- Filetype related ---
 Plugin 'slim-template/vim-slim'
 " --- Plugins ---
