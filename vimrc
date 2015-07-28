@@ -397,6 +397,8 @@ iab bgrep background-repeat
 iab bgcol background-color
 iab bgpos background-position
 
+nmap <LEADER>bda :1,1000bd<CR>
+nmap <LEADER>bwa :1,1000bw<CR>
 " TODO: buffer delete to the right
 " TODO: buffer delete to the left
 " TODO: buffer delete all but current one
@@ -428,8 +430,7 @@ if has("gui_running")
   set linespace=1           " +1px between lines
 
   if has('mac')
-    set guifont=Inconsolata\ for\ Powerline:h14
-    " set guifont=Meslo\ LG\ M\ DZ\ for\ Powerline:h11
+    set guifont=Input\ Mono\ Narrow:h12
   elseif has('unix')
     set guifont=Inconsolata\ 11
   endif
