@@ -116,6 +116,10 @@ let g:ctrlp_open_multiple_files = '0i'
 let g:ctrlp_extensions   = [ 'undo', 'changes', 'bookmarkdir' ]
 " Do not list files included in the gitignore
 let g:ctrlp_user_command = [ '.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard' ]
+" - Ctrlp-funky -
+nnoremap <leader>fu :CtrlPFunky<CR>
+let g:ctrlp_funky_syntax_highlight = 1
+
 
 " ----- vim commentary -----
 nmap <leader>c gcc
