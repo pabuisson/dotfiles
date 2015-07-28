@@ -302,9 +302,26 @@ function! HandleURI()
 	  echo "No URI found in line."
   endif
 endfunction
-
 map <Leader>w :call HandleURI()<CR>
 
+
+
+" ==================================================
+" === Count occurrences of the word under cursor ===
+" ==================================================
+
+function! CountOccurrences()
+  " 1. Retrieve cursor position
+  let l = line('.')
+  let c = col('.')
+  " 2. count occurrences of word under cursor
+  let word = expand('<cword>')
+  execute '%s/'.word.'//gn'
+  " 3. Restore cursor position
+  call cursor(l, c)
+endfunction
+
+map <Leader>co :call CountOccurrences()<CR>
 
 
 " ==============================
