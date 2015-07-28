@@ -1,10 +1,10 @@
-" ============================================================
+" ==============================================================
 "                      — VIMRC FILE —
 "
-" The original .vimrc file is stored under ~/.vim directory.
+" The original vimrc file is stored under ~/.dotfiles directory.
 " I use a symbolic link to link ~/.vimrc to this location.
 "
-" ============================================================
+" ==============================================================
 
 set nocompatible
 filetype off
@@ -96,9 +96,9 @@ imap <C-b> <ESC>:CtrlPBuffer<CR>
 " Don't open files in plugin windows
 let g:ctrlp_reuse_window = 'netrw\|help\|quickfix'
 " Open multiple files in hidden buffers
-" 0i: do not open any new tab or window, and open additionnal files in hidden buffers
+" > 0i: do not open any new tab or window, and open additionnal files in hidden buffers
 let g:ctrlp_open_multiple_files = '0i'
-let g:ctrlp_extensions = ['undo', 'changes', 'bookmarkdir']
+let g:ctrlp_extensions   = [ 'undo', 'changes', 'bookmarkdir' ]
 
 " ----- vim commentary -----
 nmap <leader>c gcc
@@ -259,8 +259,8 @@ function! ReplaceNonUnicodeWhitespaces()
   call cursor(l, c)
 endfunction
 
-autocmd BufWrite * :call StripTrailingWhitespaces()
-autocmd BufWrite * :call ReplaceNonUnicodeWhitespaces()
+au BufWrite * :call StripTrailingWhitespaces()
+au BufWrite * :call ReplaceNonUnicodeWhitespaces()
 
 
 " ===============================================
@@ -287,25 +287,25 @@ map <Leader>w :call HandleURI()<CR>
 " ==============================
 
 " Specific filetype settings
-autocmd BufRead,BufNewFile *.md     set ft=markdown
-autocmd BufRead,BufNewFile *.todo   set ft=todo
-autocmd BufRead,BufNewFile *.scss   set ft=scss
-autocmd BufRead,BufNewFile *.sass   set ft=sass
-autocmd BufRead,BufNewFile *.coffee set ft=coffee
-autocmd BufRead,BufNewFile Gemfile* set ft=ruby
+au BufRead,BufNewFile *.md     set ft=markdown
+au BufRead,BufNewFile *.todo   set ft=todo
+au BufRead,BufNewFile *.scss   set ft=scss
+au BufRead,BufNewFile *.sass   set ft=sass
+au BufRead,BufNewFile *.coffee set ft=coffee
+au BufRead,BufNewFile Gemfile* set ft=ruby
 
 " Settings depending on filetype
-autocmd FileType coffee       set commentstring=#\ %s
-autocmd FileType haml         set commentstring=/\ %s
-autocmd FileType slim         set commentstring=/\ %s
+au FileType coffee       set commentstring=#\ %s
+au FileType haml         set commentstring=/\ %s
+au FileType slim         set commentstring=/\ %s
 "
-autocmd FileType coffee,sass  match Error /;/
+au FileType coffee,sass  match Error /;/
 " Removes all autocommands for BufEnter on commit messages (au!) and set
 " cursor position on the first char
-autocmd FileType gitcommit    au! BufEnter COMMIT_EDITMSG call setpos('.', [0, 1, 1, 0])
-autocmd FileType gitcommit    set tw=80
-autocmd FileType markdown     set sw=4 ts=4 sts=4 et nolist wrap
-autocmd FileType sass         match Error /\w:\S/
+au FileType gitcommit    au! BufEnter COMMIT_EDITMSG call setpos('.', [0, 1, 1, 0])
+au FileType gitcommit    set tw=80
+au FileType markdown     set sw=4 ts=4 sts=4 et nolist wrap
+au FileType sass         match Error /\w:\S/
 
 " ===============================
 " === SHORTCUTS CONFIGURATION ===
@@ -367,7 +367,7 @@ iab bgpos background-position
 
 " vim-gitgutter : always good-looking gutter column
 highlight clear SignColumn
-autocmd ColorScheme * highlight clear SignColumn
+au ColorScheme * highlight clear SignColumn
 
 
 " Default colorscheme
@@ -381,7 +381,6 @@ if has("gui_running")
   let g:solarized_visibility="low"
   set bg=dark
   colorscheme solarized
-
 
   set columns=120 lines=60
   set linespace=1           " +1px between lines
