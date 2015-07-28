@@ -33,25 +33,28 @@ Plugin 'zenorocha/dracula-theme', { 'rtp': 'vim/' }
 " Plugin 'ronny/birds-of-paradise.vim'
 " --- Filetype related ---
 Plugin 'slim-template/vim-slim'
+Plugin 'gabrielelana/vim-markdown'
+Plugin 'kchmck/vim-coffee-script'
 " --- Plugins ---
 Plugin 'kien/ctrlp.vim'
+Plugin 'tacahiroy/ctrlp-funky'
 Plugin 'mileszs/ack.vim'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'tpope/vim-fugitive'
+Plugin 'gregsexton/gitv'
 Plugin 'itchyny/lightline.vim'
 Plugin 'techlivezheng/vim-plugin-minibufexpl'
 Plugin 'tpope/vim-surround'
 Plugin 'godlygeek/tabular.git'
 Plugin 'tpope/vim-commentary'
 Plugin 'tpope/vim-eunuch'
-" Plugin 'vim-bookmarks'
 Plugin 'tpope/vim-repeat'
-" Plugin 'Lokaltog/vim-easymotion'
 Plugin 'Raimondi/delimitMate'
 Plugin 'terryma/vim-multiple-cursors'
-" Plugin 'Yggdroot/indentLine'
-Plugin 'scrooloose/syntastic'
-" Plugin 'jeetsukumaran/vim-markology'
+Plugin 'Yggdroot/indentLine'
+Plugin 'vim-bookmarks'
+" Plugin 'scrooloose/syntastic'
+" Plugin 'SirVer/ultisnips'
 
 call vundle#end()           " required
 filetype plugin indent on   " required
@@ -63,6 +66,27 @@ filetype plugin indent on   " required
 
 " <Leader> set to , instead of \
 let mapleader = ","
+
+" ----- gitgutter -----
+nmap <leader>hj <Plug>GitGutterNextHunk
+nmap <leader>hk <Plug>GitGutterPrevHunk
+
+" ----- gruvbox -----
+let g:gruvbox_bold   = 1
+let g:gruvbox_italic = 1
+let g:gruvbox_contrast_dark="hard"
+" ----- solarized -----
+let g:solarized_contrast="high"
+let g:solarized_visibility="low"
+
+" ----- vim-coffee -----
+let coffee_compile_vert = 1   "open compile result in vertical buffer by default
+let coffee_watch_vert   = 1   "open watch result in vertical buffer by default
+
+" ----- ultisnip -----
+" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
+" let g:UltiSnipsExpandTrigger="<tab>"
+" let g:UltiSnipsSnippetDirectories=[ "UltiSnips", "ultisnips" ]
 
 " ----- indentLine -----
 " Is deemed to solved some performance issues I sometimes encountered because
@@ -78,13 +102,6 @@ let g:indentLine_faster = 1
 " nmap fj <Plug>BookmarkNext
 " nmap fk <Plug>BookmarkPrev
 
-" ----- vim-rspec -----
-let g:rspec_runner = "os_x_iterm"
-map <Leader>rsf :call RunCurrentSpecFile()<CR>
-map <Leader>rsn :call RunNearestSpec()<CR>
-map <Leader>rss :call RunLastSpec()<CR>
-map <Leader>rsa :call RunAllSpecs()<CR>
-
 " ----- Ctrlp -----
 " Updates the file list only once the user stops typing
 let g:ctrlp_lazy_update = 1
@@ -97,6 +114,8 @@ let g:ctrlp_reuse_window = 'netrw\|help\|quickfix'
 " > 0i: do not open any new tab or window, and open additionnal files in hidden buffers
 let g:ctrlp_open_multiple_files = '0i'
 let g:ctrlp_extensions   = [ 'undo', 'changes', 'bookmarkdir' ]
+" Do not list files included in the gitignore
+let g:ctrlp_user_command = [ '.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard' ]
 
 " ----- vim commentary -----
 nmap <leader>c gcc
@@ -106,7 +125,7 @@ vmap <leader>c gc
 " Mode is now displayed by ligthtline, no need to have Vim display it
 set noshowmode
 let g:lightline = {
-      \   'colorscheme': 'wombat',
+      \   'colorscheme': 'solarized_dark',
       \   'active': {
       \     'left':  [ ['mode'], ['fugitive', 'readonly', 'filename', 'modified'], ['ctrlpmark'] ],
       \     'right': [ ['lineinfo'], ['percent'], [ 'filetype' ] ]
