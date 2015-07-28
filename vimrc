@@ -204,7 +204,7 @@ syntax on
 set ai
 set number
 set relativenumber
-set undolevels=100
+set undolevels=200
 set nobackup        "don't write backup files
 set noswapfile      "don't write swap files (careful, all text will be in memory !)
 set hidden          "buffer behavior (allow to switch to other buffer even if current has been modified)
@@ -217,6 +217,12 @@ set colorcolumn=85
 set foldcolumn=1    "always enable foldcolumn
 let g:netrw_list_hide= '\.DS_Store$, *\.scssc$, *\.sassc$, \.sass-cache\/'
 set nrformats=      "interpret all digits as decimals (even when prefixed with 0)
+set nojoinspaces    "use only 1 space after '.', '!', '?' when joining lines instead of 2
+set splitright      "open vertical splits on the right
+set autoread        "auto-reload buffers when files are changed on disk
+set cursorline      "highlight current line
+set scrolloff=3     "displays at least 3 lines around the cursor when scrolling
+set clipboard=unnamed "copy to system clipboard
 " === HIDDEN/NON VISIBLE CHARS ===
 set list
 set listchars=tab:▸\ ,eol:¬
@@ -230,6 +236,8 @@ set et      "always use spaces instead of tabs
 set hlsearch
 set gdefault    "global replaces as default
 set incsearch   "show matchs as I type
+set ignorecase  "searches are case insensitive...
+set smartcase   " ... unless they contain at least one capital letter
 " === STATUS LINE ===
 set laststatus=2    "always display status line
 " === LOAD/SAVE VIEWS ===
