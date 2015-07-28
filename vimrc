@@ -419,16 +419,12 @@ au ColorScheme * highlight clear SignColumn
 
 
 " Default colorscheme
-colorscheme IR_Black
+colorscheme PaperColor
 set bg=dark
 
 if has("gui_running")
-
   " Default GUI colorscheme
-  let g:solarized_contrast="high"
-  let g:solarized_visibility="low"
-  set bg=dark
-  colorscheme solarized
+  colorscheme hybrid_material
 
   set columns=120 lines=60
   set linespace=1           " +1px between lines
