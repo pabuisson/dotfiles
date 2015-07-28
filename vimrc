@@ -378,13 +378,13 @@ imap <C-l> <esc>:bn<cr>
 nmap <C-h> :bp<cr>
 imap <C-h> <esc>:bp<cr>
 
-" Move current line down/up
-" <Alt-k>
-vmap Ï :m .+1<CR>
-nmap Ï :m .+1<CR>
+" Move current line(s) down/up
 " <Alt-j>
-vmap È :m .-2<CR>
-nmap È :m .-2<CR>
+vnoremap Ï :m'>+<CR>gv=gv
+nnoremap Ï :m+<CR>==
+" <Alt-k>
+vnoremap È :m'<-2<CR>gv=gv
+nnoremap È :m-2<CR>
 
 
 " Wrapping the current word
