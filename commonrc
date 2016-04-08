@@ -8,10 +8,6 @@ alias lla="ls -alh"
 alias grep="grep --colour"
 alias todo="grep TODO -r *"
 alias tigs="tig status"
-alias git_conflict="$EDITOR $(git status | grep both | cut -d ':' -f 2 | xargs)"
-alias git_editedfrommaster="$EDITOR $(git diff --name-only origin/master | xargs)"
-alias coffeelint_edited="coffeelint -f ~/coffeelint-altagem.json $( git diff --name-only --diff-filter=ACMRTUXB --stat origin/master | grep coffee | xargs )"
-alias rubocop_edited="rubocop $( git diff --name-only --diff-filter=ACMRTUXB --stat origin/master | grep rb | xargs )"
 alias ru="rackup"
 alias vim='nvim'
 alias rs="bin/rails server || rails server"
@@ -19,6 +15,12 @@ alias rc="bin/rails console || rails console"
 alias mm="middleman"
 alias current_week="date +%V"
 
+# Single quotes needed here, or what's inside subcommands get evaluated everytime (even when
+# initializing the shell and reading those aliases, which gives me errors 'not in a git repo')
+alias git_conflict='$EDITOR $(git status | grep both | cut -d ':' -f 2 | xargs)'
+alias git_editedfrommaster='$EDITOR $(git diff --name-only origin/master | xargs)'
+alias coffeelint_edited='coffeelint -f ~/coffeelint-altagem.json $( git diff --name-only --diff-filter=ACMRTUXB --stat origin/master | grep coffee | xargs )'
+alias rubocop_edited='rubocop $( git diff --name-only --diff-filter=ACMRTUXB --stat origin/master | grep rb | xargs )'
 
 alias rss="rspec spec/serializers"
 alias rsc="rspec spec/controllers"
@@ -57,5 +59,4 @@ alias sf='fasd -sif'     # interactive file selection
 alias z='fasd_cd -d'     # cd, same functionality as j in autojump
 alias zz='fasd_cd -d -i' # cd with interactive selection
 alias v='f -e nvim'      # quick opening files with vim and fasd
-
 
