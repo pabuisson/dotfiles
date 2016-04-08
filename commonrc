@@ -1,14 +1,19 @@
+export EDITOR=nvim
+
 alias ls="ls -G"
 alias lsa="ls -a"
 alias ll="ls -lh"
+alias l="ll"
 alias lla="ls -alh"
 alias grep="grep --colour"
 alias todo="grep TODO -r *"
 alias tigs="tig status"
-alias git-conflict="$EDITOR $(git status | grep both | cut -d ':' -f 2 | xargs -0)"
+alias git_conflict="$EDITOR $(git status | grep both | cut -d ':' -f 2 | xargs)"
+alias git_editedfrommaster="$EDITOR $(git diff --name-only origin/master | xargs)"
+alias coffeelint_edited="coffeelint -f ~/coffeelint-altagem.json $( git diff --name-only --diff-filter=ACMRTUXB --stat origin/master | grep coffee | xargs )"
+alias rubocop_edited="rubocop $( git diff --name-only --diff-filter=ACMRTUXB --stat origin/master | grep rb | xargs )"
 alias ru="rackup"
-alias v="vim"
-alias vim='~/Applications/MacVim.app/Contents/MacOS/Vim'
+alias vim='nvim'
 alias rs="bin/rails server || rails server"
 alias rc="bin/rails console || rails console"
 alias mm="middleman"
@@ -22,8 +27,9 @@ alias rsa="rspec spec"
 
 
 PATH="/usr/local/bin:$PATH:$HOME/Applications:/opt/local/bin"
-export PATH="$PATH:/Applications/Postgres.app/Contents/Versions/9.3/bin"
-export EDITOR=mvim
+export PATH="/Applications/Postgres.app/Contents/Versions/9.4/bin:$PATH"
+export PATH="$PATH:/usr/local/mysql/bin"
+
 
 
 # Permissions when creating new files/folder will be :
@@ -42,3 +48,4 @@ setopt NO_NOMATCH
 
 # Initialize FASD
 eval "$(fasd --init auto)"
+alias v='f -e nvim'    # quick opening files with vim and fasd
