@@ -99,7 +99,7 @@ nmap <silent> <leader>tv :TestVisit<CR>
 let test#strategy = "neovim"
 
 " ----- vim-bookmarks -----
-let g:bookmark_auto_save_file  = '$HOME/.nvim/bookmarks'
+let g:bookmark_auto_save_file  = '$HOME/.config/nvim/bookmarks'
 let g:bookmark_highlight_lines = 1
 nmap ff <Plug>BookmarkToggle
 nmap fj <Plug>BookmarkNext
@@ -263,11 +263,6 @@ set et      "always use spaces instead of tabs
 " === LOAD/SAVE VIEWS ===
 set viewoptions="cursors,fold"
 set viewoptions-=options       "do not save current view specific options
-" FIXME Only if not fugitive / only if real file
-" FIXME Only if not fugitive / only if real file
-" au BufWinLeave ?* mkview!
-" au BufWinEnter ?* silent loadview
-
 
 
 " TODO Move this where it belongs, once it'll be working
@@ -281,8 +276,8 @@ function! NotGblame()
   return 1
 endfunction
 
-au BufWinLeave ?* if NotGblame() | mkview!         | endif
-au BufWinEnter ?* if NotGblame() | silent loadview | endif
+au BufWinLeave *.* if NotGblame() | mkview!          | endif
+au BufWinEnter *.* if NotGblame() | silent! loadview | endif
 
 
 " ======================================
