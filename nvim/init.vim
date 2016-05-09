@@ -73,7 +73,7 @@ Plugin 'janko-m/vim-test'
 Plugin 'AndrewRadev/splitjoin.vim'
 
 call vundle#end()           " required
-filetype plugin indent on   " required
+" filetype plugin indent on   " required
 
 
 " =======================
@@ -225,7 +225,6 @@ endfunction
 " === SETTINGS ===
 " ================
 
-syntax on
 " -- NEOVIM DEFAULTS --
 " set ai
 " set encoding=utf-8
@@ -233,6 +232,7 @@ syntax on
 " set hlsearch
 " set incsearch   "show matchs as I type
 " set nocompatible
+" syntax on
 " ---------------------
 set nu
 set undolevels=100
