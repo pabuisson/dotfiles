@@ -85,7 +85,7 @@ let mapleader = ","
 " ----- ack.vim -----
 " Map Ack command to Ack! automatically so that it doesn't open first item by default
 ca Ack Ack!
-
+ca ack Ack!
 
 " ----- vim-gitgutter -----
 let g:gitgutter_sign_column_always=1
