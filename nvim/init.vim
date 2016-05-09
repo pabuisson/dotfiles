@@ -49,6 +49,7 @@ Plugin 'tpope/vim-haml'
 Plugin 'slim-template/vim-slim'
 Plugin 'gabrielelana/vim-markdown'
 Plugin 'kchmck/vim-coffee-script'
+Plugin 'othree/javascript-libraries-syntax.vim'
 " --- Plugins ---
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'tacahiroy/ctrlp-funky'
@@ -125,6 +126,9 @@ nnoremap <Leader>fU :execute 'CtrlPFunky ' . expand('<cword>')<Cr>
 " ----- vim commentary -----
 nmap <leader>c gcc
 vmap <leader>c gc
+
+" ----- javascript libraries ------
+let g:used_javascript_libs = 'jquery,underscore,angularjs'
 
 " ----- syntastic -----
 " let g:syntastic_always_populate_loc_list = 1
