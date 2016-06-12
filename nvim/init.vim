@@ -25,25 +25,20 @@ Plugin 'morhetz/gruvbox'
 Plugin 'kristijanhusak/vim-hybrid-material'
 Plugin 'NLKNguyen/papercolor-theme'
 Plugin 'altercation/vim-colors-solarized'
-Plugin 'zenorocha/dracula-theme', { 'rtp': 'vim/' }
+" Plugin 'zenorocha/dracula-theme', { 'rtp': 'vim/' }
 Plugin 'KabbAmine/yowish.vim'
 Plugin 'GertjanReynaert/cobalt2-vim-theme'
 Plugin 'joshdick/onedark.vim'
 Plugin 'jdkanani/vim-material-theme'
 Plugin 'Wutzara/vim-materialtheme'
-Plugin 'vivkin/flatland.vim'
-Plugin 'MaxSt/FlatColor'
-Plugin 'raphamorim/lucario', { 'rtp': 'vim/' }
-" Plugin 'zeis/vim-kolor'
+" Plugin 'junegunn/seoul256.vim'
 " Plugin 'chriskempson/vim-tomorrow-theme'
-" Plugin 'edubxb/vim-getafe'
-" Plugin 'mkarmona/colorsbox'
 " Plugin 'w0ng/vim-hybrid'
-" Plugin 'mhartington/oceanic-next'
-" Plugin 'nanotech/jellybeans.vim'
-" Plugin 'freeo/vim-kalisi'
 " Plugin 'ashton/.vim'
-" Plugin 'larssmit/vim-getafe'
+Plugin 'jacoborus/tender'
+Plugin 'lifepillar/vim-solarized8'
+Plugin 'sonph/onehalf', { 'rtp': 'vim/' }
+Plugin 'cocopon/iceberg.vim'
 " --- Filetype related ---
 Plugin 'tpope/vim-haml'
 Plugin 'slim-template/vim-slim'
@@ -69,11 +64,12 @@ Plugin 'terryma/vim-multiple-cursors'
 Plugin 'Yggdroot/indentLine'
 Plugin 'scrooloose/syntastic'
 Plugin 'jacquesbh/vim-showmarks'
-Plugin 'janko-m/vim-test'
-Plugin 'AndrewRadev/splitjoin.vim'
+" Plugin 'janko-m/vim-test'
+" Plugin 'AndrewRadev/splitjoin.vim'
+Plugin 'wakatime/vim-wakatime'
 
 call vundle#end()           " required
-" filetype plugin indent on   " required
+filetype plugin indent on   " required
 
 
 " =======================
@@ -91,20 +87,17 @@ ca ack Ack!
 " ----- vim-gitgutter -----
 let g:gitgutter_sign_column_always=1
 
-" ----- vim-test -----
-nmap <silent> <leader>t :TestNearest<CR>
-nmap <silent> <leader>tf :TestFile<CR>
-nmap <silent> <leader>ta :TestSuite<CR>
-nmap <silent> <leader>tl :TestLast<CR>
-nmap <silent> <leader>tv :TestVisit<CR>
-let test#strategy = "neovim"
-
 " ----- vim-bookmarks -----
 let g:bookmark_auto_save_file  = '$HOME/.config/nvim/bookmarks'
 let g:bookmark_highlight_lines = 1
 nmap ff <Plug>BookmarkToggle
 nmap fj <Plug>BookmarkNext
 nmap fk <Plug>BookmarkPrev
+
+" ----- vim-showmarks -----
+nmap <leader>sm :DoShowMarks<CR>
+nmap <leader>hm :NoShowMarks<CR>
+
 
 " ----- Ctrlp -----
 " Updates the file list only once the user stops typing
@@ -136,12 +129,15 @@ let g:used_javascript_libs = 'jquery,underscore,angularjs'
 let g:syntastic_check_on_open = 1
 " let g:syntastic_check_on_wq = 0
 let g:syntastic_coffee_checkers = [ 'coffeelint' ]
-let g:syntastic_coffee_coffeelint_args = "--csv --file /Users/pabuisson/coffeelint-altagem.json"
-let g:syntastic_ruby_checkers = [ 'rubocop' ]
+" Other argument: --file /path/to/coffeelint.json"
+" let g:syntastic_coffee_coffeelint_args = "--csv"
+" let g:syntastic_ruby_checkers = [ 'rubocop' ]
 " let g:syntastic_haml_checkers = ['haml_lint']
 
 " ----- indentLine -----
 let g:indentLine_faster = 1
+let g:indentLine_char = '┆'
+nnoremap <Leader>ti :IndentLinesToggle<CR>
 
 " ----- vim-markdown -----
 let g:markdown_enable_spell_checking = 0
@@ -150,7 +146,6 @@ let g:markdown_enable_spell_checking = 0
 " Mode is now displayed by ligthtline, no need to have Vim display it
 set noshowmode
 let g:lightline = {
-      \   'colorscheme': 'flatcolor',
       \   'active': {
       \     'left':  [ ['mode'], ['fugitive', 'readonly', 'filename', 'modified'], ['ctrlpmark'] ],
       \     'right': [ ['lineinfo'], ['percent'], [ 'filetype' ] ]
@@ -266,7 +261,7 @@ set sts=2   "number of spaces a TAB char counts for (when performing editing ope
 set et      "always use spaces instead of tabs
 " === LOAD/SAVE VIEWS ===
 set viewoptions="cursors,fold"
-set viewoptions-=options       "do not save current view specific options
+" set viewoptions-=options       "do not save current view specific options
 
 
 " TODO Move this where it belongs, once it'll be working
@@ -380,7 +375,7 @@ augroup configgroup
   au FileType slim         set commentstring=/\ %s
 
   " Specific syntax highlights
-  au BufRead,BufEnter,BufNewFile match Todo /REFACTOR/
+  au BufRead,BufEnter,BufNewFile match Todo /REFACTOR|NOTE/
   au FileType coffee,sass        match Error /;/
   au FileType coffee,javascript  match Todo /debugger\|console\.(warn|info|log)/
   au FileType ruby               match Todo /binding\.pry/
@@ -394,6 +389,8 @@ augroup configgroup
   au FileType gitcommit set tw=85
   au FileType markdown  set sw=4 ts=4 sts=4 et wrap tw=100
   au FileType sass      match Error /\w:\S/
+  " Do not hide quotes in JSON files
+  let g:vim_json_syntax_conceal = 0
 augroup END
 
 " ===============================
@@ -474,19 +471,22 @@ let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
 
 " Default colorscheme
 " -- Gruvbox --
-colorscheme Gruvbox
-set bg=dark
-let g:gruvbox_contrast_dark='hard'
-let g:gruvbox_bold=0
+" colorscheme Gruvbox
+" set bg=dark
+" let g:gruvbox_contrast_dark='hard'
+" let g:gruvbox_bold=0
 " --
 " -- Yowish --
-" color yowish
-" let g:yowish = {
+"color yowish
+"let g:yowish = {
 "   \ 'ctrlp': 1,
-"   \ 'unite': 0,
-"   \ 'agit':  0,
-"   \ 'nerdtree': 0
-"   \ }
+"  \ 'unite': 0,
+"  \ 'agit':  0,
+"  \ 'nerdtree': 0
+"  \ }
 
-" color onedark
+" -- Seoul --
+" let g:seoul256_background = 234
+" color seoul256
 
+color onehalfdark
