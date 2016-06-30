@@ -63,6 +63,7 @@ Plug 'jacquesbh/vim-showmarks'
 " Plug 'AndrewRadev/splitjoin.vim'
 Plug 'wakatime/vim-wakatime'
 Plug 'nathanaelkane/vim-indent-guides'
+Plug 'junegunn/goyo.vim'
 
 call plug#end()           " required
 filetype plugin indent on   " required
@@ -82,6 +83,9 @@ ca ack Ack!
 
 " ----- vim-gitgutter -----
 let g:gitgutter_sign_column_always=1
+
+" ----- goyo -----
+let g:goyo_width=100
 
 " ----- vim-bookmarks -----
 let g:bookmark_auto_save_file  = '$HOME/.config/nvim/bookmarks'
