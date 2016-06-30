@@ -13,62 +13,58 @@ filetype off
 " === VUNDLE PLUGINS MANAGEMENT ===
 " =================================
 
-" set the runtime path to include Vundle and initialize
-" set rtp="$HOME/.nvim,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,$HOME/.nvim/after"
-set rtp+=~/.config/nvim/bundle/Vundle.vim
-
-call vundle#begin('~/.config/nvim/bundle')
-Plugin 'gmarik/Vundle.vim'  " required
+call plug#begin('~/.config/nvim/plugged')
 
 " --- Color schemes ---
-Plugin 'morhetz/gruvbox'
-Plugin 'kristijanhusak/vim-hybrid-material'
-Plugin 'NLKNguyen/papercolor-theme'
-Plugin 'altercation/vim-colors-solarized'
-" Plugin 'zenorocha/dracula-theme', { 'rtp': 'vim/' }
-Plugin 'KabbAmine/yowish.vim'
-Plugin 'GertjanReynaert/cobalt2-vim-theme'
-Plugin 'joshdick/onedark.vim'
-Plugin 'jdkanani/vim-material-theme'
-Plugin 'Wutzara/vim-materialtheme'
-" Plugin 'junegunn/seoul256.vim'
-" Plugin 'chriskempson/vim-tomorrow-theme'
-" Plugin 'w0ng/vim-hybrid'
-" Plugin 'ashton/.vim'
-Plugin 'jacoborus/tender'
-Plugin 'lifepillar/vim-solarized8'
-Plugin 'sonph/onehalf', { 'rtp': 'vim/' }
-Plugin 'cocopon/iceberg.vim'
+Plug 'morhetz/gruvbox'
+Plug 'kristijanhusak/vim-hybrid-material'
+Plug 'NLKNguyen/papercolor-theme'
+Plug 'altercation/vim-colors-solarized'
+" Plug 'zenorocha/dracula-theme', { 'rtp': 'vim/' }
+" Plug 'junegunn/seoul256.vim'
+" Plug 'chriskempson/vim-tomorrow-theme'
+" Plug 'w0ng/vim-hybrid'
+" Plug 'ashton/.vim'
+Plug 'KabbAmine/yowish.vim'
+Plug 'GertjanReynaert/cobalt2-vim-theme'
+Plug 'joshdick/onedark.vim'
+Plug 'jdkanani/vim-material-theme'
+Plug 'Wutzara/vim-materialtheme'
+Plug 'jacoborus/tender'
+Plug 'lifepillar/vim-solarized8'
+Plug 'sonph/onehalf', { 'rtp': 'vim/' }
+Plug 'cocopon/iceberg.vim'
 " --- Filetype related ---
-Plugin 'tpope/vim-haml'
-Plugin 'slim-template/vim-slim'
-Plugin 'gabrielelana/vim-markdown'
-Plugin 'kchmck/vim-coffee-script'
-Plugin 'othree/javascript-libraries-syntax.vim'
-" --- Plugins ---
-Plugin 'ctrlpvim/ctrlp.vim'
-Plugin 'tacahiroy/ctrlp-funky'
-Plugin 'mileszs/ack.vim'
-Plugin 'airblade/vim-gitgutter'
-Plugin 'tpope/vim-fugitive'
-Plugin 'itchyny/lightline.vim'
-Plugin 'techlivezheng/vim-plugin-minibufexpl'
-Plugin 'tpope/vim-surround'
-Plugin 'godlygeek/tabular.git'
-Plugin 'tpope/vim-commentary'
-Plugin 'tpope/vim-eunuch'
-Plugin 'tpope/vim-repeat'
-Plugin 'Raimondi/delimitMate'
-Plugin 'terryma/vim-multiple-cursors'
-" Plugin 'MattesGroeger/vim-bookmarks'
-Plugin 'Yggdroot/indentLine'
-Plugin 'scrooloose/syntastic'
-Plugin 'jacquesbh/vim-showmarks'
-" Plugin 'janko-m/vim-test'
-" Plugin 'AndrewRadev/splitjoin.vim'
-Plugin 'wakatime/vim-wakatime'
+Plug 'tpope/vim-haml'
+Plug 'slim-template/vim-slim'
+Plug 'gabrielelana/vim-markdown'
+Plug 'kchmck/vim-coffee-script'
+Plug 'othree/javascript-libraries-syntax.vim'
+" --- Plugs ---
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'tacahiroy/ctrlp-funky'
+Plug 'mileszs/ack.vim'
+Plug 'airblade/vim-gitgutter'
+Plug 'tpope/vim-fugitive'
+Plug 'itchyny/lightline.vim'
+Plug 'weynhamz/vim-plugin-minibufexpl'
+Plug 'tpope/vim-surround'
+Plug 'godlygeek/tabular'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-eunuch'
+Plug 'tpope/vim-repeat'
+Plug 'Raimondi/delimitMate'
+Plug 'terryma/vim-multiple-cursors'
+" Plug 'MattesGroeger/vim-bookmarks'
+" Plug 'Yggdroot/indentLine'
+Plug 'scrooloose/syntastic'
+Plug 'jacquesbh/vim-showmarks'
+" Plug 'janko-m/vim-test'
+" Plug 'AndrewRadev/splitjoin.vim'
+Plug 'wakatime/vim-wakatime'
+Plug 'nathanaelkane/vim-indent-guides'
 
-call vundle#end()           " required
+call plug#end()           " required
 filetype plugin indent on   " required
 
 
