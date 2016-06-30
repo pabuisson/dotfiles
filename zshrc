@@ -11,6 +11,9 @@ fi
 # Source my common config file
 source ~/.commonrc
 
+# zsh rebind search to ctrl-R for vi-mode
+bindkey '^R' history-incremental-search-backward
+
 
 # New line before each command
 function precmd { print "" }
