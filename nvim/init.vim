@@ -57,11 +57,11 @@ Plug 'Raimondi/delimitMate'
 Plug 'terryma/vim-multiple-cursors'
 " Plug 'MattesGroeger/vim-bookmarks'
 " Plug 'Yggdroot/indentLine'
-Plug 'scrooloose/syntastic'
 Plug 'jacquesbh/vim-showmarks'
 " Plug 'janko-m/vim-test'
 " Plug 'AndrewRadev/splitjoin.vim'
 Plug 'wakatime/vim-wakatime'
+Plug 'w0rp/ale'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'junegunn/goyo.vim'
 
@@ -123,16 +123,12 @@ vmap <leader>c gc
 " ----- javascript libraries ------
 let g:used_javascript_libs = 'jquery,underscore,angularjs'
 
-" ----- syntastic -----
-" let g:syntastic_always_populate_loc_list = 1
-" let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-" let g:syntastic_check_on_wq = 0
-let g:syntastic_coffee_checkers = [ 'coffeelint' ]
-" Other argument: --file /path/to/coffeelint.json"
-" let g:syntastic_coffee_coffeelint_args = "--csv"
-" let g:syntastic_ruby_checkers = [ 'rubocop' ]
-" let g:syntastic_haml_checkers = ['haml_lint']
+" ----- ale -----
+let g:ale_sign_column_always = 1
+let g:ale_lint_on_text_changed = "never"
+let g:ale_linters = {
+\   'ruby': [ 'rubocop' ]
+\}
 
 " ----- indentLine -----
 let g:indentLine_faster = 1
@@ -164,6 +160,7 @@ let g:lightline = {
       \     'fugitive': '(exists("*fugitive#head") && ""!=fugitive#head())'
       \   }
       \ }
+
 function! MyFugitive()
   if exists("*fugitive#head")
     let _ = fugitive#head()
