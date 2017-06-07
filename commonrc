@@ -10,8 +10,6 @@ alias todo="grep TODO -r *"
 alias tigs="tig status"
 alias ru="rackup"
 alias vim='nvim'
-alias rs="bin/rails server || rails server"
-alias rc="bin/rails console || rails console"
 alias mm="middleman"
 alias current_week="date +%V"
 alias mon_ip="ifconfig | grep 192 | cut -d' ' -f2"
@@ -23,10 +21,12 @@ alias git_editedfrommaster='$EDITOR $(git diff --name-only origin/master | xargs
 alias coffeelint_edited='coffeelint -f ~/coffeelint-altagem.json $( git diff --name-only --diff-filter=ACMRTUXB --stat origin/master | grep coffee | xargs )'
 alias rubocop_edited='rubocop $( git diff --name-only --diff-filter=ACMRTUXB --stat origin/master | grep rb | xargs )'
 
-alias rss="rspec spec/serializers"
-alias rsc="rspec spec/controllers"
-alias rsm="rspec spec/models"
-alias rsa="rspec spec"
+alias rss="bundle exec rspec spec/serializers"
+alias rsc="bundle exec rspec spec/controllers"
+alias rsm="bundle exec rspec spec/models"
+alias rsa="bundle exec rspec"
+alias rs="bundle exec bin/rails server || bundle exec rails server"
+alias rc="bundle exec bin/rails console || bundle exec rails console"
 
 
 PATH="/usr/local/bin:$PATH:$HOME/Applications:/opt/local/bin"
