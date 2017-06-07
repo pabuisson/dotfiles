@@ -10,12 +10,12 @@
   fp = fetch -p
   ra = rebase
   rc = rebase
-	pul = pull
   recent  = "!r() { cur=$(git rev-parse --abbrev-ref HEAD); git for-each-ref --sort=-committerdate refs/heads/ --format='%(color:yellow)%(refname:short)|%(color:green)%(committerdate:relative)|%(color:magenta)%(authorname)%(color:reset)' | sed \"s/m${cur}|/m* ${cur}|/\" | column -ts'|'; }; r"
   rrecent = "!r() { cur=$(git rev-parse --abbrev-ref HEAD); git for-each-ref --sort=-committerdate refs/remotes/ --format='%(color:yellow)%(refname:short)|%(color:green)%(committerdate:relative)|%(color:magenta)%(authorname)%(color:reset)' | sed \"s/m${cur}|/m* ${cur}|/\" | column -ts'|'; }; r"
+	pp = pull -p
 [user]
-  name = Pierre-Adrien
-  email = pabuisson@gmail.com
+	name = Pierre-Adrien
+	email = pabuisson@gmail.com
 [core]
   editor = nvim
   excludesfile = /Users/pabuisson/.gitignore_global
