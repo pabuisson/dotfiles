@@ -12,7 +12,7 @@ alias ru="rackup"
 alias vim='nvim'
 alias mm="middleman"
 alias current_week="date +%V"
-alias mon_ip="ifconfig | grep 192 | cut -d' ' -f2"
+alias monip="ifconfig | grep 192 | cut -d' ' -f2"
 
 # Single quotes needed here, or what's inside subcommands get evaluated everytime (even when
 # initializing the shell and reading those aliases, which gives me errors 'not in a git repo')
