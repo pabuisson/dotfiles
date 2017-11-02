@@ -2,17 +2,13 @@
 # EXECUTES COMMANDS AT THE START OF AN INTERACTIVE SESSION.
 #
 
-# SOURCE PREZTO.
-if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
-  source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
-fi
-
-
 # Source my common config file
 source ~/.commonrc
 
 # zsh rebind search to ctrl-R for vi-mode
 bindkey '^R' history-incremental-search-backward
+# bind a custom escape code from iterm2 to backward search
+bindkey '^[search' history-incremental-search-backward
 
 
 # New line before each command
