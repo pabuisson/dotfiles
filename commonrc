@@ -29,7 +29,7 @@ alias rs="bundle exec bin/rails server || bundle exec rails server"
 alias rc="bundle exec bin/rails console || bundle exec rails console"
 
 
-PATH="/usr/local/bin:$PATH:$HOME/Applications:/opt/local/bin"
+PATH="$PATH:$HOME/Applications:$HOME/Applications/scripts:/opt/local/bin"
 export PATH="/Applications/Postgres.app/Contents/Versions/9.4/bin:$PATH"
 export PATH="$PATH:/usr/local/mysql/bin"
 
