@@ -30,12 +30,17 @@ alias rsm="bundle exec rspec spec/models"
 alias rsa="bundle exec rspec"
 alias rs="bundle exec bin/rails server || bundle exec rails server"
 alias rc="bundle exec bin/rails console || bundle exec rails console"
+alias rdbm="rails db:migrate"
+alias rdbs="rails db:seed"
+
+alias killpuma="pkill -9 -f 'puma'"
+
+alias nvm="nvim"
 
 
-PATH="$PATH:$HOME/Applications:$HOME/Applications/scripts:/opt/local/bin"
-export PATH="/Applications/Postgres.app/Contents/Versions/9.4/bin:$PATH"
-export PATH="$PATH:/usr/local/mysql/bin"
-
+export PATH="/usr/local/sbin:$PATH"
+export PATH="$PATH:$HOME/Applications:$HOME/Applications/scripts:/opt/local/bin"
+export PATH="/usr/local/opt/postgresql@9.4/bin:$PATH"
 
 
 # Permissions when creating new files/folder will be :
