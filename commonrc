@@ -16,10 +16,13 @@ alias monip="ifconfig | grep 192 | cut -d' ' -f2"
 
 # Single quotes needed here, or what's inside subcommands get evaluated everytime (even when
 # initializing the shell and reading those aliases, which gives me errors 'not in a git repo')
-alias git_conflict='$EDITOR $(git status | grep both | cut -d ':' -f 2 | xargs)'
-alias git_editedfrommaster='$EDITOR $(git diff --name-only origin/master | xargs)'
+alias gitconflict='$EDITOR $(git status | grep both | cut -d ':' -f 2 | xargs)'
+alias giteditedfrommaster='$EDITOR $(git diff --name-only origin/master | xargs)'
 alias coffeelint_edited='coffeelint -f ~/coffeelint-altagem.json $( git diff --name-only --diff-filter=ACMRTUXB --stat origin/master | grep coffee | xargs )'
 alias rubocop_edited='rubocop $( git diff --name-only --diff-filter=ACMRTUXB --stat origin/master | grep rb | xargs )'
+
+alias gfp='git fetch -p'
+alias gpp='git pull -p'
 
 alias rss="bundle exec rspec spec/serializers"
 alias rsc="bundle exec rspec spec/controllers"
