@@ -6,32 +6,40 @@ filetype off
 call plug#begin('~/.config/nvim/plugged')
 
 " --- Color schemes ---
-" Plug 'GertjanReynaert/cobalt2-vim-theme'
 " Plug 'NLKNguyen/papercolor-theme'
 " Plug 'kristijanhusak/vim-hybrid-material'
 " Plug 'jacoborus/tender'
-" Plug 'rakr/vim-two-firewatch'
-" Plug 'cocopon/iceberg.vim'
-Plug 'morhetz/gruvbox'
+"
+Plug 'tyrannicaltoucan/vim-quantum'
+Plug 'rakr/vim-two-firewatch'
+Plug 'crusoexia/vim-monokai'
+Plug 'ajh17/spacegray.vim'
+Plug 'lifepillar/vim-solarized8'
+Plug 'tyrannicaltoucan/vim-deep-space'
 Plug 'KabbAmine/yowish.vim'
+Plug 'morhetz/gruvbox'
 Plug 'sonph/onehalf', { 'rtp': 'vim/' }
+Plug 'cocopon/iceberg.vim'
+
+Plug 'dracula/vim', { 'as': 'dracula' }
+Plug 'arcticicestudio/nord-vim'
 Plug 'mhartington/oceanic-next'
 Plug 'ayu-theme/ayu-vim'
 Plug 'drewtempelmeyer/palenight.vim'
-Plug 'arcticicestudio/nord-vim'
-Plug 'challenger-deep-theme/vim'
+
 " --- Filetype related ---
-Plug 'tpope/vim-haml',            { 'for': 'haml'     }
 Plug 'slim-template/vim-slim',    { 'for': 'slim'     }
 " Plug 'gabrielelana/vim-markdown', { 'for': 'markdown '}
+Plug 'tpope/vim-haml',            { 'for': 'haml'     }
 Plug 'kchmck/vim-coffee-script',  { 'for': 'coffee'   }
 Plug 'othree/javascript-libraries-syntax.vim'
 Plug 'pangloss/vim-javascript'
 Plug 'plasticboy/vim-markdown'
+
 " --- Plugins ---
 " Plug 'MattesGroeger/vim-bookmarks'
 " Plug 'jacquesbh/vim-showmarks'
-" Plug 'weynhamz/vim-plugin-minibufexpl'
+" Plug 'weyhamz/vim-plugin-minibufexpl'
 " Plug 'nathanaelkane/vim-indent-guides'
 Plug 'mileszs/ack.vim'
 Plug 'airblade/vim-gitgutter'
@@ -47,10 +55,9 @@ Plug 'Raimondi/delimitMate'
 Plug 'terryma/vim-multiple-cursors'
 " Plug 'Yggdroot/indentLine'
 Plug 'w0rp/ale'
-Plug 'junegunn/goyo.vim', { 'for': [ 'text', 'markdown' ] }
+" Plug 'junegunn/goyo.vim', { 'for': [ 'text', 'markdown' ] }
 Plug 'ap/vim-buftabline'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'reedes/vim-pencil'
 
 call plug#end()           " required
 
@@ -171,8 +178,12 @@ function! s:goyo_leave()
 endfunction
 
 let g:goyo_width = 100
-autocmd! User GoyoEnter nested call <SID>goyo_enter()
-autocmd! User GoyoLeave nested call <SID>goyo_leave()
+augroup goyo
+  au!
+  autocmd! User GoyoEnter nested call <SID>goyo_enter()
+  autocmd! User GoyoLeave nested call <SID>goyo_leave()
+augroup END
+
 
 " ----- indentLine -----
 " let g:indentLine_char = '┆'
@@ -190,8 +201,7 @@ let g:used_javascript_libs = 'jquery,underscore,angularjs'
 set noshowmode
 let g:lightline = {
       \   'active': {
-      \     'left':  [ ['mode'], ['fugitive', 'readonly', 'filename', 'modified'], ['ctrlpmark'] ],
-      \     'right': [ ['lineinfo'], ['percent'], [ 'filetype' ] ]
+      \     'left':  [ ['mode'], ['fugitive', 'filename', 'modified'] ]
       \   },
       \   'separator':    { 'left': '', 'right': '' },
       \   'subseparator': { 'left': '', 'right': '' },
@@ -200,8 +210,7 @@ let g:lightline = {
       \     'fugitive':   'MyFugitive',
       \     'mode':       'MyMode',
       \     'readonly':   'MyReadOnly',
-      \     'modified':   'MyModified',
-      \     'ctrlpmark':  'CtrlPMark'
+      \     'modified':   'MyModified'
       \   },
       \   'component_visible_condition': {
       \     'fugitive': '(exists("*fugitive#head") && ""!=fugitive#head())'
@@ -232,30 +241,6 @@ function! MyReadonly()
 endfunction
 function! MyModified()
   return &ft =~ 'help' ? '' : &modified ? '+' : &modifiable ? '' : '-'
-endfunction
-function! CtrlPMark()
-  if expand('%:t') =~ 'ControlP'
-    call lightline#link('iR'[g:lightline.ctrlp_regex])
-    return lightline#concatenate([g:lightline.ctrlp_prev, g:lightline.ctrlp_item
-          \ , g:lightline.ctrlp_next], 0)
-  else
-    return ''
-  endif
-endfunction
-let g:ctrlp_status_func = {
-  \ 'main': 'CtrlPStatusFunc_1',
-  \ 'prog': 'CtrlPStatusFunc_2',
-  \ }
-
-function! CtrlPStatusFunc_1(focus, byfname, regex, prev, item, next, marked)
-  let g:lightline.ctrlp_regex = a:regex
-  let g:lightline.ctrlp_prev = a:prev
-  let g:lightline.ctrlp_item = a:item
-  let g:lightline.ctrlp_next = a:next
-  return lightline#statusline(0)
-endfunction
-function! CtrlPStatusFunc_2(str)
-  return lightline#statusline(0)
 endfunction
 
 " ----- vim-markdown -----
