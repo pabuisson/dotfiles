@@ -134,6 +134,13 @@ endfunction
 map <Leader>co :call CountOccurrences()<CR>
 
 
+" ===================
+" === Format JSON ===
+" ===================
+
+com! FormatJSON %!python -m json.tool
+
+
 
 " ==============================
 " === FILE SPECIFIC SETTINGS ===
