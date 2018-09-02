@@ -6,36 +6,53 @@ alias ll="ls -lh"
 alias l="ll"
 alias lla="ls -alh"
 alias grep="grep --colour"
-alias todo="grep TODO -r *"
 alias tigs="tig status"
-alias ru="rackup"
 alias vim='nvim'
-alias mm="middleman"
-alias current_week="date +%V"
+alias nvm="nvim"
+alias n="nvim"
+
+alias currentweek="date +%V"
 alias monip="ifconfig | grep 192 | cut -d' ' -f2"
 
+# GIT
+alias g='git'
+alias gfp='git fetch -p'
+alias gpp='git pull -p'
+alias gcm='git co master'
+alias gbrd='git br -D'
 # Single quotes needed here, or what's inside subcommands get evaluated everytime (even when
 # initializing the shell and reading those aliases, which gives me errors 'not in a git repo')
 alias gitconflict='$EDITOR $(git status | grep both | cut -d ':' -f 2 | xargs)'
 alias giteditedfrommaster='$EDITOR $(git diff --name-only origin/master | xargs)'
+# Churn sur les 6 derniers mois (nombre de commits par fichier)
+alias gitchurn="git log --all -M -C --name-only --format='format:' $@ --since='6 months ago' | sort | grep -v '^$' | uniq -c | sort -n | tail -10"
+
+# LINTING
 alias coffeelint_edited='coffeelint -f ~/coffeelint-altagem.json $( git diff --name-only --diff-filter=ACMRTUXB --stat origin/master | grep coffee | xargs )'
 alias rubocop_edited='rubocop $( git diff --name-only --diff-filter=ACMRTUXB --stat origin/master | grep rb | xargs )'
 
-alias gfp='git fetch -p'
-alias gpp='git pull -p'
-
+# RAILS / RUBY
+alias ru="rackup"
+alias be="bundle exec"
+alias mm="middleman"
+alias resquework="QUEUE=* bundle exec rake environment resque:work"
+# RAILS SERVER / CONSOLE
+alias rs="bundle exec bin/rails server || bundle exec rails server"
+alias rc="bundle exec bin/rails console || bundle exec rails console"
+# RAILS DB
+alias rdbm="bundle exec rails db:migrate"
+alias rdbms="bundle exec rails db:migrate:status"
+alias rdbs="bundle exec rails db:seed"
+# RSPEC
+alias rsa="bundle exec rspec"
 alias rss="bundle exec rspec spec/serializers"
 alias rsc="bundle exec rspec spec/controllers"
 alias rsm="bundle exec rspec spec/models"
-alias rsa="bundle exec rspec"
-alias rs="bundle exec bin/rails server || bundle exec rails server"
-alias rc="bundle exec bin/rails console || bundle exec rails console"
-alias rdbm="rails db:migrate"
-alias rdbs="rails db:seed"
 
 alias killpuma="pkill -9 -f 'puma'"
 
-alias nvm="nvim"
+alias python="python3"
+
 
 
 export PATH="/usr/local/sbin:$PATH"
@@ -48,7 +65,6 @@ export PATH="/usr/local/opt/postgresql@9.4/bin:$PATH"
 #    - folder : 755
 # This is needed for Homebrew to deal properly with my
 # different users.
-
 umask 002
 
 
@@ -72,6 +88,7 @@ alias v='f -e nvim'      # quick opening files with vim and fasd
 # Tell fzf to use rip grep
 export FZF_DEFAULT_COMMAND='rg --files --hidden --smart-case --glob "!.git/*"'
 
+# SSH
 # Add my identity so that I can use SSH forwarding
 ssh-add &> /dev/null
 
