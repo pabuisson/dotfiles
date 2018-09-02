@@ -6,60 +6,53 @@ filetype off
 call plug#begin('~/.config/nvim/plugged')
 
 " --- Color schemes ---
-" Plug 'NLKNguyen/papercolor-theme'
-" Plug 'kristijanhusak/vim-hybrid-material'
+" Plug 'KabbAmine/yowish.vim'
 " Plug 'jacoborus/tender'
-"
-Plug 'tyrannicaltoucan/vim-quantum'
-Plug 'rakr/vim-two-firewatch'
-Plug 'crusoexia/vim-monokai'
-Plug 'ajh17/spacegray.vim'
-Plug 'lifepillar/vim-solarized8'
-Plug 'tyrannicaltoucan/vim-deep-space'
-Plug 'KabbAmine/yowish.vim'
-Plug 'morhetz/gruvbox'
-Plug 'sonph/onehalf', { 'rtp': 'vim/' }
-Plug 'cocopon/iceberg.vim'
-
+" Plug 'morhetz/gruvbox'
+" Plug 'romainl/flattened'
+Plug 'mhartington/oceanic-next'
 Plug 'dracula/vim', { 'as': 'dracula' }
 Plug 'arcticicestudio/nord-vim'
-Plug 'mhartington/oceanic-next'
 Plug 'ayu-theme/ayu-vim'
+Plug 'tyrannicaltoucan/vim-deep-space'
+Plug 'challenger-deep-theme/vim', { 'as': 'challenger-deep' }
 Plug 'drewtempelmeyer/palenight.vim'
 
 " --- Filetype related ---
-Plug 'slim-template/vim-slim',    { 'for': 'slim'     }
 " Plug 'gabrielelana/vim-markdown', { 'for': 'markdown '}
-Plug 'tpope/vim-haml',            { 'for': 'haml'     }
 Plug 'kchmck/vim-coffee-script',  { 'for': 'coffee'   }
 Plug 'othree/javascript-libraries-syntax.vim'
 Plug 'pangloss/vim-javascript'
-Plug 'plasticboy/vim-markdown'
+Plug 'plasticboy/vim-markdown',   { 'for': 'markdown' }
+Plug 'slim-template/vim-slim',    { 'for': 'slim'     }
+Plug 'tpope/vim-haml',            { 'for': 'haml'     }
+Plug 'digitaltoad/vim-pug',       { 'for': 'pug'      }
+Plug 'rhysd/vim-crystal',         { 'for': 'crystal'  }
+Plug 'elorest/vim-slang',         { 'for': 'slang'    }
 
 " --- Plugins ---
 " Plug 'MattesGroeger/vim-bookmarks'
-" Plug 'jacquesbh/vim-showmarks'
-" Plug 'weyhamz/vim-plugin-minibufexpl'
-" Plug 'nathanaelkane/vim-indent-guides'
-Plug 'mileszs/ack.vim'
-Plug 'airblade/vim-gitgutter'
-Plug 'tpope/vim-fugitive'
-Plug 'itchyny/lightline.vim'
-Plug 'tpope/vim-surround'
-" Plug 'godlygeek/tabular'
-Plug 'junegunn/vim-easy-align'
-Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-eunuch'
-Plug 'tpope/vim-repeat'
-Plug 'Raimondi/delimitMate'
-Plug 'terryma/vim-multiple-cursors'
 " Plug 'Yggdroot/indentLine'
-Plug 'w0rp/ale'
+" Plug 'godlygeek/tabular'
+" Plug 'jacquesbh/vim-showmarks'
 " Plug 'junegunn/goyo.vim', { 'for': [ 'text', 'markdown' ] }
+" Plug 'nathanaelkane/vim-indent-guides'
+Plug 'Raimondi/delimitMate'
+" Plug 'airblade/vim-gitgutter'
+Plug 'mhinz/vim-signify'
 Plug 'ap/vim-buftabline'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/vim-easy-align'
+Plug 'mileszs/ack.vim'
+Plug 'terryma/vim-multiple-cursors'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-eunuch'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-surround'
+Plug 'w0rp/ale'
 
-call plug#end()           " required
+call plug#end()
 
 
 " =======================
@@ -78,22 +71,15 @@ ca ack Ack!
 let g:ale_sign_column_always = 1
 let g:ale_lint_on_text_changed = "never"
 let g:ale_linters = {
-\   'ruby': [ 'rubocop' ]
+\   'ruby': [ 'rubocop' ],
+\   'coffeescript': [ 'coffeelint' ]
 \}
-
-" ----- vim-bookmarks -----
-" let g:bookmark_auto_save_file  = '$HOME/.config/nvim/bookmarks'
-" let g:bookmark_highlight_lines = 1
-" nnoremap ff <Plug>BookmarkToggle
-" nnoremap fj <Plug>BookmarkNext
-" nnoremap fk <Plug>BookmarkPrev
 
 " ----- buftabline -----
 " Display only if there are 2 buffers
 let g:buftabline_show=1
 " Display vim inner buffer number
 let g:buftabline_numbers=1
-
 
 " ----- vim commentary -----
 nmap <leader>c gcc
@@ -135,6 +121,21 @@ inoremap <C-p> <ESC>:FZF<CR>
 " previous-history instead of down and up. If you don't like the change,
 " explicitly bind the keys to down and up in your $FZF_DEFAULT_OPTS.
 let g:fzf_history_dir = '~/.local/share/fzf-history'
+" Customize fzf colors to match your color scheme
+" let g:fzf_colors =
+" \ { 'fg':      ['fg', 'Normal'],
+"   \ 'bg':      ['bg', 'Normal'],
+"   \ 'hl':      ['fg', 'Comment'],
+"   \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+"   \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+"   \ 'hl+':     ['fg', 'Statement'],
+"   \ 'info':    ['fg', 'PreProc'],
+"   \ 'border':  ['fg', 'Ignore'],
+"   \ 'prompt':  ['fg', 'Conditional'],
+"   \ 'pointer': ['fg', 'Exception'],
+"   \ 'marker':  ['fg', 'Keyword'],
+"   \ 'spinner': ['fg', 'Label'],
+"   \ 'header':  ['fg', 'Comment'] }
 
 " --- Find in opened buffers ---
 function! s:buflist()
@@ -161,28 +162,28 @@ nnoremap <silent> <C-b> :call fzf#run({
 set signcolumn=yes
 
 " ----- goyo ------
-function! s:goyo_enter()
-  let g:buftabline_show = 0
-  " Needed to update configuration at runtime
-  call buftabline#update(0)
-  " vim default tabline
-  set showtabline=0
-endfunction
+" function! s:goyo_enter()
+"   let g:buftabline_show = 0
+"   " Needed to update configuration at runtime
+"   call buftabline#update(0)
+"   " vim default tabline
+"   set showtabline=0
+" endfunction
 
-function! s:goyo_leave()
-  let g:buftabline_show = 2
-  " Needed to update configuration at runtime
-  call buftabline#update(0)
-  " vim default tabline
-  set showtabline=2
-endfunction
+" function! s:goyo_leave()
+"   let g:buftabline_show = 2
+"   " Needed to update configuration at runtime
+"   call buftabline#update(0)
+"   " vim default tabline
+"   set showtabline=2
+" endfunction
 
-let g:goyo_width = 100
-augroup goyo
-  au!
-  autocmd! User GoyoEnter nested call <SID>goyo_enter()
-  autocmd! User GoyoLeave nested call <SID>goyo_leave()
-augroup END
+" let g:goyo_width = 100
+" augroup goyo
+"   au!
+"   autocmd! User GoyoEnter nested call <SID>goyo_enter()
+"   autocmd! User GoyoLeave nested call <SID>goyo_leave()
+" augroup END
 
 
 " ----- indentLine -----
@@ -196,61 +197,9 @@ augroup END
 " ----- javascript libraries ------
 let g:used_javascript_libs = 'jquery,underscore,angularjs'
 
-" ----- lightline.vim -----
-" Mode displayed by ligthtline, no need to have Vim display it
-set noshowmode
-let g:lightline = {
-      \   'active': {
-      \     'left':  [ ['mode'], ['fugitive', 'filename', 'modified'] ]
-      \   },
-      \   'separator':    { 'left': '', 'right': '' },
-      \   'subseparator': { 'left': '', 'right': '' },
-      \   'component_function': {
-      \     'filename':   'MyFilename',
-      \     'fugitive':   'MyFugitive',
-      \     'mode':       'MyMode',
-      \     'readonly':   'MyReadOnly',
-      \     'modified':   'MyModified'
-      \   },
-      \   'component_visible_condition': {
-      \     'fugitive': '(exists("*fugitive#head") && ""!=fugitive#head())'
-      \   }
-      \ }
-
-function! MyFugitive()
-  if exists("*fugitive#head")
-    let _ = fugitive#head()
-    return strlen(_) ? ' '._ : ''
-  endif
-  return ''
-endfunction
-function! MyFilename()
-  let fname = expand('%:t')
-  return fname == 'ControlP' ? g:lightline.ctrlp_item :
-       \ ('' != MyReadonly() ? MyReadonly() . ' ' : '') .
-       \ ('' != fname ? fname : '[No Name]') .
-       \ ('' != MyModified() ? ' ' . MyModified() : '')
-endfunction
-function! MyMode()
-  let fname = expand('%:t')
-  return fname == 'ControlP' ? 'CtrlP' :
-       \ winwidth(0) > 60 ? lightline#mode() : ''
-endfunction
-function! MyReadonly()
-  return &ft !~? 'help' && &readonly ? 'RO' : ''
-endfunction
-function! MyModified()
-  return &ft =~ 'help' ? '' : &modified ? '+' : &modifiable ? '' : '-'
-endfunction
-
 " ----- vim-markdown -----
 let g:vim_markdown_folding_disabled = 1
 let g:vim_markdown_conceal = 0
 
-" ----- vim-showmarks -----
-" nnoremap <leader>sm :DoShowMarks<CR>
-" nnoremap <leader>hm :NoShowMarks<CR>
-
 " ----- vim-markdown -----
 let g:markdown_enable_spell_checking = 0
-

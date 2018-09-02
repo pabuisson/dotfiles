@@ -28,11 +28,11 @@ set vb              "visual bell instead of audio
 set linebreak       "don't cut words at the end of lines
 set nowrap          "don't wrap long lines
 set colorcolumn=100
+set cursorline      "highlight current line
 set foldcolumn=1    "always enable foldcolumn
 let g:netrw_list_hide= '\.DS_Store$, *\.scssc$, *\.sassc$, \.sass-cache\/'
 " set nrformats=    "interpret all digits as decimals (even when prefixed with 0)
 set gdefault        "global replaces as default
-set laststatus=2    "always display status line
 set ignorecase      "ignore case for search and such
 set scrolloff=3     "displays at least 4 lines around the cursor even when top/bottom of screen
 set clipboard+=unnamed
@@ -57,7 +57,51 @@ augroup bufferloadsave
   " au BufWinEnter *.* if NotGblame() | loadview | endif
   " au BufWinEnter *.* if NotGblame() | silent! loadview | endif
 augroup END
+" === STATUS LINE ===
+set laststatus=2
+set noshowmode
+set statusline=
+set statusline+=[%{g:currentmode[mode()]}]
+set statusline+=[%n]
+set statusline+=\ %f
+" switching to right side
+set statusline+=%=
+set statusline+=%{GitInfo()}\ \|
+set statusline+=\ %c\ :
+set statusline+=\ %l
+set statusline+=/
+set statusline+=%L
+set statusline+=\ \|\ %p%%
 
+let g:currentmode={
+    \ 'n'  : 'N ',
+    \ 'no' : 'N·Operator Pending ',
+    \ 'v'  : 'V ',
+    \ 'V'  : 'V·Line ',
+    \ '^V' : 'V·Block ',
+    \ 's'  : 'Select ',
+    \ 'S'  : 'S·Line ',
+    \ '^S' : 'S·Block ',
+    \ 'i'  : 'I ',
+    \ 'R'  : 'R ',
+    \ 'Rv' : 'V·Replace ',
+    \ 'c'  : 'Command ',
+    \ 'cv' : 'Vim Ex ',
+    \ 'ce' : 'Ex ',
+    \ 'r'  : 'Prompt ',
+    \ 'rm' : 'More ',
+    \ 'r?' : 'Confirm ',
+    \ '!'  : 'Shell ',
+    \ 't'  : 'Terminal '
+    \}
+
+function! GitInfo()
+  let git = fugitive#head()
+  if git != ''
+    return 'g:'.fugitive#head()
+  else
+    return ''
+endfunction
 
 " ======================================
 " ===   Delete trailing whitespace   ===
@@ -138,8 +182,8 @@ map <Leader>co :call CountOccurrences()<CR>
 " === Format JSON ===
 " ===================
 
+" TODO: replace "nil" with "null" and "=>" with ":"
 com! FormatJSON %!python -m json.tool
-
 
 
 " ==============================
@@ -161,16 +205,15 @@ augroup configgroup
   au BufRead,BufNewFile Gemfile* set ft=ruby
 
   " Comment settings depending on filetype
-  au FileType coffee       set commentstring=#\ %s
-  au FileType haml         set commentstring=/\ %s
-  " au FileType slim         set commentstring=/\ %s
+  au FileType coffee set commentstring=#\ %s
+  au FileType haml   set commentstring=/\ %s
+  " au FileType slim   set commentstring=/\ %s
 
   " Specific syntax highlights
-  au BufRead,BufEnter,BufNewFile match Todo /REFACTOR\|NOTE/
-  au FileType markdown           match Todo /TODO\|NOTE/
-  au FileType coffee,sass        match Error /;/
-  au FileType coffee,javascript  match Todo /console\.(warn|info|log)/
-  au FileType ruby               match Todo /binding\.pry/
+  " au BufRead,BufEnter,BufNewFile match Todo /REFACTOR\|NOTE\|TODO/
+  " au FileType coffee,sass        match Error /;/
+  " au FileType coffee,javascript  match Todo /console\.(warn|info|log)/
+  " au FileType ruby               match Todo /binding\.pry/
   " au FileType coffee,javascript  iabbr log console.log
 
   " Other settings
@@ -179,7 +222,6 @@ augroup configgroup
   au FileType gitcommit au! BufEnter COMMIT_EDITMSG call setpos('.', [0, 1, 1, 0])
   au FileType gitcommit set tw=85
   au FileType markdown  set sw=4 ts=4 sts=4 et wrap
+  au FileType crystal   set sw=2 ts=2 sts=2 et wrap
   au FileType sass      match Error /\w:\S/
-  " Do not hide quotes in JSON files
-  let g:vim_json_syntax_conceal = 0
 augroup END

@@ -57,17 +57,11 @@ nnoremap <Up> <Nop>
 vnoremap <Up> <Nop>
 nnoremap <Down> <Nop>
 vnoremap <Down> <Nop>
-
-" Reset display
-" nnoremap <leader>l :nohlsearch<cr>:diffupdate<cr>:syntax sync fromstart<cr><c-l>
-" Should reset syntax highlight
-nnoremap <leader>s :syntax sync fromstart<CR>:redraw!<CR>
+nnoremap <Left> <Nop>
+vnoremap <Left> <Nop>
+nnoremap <Right> <Nop>
+vnoremap <Right> <Nop>
 
 " Enable/disable relative numbering
 nnoremap <leader>n :set rnu<CR>
 nnoremap <leader>nn :set nornu<CR>
-
-
-
-" ------ TESTING ---------
-inoremap jk <Esc>
