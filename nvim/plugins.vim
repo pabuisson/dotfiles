@@ -19,16 +19,8 @@ Plug 'challenger-deep-theme/vim', { 'as': 'challenger-deep' }
 Plug 'drewtempelmeyer/palenight.vim'
 
 " --- Filetype related ---
-" Plug 'gabrielelana/vim-markdown', { 'for': 'markdown '}
-Plug 'kchmck/vim-coffee-script',  { 'for': 'coffee'   }
 Plug 'othree/javascript-libraries-syntax.vim'
-Plug 'pangloss/vim-javascript'
-Plug 'plasticboy/vim-markdown',   { 'for': 'markdown' }
-Plug 'slim-template/vim-slim',    { 'for': 'slim'     }
-Plug 'tpope/vim-haml',            { 'for': 'haml'     }
-Plug 'digitaltoad/vim-pug',       { 'for': 'pug'      }
-Plug 'rhysd/vim-crystal',         { 'for': 'crystal'  }
-Plug 'elorest/vim-slang',         { 'for': 'slang'    }
+Plug 'sheerun/vim-polyglot'
 
 " --- Plugins ---
 " Plug 'MattesGroeger/vim-bookmarks'
