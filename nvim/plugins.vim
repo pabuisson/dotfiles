@@ -8,14 +8,15 @@ call plug#begin('~/.config/nvim/plugged')
 " --- Color schemes ---
 " Plug 'KabbAmine/yowish.vim'
 " Plug 'jacoborus/tender'
-" Plug 'morhetz/gruvbox'
 " Plug 'romainl/flattened'
 Plug 'mhartington/oceanic-next'
 Plug 'dracula/vim', { 'as': 'dracula' }
 Plug 'arcticicestudio/nord-vim'
-Plug 'ayu-theme/ayu-vim'
+Plug 'morhetz/gruvbox'
 Plug 'tyrannicaltoucan/vim-deep-space'
 Plug 'challenger-deep-theme/vim', { 'as': 'challenger-deep' }
+Plug 'sonph/onehalf', { 'rtp': 'vim/' }
+Plug 'ayu-theme/ayu-vim'
 Plug 'drewtempelmeyer/palenight.vim'
 
 " --- Filetype related ---
@@ -43,6 +44,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'w0rp/ale'
+Plug 'janko-m/vim-test'
 
 call plug#end()
 
@@ -66,6 +68,9 @@ let g:ale_linters = {
 \   'ruby': [ 'rubocop' ],
 \   'coffeescript': [ 'coffeelint' ]
 \}
+
+nmap <silent> <leader>ak <Plug>(ale_previous_wrap)
+nmap <silent> <leader>aj <Plug>(ale_next_wrap)
 
 " ----- buftabline -----
 " Display only if there are 2 buffers
@@ -195,3 +200,13 @@ let g:vim_markdown_conceal = 0
 
 " ----- vim-markdown -----
 let g:markdown_enable_spell_checking = 0
+
+
+" ----- vim-test -----
+" these "Ctrl mappings" work well when Caps Lock is mapped to Ctrl
+nmap <silent> <leader>tn :TestNearest<CR>
+nmap <silent> <leader>tf :TestFile<CR>
+nmap <silent> <leader>ts :TestSuite<CR>
+nmap <silent> <leader>tl :TestLast<CR>
+nmap <silent> <leader>tg :TestVisit<CR>
+let test#strategy = "neovim"
