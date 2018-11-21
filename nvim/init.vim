@@ -28,7 +28,7 @@ set vb              "visual bell instead of audio
 set linebreak       "don't cut words at the end of lines
 set nowrap          "don't wrap long lines
 set colorcolumn=100
-set cursorline      "highlight current line
+" set cursorline      "highlight current line (/!\ Performances on iterm !)
 set foldcolumn=1    "always enable foldcolumn
 let g:netrw_list_hide= '\.DS_Store$, *\.scssc$, *\.sassc$, \.sass-cache\/'
 " set nrformats=    "interpret all digits as decimals (even when prefixed with 0)
