@@ -20,6 +20,9 @@ alias gfp='git fetch -p'
 alias gpp='git pull -p'
 alias gcm='git co master'
 alias gbrd='git br -D'
+alias grom='git rebase origin/master'
+alias grc='git rebase --continue'
+alias gra='git rebase --abort'
 # Single quotes needed here, or what's inside subcommands get evaluated everytime (even when
 # initializing the shell and reading those aliases, which gives me errors 'not in a git repo')
 alias gitconflict='$EDITOR $(git status | grep both | cut -d ':' -f 2 | xargs)'
