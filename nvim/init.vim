@@ -32,7 +32,6 @@ set colorcolumn=100
 set foldcolumn=1    "always enable foldcolumn
 let g:netrw_list_hide= '\.DS_Store$, *\.scssc$, *\.sassc$, \.sass-cache\/'
 " set nrformats=    "interpret all digits as decimals (even when prefixed with 0)
-set gdefault        "global replaces as default
 set ignorecase      "ignore case for search and such
 set scrolloff=3     "displays at least 4 lines around the cursor even when top/bottom of screen
 set clipboard+=unnamed
