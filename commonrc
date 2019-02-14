@@ -76,18 +76,8 @@ umask 002
 # when trying to use HEAD^ in a git command
 setopt NO_NOMATCH
 
-
-# Initialize FASD
-eval "$(fasd --init auto)"
-alias a='fasd -a'        # any
-alias s='fasd -si'       # show / search / select
-alias d='fasd -d'        # directory
-alias f='fasd -f'        # file
-alias sd='fasd -sid'     # interactive directory selection
-alias sf='fasd -sif'     # interactive file selection
-alias z='fasd_cd -d'     # cd, same functionality as j in autojump
-alias zz='fasd_cd -d -i' # cd with interactive selection
-alias v='f -e nvim'      # quick opening files with vim and fasd
+# Z instead of FASD
+. /usr/local/etc/profile.d/z.sh
 
 # Tell fzf to use rip grep
 export FZF_DEFAULT_COMMAND='rg --files --hidden --smart-case --glob "!.git/*"'
