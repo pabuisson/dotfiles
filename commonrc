@@ -8,7 +8,6 @@ alias lla="ls -alh"
 alias grep="grep --colour"
 alias tigs="tig status"
 alias vim='nvim'
-alias nvm="nvim"
 alias n="nvim"
 
 alias currentweek="date +%V"
