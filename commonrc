@@ -58,19 +58,9 @@ alias python="python3"
 # FIXME: quotes escaping, I guess
 alias brewdeps="brew list | while read cask; do echo -n $fg[blue] $cask $fg[white]; brew deps $cask | awk '{printf(" %s ", $0)}'; echo ""; done"
 
-
 export PATH="/usr/local/sbin:$PATH"
 export PATH="$PATH:$HOME/Applications:$HOME/Applications/scripts:/opt/local/bin"
 export PATH="/usr/local/opt/postgresql@9.4/bin:$PATH"
-
-
-# Permissions when creating new files/folder will be :
-#    - file :   644
-#    - folder : 755
-# This is needed for Homebrew to deal properly with my
-# different users.
-umask 002
-
 
 # Conflicts between ZSH and GIT HEAD^ resulting in "no matches found" error
 # when trying to use HEAD^ in a git command
@@ -86,3 +76,4 @@ export FZF_DEFAULT_COMMAND='rg --files --hidden --smart-case --glob "!.git/*"'
 # Add my identity so that I can use SSH forwarding
 ssh-add &> /dev/null
 
+# export PRY_RESCUE_RAILS=1
