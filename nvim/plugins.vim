@@ -77,6 +77,9 @@ nmap <silent> <leader>aj <Plug>(ale_next_wrap)
 let g:buftabline_show=1
 " Display vim inner buffer number
 let g:buftabline_numbers=1
+" Highlighting : make visible inactive splits highlighted like any hidden buffer
+" so that the inactive split don't look more "highlighted" than the active buffer
+hi link BufTabLineActive BufTabLineHidden
 
 " ----- vim commentary -----
 nmap <leader>c gcc
