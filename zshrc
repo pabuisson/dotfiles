@@ -1,5 +1,5 @@
 # Path to your oh-my-zsh installation.
-export ZSH="/Users/pierreadrienbuisson/.oh-my-zsh"
+export ZSH="$HOME/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -17,7 +17,7 @@ source $ZSH/oh-my-zsh.sh
 
 # --- USER CONFIGURATION ---
 
-source .commonrc
+source $HOME/.commonrc
 
 # New line before each command
 function precmd { print "" }
