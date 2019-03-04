@@ -38,6 +38,7 @@ alias ru="rackup"
 alias be="bundle exec"
 alias mm="middleman"
 alias resquework="QUEUE=* bundle exec rake environment resque:work"
+alias rt="rails t"
 # RAILS SERVER / CONSOLE
 alias rs="bundle exec bin/rails server || bundle exec rails server"
 alias rc="bundle exec bin/rails console || bundle exec rails console"
