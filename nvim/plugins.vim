@@ -26,12 +26,10 @@ Plug 'sheerun/vim-polyglot'
 " --- Plugins ---
 " Plug 'MattesGroeger/vim-bookmarks'
 " Plug 'Yggdroot/indentLine'
-" Plug 'godlygeek/tabular'
 " Plug 'jacquesbh/vim-showmarks'
 " Plug 'junegunn/goyo.vim', { 'for': [ 'text', 'markdown' ] }
 " Plug 'nathanaelkane/vim-indent-guides'
 Plug 'Raimondi/delimitMate'
-" Plug 'airblade/vim-gitgutter'
 Plug 'mhinz/vim-signify'
 Plug 'ap/vim-buftabline'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
