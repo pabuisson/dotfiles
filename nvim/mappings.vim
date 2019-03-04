@@ -6,12 +6,16 @@
 nnoremap <leader>vrc  :e $MYVIMRC<CR>
 " File explorer
 nnoremap <leader>e :Explore<CR>
+nnoremap <leader>he :Sexplore<CR>
 " Undo last search (to remove the highlighting)
 nnoremap <leader>su :nohlsearch<Bar>:echo<CR>
 nnoremap <esc> :nohlsearch<Bar>:echo<CR>
+
 " Copy current file name to the clipboard
 nnoremap <leader>yf :let @+ = expand("%:p")<CR>
-"
+" Copy whole file
+nnoremap <leader>ya ggVGy
+
 " All buffers delete
 nnoremap <leader>bda :%bd!<CR>
 nnoremap <leader>bwa :%bw!<CR>
@@ -21,8 +25,9 @@ nnoremap <leader>bwl :.+,$bw!<CR>
 " TODO: buffer delete all but current one
 " TODO: buffer delete to the left
 
-" Copy whole file
-nnoremap <leader>ya ggVGy
+" Use :g to see the structure of ruby tests
+" FIXME: doesn't work, maybe something with magical regexps and all?
+" nnoremap <leader>ts :g/\(class\|describe\|it\) /<CR>
 
 " Firefox-like buffer cycle behaviour
 nnoremap <C-S-tab> :bp<cr>
