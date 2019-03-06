@@ -33,6 +33,7 @@ Plug 'Raimondi/delimitMate'
 Plug 'mhinz/vim-signify'
 Plug 'ap/vim-buftabline'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
 Plug 'junegunn/vim-easy-align'
 Plug 'mileszs/ack.vim'
 Plug 'terryma/vim-multiple-cursors'
