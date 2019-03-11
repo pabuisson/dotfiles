@@ -25,6 +25,12 @@ nnoremap <leader>bwl :.+,$bw!<CR>
 " TODO: buffer delete all but current one
 " TODO: buffer delete to the left
 
+" Highlight current word without jumping, source: https://superuser.com/a/255120/138040
+" Whole word
+nnoremap <leader>* :let @/ = '\<'.expand('<cword>').'\>'\|set hlsearch<C-M>
+" Partial word
+nnoremap <Leader>g* :let @/ = expand('<cword>')\|set hlsearch<C-M>
+
 " Use :g to see the structure of ruby tests
 " FIXME: doesn't work, maybe something with magical regexps and all?
 " nnoremap <leader>ts :g/\(class\|describe\|it\) /<CR>
