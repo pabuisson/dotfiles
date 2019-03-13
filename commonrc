@@ -14,6 +14,7 @@ alias currentweek="date +%V"
 alias monip="ifconfig | grep 192 | cut -d' ' -f2"
 
 # GIT
+alias git='LANG=en_GB git'
 alias g='git'
 alias gfp='git fetch -p'
 alias gpp='git pull -p'
