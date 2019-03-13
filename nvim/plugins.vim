@@ -67,6 +67,11 @@ let g:ale_linters = {
 \   'ruby': [ 'rubocop' ],
 \   'coffeescript': [ 'coffeelint' ]
 \}
+let g:ale_fixers = {
+\   'javascript': ['prettier']
+\}
+" Run fixers on save
+let g:ale_fix_on_save = 1
 
 nmap <silent> <leader>ak <Plug>(ale_previous_wrap)
 nmap <silent> <leader>aj <Plug>(ale_next_wrap)
