@@ -156,7 +156,7 @@ function! HandleURI()
   endif
 endfunction
 
-map <Leader>w :call HandleURI()<CR>
+nnoremap <Leader>w :call HandleURI()<CR>
 
 
 " ==============================================
@@ -174,7 +174,7 @@ function! CountOccurrences()
   call cursor(l, c)
 endfunction
 
-map <Leader>co :call CountOccurrences()<CR>
+nnoremap <Leader>co :call CountOccurrences()<CR>
 
 
 " ===================
