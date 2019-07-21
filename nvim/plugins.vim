@@ -118,10 +118,13 @@ nnoremap <leader>gw  :Gwrite<CR>
 nnoremap <leader>gb  :Gblame<CR>
 
 " ----- fzf -----
-nnoremap <C-p> :FZF<CR>
-inoremap <C-p> <ESC>:FZF<CR>
-nnoremap <C-b> :Buffers<CR>
-inoremap <C-b> <ESC>:Buffers<CR>
+" nnoremap <C-p> :FZF<CR>
+" nnoremap <C-b> :Buffers<CR>
+" nnoremap <C-t> :Tags<CR>
+nnoremap <leader>ff :FZF<CR>
+nnoremap <leader>fb :Buffers<CR>
+nnoremap <leader>ft :Tags<CR>
+nnoremap <leader>fc :BCommits<CR>
 
 " Enable per-command history.
 " CTRL-N and CTRL-P will be automatically bound to next-history and
@@ -129,17 +132,7 @@ inoremap <C-b> <ESC>:Buffers<CR>
 " explicitly bind the keys to down and up in your $FZF_DEFAULT_OPTS.
 let g:fzf_history_dir = '~/.local/share/fzf-history'
 
-" Find in opened buffers
-function! s:buflist()
-  redir => ls
-  silent ls
-  redir END
-  return split(ls, '\n')
-endfunction
 
-function! s:bufopen(e)
-  execute 'buffer' matchstr(a:e, '^[ 0-9]*')
-endfunction
 
 
 
