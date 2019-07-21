@@ -33,7 +33,7 @@ set foldcolumn=1    "always enable foldcolumn
 let g:netrw_list_hide= '\.DS_Store$, *\.scssc$, *\.sassc$, \.sass-cache\/'
 " set nrformats=    "interpret all digits as decimals (even when prefixed with 0)
 set ignorecase      "ignore case for search and such
-set scrolloff=3     "displays at least 4 lines around the cursor even when top/bottom of screen
+set scrolloff=4     "displays at least 4 lines around the cursor even when top/bottom of screen
 set clipboard+=unnamed
 set showmatch       "show matching parenthese
 set lazyredraw      "redraw only when we need to
@@ -52,46 +52,43 @@ augroup bufferloadsave
   au!
   au BufWinLeave *.* mkview!
   au BufWinEnter *.* silent! loadview
-  " au BufWinLeave *.* if NotGblame() | mkview!  | endif
-  " au BufWinEnter *.* if NotGblame() | loadview | endif
-  " au BufWinEnter *.* if NotGblame() | silent! loadview | endif
 augroup END
 " === STATUS LINE ===
 set laststatus=2
 set noshowmode
 set statusline=
-set statusline+=[%{g:currentmode[mode()]}]
-set statusline+=[%n]
-set statusline+=\ %f
-" switching to right side
+set statusline+=%#Pmenu#
+set statusline+=\ %{g:currentmode[mode()]}
+set statusline+=\ ┊\ %f
+set statusline+=\ ┊\ %{GitInfo()}
+" switch to the right side
 set statusline+=%=
-set statusline+=%{GitInfo()}\ \|
-set statusline+=\ %c\ :
-set statusline+=\ %l
+set statusline+=%{gutentags#statusline('','','\ 🗯:\ ')}
+set statusline+=\ ┊\ %l
 set statusline+=/
 set statusline+=%L
-set statusline+=\ \|\ %p%%
+set statusline+=\ \┊\ %p%%
 
 let g:currentmode={
-    \ 'n'  : 'N ',
-    \ 'no' : 'N·Operator Pending ',
-    \ 'v'  : 'V ',
-    \ 'V'  : 'V·Line ',
-    \ '^V' : 'V·Block ',
-    \ 's'  : 'Select ',
-    \ 'S'  : 'S·Line ',
-    \ '^S' : 'S·Block ',
-    \ 'i'  : 'I ',
-    \ 'R'  : 'R ',
-    \ 'Rv' : 'V·Replace ',
-    \ 'c'  : 'Command ',
-    \ 'cv' : 'Vim Ex ',
-    \ 'ce' : 'Ex ',
-    \ 'r'  : 'Prompt ',
-    \ 'rm' : 'More ',
-    \ 'r?' : 'Confirm ',
-    \ '!'  : 'Shell ',
-    \ 't'  : 'Terminal '
+    \ 'n'  : 'N',
+    \ 'no' : 'N·Operator Pending',
+    \ 'v'  : 'V',
+    \ 'V'  : 'V·Line',
+    \ '^V' : 'V·Block',
+    \ 's'  : 'Select',
+    \ 'S'  : 'S·Line',
+    \ '^S' : 'S·Block',
+    \ 'i'  : 'I',
+    \ 'R'  : 'R',
+    \ 'Rv' : 'V·Replace',
+    \ 'c'  : 'Command',
+    \ 'cv' : 'Vim Ex',
+    \ 'ce' : 'Ex',
+    \ 'r'  : 'Prompt',
+    \ 'rm' : 'More',
+    \ 'r?' : 'Confirm',
+    \ '!'  : 'Shell',
+    \ 't'  : 'Terminal'
     \}
 
 function! GitInfo()
@@ -209,11 +206,7 @@ augroup configgroup
   " au FileType slim   set commentstring=/\ %s
 
   " Specific syntax highlights
-  " au BufRead,BufEnter,BufNewFile match Todo /REFACTOR\|NOTE\|TODO/
-  " au FileType coffee,sass        match Error /;/
-  " au FileType coffee,javascript  match Todo /console\.(warn|info|log)/
-  " au FileType ruby               match Todo /binding\.pry/
-  " au FileType coffee,javascript  iabbr log console.log
+  au FileType ruby match ErrorMsg /binding\.pry\|pry\|byebug/
 
   " Other settings
   " Removes all autocommands for BufEnter on commit messages (au!) and set
