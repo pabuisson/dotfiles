@@ -11,6 +11,7 @@ alias grep="grep --colour"
 alias tigs="tig status"
 alias vim='nvim'
 alias n="nvim"
+alias y="yarn"
 
 alias currentweek="date +%V"
 alias monip="ifconfig | grep 192 | cut -d' ' -f2"
