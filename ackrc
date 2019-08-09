@@ -5,9 +5,10 @@
 --type-set=sass=.sass
 --type-set=scss=.scss
 
---ignore-dir=vendor
+--ignore-dir=coverage
+--ignore-dir=log
 --ignore-dir=node_modules
 --ignore-dir=tmp
---ignore-dir=coverage
+--ignore-dir=vendor
 
 --pager=less
