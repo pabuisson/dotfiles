@@ -7,7 +7,6 @@ call plug#begin('~/.config/nvim/plugged')
 
 " --- Color schemes ---
 " Plug 'KabbAmine/yowish.vim'
-" Plug 'tyrannicaltoucan/vim-deep-space'
 " Plug 'mhartington/oceanic-next'
 " Plug 'sonph/onehalf', { 'rtp': 'vim/' }
 " Plug 'arcticicestudio/nord-vim'

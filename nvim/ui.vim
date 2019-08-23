@@ -38,11 +38,6 @@ set bg=dark
 " set bg=dark
 " colorscheme dracula
 
-" -- Deep space --
-" let g:deepspace_italics=1
-" set bg=dark
-" colorscheme deep-space
-
 " -- night owl --
 " color night-owl
 " hi link BufTabLineActive Pmenu
