@@ -17,6 +17,7 @@ Plug 'challenger-deep-theme/vim', { 'as': 'challenger-deep' }
 Plug 'ayu-theme/ayu-vim'
 Plug 'drewtempelmeyer/palenight.vim'
 Plug 'haishanh/night-owl.vim'
+Plug 'Rigellute/rigel'
 
 " --- Filetype related ---
 Plug 'othree/javascript-libraries-syntax.vim'
