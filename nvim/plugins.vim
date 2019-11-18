@@ -41,6 +41,7 @@ Plug 'tpope/vim-surround'
 Plug 'w0rp/ale'
 Plug 'janko-m/vim-test'
 Plug 'ludovicchabant/vim-gutentags'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 call plug#end()
 
