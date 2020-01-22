@@ -69,10 +69,6 @@ export PATH="/usr/local/sbin:$PATH"
 export PATH="$PATH:$HOME/Applications:$HOME/Applications/scripts:/opt/local/bin"
 export PATH="/usr/local/opt/postgresql@9.4/bin:$PATH"
 
-# Conflicts between ZSH and GIT HEAD^ resulting in "no matches found" error
-# when trying to use HEAD^ in a git command
-setopt NO_NOMATCH
-
 # Z instead of FASD
 . /usr/local/etc/profile.d/z.sh
 

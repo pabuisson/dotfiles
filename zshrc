@@ -78,6 +78,9 @@ preexec() {
 #    RPS1="${${KEYMAP/vicmd/$VIM_PROMPT}/(main|viins)/} $EPS1"
 #    zle reset-prompt
 # }
+# Conflicts between ZSH and GIT HEAD^ resulting in "no matches found" error
+# when trying to use HEAD^ in a git command
+setopt NO_NOMATCH
 
 # zle -N zle-line-init
 # zle -N zle-keymap-select
