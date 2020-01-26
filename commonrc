@@ -65,6 +65,7 @@ alias python="python3"
 alias brewdeps="brew list | while read cask; do echo -n $fg[blue] $cask $fg[white]; brew deps $cask | awk '{printf(" %s ", $0)}'; echo ""; done"
 
 export PATH="/usr/local/sbin:$PATH"
+export PATH="/usr/local/bin:$PATH"
 export PATH="$PATH:$HOME/Applications:$HOME/Applications/scripts:/opt/local/bin"
 export PATH="/usr/local/opt/postgresql@9.4/bin:$PATH"
 
