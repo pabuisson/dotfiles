@@ -69,7 +69,13 @@ export PATH="$PATH:$HOME/Applications:$HOME/Applications/scripts:/opt/local/bin"
 export PATH="/usr/local/opt/postgresql@9.4/bin:$PATH"
 
 # Z instead of FASD
-. /usr/local/etc/profile.d/z.sh
+if [[ -e /usr/local/etc/profile.d/z.sh ]]
+then
+  source /usr/local/etc/profile.d/z.sh
+else
+  echo "You might need to install Z for quick-jump"
+  echo "$ brew install z"
+fi
 
 # Tell fzf to use rip grep
 export FZF_DEFAULT_COMMAND='rg --files --hidden --smart-case --glob "!.git/*"'
