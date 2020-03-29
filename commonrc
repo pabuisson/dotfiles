@@ -79,7 +79,13 @@ else
 fi
 
 # Tell fzf to use rip grep
-export FZF_DEFAULT_COMMAND='rg --files --hidden --smart-case --glob "!.git/*"'
+if type rg &> /dev/null
+then
+  export FZF_DEFAULT_COMMAND='rg --files --hidden --smart-case --glob "!.git/*"'
+else
+  echo "You might want to install rg for quick search"
+  echo "$ brew install ripgrep"
+fi
 
 # ASDF versions manager
 if [[ -e /usr/local/opt/asdf/asdf.sh ]]
