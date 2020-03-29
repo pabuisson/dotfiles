@@ -57,10 +57,6 @@ alias rss="bundle exec rspec spec/serializers"
 alias rsc="bundle exec rspec spec/controllers"
 alias rsm="bundle exec rspec spec/models"
 
-alias killpuma="pkill -9 -f 'puma'"
-
-alias python="python3"
-
 # FIXME: quotes escaping, I guess
 alias brewdeps="brew list | while read cask; do echo -n $fg[blue] $cask $fg[white]; brew deps $cask | awk '{printf(" %s ", $0)}'; echo ""; done"
 
