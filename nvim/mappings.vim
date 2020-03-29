@@ -10,13 +10,12 @@ nnoremap <leader>vrc  :e $MYVIMRC<CR>
 nnoremap <leader>e :Explore<CR>
 nnoremap <leader>he :Sexplore<CR>
 " Undo last search (to remove the highlighting)
-" nnoremap <leader>su :nohlsearch<Bar>:echo<CR>
+nnoremap <leader>vw :cd ~/MEGA/NOTES<CR>:e .<CR>
 nnoremap <esc> :nohlsearch<Bar>:echo<CR>
-
 " Copy current file name to the clipboard: yank path
-nnoremap <leader>yp :let @+ = expand("%:p")<CR>
+nnoremap <leader>yap :let @+ = expand("%:p")<CR>
 " TODO: copy the current filename from the git repo root
-"  let @+ = !git rev-parse --show-prefix %
+nnoremap <leader>yp :let @+ = system("git ls-files " . expand("%p"))<CR>
 " Copy whole file: yank inner file
 nnoremap <leader>yf ggVGy
 
