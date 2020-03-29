@@ -56,6 +56,9 @@ alias rsa="bundle exec rspec"
 alias rss="bundle exec rspec spec/serializers"
 alias rsc="bundle exec rspec spec/controllers"
 alias rsm="bundle exec rspec spec/models"
+# HANAMI
+alias hs="bundle exec hanami server"
+alias hc="bundle exec hanami console"
 
 # FIXME: quotes escaping, I guess
 alias brewdeps="brew list | while read cask; do echo -n $fg[blue] $cask $fg[white]; brew deps $cask | awk '{printf(" %s ", $0)}'; echo ""; done"
