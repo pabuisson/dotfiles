@@ -9,11 +9,10 @@
   lgiso = "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%ci) %C(bold blue)<%an>%Creset' --abbrev-commit"
   st = status -sb
   fp = fetch -p
-  ra = rebase
-  rc = rebase
   recent  = "!r() { cur=$(git rev-parse --abbrev-ref HEAD); git for-each-ref --sort=-committerdate refs/heads/ --format='%(color:yellow)%(refname:short)|%(color:green)%(committerdate:relative)|%(color:magenta)%(authorname)%(color:reset)' | sed \"s/m${cur}|/m* ${cur}|/\" | column -ts'|'; }; r"
   rrecent = "!r() { cur=$(git rev-parse --abbrev-ref HEAD); git for-each-ref --sort=-committerdate refs/remotes/ --format='%(color:yellow)%(refname:short)|%(color:green)%(committerdate:relative)|%(color:magenta)%(authorname)%(color:reset)' | sed \"s/m${cur}|/m* ${cur}|/\" | column -ts'|'; }; r"
   pp = pull -p
+  sw = switch
 [user]
   name = Pierre-Adrien
   email = pabuisson@gmail.com
