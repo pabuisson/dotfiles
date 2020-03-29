@@ -18,10 +18,10 @@ alias monip="ifconfig | grep 192 | cut -d' ' -f2"
 # GIT
 alias git='LANG=en_GB git'
 alias g='git'
-alias gfp='git fetch -p'
-alias gpp='git pull -p'
+alias gf='git fetch -p'
+alias gp='git pull -p'
 alias gppr='git pull -p --rebase'
-alias gcm='git co master'
+alias gsm='git sw master'
 alias gcfm='git co -f master'
 alias gbrd='git br -D'
 alias grom='git rebase origin/master'
