@@ -33,12 +33,16 @@ if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 export NVM_DIR="$HOME/.nvm"
 . "$NVM_DIR/nvm.sh"
 
-# Source FZF
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-# bind a custom escape code from iterm2 to backward search, using fzf history widget
-# TODO: make sure fzf is available
-bindkey '^[search' fzf-history-widget
+if [[ -f ~/.fzf.zsh ]]
+then
+  # Source FZF
+  source ~/.fzf.zsh
+  # bind a custom escape code from iterm2 to backward search, using fzf history widget
+  # TODO: make sure fzf is available
+  bindkey '^[search' fzf-history-widget
+else
+  echo "You might want to install FZF"
+fi
 
 # https://dougblack.io/words/zsh-vi-mode.html
 export KEYTIMEOUT=1
