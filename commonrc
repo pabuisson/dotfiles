@@ -48,8 +48,9 @@ alias rt="rails t"
 alias rs="bundle exec bin/rails server || bundle exec rails server"
 alias rc="bundle exec bin/rails console || bundle exec rails console"
 # RAILS DB
-alias rdbm="bundle exec rails db:migrate"
 alias rdbms="bundle exec rails db:migrate:status"
+alias rdbm="bundle exec rails db:migrate"
+alias rdbr="bundle exec rails db:rollback"
 alias rdbs="bundle exec rails db:seed"
 # RSPEC
 alias rsa="bundle exec rspec"
