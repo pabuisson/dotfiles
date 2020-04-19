@@ -45,6 +45,7 @@ Plug 'dense-analysis/ale'
 Plug 'janko-m/vim-test'
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'junegunn/rainbow_parentheses.vim'
 
 call plug#end()
 
@@ -165,6 +166,14 @@ let g:fzf_commits_log_options = '--color=always --format="%C(auto)%h%d %s %C(bla
 
 " ----- javascript libraries ------
 let g:used_javascript_libs = 'jquery,underscore,react'
+
+" ----- rainbow_parentheses ------
+" Activation based on file type
+let g:rainbow#pairs = [['(', ')'], ['[', ']'], ['{', '}']]
+augroup rainbow_lisp
+  autocmd!
+  autocmd FileType ruby,javascript RainbowParentheses
+augroup END
 
 " ----- vim-test -----
 " these "Ctrl mappings" work well when Caps Lock is mapped to Ctrl
