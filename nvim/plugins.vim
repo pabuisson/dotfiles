@@ -6,17 +6,20 @@ filetype off
 call plug#begin('~/.config/nvim/plugged')
 
 " --- Color schemes ---
-" Plug 'KabbAmine/yowish.vim'
-" Plug 'mhartington/oceanic-next'
-" Plug 'sonph/onehalf', { 'rtp': 'vim/' }
-" Plug 'arcticicestudio/nord-vim'
+Plug 'mhartington/oceanic-next'
+Plug 'sonph/onehalf', { 'rtp': 'vim/' }
+Plug 'KabbAmine/yowish.vim'
+Plug 'arcticicestudio/nord-vim'
 Plug 'dracula/vim', { 'as': 'dracula' }
 Plug 'morhetz/gruvbox'
 Plug 'challenger-deep-theme/vim', { 'as': 'challenger-deep' }
 Plug 'ayu-theme/ayu-vim'
 Plug 'drewtempelmeyer/palenight.vim'
 Plug 'haishanh/night-owl.vim'
-Plug 'Rigellute/rigel'
+Plug 'rakr/vim-one'
+Plug 'cocopon/iceberg.vim'
+Plug 'sainnhe/edge'
+Plug 'bluz71/vim-nightfly-guicolors'
 
 " --- Filetype related ---
 Plug 'othree/javascript-libraries-syntax.vim'
