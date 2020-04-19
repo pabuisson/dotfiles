@@ -14,7 +14,8 @@ nnoremap <leader>vw :cd ~/MEGA/NOTES<CR>:e .<CR>
 nnoremap <esc> :nohlsearch<Bar>:echo<CR>
 " Copy current file name to the clipboard: yank path
 nnoremap <leader>yap :let @+ = expand("%:p")<CR>
-" TODO: copy the current filename from the git repo root
+" TODO: copy with current line number
+" Copy the current filename from the git repo root
 nnoremap <leader>yp :let @+ = system("git ls-files " . expand("%p"))<CR>
 " Copy whole file: yank inner file
 nnoremap <leader>yf ggVGy
