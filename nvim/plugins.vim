@@ -27,7 +27,9 @@ Plug 'sheerun/vim-polyglot'
 
 " --- Plugins ---
 " Plug 'junegunn/vim-easy-align'
-" Plug 'junegunn/goyo.vim', { 'for': [ 'text', 'markdown' ] }
+Plug 'junegunn/goyo.vim', { 'for': [ 'text', 'markdown' ] }
+Plug 'junegunn/limelight.vim', { 'for': ['markdown'] }
+Plug 'godlygeek/tabular', { 'for': ['markdown'] }
 Plug 'Raimondi/delimitMate'
 Plug 'mhinz/vim-signify'
 Plug 'ap/vim-buftabline'
@@ -156,13 +158,16 @@ let g:fzf_commits_log_options = '--color=always --format="%C(auto)%h%d %s %C(bla
  "   set showtabline=2
  " endfunction
 
-" let g:goyo_width = 100
+let g:goyo_width = 100
+let g:limelight_default_coefficient = 0.8
 " augroup goyo
 "   au!
 "   autocmd! User GoyoEnter nested call <SID>goyo_enter()
 "   autocmd! User GoyoLeave nested call <SID>goyo_leave()
 " augroup END
 
+autocmd! User GoyoEnter Limelight
+autocmd! User GoyoLeave Limelight!
 
 " ----- javascript libraries ------
 let g:used_javascript_libs = 'jquery,underscore,react'
