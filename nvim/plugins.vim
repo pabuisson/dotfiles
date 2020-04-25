@@ -6,9 +6,9 @@ filetype off
 call plug#begin('~/.config/nvim/plugged')
 
 " --- Color schemes ---
+" Plug 'KabbAmine/yowish.vim'
+" Plug 'sonph/onehalf', { 'rtp': 'vim/' }
 Plug 'mhartington/oceanic-next'
-Plug 'sonph/onehalf', { 'rtp': 'vim/' }
-Plug 'KabbAmine/yowish.vim'
 Plug 'arcticicestudio/nord-vim'
 Plug 'dracula/vim', { 'as': 'dracula' }
 Plug 'morhetz/gruvbox'
