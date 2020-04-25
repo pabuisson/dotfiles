@@ -62,7 +62,7 @@ alias hs="bundle exec hanami server"
 alias hc="bundle exec hanami console"
 
 # FIXME: quotes escaping, I guess
-alias brewdeps="brew list | while read cask; do echo -n $fg[blue] $cask $fg[white]; brew deps $cask | awk '{printf(" %s ", $0)}'; echo ""; done"
+# alias brewdeps="brew list | while read cask; do echo -n $fg[blue] $cask $fg[white]; brew deps $cask | awk '{printf(" %s ", $0)}'; echo ""; done"
 
 export PATH="/usr/local/sbin:$PATH"
 export PATH="/usr/local/bin:$PATH"
@@ -99,5 +99,3 @@ fi
 # SSH
 # Add my identity so that I can use SSH forwarding
 ssh-add &> /dev/null
-
-# export PRY_RESCUE_RAILS=1
