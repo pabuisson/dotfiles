@@ -45,9 +45,13 @@ Plug 'tpope/vim-rhubarb'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'dense-analysis/ale'
+Plug 'junegunn/rainbow_parentheses.vim'
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'junegunn/rainbow_parentheses.vim'
+" https://github.com/neoclide/coc-tsserver
+" :CocInstall coc-tsserver
+" https://github.com/neoclide/coc-eslint
+" :CocInstall coc-eslint
 
 call plug#end()
 
