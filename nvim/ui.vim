@@ -9,25 +9,24 @@ set termguicolors
 
 " Default colorscheme
 
-" " -- Palenight --
-" color palenight
-" let g:palenight_terminal_italics=1
+" -- Palenight --
+color palenight
+let g:palenight_terminal_italics=1
 
 " " -- challenger_deep --
 " set bg=dark
 " color challenger_deep
 
-" -- Gruvbox --
-let g:gruvbox_contrast_dark='hard'
-let g:gruvbox_contrast_light='hard'
-color Gruvbox
-set bg=dark
+" " -- Gruvbox --
+" let g:gruvbox_contrast_dark='hard'
+" let g:gruvbox_contrast_light='soft'
 " hi Normal guibg=NONE ctermbg=NONE
-" hi SignColumn guibg=NONE ctermbg=NONE
+" colorscheme Gruvbox
+" set bg=dark
 
 " " -- Ayu --
-" " let ayucolor="mirage" " mirage version of theme
-" let ayucolor="dark"   " dark version of theme
+" let ayucolor="mirage" " mirage version of theme
+" " let ayucolor="dark"   " dark version of theme
 " color ayu
 
 " " -- Nord --
