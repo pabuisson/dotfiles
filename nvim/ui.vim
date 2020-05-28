@@ -52,21 +52,6 @@ let g:palenight_terminal_italics=1
 " hi DiffChange ctermfg=222 ctermbg=NONE guifg=#ecc48d guibg=NONE
 " hi DiffDelete ctermfg=204 ctermbg=NONE guifg=#ff5874 guibg=NONE
 
-" " -- yowish --
-" " https://github.com/KabbAmine/yowish.vim#custom-color-palette-
-" let g:yowish = {}
-" let g:yowish.term_italic = 1
-" let g:yowish.comment_italic = 1
-" let g:yowish.colors = {
-" \  'background' : ['#1b1d23', 'none'],
-" \  'backgroundDark' : ['#1b1d23', 'none'],
-" \ }
-" color yowish
-
-" " -- oceanic-next --
-" let g:oceanic_next_terminal_italic = 1
-" color OceanicNext
-
 " " -- one --
 " let g:one_allow_italics = 1 " I love italic for comments
 " color one
@@ -80,12 +65,6 @@ let g:palenight_terminal_italics=1
 " " let g:edge_style = 'neon'
 " set background=dark
 " color edge
-
-" " -- gruvbox-material --
-" " available values: 'hard', 'medium'(default), 'soft'
-" let g:gruvbox_material_background = 'hard'
-" colorscheme gruvbox-material
-
 
 " ---------------------
 
