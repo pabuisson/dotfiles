@@ -1,0 +1,311 @@
+/* https://theme.typora.io/doc/Write-Custom-Theme/ */
+
+:root {
+  --text-color: #162d41;
+  --accent-color: #15557b;
+  --light-grey: #dadada;
+  --very-light-grey: #fafafa;
+}
+
+/* ---- */
+
+html,
+body {
+  font-family: "Iosevka", monospace;
+  font-size: 1rem;
+  font-size: 16px;
+  line-height: 1.3;
+}
+
+#write {
+  padding-left: 10ch;
+  padding-right: 10ch;
+}
+
+/**
+ * ---------------------
+ * Block Elements
+ */
+
+/* yaml */
+pre.md-meta-block {
+
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Iosevka Slab", "Iosevka", monospace;
+}
+
+h1 {
+  margin-top: 1rem;
+}
+
+h2 {
+  margin-top: 3rem;
+  border-bottom: 1px solid var(--text-color);
+}
+
+h3 {
+  margin-top: 2.4rem;
+}
+h4 {
+  margin-top: 1.9rem;
+}
+h5 {
+  margin-top: 1.5rem;
+}
+h6 {
+  margin-top: 1.2rem;
+}
+
+table {
+}
+
+thead {
+}
+
+tr {}
+
+td,
+th {
+  border: 1px solid var(--light-grey);
+  padding: 0.2rem;
+}
+
+th {
+  background-color: var(--very-light-grey);
+}
+
+/* tooltip above tables */
+.md-table-edit {
+
+}
+
+ol, ul {
+}
+
+li {
+}
+
+/* blockquote */
+blockquote {
+  border-left: 6px solid var(--light-grey);
+  background-color: var(--very-light-grey);
+  padding: 0.5rem 0.5rem 0.5rem 1rem;
+  border-radius: 3px;
+}
+
+hr {
+}
+
+p {
+}
+
+/* diagram panel */
+.md-diagram-panel {
+}
+
+/* diagram panel in preview */
+#write .md-focus .md-diagram-panel {
+
+}
+
+/* reference link definition */
+.md-def-link {
+
+}
+
+/* footnote definition */
+.md-def-footnote {
+
+}
+
+/* table of contents */
+.md-toc {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  border-top: 1px solid #dadada;
+  border-bottom: 1px solid #dadada;
+  border-radius: 0;
+}
+
+
+/**
+ * Code Fences
+ * see http://support.typora.io/Code-Block-Styles
+ */
+
+.md-fences, code {
+  border-radius: 3px;
+  font-family: "Iosevka", monospace;
+  background-color: #dedede;
+}
+
+/* Code blocks */
+.md-fences {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  padding: 1rem;
+}
+
+/**
+ * Mermaid Diagrams
+ * see https://github.com/knsv/mermaid/blob/master/dist/mermaid.css
+ */
+
+/**
+ * Inline Elements
+ */
+
+/* basic styles */
+
+code {
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+strong {
+
+}
+
+em {
+
+}
+
+a {
+  color: var(--accent-color);
+}
+
+img {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+/* extend styles */
+
+/* Highlights */
+mark {
+  background-color: var(--background-color);
+}
+
+del {
+
+}
+
+sub {
+
+}
+
+sup {
+
+}
+
+/**
+ * Source Code Mode
+ * see http://support.typora.io/Code-Block-Styles
+ */
+#typora-source {
+  .cm-header {
+
+  }
+
+  .cm-strong {
+
+  }
+
+  .cm-em {
+
+  }
+
+  .cm-link {
+
+  }
+
+  .cm-string {
+
+  }
+
+  .cm-comment {
+
+  }
+}
+
+/**
+ * Control UI (optional)
+ */
+
+/* button style */
+.btn,
+.btn .btn-default {
+
+}
+
+/* outline area when popover */
+#outline-dropmenu {
+
+}
+
+/* side bar */
+.pin-outline #outline-dropmenu {
+
+}
+
+/* when sidepanel is visible */
+.pin-outline #write {
+
+}
+
+/* dialogs */
+.modal-content {}
+.modal-title {}
+
+/* search panel */
+#md-searchpanel {
+
+}
+
+#write div.md-toc-tooltip {
+  background-color: @background-color;
+}
+
+/**
+ * Control UI on Mac (optional)
+ */
+
+/* quick open panel */
+#typora-quick-open {
+  /* background-color: #525C65; */
+}
+
+#md-searchpanel,
+.on-search-panel-open header,
+.modal-content,
+.popover,
+.context-menu {
+  /* background-color: @dialog-background; */
+}
+
+.popover.bottom > .arrow:after {
+  /* border-bottom-color: @dialog-background; */
+}
+
+/**
+ * Control UI on Windows/Linux (optional)
+ */
+
+/* context menu */
+.context-menu {}
+
+/* statue bar */
+footer {
+
+}
+
+/**
+ * Control UI on Windows Unibody Style (optional)
+ */
+
+/* left side mega menu */
+.megamenu-content {
+
+}
