@@ -12,6 +12,8 @@ alias tigs="tig status"
 alias n="nvim"
 alias y="yarn"
 
+alias typora="open -a typora"
+
 alias currentweek="date +%V"
 alias monip="ifconfig | grep 192 | cut -d' ' -f2"
 
