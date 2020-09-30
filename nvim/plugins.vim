@@ -138,7 +138,7 @@ nnoremap <leader>fc :BCommits<CR>
 " previous-history instead of down and up. If you don't like the change,
 " explicitly bind the keys to down and up in your $FZF_DEFAULT_OPTS.
 let g:fzf_history_dir = '~/.local/share/fzf-history'
-let g:fzf_commits_log_options = '--color=always --format="%C(auto)%h%d %s %C(black)%C(bold)%cr (%cn)"'
+let g:fzf_commits_log_options = '--color=always --format="%C(auto)%h%d %s %C(green)%cr %C(blue)(%cn)"'
 
 
 " " ----- goyo ------
