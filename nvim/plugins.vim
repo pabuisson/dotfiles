@@ -29,7 +29,7 @@ Plug 'godlygeek/tabular', { 'for': ['markdown'] }
 Plug 'Raimondi/delimitMate'
 Plug 'mhinz/vim-signify'
 Plug 'ap/vim-buftabline'
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'mileszs/ack.vim'
 Plug 'terryma/vim-multiple-cursors'
