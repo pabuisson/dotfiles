@@ -16,9 +16,6 @@ Plug 'ayu-theme/ayu-vim'
 Plug 'drewtempelmeyer/palenight.vim'
 Plug 'haishanh/night-owl.vim'
 Plug 'rakr/vim-one'
-Plug 'cocopon/iceberg.vim'
-Plug 'sainnhe/edge'
-Plug 'bluz71/vim-nightfly-guicolors'
 
 " --- Filetype related ---
 Plug 'othree/javascript-libraries-syntax.vim'
