@@ -1,0 +1,77 @@
+# espanso configuration file
+
+# This is the default configuration file, change it as you like it
+# You can refer to the official documentation:
+# https://espanso.org/docs/
+
+# Matches are the substitution rules, when you type the "trigger" string
+# it gets replaced by the "replace" string.
+matches:
+  # Dates
+  - trigger: ":todayiso"
+    replace: "{{output}}"
+    vars:
+      - name: output
+        type: date
+        params:
+          format: "%Y%m%d"
+
+  - trigger: ":ydayiso"
+    replace: "{{output}}"
+    vars:
+      - name: output
+        type: shell
+        params:
+          cmd: "date -v-1d +%Y%m%d"
+
+  - trigger: ":tomiso"
+    replace: "{{output}}"
+    vars:
+      - name: output
+        type: shell
+        params:
+          cmd: "date -v+1d +%Y%m%d"
+
+  - trigger: ":timeiso"
+    replace: "{{output}}"
+    vars:
+      - name: output
+        type: date
+        params:
+          format: "%Y%m%d%H%M"
+
+  - trigger: ":datelongfr"
+    replace: "{{output}}"
+    vars:
+      - name: output
+        type: shell
+        params:
+          cmd: "export LANG=fr_FR.UTF-8 && date +%A %d %B %Y"
+
+
+  # Obsidian
+
+  - trigger: ":dnote"
+    replace: "{{output}}"
+    vars:
+      - name: output
+        type: shell
+        params:
+          cmd: "export LANG=fr_FR.UTF-8 && cat ~/MEGA/NOTES/_daily_template.md | sed \"s/{{date}}/$(date +'%A %d %B %Y')/g\" | sed \"s/{{yesterday}}/$(date -v-1d +'%Y%m%d')/g\" | sed \"s/{{tomorrow}}/$(date -v+1d +'%Y%m%d')/g\""
+
+  - trigger: ":znote"
+    replace: "{{output}}"
+    vars:
+      - name: output
+        type: shell
+        params:
+          cmd: "export LANG=fr_FR.UTF-8 && cat ~/MEGA/NOTES/_zettelkasten_template.md | sed \"s/{{date}}/$(date +'%Y%m%d')/g\""
+
+  - trigger: ":pvcem"
+    replace: "{{output}}"
+    vars:
+      - name: output
+        type: shell
+        params:
+          cmd: "export LANG=fr_FR.UTF-8 && cd ~/MEGA/NOTES/DOCTONOTES && cat _pvc_em_weekly_template.md | sed -l \"s/{{date}}/$(date +'%Y%m%d')/g\" | sed -l \"s/{{previous}}/$(find . -Btime -8d -name '*weekly PVC EM.md'|cut -d'/' -f2|cut -d. -f1)/g\""
+

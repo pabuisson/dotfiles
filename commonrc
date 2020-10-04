@@ -64,12 +64,13 @@ alias hs="bundle exec hanami server"
 alias hc="bundle exec hanami console"
 
 # FIXME: quotes escaping, I guess
-# alias brewdeps="brew list | while read cask; do echo -n $fg[blue] $cask $fg[white]; brew deps $cask | awk '{printf(" %s ", $0)}'; echo ""; done"
+alias brewdeps="brew list | while read cask; do echo -n $fg[blue] $cask $fg[white]; brew deps $cask | awk '{printf(\" %s \", $0)}'; echo ''; done"
 
 export PATH="/usr/local/sbin:$PATH"
 export PATH="/usr/local/bin:$PATH"
 export PATH="$PATH:$HOME/Applications:$HOME/Applications/scripts:/opt/local/bin"
 export PATH="/usr/local/opt/postgresql@9.4/bin:$PATH"
+export PATH="$HOME/Library/Python/3.8/bin:$PATH"
 
 # Z instead of FASD
 if [[ -e /usr/local/etc/profile.d/z.sh ]]

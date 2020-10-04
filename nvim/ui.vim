@@ -9,9 +9,9 @@ set termguicolors
 
 " Default colorscheme
 
-" -- Palenight --
-color palenight
-let g:palenight_terminal_italics=1
+" " -- Palenight --
+" color palenight
+" let g:palenight_terminal_italics=1
 
 " " -- challenger_deep --
 " set bg=dark
@@ -65,6 +65,9 @@ let g:palenight_terminal_italics=1
 " " let g:edge_style = 'neon'
 " set background=dark
 " color edge
+
+" -- oceanic-next --
+color OceanicNext
 
 " ---------------------
 

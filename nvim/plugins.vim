@@ -11,15 +11,18 @@ Plug 'mhartington/oceanic-next'
 Plug 'arcticicestudio/nord-vim'
 Plug 'dracula/vim', { 'as': 'dracula' }
 Plug 'morhetz/gruvbox'
-Plug 'challenger-deep-theme/vim', { 'as': 'challenger-deep' }
+" Plug 'challenger-deep-theme/vim', { 'as': 'challenger-deep' }
 Plug 'ayu-theme/ayu-vim'
 Plug 'drewtempelmeyer/palenight.vim'
 Plug 'haishanh/night-owl.vim'
 Plug 'rakr/vim-one'
+Plug 'ajmwagar/vim-deus'
+Plug 'skbolton/embark'
 
 " --- Filetype related ---
 Plug 'othree/javascript-libraries-syntax.vim'
 Plug 'sheerun/vim-polyglot'
+Plug 'gabrielelana/vim-markdown'
 
 " --- Plugins ---
 " Plug 'junegunn/vim-easy-align'
@@ -44,6 +47,7 @@ Plug 'dense-analysis/ale'
 Plug 'junegunn/rainbow_parentheses.vim'
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'thaerkh/vim-indentguides'
 " https://github.com/neoclide/coc-tsserver
 " :CocInstall coc-tsserver
 " https://github.com/neoclide/coc-eslint
@@ -170,7 +174,7 @@ autocmd! User GoyoEnter Limelight
 autocmd! User GoyoLeave Limelight!
 
 " ----- javascript libraries ------
-let g:used_javascript_libs = 'jquery,underscore,react'
+let g:used_javascript_libs = 'react'
 
 " ----- rainbow_parentheses ------
 " Activation based on file type

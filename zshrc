@@ -88,3 +88,7 @@ setopt NO_NOMATCH
 
 # zle -N zle-line-init
 # zle -N zle-keymap-select
+
+
+# --- RAILS ---
+export HTTPS=1
