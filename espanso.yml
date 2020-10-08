@@ -51,13 +51,21 @@ matches:
 
   # Obsidian
 
-  - trigger: ":dnote"
+  - trigger: ":ddnote"
     replace: "{{output}}"
     vars:
       - name: output
         type: shell
         params:
-          cmd: "export LANG=fr_FR.UTF-8 && cat ~/MEGA/NOTES/_daily_template.md | sed \"s/{{date}}/$(date +'%A %d %B %Y')/g\" | sed \"s/{{yesterday}}/$(date -v-1d +'%Y%m%d')/g\" | sed \"s/{{tomorrow}}/$(date -v+1d +'%Y%m%d')/g\""
+          cmd: "export LANG=fr_FR.UTF-8 && cat ~/MEGA/NOTES/DOCTONOTES/_daily_template.md | sed \"s/{{date}}/$(date +'%A %d %B %Y')/g\" | sed \"s/{{yesterday}}/$(date -v-1d +'%Y%m%d')/g\" | sed \"s/{{tomorrow}}/$(date -v+1d +'%Y%m%d')/g\""
+
+  - trigger: ":pdnote"
+    replace: "{{output}}"
+    vars:
+      - name: output
+        type: shell
+        params:
+          cmd: "export LANG=fr_FR.UTF-8 && cat ~/MEGA/NOTES/PERSO/_daily_template.md | sed \"s/{{date}}/$(date +'%A %d %B %Y')/g\" | sed \"s/{{yesterday}}/$(date -v-1d +'%Y%m%d')/g\" | sed \"s/{{tomorrow}}/$(date -v+1d +'%Y%m%d')/g\""
 
   - trigger: ":znote"
     replace: "{{output}}"
