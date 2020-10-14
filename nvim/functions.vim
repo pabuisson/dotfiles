@@ -103,6 +103,7 @@ function! YAMLTree()
         endif
     endfor
     let l:list = reverse(l:list)
+    let @+ = join(l:list, '.')
     echo join(l:list, '.')
 endfunction
 
