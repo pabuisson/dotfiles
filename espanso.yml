@@ -48,6 +48,10 @@ matches:
         params:
           cmd: "export LANG=fr_FR.UTF-8 && date +%A %d %B %Y"
 
+  # Misc
+
+  - trigger: "pab@docto"
+    replace: "pierre-adrien.buisson@doctolib.com"
 
   # Obsidian
 
