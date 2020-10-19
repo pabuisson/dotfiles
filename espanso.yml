@@ -85,5 +85,5 @@ matches:
       - name: output
         type: shell
         params:
-          cmd: "export LANG=fr_FR.UTF-8 && cd ~/MEGA/NOTES/DOCTONOTES && cat _pvc_em_weekly_template.md | sed -l \"s/{{date}}/$(date +'%Y%m%d')/g\" | sed -l \"s/{{previous}}/$(find . -Btime -8d -name '*weekly PVC EM.md'|cut -d'/' -f2|cut -d. -f1)/g\""
+          cmd: "export LANG=fr_FR.UTF-8 && cd ~/MEGA/NOTES/DOCTONOTES && cat _pvc_em_weekly_template.md | sed -l \"s/{{week}}/$(date +'%V')/g\" | sed -l \"s/{{date}}/$(date +'%Y%m%d')/g\" | sed -l \"s/{{previous}}/$(find . -Btime -8d -name '*weekly PVC EM.md'|cut -d'/' -f2|cut -d. -f1)/g\""
 
