@@ -9,13 +9,21 @@ set termguicolors
 
 " Default colorscheme
 
-" " -- Palenight --
-" color palenight
-" let g:palenight_terminal_italics=1
+" " -- Ayu --
+" let ayucolor="mirage" " mirage version of theme
+" " let ayucolor="dark"   " dark version of theme
+" color ayu
 
 " " -- challenger_deep --
 " set bg=dark
 " color challenger_deep
+
+" -- deus --
+color deus
+
+" " -- Dracula --
+" set bg=dark
+" color dracula
 
 " " -- Gruvbox --
 " let g:gruvbox_contrast_dark='hard'
@@ -23,23 +31,6 @@ set termguicolors
 " hi Normal guibg=NONE ctermbg=NONE
 " colorscheme Gruvbox
 " set bg=dark
-
-" " -- Ayu --
-" let ayucolor="mirage" " mirage version of theme
-" " let ayucolor="dark"   " dark version of theme
-" color ayu
-
-" " -- Nord --
-" let g:nord_italic = 1
-" let g:nord_italic_comments = 1
-" color nord
-
-" -- Iceberg --
-" color iceberg
-
-" " -- Dracula --
-" set bg=dark
-" color dracula
 
 " " -- night owl --
 " color night-owl
@@ -52,28 +43,24 @@ set termguicolors
 " hi DiffChange ctermfg=222 ctermbg=NONE guifg=#ecc48d guibg=NONE
 " hi DiffDelete ctermfg=204 ctermbg=NONE guifg=#ff5874 guibg=NONE
 
+" " -- Nord --
+" let g:nord_italic = 1
+" let g:nord_italic_comments = 1
+" color nord
+
+" " -- oceanic-next --
+" color OceanicNext
+
 " " -- one --
 " let g:one_allow_italics = 1 " I love italic for comments
 " color one
 
-" " -- nightfly --
-" let g:nightflyItalics = 0
-" color nightfly
-" hi NonText guifg=#4b6479 guibg=NONE
-
-" " -- edge --
-" " let g:edge_style = 'neon'
-" set background=dark
-" color edge
-
-" -- oceanic-next --
-color OceanicNext
+" " -- Palenight --
+" color palenight
+" let g:palenight_terminal_italics=1
 
 " ---------------------
 
 " " -- Ayu light --
 " let ayucolor="light"  " for light version of theme
 " color ayu
-
-" " -- flattened light --
-" color flattened_light
