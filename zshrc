@@ -92,3 +92,5 @@ setopt NO_NOMATCH
 
 # --- RAILS ---
 export HTTPS=1
+# --- CRYSTAL ---
+export PKG_CONFIG_PATH=/usr/local/opt/openssl/lib/pkgconfig
