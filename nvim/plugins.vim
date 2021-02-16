@@ -136,13 +136,14 @@ nnoremap <leader>ff :FZF<CR>
 nnoremap <leader>fb :Buffers<CR>
 nnoremap <leader>ft :Tags<CR>
 nnoremap <leader>fc :BCommits<CR>
+nnoremap <leader>fo :FZFBuffersLines<CR>
 
 " Enable per-command history.
 " CTRL-N and CTRL-P will be automatically bound to next-history and
 " previous-history instead of down and up. If you don't like the change,
 " explicitly bind the keys to down and up in your $FZF_DEFAULT_OPTS.
 let g:fzf_history_dir = '~/.local/share/fzf-history'
-let g:fzf_commits_log_options = '--color=always --format="%C(auto)%h%d %s %C(green)%cr %C(blue)(%cn)"'
+let g:fzf_commits_log_options = '--color=always --format="%C(auto)%h%d %s %C(green)%as %C(cyan)(%an)"'
 
 
 " " ----- goyo ------
