@@ -17,18 +17,13 @@ Plug 'drewtempelmeyer/palenight.vim'
 Plug 'haishanh/night-owl.vim'
 Plug 'rakr/vim-one'
 Plug 'ajmwagar/vim-deus'
-Plug 'skbolton/embark'
 
 " --- Filetype related ---
 Plug 'othree/javascript-libraries-syntax.vim'
 Plug 'sheerun/vim-polyglot'
-Plug 'gabrielelana/vim-markdown'
+" Plug 'gabrielelana/vim-markdown'
 
 " --- Plugins ---
-" Plug 'junegunn/vim-easy-align'
-Plug 'junegunn/goyo.vim', { 'for': [ 'text', 'markdown' ] }
-Plug 'junegunn/limelight.vim', { 'for': ['markdown'] }
-Plug 'godlygeek/tabular', { 'for': ['markdown'] }
 Plug 'Raimondi/delimitMate'
 Plug 'mhinz/vim-signify'
 Plug 'ap/vim-buftabline'
@@ -40,7 +35,7 @@ Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rhubarb'
-" Plug 'janko-m/vim-test'
+Plug 'tommcdo/vim-fubitive'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'dense-analysis/ale'
@@ -48,6 +43,11 @@ Plug 'junegunn/rainbow_parentheses.vim'
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'thaerkh/vim-indentguides'
+" Plug 'junegunn/goyo.vim', { 'for': [ 'text', 'markdown' ] }
+" Plug 'junegunn/limelight.vim', { 'for': ['markdown'] }
+" Plug 'godlygeek/tabular', { 'for': ['markdown'] }
+" Plug 'junegunn/vim-easy-align'
+" Plug 'janko-m/vim-test'
 " https://github.com/neoclide/coc-tsserver
 " :CocInstall coc-tsserver
 " https://github.com/neoclide/coc-eslint

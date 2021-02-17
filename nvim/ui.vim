@@ -9,7 +9,7 @@ set termguicolors
 
 " Default colorscheme
 
-" " -- Ayu --
+" " -- ayu --
 " let ayucolor="mirage" " mirage version of theme
 " " let ayucolor="dark"   " dark version of theme
 " color ayu
@@ -18,14 +18,18 @@ set termguicolors
 " set bg=dark
 " color challenger_deep
 
-" -- deus --
-color deus
+"-" set t_Co=256
+" set termguicolors
+" let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+" let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+" set background=dark
+" color deus
 
-" " -- Dracula --
+" " -- dracula --
 " set bg=dark
 " color dracula
 
-" " -- Gruvbox --
+" " -- gruvbox --
 " let g:gruvbox_contrast_dark='hard'
 " let g:gruvbox_contrast_light='soft'
 " hi Normal guibg=NONE ctermbg=NONE
@@ -43,7 +47,7 @@ color deus
 " hi DiffChange ctermfg=222 ctermbg=NONE guifg=#ecc48d guibg=NONE
 " hi DiffDelete ctermfg=204 ctermbg=NONE guifg=#ff5874 guibg=NONE
 
-" " -- Nord --
+" " -- nord --
 " let g:nord_italic = 1
 " let g:nord_italic_comments = 1
 " color nord
@@ -55,12 +59,12 @@ color deus
 " let g:one_allow_italics = 1 " I love italic for comments
 " color one
 
-" " -- Palenight --
+" " -- palenight --
 " color palenight
 " let g:palenight_terminal_italics=1
 
 " ---------------------
 
-" " -- Ayu light --
+" " -- ayu light --
 " let ayucolor="light"  " for light version of theme
 " color ayu
