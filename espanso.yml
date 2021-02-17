@@ -53,6 +53,9 @@ matches:
   - trigger: "pab@docto"
     replace: "pierre-adrien.buisson@doctolib.com"
 
+  - trigger: "hl1"
+    replace: "HEADLESS=1 "
+
   # Obsidian
 
   - trigger: ":ddtod"
