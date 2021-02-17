@@ -55,13 +55,29 @@ matches:
 
   # Obsidian
 
-  - trigger: ":ddnote"
+  - trigger: ":ddtod"
     replace: "{{output}}"
     vars:
       - name: output
         type: shell
         params:
           cmd: "export LANG=fr_FR.UTF-8 && cat ~/MEGA/NOTES/DOCTONOTES/_daily_template.md | sed \"s/{{date}}/$(date +'%A %d %B %Y')/g\" | sed \"s/{{yesterday}}/$(date -v-1d +'%Y%m%d')/g\" | sed \"s/{{tomorrow}}/$(date -v+1d +'%Y%m%d')/g\""
+
+  - trigger: ":ddtom"
+    replace: "{{output}}"
+    vars:
+      - name: output
+        type: shell
+        params:
+          cmd: "export LANG=fr_FR.UTF-8 && cat ~/MEGA/NOTES/DOCTONOTES/_daily_template.md | sed \"s/{{date}}/$(date -v+1d +'%A %d %B %Y')/g\" | sed \"s/{{yesterday}}/$(date +'%Y%m%d')/g\" | sed \"s/{{tomorrow}}/$(date -v+2d +'%Y%m%d')/g\""
+
+  - trigger: ":wnote"
+    replace: "{{output}}"
+    vars:
+      - name: output
+        type: shell
+        params:
+          cmd: "export LANG=fr_FR.UTF-8 && cat ~/MEGA/NOTES/DOCTONOTES/_weekly_template.md | sed \"s/{{date}}/$(date +'%A %d %B %Y')/g\" | sed \"s/{{week}}/$(date +'%V')/g\" | sed \"s/{{prevweek}}/$(date -v-1w +'%V')/g\" | sed \"s/{{mon}}/$(date -vmon +'%Y%m%d')/g\""
 
   - trigger: ":pdnote"
     replace: "{{output}}"
