@@ -122,11 +122,11 @@ vmap <leader>c gc
 " \ j
 
 " ----- fugitive.vim -----
-nnoremap <leader>gst :Gstatus<CR>
-nnoremap <leader>gci :Gcommit<CR>
+nnoremap <leader>gst :Git<CR>
+nnoremap <leader>gci :Git commit<CR>
 nnoremap <leader>gr  :Gread<CR>
 nnoremap <leader>gw  :Gwrite<CR>
-nnoremap <leader>gb  :Gblame<CR>
+nnoremap <leader>gb  :Git blame<CR>
 
 " ----- fzf -----
 " nnoremap <C-p> :FZF<CR>
