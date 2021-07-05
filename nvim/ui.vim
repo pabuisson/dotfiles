@@ -7,34 +7,14 @@
 set termguicolors
 
 
-" Default colorscheme
-
 " " -- ayu --
-" let ayucolor="mirage" " mirage version of theme
-" " let ayucolor="dark"   " dark version of theme
+" " let ayucolor="mirage" " mirage version of theme
+" let ayucolor="dark"   " dark version of theme
 " color ayu
-
-" " -- challenger_deep --
-" set bg=dark
-" color challenger_deep
-
-"-" set t_Co=256
-" set termguicolors
-" let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
-" let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
-" set background=dark
-" color deus
 
 " " -- dracula --
 " set bg=dark
 " color dracula
-
-" " -- gruvbox --
-" let g:gruvbox_contrast_dark='hard'
-" let g:gruvbox_contrast_light='soft'
-" hi Normal guibg=NONE ctermbg=NONE
-" colorscheme Gruvbox
-" set bg=dark
 
 " " -- night owl --
 " color night-owl
@@ -55,16 +35,36 @@ set termguicolors
 " " -- oceanic-next --
 " color OceanicNext
 
-" " -- one --
-" let g:one_allow_italics = 1 " I love italic for comments
-" color one
+" " -- material --
+" " let g:material_theme_style = 'default' | 'palenight' | 'ocean' | 'lighter' | 'darker'
+" let g:material_theme_style = 'darker'
+" color material
+" hi clear Folded
+" hi link Folded Comment
 
 " " -- palenight --
 " color palenight
 " let g:palenight_terminal_italics=1
+
+ " -- tokyonight --
+ " let g:tokyonight_style = 'night' | 'storm'
+let g:tokyonight_style = "storm"
+let g:tokyonight_italic_functions = 1
+colorscheme tokyonight
 
 " ---------------------
 
 " " -- ayu light --
 " let ayucolor="light"  " for light version of theme
 " color ayu
+
+" " -- material light --
+" " let g:material_theme_style = 'default' | 'palenight' | 'ocean' | 'lighter' | 'darker'
+" let g:material_theme_style = 'lighter'
+" color material
+
+" " -- tokyonight --
+" " NOTE: requires neovim >= 0.5.0
+" let g:tokyonight_style = "day"
+" let g:tokyonight_italic_functions = 1
+" colorscheme tokyonight
