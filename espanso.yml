@@ -40,6 +40,14 @@ matches:
         params:
           format: "%Y%m%d%H%M"
 
+  - trigger: ":now"
+    replace: "{{output}}"
+    vars:
+      - name: output
+        type: date
+        params:
+          format: "%H:%M"
+
   - trigger: ":datelongfr"
     replace: "{{output}}"
     vars:
@@ -55,6 +63,9 @@ matches:
 
   - trigger: "hl1"
     replace: "HEADLESS=1 "
+
+  - trigger: "prr1"
+    replace: "PRY_RESCUE_RAILS=1 "
 
   # Obsidian
 
