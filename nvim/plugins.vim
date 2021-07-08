@@ -72,7 +72,8 @@ let g:ale_lint_on_text_changed = "never"
 let g:ale_linters_explicit = 1
 let g:ale_linters = {
 \   'ruby': ['rubocop'],
-\   'javascript': ['eslint']
+\   'javascript': ['eslint'],
+\   'crystal': ['ameba', 'crystal']
 \}
 
 let g:ale_fixers = {
