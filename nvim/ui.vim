@@ -6,6 +6,10 @@
 " For neovim > 0.1.5
 set termguicolors
 
+if !has('nvim-0.5.0')
+  color palenight
+  finish
+endif
 
 " " -- ayu --
 " " let ayucolor="mirage" " mirage version of theme
