@@ -45,11 +45,18 @@ Plug 'ludovicchabant/vim-gutentags'
 Plug 'thaerkh/vim-indentguides'
 Plug 'junegunn/goyo.vim', { 'for': [ 'text', 'markdown' ] }
 Plug 'junegunn/limelight.vim', { 'for': ['markdown'] }
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-" https://github.com/neoclide/coc-tsserver
-" :CocInstall coc-tsserver
-" https://github.com/neoclide/coc-eslint
-" :CocInstall coc-eslint
+" -- Neovim 0.5.0 --
+if has('nvim-0.5.0')
+  Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
+  Plug 'neovim/nvim-lspconfig'
+  " npm install -g typescript typescript-language-server
+else
+  Plug 'neoclide/coc.nvim', {'branch': 'release'}
+  " https://github.com/neoclide/coc-tsserver
+  " :CocInstall coc-tsserver
+  " https://github.com/neoclide/coc-eslint
+  " :CocInstall coc-eslint
+endif
 
 call plug#end()
 
@@ -180,4 +187,32 @@ augroup rainbow_lisp
   autocmd!
   autocmd FileType ruby,javascript RainbowParentheses
 augroup END
+
+
+" =================================
+"       NVIM 0.5.0 SPECIFIC
+" =================================
+
+if !has('nvim-0.5.0')
+  finish
+end
+
+" ----- lspconfig -----
+" https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md#tsserver
+lua <<EOF
+require'lspconfig'.tsserver.setup{}
+EOF
+
+
+" ----- treesitter -----
+lua <<EOF
+require'nvim-treesitter.configs'.setup {
+  ensure_installed = { "javascript", "ruby" }, -- one of "all", "maintained" (parsers with maintainers), or a list of languages
+  ignore_install = {}, -- List of parsers to ignore installing
+  highlight = {
+    enable = true,              -- false will disable the whole extension
+    disable = {},  -- list of language that will be disabled
+  },
+}
+EOF
 
