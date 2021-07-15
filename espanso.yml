@@ -56,7 +56,12 @@ matches:
         params:
           cmd: "export LANG=fr_FR.UTF-8 && date +%A %d %B %Y"
 
+
+
   # Misc
+
+  - trigger: "nrfields"
+    replace: "timestamp, ssid, account_id, http.statusCode, request.method, name, path,request.headers.contentType, request.headers.contentLength"
 
   - trigger: "pab@docto"
     replace: "pierre-adrien.buisson@doctolib.com"
