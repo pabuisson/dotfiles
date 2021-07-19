@@ -42,6 +42,7 @@ Plug 'tpope/vim-surround'
 Plug 'dense-analysis/ale'
 Plug 'junegunn/rainbow_parentheses.vim'
 Plug 'ludovicchabant/vim-gutentags'
+" brew install universal-ctags
 Plug 'thaerkh/vim-indentguides'
 Plug 'junegunn/goyo.vim', { 'for': [ 'text', 'markdown' ] }
 Plug 'junegunn/limelight.vim', { 'for': ['markdown'] }
@@ -164,7 +165,18 @@ autocmd! User GoyoEnter Limelight
 autocmd! User GoyoLeave Limelight!
 
 " ----- gutentags -----
+" let g:gutentags_trace = 1
 let g:gutentags_cache_dir = '~/.local/share/nvim/ctags'
+if executable('rg')
+  " Ignore gitignore files by using rg
+  let g:gutentags_file_list_command = 'rg --files'
+endif
+" Never managed to get this exclude param to work
+" let g:gutentags_ctags_exclude = [
+"   \ 'build/*',
+"   \ 'dist/*',
+"   \ 'node_modules/*'
+" \]
 
 function! s:get_gutentags_status(mods)
   let l:msg = ''
