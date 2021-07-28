@@ -34,10 +34,13 @@ set foldcolumn=1    "always enable foldcolumn
 let g:netrw_list_hide= '\.DS_Store$, *\.scssc$, *\.sassc$, \.sass-cache\/'
 set ignorecase      "ignore case for search and such
 set smartcase       "don't ignore case if there's an uppercase letter in the pattern
+set gdefault        "use g flag by default when using substitute
 set scrolloff=4     "displays at least 4 lines around the cursor even when top/bottom of screen
 set clipboard+=unnamed
 set showmatch       "show matching parenthese
 set lazyredraw      "redraw only when we need to
+set splitbelow          " Horizontal split below current.
+set splitright          " Vertical split to right of current.
 " === HIDDEN/NON VISIBLE CHARS ===
 set list
 set listchars=tab:▸\ ,eol:¬
