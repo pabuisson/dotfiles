@@ -40,7 +40,6 @@ Plug 'tommcdo/vim-fubitive'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'dense-analysis/ale'
-Plug 'junegunn/rainbow_parentheses.vim'
 Plug 'ludovicchabant/vim-gutentags'
 " brew install universal-ctags
 Plug 'thaerkh/vim-indentguides'
@@ -191,14 +190,6 @@ endfunction
 
 " ----- javascript libraries ------
 let g:used_javascript_libs = 'react'
-
-" ----- rainbow_parentheses ------
-" Activation based on file type
-let g:rainbow#pairs = [['(', ')'], ['[', ']'], ['{', '}']]
-augroup rainbow_lisp
-  autocmd!
-  autocmd FileType ruby,javascript RainbowParentheses
-augroup END
 
 
 " =================================
