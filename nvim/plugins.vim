@@ -124,6 +124,7 @@ nnoremap <leader>fb :Buffers<CR>
 nnoremap <leader>ft :Tags<CR>
 nnoremap <leader>fc :BCommits<CR>
 nnoremap <leader>fo :FZFBuffersLines<CR>
+ca rg Rg
 
 let g:fzf_preview_window = ['right:40%']
 " Enable per-command history.
@@ -131,9 +132,8 @@ let g:fzf_preview_window = ['right:40%']
 " previous-history instead of down and up. If you don't like the change,
 " explicitly bind the keys to down and up in your $FZF_DEFAULT_OPTS.
 let g:fzf_history_dir = '~/.local/share/fzf-history'
-let g:fzf_commits_log_options = '--color=always --format="%C(auto)%h%d %s %C(green)%as %C(cyan)(%an)"'
+let g:fzf_commits_log_options = '--color=always --format="%C(auto)%h%d %C(green)%as %C(cyan)%an :: %C(reset)%s"'
 
-ca rg Rg
 
 " " ----- goyo ------
 " function! s:goyo_enter()
