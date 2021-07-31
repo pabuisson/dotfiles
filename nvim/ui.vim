@@ -7,7 +7,7 @@
 set termguicolors
 
 if !has('nvim-0.5.0')
-  color palenight
+  color OceanicNext
   finish
 endif
 
@@ -27,7 +27,16 @@ endif
 " -- oceanic-next --
 let g:oceanic_next_terminal_bold = 1
 let g:oceanic_next_terminal_italic = 1
+" hi default link BufTabLineCurrent         TabLineSel
+" buffer ouvert mais pas en édition. doit être moins visible
+" Doit pas être underlined
+" hi default link BufTabLineHidden          TabLine
+" hi default link BufTabLineFill            TabLineFill
 color OceanicNext
+" hi link BufTabLineCurrent PmenuSbar
+hi link BufTabLineActive PmenuSbar
+hi link BufTabLineHidden Pmenu
+hi link BufTabLineFill StatusLine
 
 " " -- palenight --
 " color palenight
