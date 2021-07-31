@@ -34,7 +34,6 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 " TODO: get rid of this
 Plug 'mileszs/ack.vim'
-Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-fugitive'
@@ -53,6 +52,7 @@ if has('nvim-0.5.0')
   Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
   Plug 'neovim/nvim-lspconfig'
   " npm install -g typescript typescript-language-server
+  " gem install solargraph
 else
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
   " https://github.com/neoclide/coc-tsserver
@@ -207,6 +207,7 @@ end
 " https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md#tsserver
 lua <<EOF
 require'lspconfig'.tsserver.setup{}
+require'lspconfig'.solargraph.setup{}
 EOF
 
 
@@ -221,4 +222,3 @@ require'nvim-treesitter.configs'.setup {
   },
 }
 EOF
-
