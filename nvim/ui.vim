@@ -20,17 +20,6 @@ endif
 " set bg=dark
 " color dracula
 
-" " -- night owl --
-" color night-owl
-" hi link BufTabLineActive Pmenu
-" hi link BufTabLineHidden Pmenu
-" hi link BufTabLineFill Pmenu
-" " TODO: more distinctive colors maybe?
-" " TODO: PR this to nightowl https://github.com/haishanh/night-owl.vim/pulls
-" hi DiffAdd ctermfg=149 ctermbg=NONE guifg=#addb67 guibg=NONE
-" hi DiffChange ctermfg=222 ctermbg=NONE guifg=#ecc48d guibg=NONE
-" hi DiffDelete ctermfg=204 ctermbg=NONE guifg=#ff5874 guibg=NONE
-
 " " -- nord --
 " let g:nord_italic = 1
 " let g:nord_italic_comments = 1
