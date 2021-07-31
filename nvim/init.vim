@@ -29,7 +29,7 @@ set vb              "visual bell instead of audio
 set linebreak       "don't cut words at the end of lines
 set nowrap          "don't wrap long lines
 set colorcolumn=120
-set cursorline      "highlight current line (/!\ Performances on iterm !)
+set cursorline      "highlight current line
 set foldcolumn=1    "always enable foldcolumn
 let g:netrw_list_hide= '\.DS_Store$, *\.scssc$, *\.sassc$, \.sass-cache\/'
 set ignorecase      "ignore case for search and such
@@ -100,6 +100,7 @@ function! GitInfo()
     return 'g:'.fugitive#head()
   else
     return ''
+  endif
 endfunction
 
 
@@ -114,17 +115,14 @@ augroup configgroup
 
   " Specific filetype settings
   au BufRead,BufNewFile *.md     set ft=markdown
-  au BufRead,BufNewFile *.todo   set ft=todo
   au BufRead,BufNewFile *.scss   set ft=scss
   au BufRead,BufNewFile *.sass   set ft=sass
-  au BufRead,BufNewFile *.coffee set ft=coffee
-  au BufRead,BufNewFile *.es6    set ft=javacript
   au BufRead,BufNewFile Gemfile* set ft=ruby
+  au BufRead,BufNewFile *.slim   set ft=slim
 
   " Comment settings depending on filetype
   au FileType coffee set commentstring=#\ %s
   au FileType haml   set commentstring=/\ %s
-  " au FileType slim   set commentstring=/\ %s
 
   " Specific syntax highlights
   au FileType ruby match ErrorMsg /binding\.pry\|pry\|byebug/
