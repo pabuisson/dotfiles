@@ -12,10 +12,13 @@ Plug 'ayu-theme/ayu-vim'
 Plug 'dracula/vim', { 'as': 'dracula' }
 Plug 'kaicataldo/material.vim'
 Plug 'drewtempelmeyer/palenight.vim'
-" --- Neovim < 0.5 ---
-" Plug 'ghifarit53/tokyonight-vim'
 " --- Neovim 0.5 ---
-Plug 'folke/tokyonight.nvim'
+if has('nvim-0.5.0')
+  Plug 'folke/tokyonight.nvim'
+else
+  Plug 'ghifarit53/tokyonight-vim'
+endif
+" -------------------
 
 " --- Filetype related ---
 Plug 'othree/javascript-libraries-syntax.vim'
