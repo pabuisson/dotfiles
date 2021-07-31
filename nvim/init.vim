@@ -57,42 +57,27 @@ augroup bufferloadsave
   au BufWinEnter *.* silent! loadview
 augroup END
 " === STATUS LINE ===
+" TODO: active / inactive buffer
 set laststatus=2
 set noshowmode
-set statusline=
+set statusline=%#Pmenu#
+set statusline+=%{(mode()=='n')?'\ \ NORMAL\ ':''}
+set statusline+=%#DiffAdd#%{(mode()=='i')?'\ \ INSERT\ ':''}
+set statusline+=%#DiffText#%{(mode()=='r')?'\ \ REPLACE\ ':''}
+set statusline+=%#Cursor#%{IsVisual()?'\ \ VISUAL\ ':''}
 set statusline+=%#Pmenu#
-set statusline+=\ %{g:currentmode[mode()]}
-set statusline+=\ ┊\ %f
+set statusline+=┊\ %f
+set statusline+=%{&modified?'\ [+]\ ':''}
 set statusline+=\ ┊\ %{GitInfo()}
 " switch to the right side
 set statusline+=%=
 set statusline+=%{gutentags#statusline('','','\ 🗯:\ ')}
-set statusline+=\ ┊\ %l
-set statusline+=/
-set statusline+=%L
+set statusline+=\ ┊\ %l/%L
 set statusline+=\ \┊\ %p%%
 
-let g:currentmode={
-    \ 'n'  : 'N',
-    \ 'no' : 'N·Operator Pending',
-    \ 'v'  : 'V',
-    \ 'V'  : 'V·Line',
-    \ '^V' : 'V·Block',
-    \ 's'  : 'Select',
-    \ 'S'  : 'S·Line',
-    \ '^S' : 'S·Block',
-    \ 'i'  : 'I',
-    \ 'R'  : 'R',
-    \ 'Rv' : 'V·Replace',
-    \ 'c'  : 'Command',
-    \ 'cv' : 'Vim Ex',
-    \ 'ce' : 'Ex',
-    \ 'r'  : 'Prompt',
-    \ 'rm' : 'More',
-    \ 'r?' : 'Confirm',
-    \ '!'  : 'Shell',
-    \ 't'  : 'Terminal'
-    \}
+function! IsVisual()
+  return mode() == 'v' || mode() == ''
+endfunction
 
 function! GitInfo()
   let git = fugitive#head()
