@@ -58,8 +58,12 @@ vnoremap È :m '<-2<CR>gv=gv
 nnoremap È :m .-2<CR>
 
 " Map arrow keys
-nnoremap <S-Tab> <<
-nnoremap <Tab> >>
+" Tab and Ctrl-I are the same: overriding Tab behaviour prevent Ctrl-I to work
+" as it should (and use it to move back and forth in the jump list)
+" nnoremap <S-Tab> <<
+" nnoremap <Tab> >>
+vnoremap < <gv
+vnoremap > >gv
 vnoremap <S-Tab> <gv
 vnoremap <Tab> >gv
 nnoremap <Up> <Nop>
