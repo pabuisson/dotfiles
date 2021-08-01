@@ -53,6 +53,7 @@ if has('nvim-0.5.0')
   Plug 'neovim/nvim-lspconfig'
   " npm install -g typescript typescript-language-server
   " gem install solargraph
+  Plug 'hrsh7th/nvim-compe'
 else
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
   " https://github.com/neoclide/coc-tsserver
@@ -209,6 +210,16 @@ lua <<EOF
 require'lspconfig'.tsserver.setup{}
 require'lspconfig'.solargraph.setup{}
 EOF
+
+
+" ----- compe -----
+set completeopt=menuone,noselect
+let g:compe = {}
+let g:compe.enabled = v:true
+let g:compe.source = {}
+let g:compe.source.buffer = v:true
+let g:compe.source.nvim_lsp = v:true
+let g:compe.source.nvim_lua = v:true
 
 
 " ----- treesitter -----
