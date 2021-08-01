@@ -113,9 +113,8 @@ nnoremap <leader>gw  :Gwrite<CR>
 nnoremap <leader>gb  :Git blame<CR>
 
 " ----- fzf -----
-" nnoremap <C-p> :FZF<CR>
-" nnoremap <C-b> :Buffers<CR>
-" nnoremap <C-t> :Tags<CR>
+" Escape C-a and C-d in iTerm2 : https://github.com/junegunn/fzf.vim/issues/54
+" ---
 nnoremap <leader>ff :FZF<CR>
 nnoremap <leader>fb :Buffers<CR>
 nnoremap <leader>ft :Tags<CR>
