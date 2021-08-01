@@ -33,7 +33,6 @@ Plug 'ap/vim-css-color'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 " TODO: get rid of this
-Plug 'mileszs/ack.vim'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-fugitive'
@@ -68,12 +67,6 @@ call plug#end()
 " =======================
 " === PLUGIN SETTINGS ===
 " =======================
-
-" ----- ack.vim -----
-" Map Ack command to Ack! automatically so that it doesn't open first item by default
-ca Ack Ack!
-ca ack Ack!
-" nnoremap <leader>a :Ack!<CR>
 
 " ----- ale -----
 let g:ale_sign_column_always = 1
