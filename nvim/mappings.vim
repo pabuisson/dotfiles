@@ -5,16 +5,18 @@
 " <Leader> set to , instead of \
 let mapleader = ","
 
+" Plugin install/update/clean mappings
 nnoremap <leader>pi :PlugInstall<CR>
 nnoremap <leader>pu :PlugUpdate<CR>
 nnoremap <leader>pc :PlugClean<CR>
 
 nnoremap <leader>vrc  :e $MYVIMRC<CR>
+
 " File explorer
 nnoremap <leader>e :Explore<CR>
 nnoremap <leader>he :Sexplore<CR>
+
 " Undo last search (to remove the highlighting)
-nnoremap <leader>vw :cd ~/MEGA/NOTES<CR>:e .<CR>
 nnoremap <esc> :nohlsearch<Bar>:echo<CR>
 
 " Copy current file path to the clipboard: yank absolute path
@@ -30,28 +32,22 @@ nnoremap <leader>yl :let @+ = systemlist("git ls-files ".expand("%:p"))[0].":".l
 " Copy whole file: yank inner file
 nnoremap <leader>yf ggVGy
 
-" All buffers delete
+nnoremap <leader>tt :let @+ = system("echo 'bonjour'")<CR>
+
+" All buffers delete/wipe
 nnoremap <leader>bda :%bd!<CR>
 nnoremap <leader>bwa :%bw!<CR>
-" Buffer delete to the right
-nnoremap <leader>bdl :.+,$bd!<CR>
-nnoremap <leader>bwl :.+,$bw!<CR>
+" Buffer delete to the right/left
+nnoremap <leader>bdr :.,$bd!<CR>
+nnoremap <leader>bdl :1,.-bd!<CR>
 " TODO: buffer delete all but current one
-" TODO: buffer delete to the left
-
-" Use :g to see the structure of ruby tests
-" FIXME: doesn't work, maybe something with magical regexps and all?
-" nnoremap <leader>ts :g/\(class\|describe\|it\) /<CR>
 
 " Vim specific buffer cycle behaviour
 nnoremap <C-l> :bn<CR>
-" inoremap <C-l> <ESC>:bn<CR>
 nnoremap <C-h> :bp<CR>
-" inoremap <C-h> <ESC>:bp<CR>
 
-" "Goes 1l down even with wrap enabled
+" "Goes 1l down/up even with wrap enabled
 nnoremap j gj
-" "Goes 1l up even with wrap enabled
 nnoremap k gk
 
 " Move current line down/up

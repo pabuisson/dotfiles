@@ -38,8 +38,8 @@ set scrolloff=4     "displays at least 4 lines around the cursor even when top/b
 set clipboard+=unnamed
 set showmatch       "show matching parenthese
 set lazyredraw      "redraw only when we need to
-set splitbelow          " Horizontal split below current.
-set splitright          " Vertical split to right of current.
+set splitbelow      " Horizontal split below current.
+set splitright      " Vertical split to right of current.
 " === HIDDEN/NON VISIBLE CHARS ===
 set list
 set listchars=tab:▸\ ,eol:¬
