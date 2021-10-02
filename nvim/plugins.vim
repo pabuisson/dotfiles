@@ -200,13 +200,32 @@ if !has('nvim-0.5.0')
   finish
 end
 
+" ----- compe -----
+set completeopt=menuone,noselect
+inoremap <silent><expr> <C-Space> compe#complete()
+inoremap <silent><expr> <CR>      compe#confirm('<CR>')
+inoremap <silent><expr> <C-e>     compe#close('<C-e>')
+inoremap <silent><expr> <C-f>     compe#scroll({ 'delta': +4 })
+inoremap <silent><expr> <C-d>     compe#scroll({ 'delta': -4 })
+
+
 " ----- lspconfig -----
 " https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md#tsserver
 lua <<EOF
-require'lspconfig'.tsserver.setup{}
-require'lspconfig'.solargraph.setup{}
+local nvim_lsp = require('lspconfig')
+nvim_lsp.tsserver.setup{}
+nvim_lsp.solargraph.setup{}
 EOF
 
+" LSP config (the mappings used in the default file don't quite work right)
+nnoremap <silent> gd <cmd>lua vim.lsp.buf.definition()<CR>
+nnoremap <silent> gD <cmd>lua vim.lsp.buf.declaration()<CR>
+nnoremap <silent> gr <cmd>lua vim.lsp.buf.references()<CR>
+nnoremap <silent> gi <cmd>lua vim.lsp.buf.implementation()<CR>
+nnoremap <silent> K <cmd>lua vim.lsp.buf.hover()<CR>
+nnoremap <silent> <C-k> <cmd>lua vim.lsp.buf.signature_help()<CR>
+nnoremap <silent> <C-n> <cmd>lua vim.lsp.diagnostic.goto_prev()<CR>
+nnoremap <silent> <C-p> <cmd>lua vim.lsp.diagnostic.goto_next()<CR>
 
 " ----- gitsigns -----
 lua <<EOF
@@ -229,7 +248,7 @@ require'nvim-treesitter.configs'.setup {
   ensure_installed = { "javascript", "ruby" }, -- one of "all", "maintained" (parsers with maintainers), or a list of languages
   ignore_install = {}, -- List of parsers to ignore installing
   highlight = {
-    enable = true,              -- false will disable the whole extension
+    enable = true, -- false will disable the whole extension
     disable = {},  -- list of language that will be disabled
   },
 }
