@@ -28,7 +28,6 @@ Plug 'gabrielelana/vim-markdown'
 " --- Plugins ---
 Plug 'ap/vim-buftabline'
 Plug 'Raimondi/delimitMate'
-Plug 'mhinz/vim-signify'
 Plug 'ap/vim-css-color'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
@@ -48,10 +47,12 @@ Plug 'junegunn/goyo.vim', { 'for': [ 'text', 'markdown' ] }
 Plug 'junegunn/limelight.vim', { 'for': ['markdown'] }
 " -- Neovim 0.5.0 --
 if has('nvim-0.5.0')
-  Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
+  Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
   Plug 'neovim/nvim-lspconfig'
   " npm install -g typescript typescript-language-server
   " gem install solargraph
+  Plug 'nvim-lua/plenary.nvim' "prerequisite for gitsigns
+  Plug 'lewis6991/gitsigns.nvim'
   Plug 'hrsh7th/nvim-compe'
 else
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -59,6 +60,7 @@ else
   " :CocInstall coc-tsserver
   " https://github.com/neoclide/coc-eslint
   " :CocInstall coc-eslint
+  Plug 'mhinz/vim-signify'
 endif
 
 call plug#end()
@@ -203,6 +205,11 @@ require'lspconfig'.tsserver.setup{}
 require'lspconfig'.solargraph.setup{}
 EOF
 
+
+" ----- gitsigns -----
+lua <<EOF
+require('gitsigns').setup()
+EOF
 
 " ----- compe -----
 set completeopt=menuone,noselect
