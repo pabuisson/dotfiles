@@ -2,6 +2,9 @@
 " === SHORTCUTS CONFIGURATION ===
 " ===============================
 
+iabbr bdp binding.pry
+iabbr fst # frozen_string_literal: true
+
 " <Leader> set to , instead of \
 let mapleader = ","
 
