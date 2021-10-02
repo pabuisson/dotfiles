@@ -20,6 +20,25 @@ endif
 " set bg=dark
 " color dracula
 
+" " -- everforest --
+" set bg=dark
+" let g:everforest_background = 'hard'
+" colorscheme everforest
+
+" -- nightfox --
+" let nightfox_style='nightfox|nordfox|palefox'
+lua << EOF
+local nightfox = require('nightfox')
+nightfox.setup({
+  fox = "nightfox",
+  styles = {
+    comments = "italic", -- change style of comments to be italic
+  }
+})
+-- Load the configuration set above and apply the colorscheme
+nightfox.load()
+EOF
+
 " " -- nord --
 " let g:nord_italic_comments = 1
 " color nord
@@ -53,6 +72,11 @@ hi link BufTabLineFill StatusLine
 " " -- ayu light --
 " let ayucolor="light"  " for light version of theme
 " color ayu
+
+" " -- everforest --
+" set bg=light
+" let g:everforest_background = 'hard'
+" colorscheme everforest
 
 " " -- material light --
 " let g:material_theme_style = 'lighter'

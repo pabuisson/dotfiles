@@ -6,12 +6,14 @@ filetype off
 call plug#begin('~/.config/nvim/plugged')
 
 " --- Color schemes ---
+Plug 'sainnhe/everforest'
 Plug 'arcticicestudio/nord-vim'
 Plug 'mhartington/oceanic-next'
 Plug 'ayu-theme/ayu-vim'
 Plug 'dracula/vim', { 'as': 'dracula' }
 Plug 'kaicataldo/material.vim'
 Plug 'drewtempelmeyer/palenight.vim'
+Plug 'EdenEast/nightfox.nvim'
 " --- Neovim 0.5 ---
 if has('nvim-0.5.0')
   Plug 'folke/tokyonight.nvim'
