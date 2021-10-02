@@ -63,7 +63,7 @@ matches:
   - trigger: "nrfields"
     replace: "timestamp, ssid, account_id, http.statusCode, request.method, name, path,request.headers.contentType, request.headers.contentLength"
 
-  - trigger: "pab@docto"
+  - trigger: "pab@@"
     replace: "pierre-adrien.buisson@doctolib.com"
 
   - trigger: "hl1"
