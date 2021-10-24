@@ -134,6 +134,15 @@ let g:fzf_preview_window = ['right:40%']
 let g:fzf_history_dir = '~/.local/share/fzf-history'
 let g:fzf_commits_log_options = '--color=always --format="%C(auto)%h%d %C(green)%as %C(cyan)%an :: %C(reset)%s"'
 
+" Search with ripgrep for the word under the cursor
+" Source: https://coffeeandcontemplation.dev/2020/11/13/fuzzy-finding-in-vim/
+command! -bang -nargs=* RgCurrentWord
+  \ call fzf#vim#grep(
+  \   'rg -F --column --line-number --no-heading --color=always --smart-case -- '.shellescape(<q-args>), 1,
+  \   fzf#vim#with_preview(), <bang>0)
+
+nnoremap <leader>fw :execute 'RgCurrentWord ' . expand('<cword>') <CR>
+
 
 " " ----- goyo ------
 " function! s:goyo_enter()
