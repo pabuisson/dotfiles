@@ -38,8 +38,6 @@ Plug 'dense-analysis/ale'
 Plug 'ludovicchabant/vim-gutentags'
 " brew install universal-ctags
 Plug 'thaerkh/vim-indentguides'
-" Plug 'junegunn/goyo.vim', { 'for': [ 'text', 'markdown' ] }
-" Plug 'junegunn/limelight.vim', { 'for': ['markdown'] }
 if has('nvim-0.5')
   Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
   Plug 'neovim/nvim-lspconfig'
@@ -99,9 +97,11 @@ let g:buftabline_numbers=1
 " NOTE: commented on oct 2021 to see if it makes a diff today
 " hi link BufTabLineActive BufTabLineHidden
 
+
 " ----- vim commentary -----
 nmap <leader>c gcc
 vmap <leader>c gc
+
 
 " ----- fugitive.vim -----
 nnoremap <leader>gst :Git<CR>
@@ -109,6 +109,7 @@ nnoremap <leader>gci :Git commit<CR>
 nnoremap <leader>gr  :Gread<CR>
 nnoremap <leader>gw  :Gwrite<CR>
 nnoremap <leader>gb  :Git blame<CR>
+
 
 " ----- fzf -----
 " Escape C-a and C-d in iTerm2 : https://github.com/junegunn/fzf.vim/issues/54
@@ -138,34 +139,6 @@ let g:fzf_preview_window = ['right:40%', 'ctrl-/']
 let g:fzf_history_dir = '~/.local/share/fzf-history'
 let g:fzf_commits_log_options = '--color=always --format="%C(auto)%h%d %C(green)%as %C(cyan)%an :: %C(reset)%s"'
 
-
-" " ----- goyo ------
-" function! s:goyo_enter()
-"   let g:buftabline_show = 0
-"   " Needed to update configuration at runtime
-"   call buftabline#update(0)
-"   " vim default tabline
-"   set showtabline=0
-" endfunction
-
-" function! s:goyo_leave()
-"   let g:buftabline_show = 2
-"   " Needed to update configuration at runtime
-"   call buftabline#update(0)
-"   " vim default tabline
-"   set showtabline=2
-" endfunction
-
-" let g:goyo_width = 100
-" let g:limelight_default_coefficient = 0.8
-" augroup goyo
-"   au!
-"   autocmd! User GoyoEnter nested call <SID>goyo_enter()
-"   autocmd! User GoyoLeave nested call <SID>goyo_leave()
-" augroup END
-
-" autocmd! User GoyoEnter Limelight
-" autocmd! User GoyoLeave Limelight!
 
 " ----- gutentags -----
 " let g:gutentags_trace = 1
