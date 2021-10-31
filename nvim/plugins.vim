@@ -2,14 +2,15 @@ filetype off
 call plug#begin('~/.config/nvim/plugged')
 
 " --- Color schemes ---
-Plug 'sainnhe/everforest'
-Plug 'arcticicestudio/nord-vim'
-Plug 'mhartington/oceanic-next'
 Plug 'ayu-theme/ayu-vim'
+Plug 'arcticicestudio/nord-vim'
 Plug 'dracula/vim', { 'as': 'dracula' }
 Plug 'kaicataldo/material.vim'
+Plug 'sainnhe/everforest'
+Plug 'mhartington/oceanic-next'
 Plug 'drewtempelmeyer/palenight.vim'
 Plug 'EdenEast/nightfox.nvim'
+Plug 'rmehri01/onenord.nvim'
 if has('nvim-0.5')
   Plug 'folke/tokyonight.nvim'
 else
@@ -19,27 +20,26 @@ endif
 Plug 'othree/javascript-libraries-syntax.vim'
 Plug 'sheerun/vim-polyglot'
 Plug 'gabrielelana/vim-markdown'
-
 " --- Plugins ---
 Plug 'ap/vim-buftabline'
-Plug 'Raimondi/delimitMate'
-Plug 'ap/vim-css-color'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
-" TODO: get rid of this
+Plug 'Raimondi/delimitMate'
+Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rhubarb'
 Plug 'tommcdo/vim-fubitive'
 Plug 'tpope/vim-repeat'
-Plug 'tpope/vim-surround'
+Plug 'ap/vim-css-color'
 Plug 'dense-analysis/ale'
+" NOTE: can I replace that with lspconfig / treesitter ?
 Plug 'ludovicchabant/vim-gutentags'
 " brew install universal-ctags
 Plug 'thaerkh/vim-indentguides'
-Plug 'junegunn/goyo.vim', { 'for': [ 'text', 'markdown' ] }
-Plug 'junegunn/limelight.vim', { 'for': ['markdown'] }
+" Plug 'junegunn/goyo.vim', { 'for': [ 'text', 'markdown' ] }
+" Plug 'junegunn/limelight.vim', { 'for': ['markdown'] }
 if has('nvim-0.5')
   Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
   Plug 'neovim/nvim-lspconfig'
@@ -47,6 +47,7 @@ if has('nvim-0.5')
   " gem install solargraph
   Plug 'nvim-lua/plenary.nvim' "prerequisite for gitsigns
   Plug 'lewis6991/gitsigns.nvim'
+  " TODO: migrate to nvim-cmp
   Plug 'hrsh7th/nvim-compe'
 else
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -155,16 +156,16 @@ let g:fzf_commits_log_options = '--color=always --format="%C(auto)%h%d %C(green)
 "   set showtabline=2
 " endfunction
 
-let g:goyo_width = 100
-let g:limelight_default_coefficient = 0.8
+" let g:goyo_width = 100
+" let g:limelight_default_coefficient = 0.8
 " augroup goyo
 "   au!
 "   autocmd! User GoyoEnter nested call <SID>goyo_enter()
 "   autocmd! User GoyoLeave nested call <SID>goyo_leave()
 " augroup END
 
-autocmd! User GoyoEnter Limelight
-autocmd! User GoyoLeave Limelight!
+" autocmd! User GoyoEnter Limelight
+" autocmd! User GoyoLeave Limelight!
 
 " ----- gutentags -----
 " let g:gutentags_trace = 1

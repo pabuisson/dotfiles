@@ -3,7 +3,6 @@
 " ====================
 
 " Enable true colors for better colorschemes
-" For neovim > 0.1.5
 set termguicolors
 
 if !has('nvim-0.5')
@@ -25,19 +24,19 @@ endif
 " let g:everforest_background = 'hard'
 " colorscheme everforest
 
-" -- nightfox --
-" let nightfox_style='nightfox|nordfox|palefox'
-lua << EOF
-local nightfox = require('nightfox')
-nightfox.setup({
-  fox = "nightfox",
-  styles = {
-    comments = "italic", -- change style of comments to be italic
-  }
-})
--- Load the configuration set above and apply the colorscheme
-nightfox.load()
-EOF
+" " -- nightfox --
+" " let nightfox_style='nightfox|nordfox|palefox'
+" lua << EOF
+" local nightfox = require('nightfox')
+" nightfox.setup({
+"   fox = "nordfox",
+"   styles = {
+"     comments = "italic", -- change style of comments to be italic
+"   }
+" })
+" -- Load the configuration set above and apply the colorscheme
+" nightfox.load()
+" EOF
 
 " " -- nord --
 " let g:nord_italic_comments = 1
@@ -46,16 +45,14 @@ EOF
 " -- oceanic-next --
 let g:oceanic_next_terminal_bold = 1
 let g:oceanic_next_terminal_italic = 1
-" hi default link BufTabLineCurrent         TabLineSel
-" buffer ouvert mais pas en édition. doit être moins visible
-" Doit pas être underlined
-" hi default link BufTabLineHidden          TabLine
-" hi default link BufTabLineFill            TabLineFill
 color OceanicNext
 " hi link BufTabLineCurrent PmenuSbar
 hi link BufTabLineActive PmenuSbar
 hi link BufTabLineHidden Pmenu
 hi link BufTabLineFill StatusLine
+
+" " -- one nord --
+" color onenord
 
 " " -- palenight --
 " color palenight
@@ -70,20 +67,12 @@ hi link BufTabLineFill StatusLine
 " ---------------------
 
 " " -- ayu light --
-" let ayucolor="light"  " for light version of theme
+" let ayucolor="light"
+" let g:indentguides_conceal_color = 'ctermfg=251 ctermbg=NONE guifg=#c6c6c6 guibg=NONE'
+" let g:indentguides_specialkey_color = 'ctermfg=251 ctermbg=NONE guifg=#c6c6c6 guibg=NONE'
 " color ayu
 
 " " -- everforest --
 " set bg=light
 " let g:everforest_background = 'hard'
 " colorscheme everforest
-
-" " -- material light --
-" let g:material_theme_style = 'lighter'
-" color material
-
-" " -- tokyonight --
-" let g:tokyonight_italic_keywords = 0
-" let g:tokyonight_day_brightness = 1.0
-" let g:tokyonight_style = "day"
-" color tokyonight
