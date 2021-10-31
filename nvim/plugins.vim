@@ -45,8 +45,13 @@ if has('nvim-0.5')
   " gem install solargraph
   Plug 'nvim-lua/plenary.nvim' "prerequisite for gitsigns
   Plug 'lewis6991/gitsigns.nvim'
-  " TODO: migrate to nvim-cmp
-  Plug 'hrsh7th/nvim-compe'
+  " -- nvim-cmp --
+  Plug 'neovim/nvim-lspconfig'
+  Plug 'hrsh7th/cmp-nvim-lsp'
+  Plug 'hrsh7th/cmp-buffer'
+  Plug 'hrsh7th/cmp-path'
+  Plug 'hrsh7th/cmp-cmdline'
+  Plug 'hrsh7th/nvim-cmp'
 else
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
   " https://github.com/neoclide/coc-tsserver
@@ -184,19 +189,51 @@ lua <<EOF
 require('gitsigns').setup()
 EOF
 
-" ----- compe -----
-set completeopt=menuone,noselect
-let g:compe = {}
-let g:compe.enabled = v:true
-let g:compe.source = {}
-let g:compe.source.buffer = v:true
-let g:compe.source.nvim_lsp = v:true
-let g:compe.source.nvim_lua = v:true
-inoremap <silent><expr> <C-Space> compe#complete()
-inoremap <silent><expr> <CR>      compe#confirm('<CR>')
-inoremap <silent><expr> <C-e>     compe#close('<C-e>')
-inoremap <silent><expr> <C-f>     compe#scroll({ 'delta': +4 })
-inoremap <silent><expr> <C-d>     compe#scroll({ 'delta': -4 })
+" ----- cmp -----
+set completeopt=menu,menuone,noselect
+
+lua <<EOF
+local cmp = require'cmp'
+
+cmp.setup({
+  snippet = {},
+  mapping = {
+    ['<C-d>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
+    ['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
+    ['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
+    ['<C-y>'] = cmp.config.disable, -- If you want to remove the default `<C-y>` mapping, You can specify `cmp.config.disable` value.
+    ['<C-e>'] = cmp.mapping({
+      i = cmp.mapping.abort(),
+      c = cmp.mapping.close(),
+    }),
+    ['<CR>'] = cmp.mapping.confirm({ select = true }),
+  },
+  sources = cmp.config.sources({
+    { name = 'buffer' },
+  })
+})
+
+-- Use buffer source for `/`.
+cmp.setup.cmdline('/', {
+  sources = {
+    { name = 'buffer' }
+  }
+})
+
+-- Use cmdline & path source for ':'.
+cmp.setup.cmdline(':', {
+  sources = cmp.config.sources({
+    { name = 'path' }
+  }, {
+    { name = 'cmdline' }
+  })
+})
+
+-- Setup lspconfig.
+local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+require'lspconfig'.tsserver.setup{}
+require'lspconfig'.solargraph.setup{}
+EOF
 
 " ----- treesitter -----
 lua <<EOF
