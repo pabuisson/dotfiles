@@ -65,7 +65,8 @@ set statusline+=%{&modified?'\ [+]\ ':''}
 set statusline+=\ ┊\ %{GitInfo()}
 " switch to the right side
 set statusline+=%=
-set statusline+=%{gutentags#statusline('','','\ 🗯:\ ')}
+" statusline(prefix, suffix, text_to_print)
+set statusline+=%{gutentags#statusline('','','⚡️')}
 set statusline+=\ ┊\ %l/%L
 set statusline+=\ \┊\ %p%%
 

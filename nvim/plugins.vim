@@ -173,23 +173,7 @@ if executable('rg')
   " Ignore gitignore files by using rg
   let g:gutentags_file_list_command = 'rg --files'
 endif
-" Never managed to get this exclude param to work
-" let g:gutentags_ctags_exclude = [
-"   \ 'build/*',
-"   \ 'dist/*',
-"   \ 'node_modules/*'
-" \]
 
-function! s:get_gutentags_status(mods)
-  let l:msg = ''
-  if index(a:mods, 'ctags') >= 0
-    let l:msg .= '♨'
-  endif
-  if index(a:mods, 'cscope') >= 0
-    let l:msg .= '♺'
-  endif
-  return l:msg
-endfunction
 
 " ----- javascript libraries ------
 let g:used_javascript_libs = 'react'
