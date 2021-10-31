@@ -4,6 +4,9 @@
 " ======================================
 
 function! StripTrailingWhitespaces()
+  if exists('b:noAutoWhitespaceFix')
+    return
+  endif
   "1. Save last search, and cursor position.
   let _s=@/
   let l = line(".")
@@ -15,9 +18,12 @@ function! StripTrailingWhitespaces()
   call cursor(l, c)
 endfunction
 
+" On Mac OS, typing alt+space insert a non-regular space character that's not visible but
+" can generate random errors. Let's replace them with regular spaces on save
 function! ReplaceNonUnicodeWhitespaces()
-  " On Mac OS, typing alt+space insert a non-regular space character that's not visible but
-  " can generate random errors. Let's replace them with regular spaces on save
+  if exists('b:noAutoWhitespaceFix')
+    return
+  endif
   "1. Save last search, and cursor position.
   let _s=@/
   let l = line(".")
@@ -33,6 +39,7 @@ augroup customfunctions
   au!
   au BufWrite * :call StripTrailingWhitespaces()
   au BufWrite * :call ReplaceNonUnicodeWhitespaces()
+  au FileType yaml let b:noAutoWhitespaceFix=1
 augroup END
 
 
