@@ -16,10 +16,7 @@ source $HOME/.config/nvim/functions.vim
 " === SETTINGS ===
 " ================
 
-" TEMP: need to enable this, work in progress, this should become the default
-"       setting again once mouse=a is good enough for a majority of users
-set mouse=a
-" ---------------------
+set mouse=a         "enable mouse for all modes
 set nu              "display line numbers
 set nobackup        "don't write backup files
 set noswapfile      "don't write swap files (careful, all text will be in memory !)
@@ -37,9 +34,7 @@ set smartcase       "don't ignore case if there's an uppercase letter in the pat
 set scrolloff=4     "displays at least 4 lines around the cursor even when top/bottom of screen
 set clipboard+=unnamed
 set showmatch       "show matching parenthese
-set lazyredraw      "redraw only when we need to
-set splitbelow      " Horizontal split below current.
-set splitright      " Vertical split to right of current.
+set lazyredraw      "redraw only when we need to (especially on macros, registers and such)
 " === HIDDEN/NON VISIBLE CHARS ===
 set list
 set listchars=tab:▸\ ,eol:¬
@@ -57,7 +52,6 @@ augroup bufferloadsave
   au BufWinEnter *.* silent! loadview
 augroup END
 " === STATUS LINE ===
-" TODO: active / inactive buffer
 set laststatus=2
 set noshowmode
 set statusline=%#Pmenu#
@@ -95,19 +89,11 @@ endfunction
 
 " Ensures the autocmds are only applied once.
 augroup configgroup
-  " Clears all the autocmds for the current group
-  autocmd!
+  autocmd!  
 
   " Specific filetype settings
-  au BufRead,BufNewFile *.md     set ft=markdown
-  au BufRead,BufNewFile *.scss   set ft=scss
-  au BufRead,BufNewFile *.sass   set ft=sass
-  au BufRead,BufNewFile Gemfile* set ft=ruby
-  au BufRead,BufNewFile *.slim   set ft=slim
-
-  " Comment settings depending on filetype
-  au FileType coffee set commentstring=#\ %s
-  au FileType haml   set commentstring=/\ %s
+  au BufRead,BufNewFile *.slim set ft=slim
+  au BufRead,BufNewFile *.yml set ft=yaml
 
   " Specific syntax highlights
   au FileType ruby match ErrorMsg /binding\.pry\|pry\|byebug/
@@ -120,5 +106,4 @@ augroup configgroup
   au FileType gitcommit set tw=85
   au FileType markdown  set sw=4 ts=4 sts=4 et wrap
   au FileType crystal   set sw=2 ts=2 sts=2 et wrap
-  au FileType sass      match Error /\w:\S/
 augroup END

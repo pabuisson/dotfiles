@@ -1,7 +1,3 @@
-" =================================
-" === VUNDLE PLUGINS MANAGEMENT ===
-" =================================
-
 filetype off
 call plug#begin('~/.config/nvim/plugged')
 
@@ -99,7 +95,8 @@ let g:buftabline_show=1
 let g:buftabline_numbers=1
 " Highlighting : make visible inactive splits highlighted like any hidden buffer
 " so that the inactive split don't look more "highlighted" than the active buffer
-hi link BufTabLineActive BufTabLineHidden
+" NOTE: commented on oct 2021 to see if it makes a diff today
+" hi link BufTabLineActive BufTabLineHidden
 
 " ----- vim commentary -----
 nmap <leader>c gcc
@@ -115,21 +112,6 @@ nnoremap <leader>gb  :Git blame<CR>
 " ----- fzf -----
 " Escape C-a and C-d in iTerm2 : https://github.com/junegunn/fzf.vim/issues/54
 " ---
-nnoremap <leader>ff :FZF<CR>
-nnoremap <leader>fb :Buffers<CR>
-nnoremap <leader>ft :Tags<CR>
-nnoremap <leader>fc :BCommits<CR>
-nnoremap <leader>fo :FZFBuffersLines<CR>
-ca rg Rg
-
-let g:fzf_preview_window = ['right:40%']
-" Enable per-command history.
-" CTRL-N and CTRL-P will be automatically bound to next-history and
-" previous-history instead of down and up. If you don't like the change,
-" explicitly bind the keys to down and up in your $FZF_DEFAULT_OPTS.
-let g:fzf_history_dir = '~/.local/share/fzf-history'
-let g:fzf_commits_log_options = '--color=always --format="%C(auto)%h%d %C(green)%as %C(cyan)%an :: %C(reset)%s"'
-
 " Search with ripgrep for the word under the cursor
 " Source: https://coffeeandcontemplation.dev/2020/11/13/fuzzy-finding-in-vim/
 command! -bang -nargs=* RgCurrentWord
@@ -137,7 +119,23 @@ command! -bang -nargs=* RgCurrentWord
   \   'rg -F --column --line-number --no-heading --color=always --smart-case -- '.shellescape(<q-args>), 1,
   \   fzf#vim#with_preview(), <bang>0)
 
-nnoremap <leader>fw :execute 'RgCurrentWord ' . expand('<cword>') <CR>
+nnoremap <leader>fw :execute 'RgCurrentWord '.expand('<cword>')<CR>
+nnoremap <leader>ff :Files<CR>
+nnoremap <leader>fb :Buffers<CR>
+nnoremap <leader>fc :BCommits<CR>
+nnoremap <leader>fl :Lines<CR>
+ca rg Rg
+
+" Layout / Sizing
+" hidden by default, ctrl-/ to toggle
+let g:fzf_preview_window = ['right:40%', 'ctrl-/']
+
+" Enable per-command history.
+" CTRL-N and CTRL-P will be automatically bound to next-history and
+" previous-history instead of down and up. If you don't like the change,
+" explicitly bind the keys to down and up in your $FZF_DEFAULT_OPTS.
+let g:fzf_history_dir = '~/.local/share/fzf-history'
+let g:fzf_commits_log_options = '--color=always --format="%C(auto)%h%d %C(green)%as %C(cyan)%an :: %C(reset)%s"'
 
 
 " " ----- goyo ------
@@ -205,15 +203,6 @@ if !has('nvim-0.5')
   finish
 end
 
-" ----- compe -----
-set completeopt=menuone,noselect
-inoremap <silent><expr> <C-Space> compe#complete()
-inoremap <silent><expr> <CR>      compe#confirm('<CR>')
-inoremap <silent><expr> <C-e>     compe#close('<C-e>')
-inoremap <silent><expr> <C-f>     compe#scroll({ 'delta': +4 })
-inoremap <silent><expr> <C-d>     compe#scroll({ 'delta': -4 })
-
-
 " ----- lspconfig -----
 " https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md#tsserver
 lua <<EOF
@@ -245,7 +234,11 @@ let g:compe.source = {}
 let g:compe.source.buffer = v:true
 let g:compe.source.nvim_lsp = v:true
 let g:compe.source.nvim_lua = v:true
-
+inoremap <silent><expr> <C-Space> compe#complete()
+inoremap <silent><expr> <CR>      compe#confirm('<CR>')
+inoremap <silent><expr> <C-e>     compe#close('<C-e>')
+inoremap <silent><expr> <C-f>     compe#scroll({ 'delta': +4 })
+inoremap <silent><expr> <C-d>     compe#scroll({ 'delta': -4 })
 
 " ----- treesitter -----
 lua <<EOF
