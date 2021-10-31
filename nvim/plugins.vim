@@ -14,14 +14,11 @@ Plug 'dracula/vim', { 'as': 'dracula' }
 Plug 'kaicataldo/material.vim'
 Plug 'drewtempelmeyer/palenight.vim'
 Plug 'EdenEast/nightfox.nvim'
-" --- Neovim 0.5 ---
-if has('nvim-0.5.0')
+if has('nvim-0.5')
   Plug 'folke/tokyonight.nvim'
 else
   Plug 'ghifarit53/tokyonight-vim'
 endif
-" -------------------
-
 " --- Filetype related ---
 Plug 'othree/javascript-libraries-syntax.vim'
 Plug 'sheerun/vim-polyglot'
@@ -47,8 +44,7 @@ Plug 'ludovicchabant/vim-gutentags'
 Plug 'thaerkh/vim-indentguides'
 Plug 'junegunn/goyo.vim', { 'for': [ 'text', 'markdown' ] }
 Plug 'junegunn/limelight.vim', { 'for': ['markdown'] }
-" -- Neovim 0.5.0 --
-if has('nvim-0.5.0')
+if has('nvim-0.5')
   Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
   Plug 'neovim/nvim-lspconfig'
   " npm install -g typescript typescript-language-server
@@ -205,7 +201,7 @@ let g:used_javascript_libs = 'react'
 "       NVIM 0.5.0 SPECIFIC
 " =================================
 
-if !has('nvim-0.5.0')
+if !has('nvim-0.5')
   finish
 end
 

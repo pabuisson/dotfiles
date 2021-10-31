@@ -6,7 +6,7 @@
 " For neovim > 0.1.5
 set termguicolors
 
-if !has('nvim-0.5.0')
+if !has('nvim-0.5')
   color OceanicNext
   finish
 endif
