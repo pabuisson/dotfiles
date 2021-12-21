@@ -51,9 +51,6 @@ hi link BufTabLineActive PmenuSbar
 hi link BufTabLineHidden Pmenu
 hi link BufTabLineFill StatusLine
 
-" " -- one nord --
-" color onenord
-
 " " -- palenight --
 " color palenight
 " let g:palenight_terminal_italics=1

@@ -10,7 +10,6 @@ Plug 'sainnhe/everforest'
 Plug 'mhartington/oceanic-next'
 Plug 'drewtempelmeyer/palenight.vim'
 Plug 'EdenEast/nightfox.nvim'
-Plug 'rmehri01/onenord.nvim'
 if has('nvim-0.5')
   Plug 'folke/tokyonight.nvim'
 else
