@@ -10,16 +10,9 @@ alias lla="ls -alh"
 alias grep="grep --colour"
 alias tigs="tig status"
 alias n="nvim"
-alias y="yarn"
-
-alias typora="open -a typora"
 
 alias currentweek="date +%V"
 alias monip="ifconfig | grep 192 | cut -d' ' -f2"
-
-alias killprepare="pkill -9 -f db:prepare"
-
-alias sep="echo '' && echo --------------------------------------------------------------------------- && echo --------------------------------------------------------------------------- && echo ''"
 
 # GIT
 alias git='LANG=en_GB git'
@@ -47,12 +40,9 @@ alias githead='git rev-parse HEAD | cut -c 1-8 | pbcopy'
 alias ru="rackup"
 alias be="bundle exec"
 alias mm="middleman"
-alias resquework="QUEUE=* bundle exec rake environment resque:work"
 alias rt="rails t"
-# RAILS SERVER / CONSOLE
 alias rs="bundle exec bin/rails server || bundle exec rails server"
 alias rc="bundle exec bin/rails console || bundle exec rails console"
-# RAILS DB
 alias rdbms="bundle exec rails db:migrate:status"
 alias rdbm="bundle exec rails db:migrate"
 alias rdbr="bundle exec rails db:rollback"
