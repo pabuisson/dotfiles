@@ -19,6 +19,7 @@
 [core]
   editor = nvim
   excludesfile = /Users/pabuisson/.gitignore_global
+  pager = delta
 [color]
   ui = true
 [log]
@@ -27,3 +28,11 @@
   date = relative
 [push]
   default = simple
+[interactive]
+  diffFilter = delta --color-only
+[delta]
+  navigate = true
+[merge]
+  conflictstyle = diff3
+[diff]
+  colorMoved = default
