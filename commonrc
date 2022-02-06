@@ -95,3 +95,6 @@ fi
 # SSH
 # Add my identity so that I can use SSH forwarding
 ssh-add &> /dev/null
+
+# OTHERS
+export BAT_THEME="base16"
