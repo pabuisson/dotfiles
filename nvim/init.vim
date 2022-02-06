@@ -59,16 +59,18 @@ set statusline+=%{(mode()=='n')?'\ \ NORMAL\ ':''}
 set statusline+=%#DiffAdd#%{(mode()=='i')?'\ \ INSERT\ ':''}
 set statusline+=%#DiffText#%{(mode()=='r')?'\ \ REPLACE\ ':''}
 set statusline+=%#Cursor#%{IsVisual()?'\ \ VISUAL\ ':''}
+" Reset color
 set statusline+=%#Pmenu#
-set statusline+=┊\ %f
-set statusline+=%{&modified?'\ [+]\ ':''}
+set statusline+=┊\ %{LinterStatus()}
+set statusline+=\ ┊\ %f\ %{&modified?'[+]':''}
 set statusline+=\ ┊\ %{GitInfo()}
 " switch to the right side
 set statusline+=%=
 " statusline(prefix, suffix, text_to_print)
 set statusline+=%{gutentags#statusline('','','⚡️')}
 set statusline+=\ ┊\ %l/%L
-set statusline+=\ \┊\ %p%%
+set statusline+=\ ┊\ %p%%
+set statusline+=\ ┊
 
 function! IsVisual()
   return mode() == 'v' || mode() == ''
@@ -83,6 +85,18 @@ function! GitInfo()
   endif
 endfunction
 
+function! LinterStatus() abort
+  let l:counts = ale#statusline#Count(bufnr(''))
+  let l:all_errors = l:counts.error + l:counts.style_error
+  let l:all_non_errors = l:counts.total - l:all_errors
+
+  return l:counts.total == 0 ? 'OK' : printf(
+        \   '%dW %dE',
+        \   all_non_errors,
+        \   all_errors
+        \)
+endfunction
+
 
 " ==============================
 " === FILE SPECIFIC SETTINGS ===
@@ -90,7 +104,7 @@ endfunction
 
 " Ensures the autocmds are only applied once.
 augroup configgroup
-  autocmd!  
+  autocmd!
 
   " Specific filetype settings
   au BufRead,BufNewFile *.slim set ft=slim
