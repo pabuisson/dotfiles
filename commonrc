@@ -57,6 +57,8 @@ alias rsm="bundle exec rspec spec/models"
 # HANAMI
 alias hs="bundle exec hanami server"
 alias hc="bundle exec hanami console"
+# DOCKER
+alias dc="docker compose"
 
 # FIXME: quotes escaping, I guess
 alias brewdeps="brew list | while read cask; do echo -n $fg[blue] $cask $fg[white]; brew deps $cask | awk '{printf(\" %s \", $0)}'; echo ''; done"
@@ -98,5 +100,12 @@ fi
 # Add my identity so that I can use SSH forwarding
 ssh-add &> /dev/null
 
-# OTHERS
+# Github commit signing
 export BAT_THEME="base16"
+
+# Rails dev
+export DISABLE_SPRING="of_course"
+export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
+
+# sysctl kern.maxfilesperproc -> 24576
+ulimit -n 24576
