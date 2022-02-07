@@ -2,16 +2,16 @@ filetype off
 call plug#begin('~/.config/nvim/plugged')
 
 " --- Color schemes ---
-Plug 'ayu-theme/ayu-vim'
-Plug 'arcticicestudio/nord-vim'
+" Plug 'ayu-theme/ayu-vim'
 Plug 'dracula/vim', { 'as': 'dracula' }
 Plug 'kaicataldo/material.vim'
+Plug 'arcticicestudio/nord-vim'
 Plug 'sainnhe/everforest'
 Plug 'mhartington/oceanic-next'
 Plug 'drewtempelmeyer/palenight.vim'
-Plug 'EdenEast/nightfox.nvim'
 if has('nvim-0.5')
   Plug 'folke/tokyonight.nvim'
+  Plug 'EdenEast/nightfox.nvim'
 else
   Plug 'ghifarit53/tokyonight-vim'
 endif
@@ -21,16 +21,17 @@ Plug 'sheerun/vim-polyglot'
 Plug 'gabrielelana/vim-markdown'
 " --- Plugins ---
 Plug 'ap/vim-buftabline'
+Plug 'mhinz/vim-signify'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'Raimondi/delimitMate'
 Plug 'tpope/vim-surround'
+Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rhubarb'
 Plug 'tommcdo/vim-fubitive'
-Plug 'tpope/vim-repeat'
 Plug 'ap/vim-css-color'
 Plug 'dense-analysis/ale'
 " NOTE: can I replace that with lspconfig / treesitter ?
@@ -42,8 +43,7 @@ if has('nvim-0.5')
   Plug 'neovim/nvim-lspconfig'
   " npm install -g typescript typescript-language-server
   " gem install solargraph
-  Plug 'nvim-lua/plenary.nvim' "prerequisite for gitsigns
-  Plug 'lewis6991/gitsigns.nvim'
+
   " -- nvim-cmp --
   Plug 'neovim/nvim-lspconfig'
   Plug 'hrsh7th/cmp-nvim-lsp'
@@ -57,7 +57,6 @@ else
   " :CocInstall coc-tsserver
   " https://github.com/neoclide/coc-eslint
   " :CocInstall coc-eslint
-  Plug 'mhinz/vim-signify'
 endif
 
 call plug#end()
@@ -131,6 +130,7 @@ nnoremap <leader>ff :Files<CR>
 nnoremap <leader>fb :Buffers<CR>
 nnoremap <leader>fc :BCommits<CR>
 nnoremap <leader>fl :Lines<CR>
+nnoremap <leader>fo :BLines<CR>
 ca rg Rg
 
 " Layout / Sizing
@@ -183,11 +183,6 @@ nnoremap <silent> K <cmd>lua vim.lsp.buf.hover()<CR>
 nnoremap <silent> <C-k> <cmd>lua vim.lsp.buf.signature_help()<CR>
 nnoremap <silent> <C-n> <cmd>lua vim.lsp.diagnostic.goto_prev()<CR>
 nnoremap <silent> <C-p> <cmd>lua vim.lsp.diagnostic.goto_next()<CR>
-
-" ----- gitsigns -----
-lua <<EOF
-require('gitsigns').setup()
-EOF
 
 " ----- cmp -----
 set completeopt=menu,menuone,noselect
