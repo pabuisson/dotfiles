@@ -72,6 +72,9 @@ matches:
   - trigger: "prr1"
     replace: "PRY_RESCUE_RAILS=1 "
 
+  - trigger: "ETQ"
+    replace: "en tant que"
+
   # Obsidian
 
   - trigger: ":ddtod"
