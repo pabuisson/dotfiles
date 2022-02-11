@@ -38,7 +38,7 @@ matches:
       - name: output
         type: date
         params:
-          format: "%Y%m%d%H%M"
+          format: "%Y-%m-%d %H:%M"
 
   - trigger: ":now"
     replace: "{{output}}"
@@ -55,8 +55,6 @@ matches:
         type: shell
         params:
           cmd: "export LANG=fr_FR.UTF-8 && date +%A %d %B %Y"
-
-
 
   # Misc
 
@@ -116,12 +114,3 @@ matches:
         type: shell
         params:
           cmd: "export LANG=fr_FR.UTF-8 && cat ~/MEGA/NOTES/_zettelkasten_template.md | sed \"s/{{date}}/$(date +'%Y%m%d')/g\""
-
-  - trigger: ":pvcem"
-    replace: "{{output}}"
-    vars:
-      - name: output
-        type: shell
-        params:
-          cmd: "export LANG=fr_FR.UTF-8 && cd ~/MEGA/NOTES/DOCTONOTES && cat _pvc_em_weekly_template.md | sed -l \"s/{{week}}/$(date +'%V')/g\" | sed -l \"s/{{date}}/$(date +'%Y%m%d')/g\" | sed -l \"s/{{previous}}/$(find . -Btime -8d -name '*weekly PVC EM.md'|cut -d'/' -f2|cut -d. -f1)/g\""
-
