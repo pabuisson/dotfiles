@@ -3,17 +3,15 @@ call plug#begin('~/.config/nvim/plugged')
 
 " --- Color schemes ---
 " Plug 'ayu-theme/ayu-vim'
-Plug 'dracula/vim', { 'as': 'dracula' }
-Plug 'kaicataldo/material.vim'
+" Plug 'dracula/vim', { 'as': 'dracula' }
 Plug 'arcticicestudio/nord-vim'
 Plug 'sainnhe/everforest'
 Plug 'mhartington/oceanic-next'
 Plug 'drewtempelmeyer/palenight.vim'
 if has('nvim-0.5')
-  Plug 'folke/tokyonight.nvim'
   Plug 'EdenEast/nightfox.nvim'
 else
-  Plug 'ghifarit53/tokyonight-vim'
+  " Nothing yet
 endif
 " --- Filetype related ---
 Plug 'othree/javascript-libraries-syntax.vim'
@@ -96,10 +94,6 @@ let g:ale_fix_on_save = 1
 let g:buftabline_show=1
 " Display vim inner buffer number
 let g:buftabline_numbers=1
-" Highlighting : make visible inactive splits highlighted like any hidden buffer
-" so that the inactive split don't look more "highlighted" than the active buffer
-" NOTE: commented on oct 2021 to see if it makes a diff today
-" hi link BufTabLineActive BufTabLineHidden
 
 
 " ----- vim commentary -----

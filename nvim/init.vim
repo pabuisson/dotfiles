@@ -113,6 +113,7 @@ augroup configgroup
   " Specific syntax highlights
   au FileType ruby match ErrorMsg /binding\.pry\|pry\|byebug/
   au FileType ruby ab fsl # frozen_string_literal: true
+  au FileType ruby ab logmethod puts(__method__.to_s.center(50, '-'))
 
   " Other settings
   " Removes all autocommands for BufEnter on commit messages (au!) and set
