@@ -61,9 +61,6 @@ matches:
   - trigger: "nrfields"
     replace: "timestamp, ssid, account_id, http.statusCode, request.method, name, path,request.headers.contentType, request.headers.contentLength"
 
-  - trigger: "pab@@"
-    replace: "pierre-adrien.buisson@doctolib.com"
-
   - trigger: "hl1"
     replace: "HEADLESS=1 "
 
@@ -72,6 +69,23 @@ matches:
 
   - trigger: "ETQ"
     replace: "en tant que"
+
+  - trigger: "pab@@"
+    replace: "{{output}}"
+    vars:
+      - name: output
+        type: shell
+        params:
+          cmd: "tr 'N-ZA-Mn-za-m' 'A-Za-z' <<< 'cvreer-nqevra.ohvffba@qbpgbyvo.pbz'"
+
+  - trigger: "gdd"
+    replace: "{{output}}"
+    vars:
+      - name: output
+        type: shell
+        params:
+          cmd: "tr 'N-ZA-Mn-za-m' 'A-Za-z' <<< 'tvguho.pbz/qbpgbyvo/qbpgbyvo'"
+
 
   # Obsidian
 
