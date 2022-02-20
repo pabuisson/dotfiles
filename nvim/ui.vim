@@ -25,16 +25,6 @@ color everforest
 " let g:gruvbox_material_background = 'hard'
 " color gruvbox-material
 
-" " -- nightfox
-" lua <<EOF
-" local nightfox = require('nightfox')
-" -- This function set the configuration of nightfox. If a value is not passed in the setup function
-" -- it will be taken from the default configuration above
-" nightfox.setup({
-"   fox = "duskfox", -- change the colorscheme to use nordfox
-" })
-" nightfox.load()
-" EOF
 
 " " -- nord --
 " let g:nord_italic_comments = 1
@@ -49,9 +39,29 @@ color everforest
 " hi link BufTabLineHidden Pmenu
 " hi link BufTabLineFill StatusLine
 
+" -- onedark --
+lua << EOF
+require('onedark').setup {
+  -- Choose between 'dark', 'darker', 'cool', 'deep', 'warm', 'warmer' and 'light'
+  style = 'cool',
+  -- Change code style ---
+  -- Options are italic, bold, underline, none
+  -- You can configure multiple style with comma seperated, For e.g., keywords = 'italic,bold'
+  code_style = {
+    comments = 'none',
+    keywords = 'bold',
+  },
+  -- Customize colors
+  colors = {
+    fg = '#cccccc'
+  },
+}
+require('onedark').load()
+EOF
+
 " " -- palenight --
-" color palenight
 " let g:palenight_terminal_italics=1
+" color palenight
 
 " ---------------------
 

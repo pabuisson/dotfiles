@@ -9,9 +9,9 @@ Plug 'sainnhe/everforest'
 Plug 'mhartington/oceanic-next'
 Plug 'drewtempelmeyer/palenight.vim'
 if has('nvim-0.5')
-  Plug 'EdenEast/nightfox.nvim'
+  Plug 'navarasu/onedark.nvim'
 else
-  " Nothing yet
+  Plug 'joshdick/onedark.vim'
 endif
 " --- Filetype related ---
 Plug 'othree/javascript-libraries-syntax.vim'
