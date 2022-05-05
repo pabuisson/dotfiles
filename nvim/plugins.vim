@@ -77,7 +77,7 @@ let g:ale_linters = {
 
 let g:ale_fixers = {
 \   '*': ['remove_trailing_lines', 'trim_whitespace'],
-\   'ruby': ['prettier'],
+\   'ruby': ['prettier', 'remove_trailing_lines', 'trim_whitespace'],
 \   'javascript': ['prettier']
 \}
 
@@ -182,7 +182,6 @@ set completeopt=menu,menuone,noselect
 
 lua <<EOF
 local cmp = require'cmp'
-
 cmp.setup({
   snippet = {},
   mapping = {
