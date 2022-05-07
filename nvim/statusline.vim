@@ -10,7 +10,7 @@ set statusline+=%#Cursor#%{IsVisual()?'\ \ VISUAL\ ':''}
 set statusline+=%#Pmenu#
 set statusline+=┊
 set statusline+=%#ErrorMsg#%{LinterErrors()>0?\ LinterStatusText():''}
-set statusline+=%#WarningMsg#%{LinterWarnings()>0?\ LinterStatusText():''}
+set statusline+=%#WarningMsg#%{LinterErrors()==0&&LinterWarnings()>0?\ LinterStatusText():''}
 set statusline+=%#Pmenu#%{LinterErrors()==0&&LinterWarnings()==0?LinterStatusText():''}
 " Reset color
 set statusline+=%#Pmenu#
