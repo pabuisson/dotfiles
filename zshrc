@@ -48,5 +48,6 @@ bindkey -v
 # when trying to use HEAD^ in a git command
 setopt NO_NOMATCH
 
-
-
+# Prefix prompt with number of background jobs if any
+# https://stackoverflow.com/a/10194174/85076
+export PROMPT="%(1j.%{$fg[yellow]%}[%j]%{$reset_color%}.) $PROMPT"
