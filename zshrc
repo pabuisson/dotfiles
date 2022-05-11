@@ -22,12 +22,8 @@ source $HOME/.commonrc
 # New line before each command
 function precmd { print "" }
 
-
 # RBENV
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
-# RVM
-# [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
-# export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 
 # NVM
 export NVM_DIR="$HOME/.nvm"
@@ -48,45 +44,9 @@ fi
 export KEYTIMEOUT=1
 bindkey -v
 
-
-# VIM MODE CURSOR SHAPE
-
-# Change cursor shape for different vi modes.
-function zle-keymap-select {
-  if [[ ${KEYMAP} == vicmd ]] ||
-     [[ $1 = 'block' ]]; then
-    echo -ne '\e[1 q'
-
-  elif [[ ${KEYMAP} == main ]] ||
-       [[ ${KEYMAP} == viins ]] ||
-       [[ ${KEYMAP} = '' ]] ||
-       [[ $1 = 'beam' ]]; then
-    echo -ne '\e[5 q'
-  fi
-}
-zle -N zle-keymap-select
-
-# Use beam shape cursor on startup.
-echo -ne '\e[5 q'
-# Use beam shape cursor for each new prompt.
-preexec() {
-   echo -ne '\e[5 q'
-}
-
-# VIM MODE "NORMAL" EOL INDICATOR
-# NOTE: breaks the cursor shape thing
-
-# http://coryklein.com/vi/2015/09/17/a-working-vi-mode-indicator-in-zsh.html
-# function zle-line-init zle-keymap-select {
-#    VIM_PROMPT="%{$fg_bold[yellow]%} [% NORMAL]%  %{$reset_color%}"
-#    RPS1="${${KEYMAP/vicmd/$VIM_PROMPT}/(main|viins)/} $EPS1"
-#    zle reset-prompt
-# }
 # Conflicts between ZSH and GIT HEAD^ resulting in "no matches found" error
 # when trying to use HEAD^ in a git command
 setopt NO_NOMATCH
 
-# zle -N zle-line-init
-# zle -N zle-keymap-select
 
 
