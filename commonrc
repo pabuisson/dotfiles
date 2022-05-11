@@ -106,8 +106,12 @@ ssh-add &> /dev/null
 export BAT_THEME="base16"
 
 # Rails dev
+export HTTPS=1
 export DISABLE_SPRING="of_course"
 export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
+
+# CRYSTAL
+export PKG_CONFIG_PATH=/usr/local/opt/openssl/lib/pkgconfig
 
 # sysctl kern.maxfilesperproc -> 24576
 ulimit -n 24576

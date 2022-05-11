@@ -29,7 +29,7 @@ if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 # [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
 # export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 
-# nvm
+# NVM
 export NVM_DIR="$HOME/.nvm"
 . "$NVM_DIR/nvm.sh"
 
@@ -90,7 +90,3 @@ setopt NO_NOMATCH
 # zle -N zle-keymap-select
 
 
-# --- RAILS ---
-export HTTPS=1
-# --- CRYSTAL ---
-export PKG_CONFIG_PATH=/usr/local/opt/openssl/lib/pkgconfig
