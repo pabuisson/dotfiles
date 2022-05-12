@@ -29,9 +29,9 @@ function! IsVisual()
 endfunction
 
 function! GitInfo()
-  let git = fugitive#head()
+  let git = FugitiveHead()
   if git != ''
-    return 'g:'.fugitive#head()
+    return 'g:'.FugitiveHead()
   else
     return ''
   endif
