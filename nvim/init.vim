@@ -64,18 +64,18 @@ augroup configgroup
 
   " Specific filetype settings
   au BufRead,BufNewFile *.slim set ft=slim
+  au BufRead,BufNewFile *.haml set ft=haml
   au BufRead,BufNewFile *.yml set ft=yaml
 
-  " Specific syntax highlights
+  " Specific settings
+  au FileType crystal   set sw=2 ts=2 sts=2 et wrap
+  au FileType gitcommit set tw=85
+  au FileType markdown  set sw=4 ts=4 sts=4 et wrap
+  au FileType markdown  set conceallevel=0
   au FileType ruby match ErrorMsg /binding\.pry\|pry\|byebug/
   au FileType ruby ab fsl # frozen_string_literal: true
   au FileType ruby ab logmethod puts(__method__.to_s.center(50, '-'))
-
-  " Other settings
   " Removes all autocommands for BufEnter on commit messages (au!) and set
   " cursor position on the first char
   au FileType gitcommit au! BufEnter COMMIT_EDITMSG call setpos('.', [0, 1, 1, 0])
-  au FileType gitcommit set tw=85
-  au FileType markdown  set sw=4 ts=4 sts=4 et wrap
-  au FileType crystal   set sw=2 ts=2 sts=2 et wrap
 augroup END
