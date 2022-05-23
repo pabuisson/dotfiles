@@ -16,7 +16,7 @@ endif
 " --- Filetype related ---
 Plug 'othree/javascript-libraries-syntax.vim'
 Plug 'sheerun/vim-polyglot'
-Plug 'gabrielelana/vim-markdown'
+Plug 'gabrielelana/vim-markdown', { 'for': 'markdown' }
 " --- Plugins ---
 Plug 'ap/vim-buftabline'
 Plug 'mhinz/vim-signify'
@@ -29,7 +29,7 @@ Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rhubarb'
 Plug 'tommcdo/vim-fubitive'
-Plug 'ap/vim-css-color'
+Plug 'ap/vim-css-color', { 'for': ['css', 'sass', 'scss'] }
 Plug 'dense-analysis/ale'
 " " NOTE: can I replace gutentags with lspconfig ?
 " Plug 'ludovicchabant/vim-gutentags'
