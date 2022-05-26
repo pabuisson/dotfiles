@@ -69,6 +69,9 @@ vnoremap > >gv
 vnoremap <S-Tab> <gv
 vnoremap <Tab> >gv
 
+" Reselect pasted text
+nnoremap gp `[v`]
+
 " Enable/disable relative numbering
 " nnoremap <leader>n :set rnu<CR>
 " nnoremap <leader>nn :set nornu<CR>
