@@ -10,20 +10,11 @@ if !has('nvim-0.5')
   finish
 endif
 
-" " -- dracula --
 " set bg=dark
-" color dracula
-
 " -- everforest --
 set bg=dark
 let g:everforest_background = 'hard'
 color everforest
-
-" " -- gruvbox-material --
-" set background=dark
-" " Set contrast. Available values: 'hard', 'medium'(default), 'soft'
-" let g:gruvbox_material_background = 'hard'
-" color gruvbox-material
 
 
 " " -- nord --
@@ -96,8 +87,3 @@ color palenight
 " let g:indentguides_conceal_color = 'ctermfg=151 ctermbg=NONE guifg=#c6c6c6 guibg=NONE'
 " let g:indentguides_specialkey_color = 'ctermfg=151 ctermbg=NONE guifg=#c6c6c6 guibg=NONE'
 
-" " -- gruvbox-material --
-" set background=light
-" " Set contrast. Available values: 'hard', 'medium'(default), 'soft'
-" let g:gruvbox_material_background = 'hard'
-" color gruvbox-material
