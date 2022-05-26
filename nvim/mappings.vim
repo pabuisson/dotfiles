@@ -35,8 +35,6 @@ nnoremap <leader>yl :let @+ = systemlist("git ls-files ".expand("%:p"))[0].":".l
 " Copy whole file: yank inner file
 nnoremap <leader>yf ggVGy
 
-nnoremap <leader>tt :let @+ = system("echo 'bonjour'")<CR>
-
 " All buffers delete/wipe
 nnoremap <leader>bda :%bd!<CR>
 nnoremap <leader>bwa :%bw!<CR>
@@ -70,14 +68,6 @@ vnoremap < <gv
 vnoremap > >gv
 vnoremap <S-Tab> <gv
 vnoremap <Tab> >gv
-nnoremap <Up> <Nop>
-vnoremap <Up> <Nop>
-nnoremap <Down> <Nop>
-vnoremap <Down> <Nop>
-nnoremap <Left> <Nop>
-vnoremap <Left> <Nop>
-nnoremap <Right> <Nop>
-vnoremap <Right> <Nop>
 
 " Enable/disable relative numbering
 " nnoremap <leader>n :set rnu<CR>
