@@ -75,6 +75,9 @@ export PATH="$HOME/Library/Python/3.8/bin:$PATH"
 if [[ -e /usr/local/etc/profile.d/z.sh ]]
 then
   source /usr/local/etc/profile.d/z.sh
+elif [[ -e /opt/homebrew/etc/profile.d/z.sh ]]
+then
+  source /opt/homebrew/etc/profile.d/z.sh
 else
   echo "You might need to install Z for quick-jump"
   echo "$ brew install z"
