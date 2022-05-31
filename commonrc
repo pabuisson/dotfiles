@@ -17,6 +17,7 @@ alias monip="ifconfig | grep 192 | cut -d' ' -f2"
 # GIT
 alias git='LANG=en_GB git'
 alias g='git'
+alias gd='git diff'
 alias gf='git fetch -p'
 alias gp='git pull -p'
 alias gpr='git pull -p --rebase'
@@ -25,6 +26,7 @@ alias gsfm='git co -f master'
 alias grom='git rebase origin/master'
 alias grc='git rebase --continue'
 alias gra='git rebase --abort'
+alias gst='git st'
 # Single quotes needed here, or what's inside subcommands get evaluated everytime (even when
 # initializing the shell and reading those aliases, which gives me errors 'not in a git repo')
 alias gitconflict='$EDITOR $(git status | grep both | cut -d ':' -f 2 | xargs)'
