@@ -26,6 +26,9 @@
   date = relative
 [blame]
   date = relative
+  ignoreRevsFile = .git-blame-ignore-revs
+  markIgnoredLines = true
+  markUnblamableLines = true
 [push]
   default = simple
 [interactive]
