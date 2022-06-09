@@ -49,13 +49,28 @@ setopt EXTENDED_HISTORY
 # Don't wait for shell to close to append to history
 setopt INC_APPEND_HISTORY
 
+# https://dougblack.io/words/zsh-vi-mode.html
+export KEYTIMEOUT=1
+bindkey -v
+
+# Conflicts between ZSH and GIT HEAD^ resulting in "no matches found" error
+# when trying to use HEAD^ in a git command
+setopt NO_NOMATCH
+
+
+# ----- RUNTIME MANAGEMENT -----
 
 # RBENV
-if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
+if command -v rbenv > /dev/null 2>&1; then
+  eval "$(rbenv init -)";
+fi
 
 # NVM
 export NVM_DIR="$HOME/.nvm"
-. "$NVM_DIR/nvm.sh"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+
 # ----- ALIASES -----
 
 export EDITOR=nvim
@@ -137,13 +152,6 @@ else
   echo "$ brew install ripgrep"
 fi
 
-# https://dougblack.io/words/zsh-vi-mode.html
-export KEYTIMEOUT=1
-bindkey -v
-
-# Conflicts between ZSH and GIT HEAD^ resulting in "no matches found" error
-# when trying to use HEAD^ in a git command
-setopt NO_NOMATCH
 # Z instead of FASD
 if [[ -e /usr/local/etc/profile.d/z.sh ]]
 then
