@@ -18,7 +18,7 @@ for index ({1..9}) alias "$index"="cd +${index}"; unset index
 autoload -Uz vcs_info
 zstyle ':vcs_info:*' enable git
 # This line obtains information from the vcs.
-zstyle ':vcs_info:git*' formats "(%b)"
+zstyle ':vcs_info:git*' formats " (%b)"
 precmd() {
   vcs_info
 }
@@ -33,10 +33,10 @@ setopt prompt_subst
 # NOTE: must use single quotes instead of double quotes otherwise git info does not get updated when moving
 #       in the filesystem or switching git branch
 #       source: https://stackoverflow.com/a/57439606/85076
-PS1='%(1j.%F{red}[%j] %f.)%F{cyan}%n%f@%F{blue}%1d%f %F{green}${vcs_info_msg_0_}%f $ '
-
-# # New line before each command
-# function precmd { print "" }
+# %F{color} starts the color, %f stops it
+# %B starts bold, %b stops it
+NEWLINE=$'\n'
+PS1='$NEWLINE%(1j.%B%F{red}[%j] %f%b.)%F{cyan}%n%f@%F{blue}%1d%f%F{green}${vcs_info_msg_0_}%f %F{yellow}▶%f '
 
 # Enable history
 export HISTFILESIZE=1000
