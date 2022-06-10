@@ -8,21 +8,25 @@ set statusline+=%#DiffText#%{(mode()=='r')?'\ \ REPLACE\ ':''}
 set statusline+=%#Cursor#%{IsVisual()?'\ \ VISUAL\ ':''}
 " Reset color
 set statusline+=%#Pmenu#
-set statusline+=┊
+set statusline+=⋮
 set statusline+=%#ErrorMsg#%{LinterErrors()>0?\ LinterStatusText():''}
 set statusline+=%#WarningMsg#%{LinterErrors()==0&&LinterWarnings()>0?\ LinterStatusText():''}
 set statusline+=%#Pmenu#%{LinterErrors()==0&&LinterWarnings()==0?LinterStatusText():''}
 " Reset color
 set statusline+=%#Pmenu#
-set statusline+=\ ┊\ %f%{&modified?'\ [+]':''}
-set statusline+=\ ┊\ %{GitInfo()}
+set statusline+=\ ⋮\ %.20f%{&modified?'\ [+]':''}
+set statusline+=\ ⋮\ %.20{GitInfo()}
 " switch to the right side
 set statusline+=%=
 " statusline(prefix, suffix, text_to_print)
 set statusline+=%{gutentags#statusline('','','⚡️\ ┊')}
 set statusline+=\ %l/%L
-set statusline+=\ ┊\ %p%%
-set statusline+=\ ┊
+set statusline+=\ ⋮\ %2p%%
+set statusline+=%{UnbreakableSpace()}
+
+function! UnbreakableSpace()
+  return ' '
+endfunction
 
 function! IsVisual()
   return mode() == 'v' || mode() == ''
