@@ -211,3 +211,7 @@ fi
 # else
 #   echo "You might want to install FZF"
 # fi
+
+# ----- OTHER SETTINGS -----
+
+export BAT_THEME="OneHalfDark"

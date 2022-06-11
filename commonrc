@@ -1,6 +1,5 @@
 # vim:set ft=zsh :
 
-
 export PATH="/usr/local/sbin:$PATH"
 export PATH="/usr/local/bin:$PATH"
 export PATH="$PATH:$HOME/Applications:$HOME/Applications/scripts:/opt/local/bin"
@@ -10,9 +9,6 @@ export PATH="$HOME/Library/Python/3.8/bin:$PATH"
 # SSH
 # Add my identity so that I can use SSH forwarding
 ssh-add &> /dev/null
-
-# Github commit signing
-export BAT_THEME="base16"
 
 # Rails dev
 export HTTPS=1
