@@ -10,12 +10,11 @@ if !has('nvim-0.5')
   finish
 endif
 
-" set bg=dark
-" -- everforest --
-set bg=dark
-let g:everforest_background = 'hard'
-color everforest
 
+" " -- everforest --
+" set bg=dark
+" let g:everforest_background = 'hard'
+" color everforest
 
 " " -- nord --
 " let g:nord_italic_comments = 1
@@ -30,29 +29,26 @@ color everforest
 " hi link BufTabLineHidden Pmenu
 " hi link BufTabLineFill StatusLine
 
-" " -- onedark --
-" lua << EOF
-" require('onedark').setup {
-"   -- Choose between 'dark', 'darker', 'cool', 'deep', 'warm', 'warmer' and 'light'
-"   style = 'cool',
-"   -- Change code style ---
-"   -- Options are italic, bold, underline, none
-"   -- You can configure multiple style with comma seperated, For e.g., keywords = 'italic,bold'
-"   code_style = {
-"     comments = 'none',
-"     keywords = 'bold',
-"   },
-"   -- Customize colors
-"   colors = {
-"     fg = '#cccccc'
-"   },
-" }
-" require('onedark').load()
-" EOF
+" -- onedark --
+set bg=dark
+lua << EOF
+require('onedark').setup {
+  -- Choose between 'dark', 'darker', 'cool', 'deep', 'warm', 'warmer' and 'light'
+  style = 'deep',
+  code_style = {
+    comments = 'italic',
+    keywords = 'bold',
+  },
+  colors = {
+    fg = '#cccccc'
+  },
+}
+require('onedark').load()
+EOF
 
-" -- palenight --
-let g:palenight_terminal_italics=1
-color palenight
+" " -- palenight --
+" let g:palenight_terminal_italics=1
+" color palenight
 
 " ---------------------
 
