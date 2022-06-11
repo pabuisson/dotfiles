@@ -20,8 +20,14 @@ for index ({1..9}) alias "$index"="cd +${index}"; unset index
 # Enabling and setting git info var to be used in prompt config.
 autoload -Uz vcs_info
 zstyle ':vcs_info:*' enable git
-# This line obtains information from the vcs.
-zstyle ':vcs_info:git*' formats " (%b)"
+zstyle ':vcs_info:*' check-for-changes true
+
+# formats: list of formats used when actionformats is not used (which is most of the time)
+zstyle ':vcs_info:git*' formats ' (%b)%u'
+# actionformats: list of formats used if there is a special action going on in current repository (interactive rebase, merge conflict)
+zstyle ':vcs_info:git*' actionformats ' (%b) [%a]%u'
+zstyle ':vcs_info:git*' unstagedstr " ✖︎"
+# TODO: unpushed commits can be obtained through "git lg @{push}..". Add this to the prompt
 precmd() {
   vcs_info
 }
@@ -29,7 +35,6 @@ precmd() {
 # Enable substitution in the prompt.
 setopt prompt_subst
 
-# 1st part = prefix prompt with number of background jobs if any - https://stackoverflow.com/a/10194174/85076
 # 2nd part = user and directory
 # 3rd part = git branch
 # NOTE: must use single quotes instead of double quotes otherwise git info does not get updated when moving
@@ -38,7 +43,10 @@ setopt prompt_subst
 # %F{color} starts the color, %f stops it
 # %B starts bold, %b stops it
 NEWLINE=$'\n'
-PS1='$NEWLINE%(1j.%B%F{red}[%j] %f%b.)%F{cyan}%n%f@%F{blue}%1d%f%F{green}${vcs_info_msg_0_}%f %F{yellow}▶%f '
+# Number of background jobs if any - https://stackoverflow.com/a/10194174/85076
+BACKGROUND_JOBS='%(1j.%B%F{red}[%j] %f%b.)'
+INVITE_CHAR='%F{yellow}▶%f'
+PS1='$NEWLINE$BACKGROUND_JOBS%F{cyan}%n%f@%F{blue}%1d%f%F{green}${vcs_info_msg_0_}%f $INVITE_CHAR '
 
 
 # HISTORY
