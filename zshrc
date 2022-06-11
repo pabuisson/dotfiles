@@ -2,11 +2,12 @@ source $HOME/.commonrc
 
 # ----- ZSH CONFIGURATION -----
 
-# Completion
+# COMPLETION
 autoload -Uz compinit
 compinit
 
-# Stack of visited directories
+
+# STACK OF VISITED DIRECTORIES
 setopt AUTO_PUSHD           # Push the current directory visited on the stack.
 setopt PUSHD_IGNORE_DUPS    # Do not store duplicates in the stack.
 setopt PUSHD_SILENT         # Do not print the directory stack after pushd or popd.
@@ -14,6 +15,8 @@ alias d='dirs -v'
 # Creates indices to quickly access the 10 last directories
 for index ({1..9}) alias "$index"="cd +${index}"; unset index
 
+
+# PROMPT
 # Enabling and setting git info var to be used in prompt config.
 autoload -Uz vcs_info
 zstyle ':vcs_info:*' enable git
@@ -26,7 +29,6 @@ precmd() {
 # Enable substitution in the prompt.
 setopt prompt_subst
 
-# PROMPT
 # 1st part = prefix prompt with number of background jobs if any - https://stackoverflow.com/a/10194174/85076
 # 2nd part = user and directory
 # 3rd part = git branch
@@ -38,7 +40,8 @@ setopt prompt_subst
 NEWLINE=$'\n'
 PS1='$NEWLINE%(1j.%B%F{red}[%j] %f%b.)%F{cyan}%n%f@%F{blue}%1d%f%F{green}${vcs_info_msg_0_}%f %F{yellow}▶%f '
 
-# Enable history
+
+# HISTORY
 export HISTFILESIZE=1000
 export HISTSIZE=1000
 export HISTFILE=~/.zsh_history
@@ -49,10 +52,12 @@ setopt EXTENDED_HISTORY
 # Don't wait for shell to close to append to history
 setopt INC_APPEND_HISTORY
 
+# VIM MODE
 # https://dougblack.io/words/zsh-vi-mode.html
 export KEYTIMEOUT=1
 bindkey -v
 
+# OTHER SETTINGS
 # Conflicts between ZSH and GIT HEAD^ resulting in "no matches found" error
 # when trying to use HEAD^ in a git command
 setopt NO_NOMATCH
