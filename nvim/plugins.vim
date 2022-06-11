@@ -123,15 +123,6 @@ let g:fzf_history_dir = '~/.local/share/fzf-history'
 let g:fzf_commits_log_options = '--color=always --format="%C(auto)%h%d %C(green)%as %C(cyan)%an :: %C(reset)%s"'
 
 
-" " ----- gutentags -----
-" " let g:gutentags_trace = 1
-" let g:gutentags_cache_dir = '~/.local/share/nvim/ctags'
-" if executable('rg')
-"   " Ignore gitignore files by using rg
-"   let g:gutentags_file_list_command = 'rg --files'
-" endif
-
-
 " ----- javascript libraries ------
 let g:used_javascript_libs = 'react'
 

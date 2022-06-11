@@ -1,6 +1,7 @@
 " === STATUS LINE ===
 set laststatus=2
 set noshowmode
+
 set statusline=%#Pmenu#
 set statusline+=%{(mode()=='n')?'\ \ NORMAL\ ':''}
 set statusline+=%#DiffAdded#%{(mode()=='i')?'\ \ INSERT\ ':''}
@@ -18,8 +19,6 @@ set statusline+=\ ⋮\ %.20f%{&modified?'\ [+]':''}
 set statusline+=\ ⋮\ %.20{GitInfo()}
 " switch to the right side
 set statusline+=%=
-" statusline(prefix, suffix, text_to_print)
-set statusline+=%{gutentags#statusline('','','⚡️\ ┊')}
 set statusline+=\ %l/%L
 set statusline+=\ ⋮\ %2p%%
 set statusline+=%{UnbreakableSpace()}
