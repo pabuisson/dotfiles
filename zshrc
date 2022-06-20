@@ -59,6 +59,7 @@ setopt HIST_FIND_NO_DUPS
 setopt EXTENDED_HISTORY
 # Don't wait for shell to close to append to history
 setopt INC_APPEND_HISTORY
+bindkey '^R' history-incremental-search-backward
 
 # VIM MODE
 # https://dougblack.io/words/zsh-vi-mode.html
