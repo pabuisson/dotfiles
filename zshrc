@@ -26,7 +26,7 @@ zstyle ':vcs_info:*' check-for-changes true
 zstyle ':vcs_info:git*' formats ' (%b)%u'
 # actionformats: list of formats used if there is a special action going on in current repository (interactive rebase, merge conflict)
 zstyle ':vcs_info:git*' actionformats ' (%b) [%a]%u'
-zstyle ':vcs_info:git*' unstagedstr " ✖︎"
+zstyle ':vcs_info:git*' unstagedstr " %F{red}✖︎%f"
 # TODO: unpushed commits can be obtained through "git lg @{push}..". Add this to the prompt
 precmd() {
   vcs_info
