@@ -6,6 +6,10 @@ source $HOME/.commonrc
 autoload -Uz compinit
 compinit
 
+# VIM MODE
+# https://dougblack.io/words/zsh-vi-mode.html
+export KEYTIMEOUT=1
+bindkey -v
 
 # STACK OF VISITED DIRECTORIES
 setopt AUTO_PUSHD           # Push the current directory visited on the stack.
@@ -61,10 +65,6 @@ setopt EXTENDED_HISTORY
 setopt INC_APPEND_HISTORY
 bindkey '^R' history-incremental-search-backward
 
-# VIM MODE
-# https://dougblack.io/words/zsh-vi-mode.html
-export KEYTIMEOUT=1
-bindkey -v
 
 # OTHER SETTINGS
 # Conflicts between ZSH and GIT HEAD^ resulting in "no matches found" error
