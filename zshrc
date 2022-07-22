@@ -49,22 +49,22 @@ NEWLINE=$'\n'
 # Number of background jobs if any - https://stackoverflow.com/a/10194174/85076
 BACKGROUND_JOBS='%(1j.%B%F{red}[%j] %f%b.)'
 
-DEFAULT_INVITE_CHAR='▶'
-VI_INSERT_MODE_CHAR='◼︎'
-VI_NORMAL_MODE_CHAR=$DEFAULT_INVITE_CHAR
-invite_char() {
-  if [[ "${KEYMAP}" == 'vicmd' ]]
-  then
-    # Insert mode
-    print "%F{magenta}$VI_INSERT_MODE_CHAR%f"
+VI_NORMAL_MODE_CHAR='◼︎'
+VI_INSERT_MODE_CHAR='▶'
+
+INVITE_CHAR=$VI_INSERT_MODE_CHAR
+function zle-keymap-select {
+  if [[ "${KEYMAP}" == 'vicmd' ]]; then
+    INVITE_CHAR="%F{magenta}$VI_NORMAL_MODE_CHAR%f"
   else
-    # Normal mode
-    print "%F{yellow}$VI_NORMAL_MODE_CHAR%f"
+    INVITE_CHAR="%F{yellow}$VI_INSERT_MODE_CHAR%f"
   fi
+  zle reset-prompt
 }
+zle -N zle-keymap-select
 
 # INVITE=insert_mode
-PS1='$NEWLINE $BACKGROUND_JOBS%F{cyan}%n%f@%F{blue}%1d%f%F{green}${vcs_info_msg_0_}%f %F{yellow}$(invite_char) %f'
+PS1='$NEWLINE $BACKGROUND_JOBS%F{cyan}%n%f@%F{blue}%1d%f%F{green}${vcs_info_msg_0_}%f ${INVITE_CHAR} '
 
 
 # HISTORY
