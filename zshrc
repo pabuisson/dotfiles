@@ -37,20 +37,34 @@ precmd() {
 }
 
 # Enable substitution in the prompt.
-setopt prompt_subst
+setopt PROMPT_SUBST
 
 # 2nd part = user and directory
 # 3rd part = git branch
-# NOTE: must use single quotes instead of double quotes otherwise git info does not get updated when moving
-#       in the filesystem or switching git branch
+# NOTE: single quotes mandatory so that git info is updated when moving in the FS or switching branch
 #       source: https://stackoverflow.com/a/57439606/85076
 # %F{color} starts the color, %f stops it
 # %B starts bold, %b stops it
 NEWLINE=$'\n'
 # Number of background jobs if any - https://stackoverflow.com/a/10194174/85076
 BACKGROUND_JOBS='%(1j.%B%F{red}[%j] %f%b.)'
-INVITE_CHAR='%F{yellow}▶%f'
-PS1='$NEWLINE$BACKGROUND_JOBS%F{cyan}%n%f@%F{blue}%1d%f%F{green}${vcs_info_msg_0_}%f $INVITE_CHAR '
+
+DEFAULT_INVITE_CHAR='▶'
+VI_INSERT_MODE_CHAR='◼︎'
+VI_NORMAL_MODE_CHAR=$DEFAULT_INVITE_CHAR
+invite_char() {
+  if [[ "${KEYMAP}" == 'vicmd' ]]
+  then
+    # Insert mode
+    print "%F{magenta}$VI_INSERT_MODE_CHAR%f"
+  else
+    # Normal mode
+    print "%F{yellow}$VI_NORMAL_MODE_CHAR%f"
+  fi
+}
+
+# INVITE=insert_mode
+PS1='$NEWLINE $BACKGROUND_JOBS%F{cyan}%n%f@%F{blue}%1d%f%F{green}${vcs_info_msg_0_}%f %F{yellow}$(invite_char) %f'
 
 
 # HISTORY
