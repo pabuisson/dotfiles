@@ -6,6 +6,10 @@ source $HOME/.commonrc
 autoload -Uz compinit
 compinit
 
+# Tries case insensitive option if case sensitive does not matche
+# source: https://zsh.sourceforge.io/Doc/Release/Completion-System.html
+zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}'
+
 # VIM MODE
 # https://dougblack.io/words/zsh-vi-mode.html
 export KEYTIMEOUT=1
