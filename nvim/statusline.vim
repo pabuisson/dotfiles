@@ -3,10 +3,10 @@ set laststatus=2
 set noshowmode
 
 set statusline=%#Pmenu#
-set statusline+=%{(mode()=='n')?'\ \ NORMAL\ ':''}
-set statusline+=%#DiffAdded#%{(mode()=='i')?'\ \ INSERT\ ':''}
-set statusline+=%#DiffText#%{(mode()=='r')?'\ \ REPLACE\ ':''}
-set statusline+=%#Cursor#%{IsVisual()?'\ \ VISUAL\ ':''}
+set statusline+=%{(mode()=='n')?'\ \ N\ ':''}
+set statusline+=%#DiffAdded#%{(mode()=='i')?'\ \ I\ ':''}
+set statusline+=%#DiffText#%{(mode()=='r')?'\ \ R\ ':''}
+set statusline+=%#Cursor#%{IsVisual()?'\ \ V\ ':''}
 " Reset color
 set statusline+=%#Pmenu#
 set statusline+=⋮
@@ -15,7 +15,7 @@ set statusline+=%#WarningMsg#%{LinterErrors()==0&&LinterWarnings()>0?\ LinterSta
 set statusline+=%#Pmenu#%{LinterErrors()==0&&LinterWarnings()==0?LinterStatusText():''}
 " Reset color
 set statusline+=%#Pmenu#
-set statusline+=\ ⋮\ %.20f%{&modified?'\ [+]':''}
+set statusline+=\ ⋮\ %.80f%{&modified?'\ [+]':''}
 set statusline+=\ ⋮\ %.20{GitInfo()}
 " switch to the right side
 set statusline+=%=
