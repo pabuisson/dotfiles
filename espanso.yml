@@ -105,6 +105,14 @@ matches:
         params:
           cmd: "export LANG=fr_FR.UTF-8 && cat ~/MEGA/NOTES/DOCTONOTES/_daily_template.md | sed \"s/%date%/$(date -v+1d +'%A %d %B %Y')/g\" | sed \"s/%yesterday%/$(date +'%Y%m%d')/g\" | sed \"s/%tomorrow%/$(date -v+2d +'%Y%m%d')/g\""
 
+  - trigger: ":ddyes"
+    replace: "{{output}}"
+    vars:
+      - name: output
+        type: shell
+        params:
+          cmd: "export LANG=fr_FR.UTF-8 && cat ~/MEGA/NOTES/DOCTONOTES/_daily_template.md | sed \"s/%date%/$(date -v-1d +'%A %d %B %Y')/g\" | sed \"s/%yesterday%/$(date -v-2d +'%Y%m%d')/g\" | sed \"s/%tomorrow%/$(date +'%Y%m%d')/g\""
+
   - trigger: ":znote"
     replace: "{{output}}"
     vars:
