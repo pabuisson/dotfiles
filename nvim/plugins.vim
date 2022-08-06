@@ -157,15 +157,19 @@ for type, icon in pairs(signs) do
 end
 EOF
 
-" LSP config (the mappings used in the default file don't quite work right)
 nnoremap <silent> gd <cmd>lua vim.lsp.buf.definition()<CR>
-nnoremap <silent> gD <cmd>lua vim.lsp.buf.declaration()<CR>
 nnoremap <silent> gr <cmd>lua vim.lsp.buf.references()<CR>
-nnoremap <silent> gi <cmd>lua vim.lsp.buf.implementation()<CR>
+nnoremap <silent> <leader>lic <cmd>lua vim.lsp.buf.incoming_calls()<CR>
+nnoremap <silent> <leader>loc <cmd>lua vim.lsp.buf.outgoing_calls()<CR>
 nnoremap <silent> K <cmd>lua vim.lsp.buf.hover()<CR>
+
 nnoremap <silent> ge <cmd>lua vim.diagnostic.setloclist()<CR>
-nnoremap <silent> <C-n> <cmd>lua vim.diagnostic.goto_prev()<CR>
-nnoremap <silent> <C-p> <cmd>lua vim.diagnostic.goto_next()<CR>
+nnoremap <silent> <leader>dp <cmd>lua vim.diagnostic.goto_prev()<CR>
+nnoremap <silent> <leader>dn <cmd>lua vim.diagnostic.goto_next()<CR>
+
+nnoremap <silent> <leader>rn <cmd>lua vim.lsp.buf.rename()<CR>
+nnoremap <silent> <leader>ca <cmd>lua vim.lsp.buf.code_action()<CR>
+vnoremap <silent> ca <cmd>lua vim.lsp.buf.code_action()<CR>
 
 " ----- cmp -----
 set completeopt=menu,menuone,noselect
