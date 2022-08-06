@@ -20,6 +20,9 @@ Plug 'ap/vim-buftabline'
 Plug 'mhinz/vim-signify'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
+Plug 'dense-analysis/ale'
+Plug 'thaerkh/vim-indentguides'
+Plug 'wellle/context.vim'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-commentary'
@@ -30,11 +33,6 @@ Plug 'tpope/vim-rhubarb'
 " vim-fugitive adapter for bitbucket
 " Plug 'tommcdo/vim-fubitive'
 Plug 'ap/vim-css-color', { 'for': ['css', 'sass', 'scss'] }
-Plug 'dense-analysis/ale'
-" " NOTE: can I replace gutentags with lspconfig ?
-" Plug 'ludovicchabant/vim-gutentags'
-" brew install universal-ctags
-Plug 'thaerkh/vim-indentguides'
 if has('nvim-0.5')
   " NOTE: treesitter brings problems with % matching for ruby
   " stuff inside comments or 'it' tests are matched as if they were keywords
