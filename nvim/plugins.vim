@@ -25,8 +25,10 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-fugitive'
+" vim-fugitive adapter for github
 Plug 'tpope/vim-rhubarb'
-Plug 'tommcdo/vim-fubitive'
+" vim-fugitive adapter for bitbucket
+" Plug 'tommcdo/vim-fubitive'
 Plug 'ap/vim-css-color', { 'for': ['css', 'sass', 'scss'] }
 Plug 'dense-analysis/ale'
 " " NOTE: can I replace gutentags with lspconfig ?
@@ -46,7 +48,7 @@ if has('nvim-0.5')
   Plug 'hrsh7th/cmp-path'
   Plug 'hrsh7th/cmp-cmdline'
   Plug 'hrsh7th/nvim-cmp'
-  " snippet engine (required)
+  " snippet engine (required for cmp)
   Plug 'hrsh7th/cmp-vsnip'
   Plug 'hrsh7th/vim-vsnip'
 endif
@@ -111,10 +113,6 @@ nnoremap <leader>fl :Lines<CR>
 nnoremap <leader>fo :BLines<CR>
 ca rg Rg
 
-" Layout / Sizing
-" hidden by default, ctrl-/ to toggle
-let g:fzf_preview_window = ['right:40%', 'ctrl-/']
-
 " Enable per-command history.
 " CTRL-N and CTRL-P will be automatically bound to next-history and
 " previous-history instead of down and up. If you don't like the change,
@@ -147,7 +145,6 @@ require("nvim-lsp-installer").setup {
 local nvim_lsp = require('lspconfig')
 nvim_lsp.tsserver.setup{}
 nvim_lsp.solargraph.setup{}
-nvim_lsp.crystalline.setup{}
 
 local signs = { Error = "❗️", Warn = "🔸", Hint = "🔹", Info = "🔹" }
 for type, icon in pairs(signs) do
@@ -179,7 +176,7 @@ cmp.setup({
       vim_item.menu = ({
         buffer = "[Buffer]",
         nvim_lsp = "[LSP]",
-        luasnip = "[LuaSnip]",
+        luasnip = "[Snip]",
         nvim_lua = "[Lua]",
         latex_symbols = "[LaTeX]"
       })[entry.source.name]
