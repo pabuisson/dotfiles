@@ -1,4 +1,5 @@
 source $HOME/.commonrc
+source $HOME/.workrc
 
 # ----- ZSH CONFIGURATION -----
 
@@ -167,8 +168,6 @@ alias gitconflict='$EDITOR $(git status | grep both | cut -d ':' -f 2 | xargs)'
 alias giteditedfrommaster='$EDITOR $(git diff --name-only origin/master... | xargs)'
 alias giteditedfromlast='$EDITOR $(git diff --name-only head | xargs)'
 alias gitdifffrommaster='git diff $(git merge-base head origin/master)'
-alias editpimfiles='$EDITOR $(find $(cat CODEOWNERS | grep @doctolib/pims | cut -d " " -f1 | xargs) -iname "*rb")'
-alias edittestfiles='$EDITOR $(find $(cat CODEOWNERS | grep test/ | grep @doctolib/pims | cut -d " " -f1 | xargs) -iname "*rb")'
 # Churn sur les 6 derniers mois (nombre de commits par fichier)
 alias gitchurn="git log --all -M -C --name-only --format='format:' $@ --since='6 months ago' | sort | grep -v '^$' | uniq -c | sort -n | tail -10"
 # Get short SHA1 of HEAD in clipboard
@@ -196,9 +195,6 @@ alias hs="bundle exec hanami server"
 alias hc="bundle exec hanami console"
 # DOCKER
 alias dc="docker compose"
-# DOCTO
-alias bg="./bin/green.sh"
-
 # FIXME: quotes escaping, I guess
 alias brewdeps="brew list | while read cask; do echo -n $fg[blue] $cask $fg[white]; brew deps $cask | awk '{printf(\" %s \", $0)}'; echo ''; done"
 
