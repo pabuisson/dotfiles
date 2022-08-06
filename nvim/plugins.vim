@@ -2,7 +2,6 @@ filetype off
 call plug#begin('~/.config/nvim/plugged')
 
 " --- Color schemes ---
-Plug 'arcticicestudio/nord-vim'
 Plug 'sainnhe/everforest'
 Plug 'mhartington/oceanic-next'
 Plug 'drewtempelmeyer/palenight.vim'

@@ -14,11 +14,11 @@ endif
 " " -- everforest --
 " set bg=dark
 " let g:everforest_background = 'hard'
+" " standard hard dark : fg = ['#d3c6aa',   '223']
+" let g:everforest_colors_override = {
+"       \ 'fg': ['#d8d0c0', '223'],
+"       \}
 " color everforest
-
-" " -- nord --
-" let g:nord_italic_comments = 1
-" color nord
 
 " " -- oceanic-next --
 " let g:oceanic_next_terminal_bold = 1
@@ -34,13 +34,13 @@ set bg=dark
 lua << EOF
 require('onedark').setup {
   -- Choose between 'dark', 'darker', 'cool', 'deep', 'warm', 'warmer' and 'light'
-  style = 'deep',
+  style = 'cool',
   code_style = {
-    comments = 'italic',
     keywords = 'bold',
   },
   colors = {
-    fg = '#cccccc'
+    fg = '#cbcbcb',
+    grey = '#536177'
   },
 }
 require('onedark').load()
