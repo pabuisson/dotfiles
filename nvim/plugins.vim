@@ -98,12 +98,18 @@ nnoremap <leader>gb  :Git blame<CR>
 " ---
 " Search with ripgrep for the word under the cursor
 " Source: https://coffeeandcontemplation.dev/2020/11/13/fuzzy-finding-in-vim/
+command! -bang -nargs=* RgCurrentWordExact
+  \ call fzf#vim#grep(
+  \   'rg -F -w --column --line-number --no-heading --color=always -- '.shellescape(<q-args>), 1,
+  \   fzf#vim#with_preview(), <bang>0)
+
 command! -bang -nargs=* RgCurrentWord
   \ call fzf#vim#grep(
-  \   'rg -F --column --line-number --no-heading --color=always --smart-case -- '.shellescape(<q-args>), 1,
+  \   'rg -F --column --line-number --no-heading --color=always -- '.shellescape(<q-args>), 1,
   \   fzf#vim#with_preview(), <bang>0)
 
 nnoremap <leader>fw :execute 'RgCurrentWord '.expand('<cword>')<CR>
+nnoremap <leader>fW :execute 'RgCurrentWordExact '.expand('<cword>')<CR>
 nnoremap <leader>ff :Files<CR>
 nnoremap <leader>fb :Buffers<CR>
 nnoremap <leader>fc :BCommits<CR>
