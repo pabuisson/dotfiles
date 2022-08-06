@@ -4,6 +4,7 @@
 
 iabbr bdp binding.pry
 iabbr fst # frozen_string_literal: true
+iabbr mlog puts __method__.to_s.center(40, '-')
 
 " <Leader> set to , instead of \
 let mapleader = ","
@@ -71,11 +72,3 @@ vnoremap <Tab> >gv
 
 " Reselect pasted text
 nnoremap gp `[v`]
-
-" Enable/disable relative numbering
-" nnoremap <leader>n :set rnu<CR>
-" nnoremap <leader>nn :set nornu<CR>
-
-" ctags remapping
-nnoremap <leader>jt <C-]>
-nnoremap <leader>jb :pop<CR>

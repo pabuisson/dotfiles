@@ -3,21 +3,6 @@
 " === and weird mac alt+space spaces ===
 " ======================================
 
-"function! StripTrailingWhitespaces()
-"  if exists('b:noAutoWhitespaceFix')
-"    return
-"  endif
-"  "1. Save last search, and cursor position.
-"  let _s=@/
-"  let l = line(".")
-"  let c = col(".")
-"  "2. Do the business:
-"  %s/\s\+$//e
-"  "3. Clean up: restore search history and cursor position
-"  let @/=_s
-"  call cursor(l, c)
-"endfunction
-
 " On Mac OS, typing alt+space insert a non-regular space character that's not visible but
 " can generate random errors. Let's replace them with regular spaces on save
 function! ReplaceNonUnicodeWhitespaces()
@@ -84,7 +69,7 @@ nnoremap <Leader>co :call CountOccurrences()<CR>
 " === Format JSON ===
 " ===================
 
-" TODO: replace "nil" with "null" and "=>" with ":"
+" TODO: replace "nil" with "null" and "=>" with ":" before calling python
 com! FormatJSON %!python -m json.tool
 
 
@@ -117,6 +102,9 @@ endfunction
 nnoremap <leader>yml :call YAMLTree()<CR>
 
 
+" ========================================
+" ===  Remove item from quickfix list  ===
+" ========================================
 " When using `dd` in the quickfix list, remove the item from the quickfix list.
 function! RemoveQFItem()
   let curqfidx = line('.') - 1
