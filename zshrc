@@ -78,11 +78,16 @@ export HISTSIZE=1000
 export HISTFILE=~/.zsh_history
 # Ignore duplicates when searching through history
 setopt HIST_FIND_NO_DUPS
+# Don't write duplicates to history
+setopt HIST_IGNORE_ALL_DUPS
 # Add timestamp to commands
 setopt EXTENDED_HISTORY
 # Don't wait for shell to close to append to history
 setopt INC_APPEND_HISTORY
 bindkey '^R' history-incremental-search-backward
+# Using this, to make sure the HIST_FIND_NO_DUPS settings is used for up and down keys too
+bindkey "^[[A" history-beginning-search-backward
+bindkey "^[[B" history-beginning-search-forward
 
 
 # OTHER SETTINGS
