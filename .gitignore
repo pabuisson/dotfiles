@@ -1,5 +1,6 @@
-nvim/view/
+.DS_Store
+nvim/.netrwhist
 nvim/autoload/plug.vim
 nvim/plugged/
-nvim/.netrwhist
-.DS_Store
+nvim/spell/
+nvim/view/
