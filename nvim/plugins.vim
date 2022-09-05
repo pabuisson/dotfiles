@@ -38,6 +38,7 @@ if has('nvim-0.5')
   Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
   Plug 'williamboman/nvim-lsp-installer'
   Plug 'neovim/nvim-lspconfig'
+  Plug 'mfussenegger/nvim-lint'
 
   " -- nvim-cmp --
   Plug 'hrsh7th/cmp-nvim-lsp'
@@ -68,7 +69,9 @@ let g:ale_fix_on_save = 1
 let g:ale_fixers = {
 \   '*': ['remove_trailing_lines', 'trim_whitespace'],
 \   'ruby': ['prettier', 'remove_trailing_lines', 'trim_whitespace'],
-\   'javascript': ['prettier']
+\   'javascript': ['prettier'],
+\   'typescript': ['prettier'],
+\   'typescriptreact': ['prettier'],
 \}
 
 
@@ -136,6 +139,26 @@ if !has('nvim-0.5')
   finish
 end
 
+" ----- lint -----
+" Solution to use external linters through the native LSP diagnostics
+" Alternative (more complete): https://github.com/jose-elias-alvarez/null-ls.nvim
+
+lua <<EOF
+require('lint').linters_by_ft = {
+  ruby = {'rubocop'},
+  javascript = {'eslint'},
+  typescript = {'eslint'},
+  typescriptreact = {'eslint'}
+}
+
+-- Autocmd to trigger linting
+vim.api.nvim_create_autocmd({ "BufReadPost", "BufWritePost" }, {
+  callback = function()
+    require("lint").try_lint()
+  end,
+})
+EOF
+
 " ----- lspconfig -----
 " TODO: setup a "peek definition" shortcut
 " It exists in lspsaga, but should be possible with only lspconfig?
@@ -169,6 +192,7 @@ nnoremap <silent> <leader>dn <cmd>lua vim.diagnostic.goto_next()<CR>
 nnoremap <silent> <leader>rn <cmd>lua vim.lsp.buf.rename()<CR>
 nnoremap <silent> <leader>ca <cmd>lua vim.lsp.buf.code_action()<CR>
 vnoremap <silent> ca <cmd>lua vim.lsp.buf.code_action()<CR>
+
 
 " ----- cmp -----
 set completeopt=menu,menuone,noselect
