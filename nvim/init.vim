@@ -72,7 +72,7 @@ augroup configgroup
   au FileType gitcommit set tw=85
   au FileType markdown  set sw=4 ts=4 sts=4 et wrap
   au FileType markdown  set conceallevel=0
-  au FileType ruby match ErrorMsg /binding\.pry\|pry\|byebug/
+  au FileType ruby match ErrorMsg /binding\.pry\|pry\|byebug\|debugger/
   au FileType ruby ab fsl # frozen_string_literal: true
   au FileType ruby ab logmethod puts(__method__.to_s.center(50, '-'))
   " Removes all autocommands for BufEnter on commit messages (au!) and set
