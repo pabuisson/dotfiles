@@ -14,11 +14,33 @@ endif
 " " -- everforest --
 " set bg=dark
 " let g:everforest_background = 'hard'
-" " standard hard dark : fg = ['#d3c6aa',   '223']
+" " standard hard dark : fg = ['#d3c6aa', '223']
+" " standard hard dark : bg0 = ['#2b3339', '235']
 " let g:everforest_colors_override = {
-"       \ 'fg': ['#d8d0c0', '223'],
-"       \}
+" \ 'fg': ['#d8d0c0', '223'],
+" \ 'bg0': ['#242b30', '235']
+" \}
 " color everforest
+
+" " -- kanagawa --
+" lua << EOF
+" -- color palette: https://github.com/rebelot/kanagawa.nvim/blob/master/lua/kanagawa/colors.lua
+" require('kanagawa').setup({
+"     undercurl = true,
+"     commentStyle = { italic = true },
+"     functionStyle = { bold = true },
+"     keywordStyle = { italic = false },
+"     statementStyle = { bold = true },
+"     specialReturn = true,       -- special highlight for the return keyword
+"     specialException = true,    -- special highlight for exception handling keywords
+"     colors = {
+"       fujiWhite = "#dbd8c5",  -- a bit less saturated
+"       fujiGray = "#666772",   -- more blue-ish, less brown-ish
+"     },
+"     overrides = {},
+" })
+" vim.cmd('color kanagawa')
+" EOF
 
 " " -- oceanic-next --
 " let g:oceanic_next_terminal_bold = 1

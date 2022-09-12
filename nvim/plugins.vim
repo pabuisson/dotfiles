@@ -7,6 +7,7 @@ Plug 'mhartington/oceanic-next'
 Plug 'drewtempelmeyer/palenight.vim'
 if has('nvim-0.5')
   Plug 'navarasu/onedark.nvim'
+  Plug 'rebelot/kanagawa.nvim'
 else
   Plug 'joshdick/onedark.vim'
 endif
