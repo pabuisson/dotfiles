@@ -22,7 +22,6 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'dense-analysis/ale'
 Plug 'thaerkh/vim-indentguides'
-Plug 'wellle/context.vim'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-commentary'
@@ -33,6 +32,7 @@ Plug 'tpope/vim-rhubarb'
 " vim-fugitive adapter for bitbucket
 " Plug 'tommcdo/vim-fubitive'
 Plug 'ap/vim-css-color', { 'for': ['css', 'sass', 'scss'] }
+Plug 'dominikduda/vim_current_word'
 if has('nvim-0.5')
   " NOTE: treesitter brings problems with % matching for ruby
   " stuff inside comments or 'it' tests are matched as if they were keywords
@@ -130,6 +130,11 @@ let g:fzf_commits_log_options = '--color=always --format="%C(auto)%h%d %C(green)
 
 " ----- javascript libraries ------
 let g:used_javascript_libs = 'react'
+
+
+" ----- vim_current_word -----
+let g:vim_current_word#highlight_delay = 1000
+" styling: https://github.com/dominikduda/vim_current_word#styling
 
 
 " =================================
