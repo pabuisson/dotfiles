@@ -2,10 +2,6 @@
 " === SHORTCUTS CONFIGURATION ===
 " ===============================
 
-iabbr bdp binding.pry
-iabbr fst # frozen_string_literal: true
-iabbr mlog puts __method__.to_s.center(40, '-')
-
 " <Leader> set to , instead of \
 let mapleader = ","
 

@@ -71,6 +71,8 @@ augroup configgroup
   " Custom abbreviation for certain filetypes
   au FileType ruby ab fsl # frozen_string_literal: true
   au FileType ruby ab logmethod puts(__method__.to_s.center(50, '-'))
+  au FileType ruby iabbr bdp binding.pry
+  au FileType ruby iabbr mlog puts __method__.to_s.center(40, '-')
 
   " Other custom settings
   au FileType crystal   set sw=2 ts=2 sts=2 et wrap
