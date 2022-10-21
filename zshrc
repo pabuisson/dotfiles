@@ -69,7 +69,7 @@ function zle-keymap-select {
 zle -N zle-keymap-select
 
 # INVITE=insert_mode
-PS1='$NEWLINE $BACKGROUND_JOBS%F{cyan}%n%f@%F{blue}%1d%f%F{green}${vcs_info_msg_0_}%f ${INVITE_CHAR} '
+PS1='$NEWLINE$BACKGROUND_JOBS%F{cyan}%n%f@%F{blue}%1d%f%F{green}${vcs_info_msg_0_}%f ${INVITE_CHAR} '
 
 
 # HISTORY
@@ -86,8 +86,9 @@ setopt EXTENDED_HISTORY
 setopt INC_APPEND_HISTORY
 bindkey '^R' history-incremental-search-backward
 # Using this, to make sure the HIST_FIND_NO_DUPS settings is used for up and down keys too
-bindkey "^[[A" history-beginning-search-backward
-bindkey "^[[B" history-beginning-search-forward
+bindkey "^[[A" up-line-or-history
+bindkey "^[[B" down-line-or-history
+
 
 
 # OTHER SETTINGS
