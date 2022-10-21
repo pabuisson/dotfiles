@@ -10,24 +10,23 @@ if !has('nvim-0.5')
   finish
 endif
 
-
-" " -- everforest --
-" set bg=dark
-" let g:everforest_background = 'hard'
-" " standard hard dark : fg = ['#d3c6aa', '223']
-" " standard hard dark : bg0 = ['#2b3339', '235']
-" let g:everforest_colors_override = {
-" \ 'fg': ['#d8d0c0', '223'],
-" \ 'bg0': ['#242b30', '235']
-" \}
-" color everforest
+" -- everforest --
+set bg=dark
+let g:everforest_background = 'hard'
+" standard hard dark : fg = ['#d3c6aa', '223']
+" 'bg0': ['#2b3339',   '235'],
+let g:everforest_colors_override = {
+\ 'fg': ['#d8d0c0', '223'],
+\ 'bg0': ['#23292d', '235']
+\}
+color everforest
 
 " " -- kanagawa --
 " lua << EOF
 " -- color palette: https://github.com/rebelot/kanagawa.nvim/blob/master/lua/kanagawa/colors.lua
 " require('kanagawa').setup({
 "     undercurl = true,
-"     commentStyle = { italic = true },
+"     commentStyle = { italic = false },
 "     functionStyle = { bold = true },
 "     keywordStyle = { italic = false },
 "     statementStyle = { bold = true },
@@ -35,7 +34,7 @@ endif
 "     specialException = true,    -- special highlight for exception handling keywords
 "     colors = {
 "       fujiWhite = "#dbd8c5",  -- a bit less saturated
-"       fujiGray = "#666772",   -- more blue-ish, less brown-ish
+"       fujiGray = "#6a6b77",   -- more blue-ish, less brown-ish
 "     },
 "     overrides = {},
 " })
@@ -51,32 +50,45 @@ endif
 " hi link BufTabLineHidden Pmenu
 " hi link BufTabLineFill StatusLine
 
-" -- onedark --
-set bg=dark
-lua << EOF
-require('onedark').setup {
-  -- Choose between 'dark', 'darker', 'cool', 'deep', 'warm', 'warmer' and 'light'
-  style = 'cool',
-  code_style = {
-    keywords = 'bold',
-  },
-  colors = {
-    fg = '#cbcbcb',
-    grey = '#536177'
-  },
-}
-require('onedark').load()
-EOF
-
-" " -- palenight --
-" let g:palenight_terminal_italics=1
-" color palenight
+" " -- onedark --
+" set bg=dark
+" lua << EOF
+" require('onedark').setup {
+"   -- Choose between 'dark', 'darker', 'cool', 'deep', 'warm', 'warmer'
+"   style = 'cool',
+"   code_style = {
+"     keywords = 'bold',
+"     comments = 'none',
+"   },
+"   colors = {
+"     fg = '#cbcbcb',
+"     grey = '#5f6e87'
+"   },
+" }
+" require('onedark').load()
+" EOF
 
 " ---------------------
 
 " " -- everforest --
 " set bg=light
 " let g:everforest_background = 'hard'
-" colorscheme everforest
+" " standard hard light 'bg0': ['#fff9e8',   '230'],
+" let g:everforest_colors_override = {
+" \ 'bg0': ['#fffdef', '230']
+" \}
+" color everforest
 " let g:indentguides_conceal_color = 'ctermfg=151 ctermbg=NONE guifg=#c6c6c6 guibg=NONE'
 " let g:indentguides_specialkey_color = 'ctermfg=151 ctermbg=NONE guifg=#c6c6c6 guibg=NONE'
+
+" " -- onedark --
+" set bg=light
+" lua << EOF
+" require('onedark').setup {
+"   style = 'light',
+"   code_style = {
+"     keywords = 'bold',
+"   },
+" }
+" require('onedark').load()
+" EOF

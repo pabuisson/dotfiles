@@ -4,7 +4,7 @@ call plug#begin('~/.config/nvim/plugged')
 " --- Color schemes ---
 Plug 'sainnhe/everforest'
 Plug 'mhartington/oceanic-next'
-Plug 'drewtempelmeyer/palenight.vim'
+
 if has('nvim-0.5')
   Plug 'navarasu/onedark.nvim'
   Plug 'rebelot/kanagawa.nvim'
