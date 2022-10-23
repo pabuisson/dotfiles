@@ -37,7 +37,8 @@ if has('nvim-0.5')
   " NOTE: treesitter brings problems with % matching for ruby
   " stuff inside comments or 'it' tests are matched as if they were keywords
   Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-  Plug 'williamboman/nvim-lsp-installer'
+  Plug 'williamboman/mason.nvim'
+  Plug 'williamboman/mason-lspconfig.nvim'
   Plug 'neovim/nvim-lspconfig'
   Plug 'mfussenegger/nvim-lint'
 
@@ -165,27 +166,47 @@ vim.api.nvim_create_autocmd({ "BufReadPost", "BufWritePost" }, {
 })
 EOF
 
-" ----- lspconfig -----
-" TODO: setup a "peek definition" shortcut
-" It exists in lspsaga, but should be possible with only lspconfig?
 
 lua <<EOF
-require("nvim-lsp-installer").setup {
-  automatic_installation = true -- automatically install language servers setup below for lspconfig
+-- ----- mason, mason-lspconfig & lspconfig -----
+require("mason").setup()
+require("mason-lspconfig").setup {
+  -- automatically install language servers setup below for lspconfig
+  automatic_installation = true
 }
-
-local nvim_lsp = require('lspconfig')
-nvim_lsp.tsserver.setup{}
-nvim_lsp.solargraph.setup{}
 
 local signs = { Error = "❗️", Warn = "🔸", Hint = "🔹", Info = "🔹" }
 for type, icon in pairs(signs) do
   local hl = "DiagnosticSign" .. type
   vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
 end
+
+-- Mappings.
+-- See `:help vim.diagnostic.*` for documentation on any of the below functions
+local opts = { noremap=true, silent=true }
+vim.keymap.set('n', '<space>e', vim.diagnostic.open_float, opts)
+vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)
+vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
+vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, opts)
+
+-- Use an on_attach function to only map the following keys
+-- after the language server attaches to the current buffer
+local on_attach = function(client, bufnr)
+  -- Enable completion triggered by <c-x><c-o>
+  vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
+end
+
+local lspconfig = require('lspconfig')
+lspconfig.tsserver.setup{
+  on_attach = on_attach
+}
+lspconfig.solargraph.setup{
+  on_attach = on_attach
+}
 EOF
 
 nnoremap <silent> gd <cmd>lua vim.lsp.buf.definition()<CR>
+nnoremap <silent> gD <cmd>lua vim.lsp.buf.declaration()<CR>
 nnoremap <silent> gr <cmd>lua vim.lsp.buf.references()<CR>
 nnoremap <silent> <leader>lic <cmd>lua vim.lsp.buf.incoming_calls()<CR>
 nnoremap <silent> <leader>loc <cmd>lua vim.lsp.buf.outgoing_calls()<CR>
@@ -259,6 +280,6 @@ EOF
 lua <<EOF
 require('nvim-treesitter.configs').setup {
   -- one of "all", "maintained" (parsers with maintainers), or a list of languages
-  ensure_installed = { "javascript", "ruby", "elixir", "comment" },
+  ensure_installed = { "javascript", "ruby", "elixir", "markdown", "comment" },
 }
 EOF
