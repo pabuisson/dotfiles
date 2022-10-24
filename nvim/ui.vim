@@ -12,11 +12,13 @@ endif
 
 " -- everforest --
 set bg=dark
+let g:everforest_disable_italic_comment = 1
 let g:everforest_background = 'hard'
-" standard hard dark : fg = ['#d3c6aa', '223']
-" 'bg0': ['#2b3339',   '235'],
+" standard hard dark :
+" fg:  ['#d3c6aa', '223']
+" bg0: ['#2b3339',   '235'],
 let g:everforest_colors_override = {
-\ 'fg': ['#d8d0c0', '223'],
+\ 'fg':  ['#d8d0c0', '223'],
 \ 'bg0': ['#23292d', '235']
 \}
 color everforest
