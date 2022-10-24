@@ -15,6 +15,7 @@ endif
 Plug 'othree/javascript-libraries-syntax.vim'
 Plug 'sheerun/vim-polyglot'
 Plug 'gabrielelana/vim-markdown', { 'for': 'markdown' }
+Plug 'junegunn/goyo.vim', { 'for': 'markdown' }
 " --- Plugins ---
 Plug 'ap/vim-buftabline'
 Plug 'mhinz/vim-signify'
@@ -164,10 +165,7 @@ vim.api.nvim_create_autocmd({ "BufReadPost", "BufWritePost" }, {
     require("lint").try_lint()
   end,
 })
-EOF
 
-
-lua <<EOF
 -- ----- mason, mason-lspconfig & lspconfig -----
 require("mason").setup()
 require("mason-lspconfig").setup {
@@ -175,19 +173,19 @@ require("mason-lspconfig").setup {
   automatic_installation = true
 }
 
+-- Mappings.
+-- See `:help vim.diagnostic.*` for documentation on any of the below functions
+local opts = { noremap=true, silent=true }
+vim.keymap.set('n', '<leader>dd', vim.diagnostic.open_float, opts)
+vim.keymap.set('n', '<leader>dk', vim.diagnostic.goto_prev, opts)
+vim.keymap.set('n', '<leader>dj', vim.diagnostic.goto_next, opts)
+vim.keymap.set('n', '<leader>dl', vim.diagnostic.setloclist, opts)
+
 local signs = { Error = "❗️", Warn = "🔸", Hint = "🔹", Info = "🔹" }
 for type, icon in pairs(signs) do
   local hl = "DiagnosticSign" .. type
   vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
 end
-
--- Mappings.
--- See `:help vim.diagnostic.*` for documentation on any of the below functions
-local opts = { noremap=true, silent=true }
-vim.keymap.set('n', '<space>e', vim.diagnostic.open_float, opts)
-vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)
-vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
-vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, opts)
 
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
@@ -274,10 +272,8 @@ cmp.setup.cmdline(':', {
 local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
 -- NOTE: in the wiki, language servers are "setup{}" aftrer the update_capabilities but in my config it's not the case
 -- not sure if it will work but if it does not, it may be a reason why
-EOF
 
-" ----- treesitter -----
-lua <<EOF
+-- ----- treesitter -----
 require('nvim-treesitter.configs').setup {
   -- one of "all", "maintained" (parsers with maintainers), or a list of languages
   ensure_installed = { "javascript", "ruby", "elixir", "markdown", "comment" },
