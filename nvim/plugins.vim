@@ -200,12 +200,8 @@ local on_attach = function(client, bufnr)
 end
 
 local lspconfig = require('lspconfig')
-lspconfig['tsserver'].setup{
-  on_attach = on_attach
-}
-lspconfig['solargraph'].setup{
-  on_attach = on_attach
-}
+lspconfig.tsserver.setup{ on_attach = on_attach }
+lspconfig.solargraph.setup{ on_attach = on_attach }
 EOF
 
 " ----- cmp -----
@@ -256,9 +252,11 @@ cmp.setup.cmdline(':', {
 })
 
 -- Setup lspconfig.
-local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
--- NOTE: in the wiki, language servers are "setup{}" aftrer the update_capabilities but in my config it's not the case
--- not sure if it will work but if it does not, it may be a reason why
+-- The nvim-cmp almost supports LSP's capabilities so You should advertise it to LSP servers..
+local capabilities = require('cmp_nvim_lsp').default_capabilities()
+local lspconfig = require('lspconfig')
+lspconfig.tsserver.setup { capabilities = capabilities }
+lspconfig.solargraph.setup { capabilities = capabilities }
 
 -- ----- treesitter -----
 require('nvim-treesitter.configs').setup {
