@@ -1,5 +1,9 @@
 source $HOME/.commonrc
-source $HOME/.workrc
+
+if [[ -e $HOME/.workrc ]]
+then
+  source $HOME/.workrc
+fi
 
 # ----- ZSH CONFIGURATION -----
 
