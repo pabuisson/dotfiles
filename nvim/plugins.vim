@@ -63,15 +63,14 @@ call plug#end()
 
 " " ----- ale -----
 let g:ale_disable_lsp = 1
-
-" Disable linting: handled by native LSP
 let g:ale_linters_explicit = 1
 let g:ale_linters = {}
 
 let g:ale_fix_on_save = 1
+let g:ale_ruby_syntax_tree_executable = 'bundle'
 let g:ale_fixers = {
 \   '*': ['remove_trailing_lines', 'trim_whitespace'],
-\   'ruby': ['prettier', 'remove_trailing_lines', 'trim_whitespace'],
+\   'ruby': ['syntax_tree', 'prettier', 'remove_trailing_lines', 'trim_whitespace'],
 \   'javascript': ['prettier'],
 \   'typescript': ['prettier'],
 \   'typescriptreact': ['prettier'],
@@ -135,8 +134,10 @@ let g:used_javascript_libs = 'react'
 
 
 " ----- vim_current_word -----
-let g:vim_current_word#highlight_delay = 1000
-" styling: https://github.com/dominikduda/vim_current_word#styling
+let g:vim_current_word#highlight_delay = 500
+hi CurrentWordTwins gui=underline cterm=underline
+" hi CurrentWord gui=underline cterm=underline
+
 
 
 " =================================
@@ -147,11 +148,11 @@ if !has('nvim-0.5')
   finish
 end
 
-" ----- lint -----
-" Solution to use external linters through the native LSP diagnostics
-" Alternative (more complete): https://github.com/jose-elias-alvarez/null-ls.nvim
 
 lua <<EOF
+-- ----- lint -----
+-- Solution to use external linters through the native LSP diagnostics
+-- Alternative (more complete): https://github.com/jose-elias-alvarez/null-ls.nvim
 require('lint').linters_by_ft = {
   ruby = {'rubocop'},
   javascript = {'eslint'},
@@ -181,43 +182,31 @@ vim.keymap.set('n', '<leader>dk', vim.diagnostic.goto_prev, opts)
 vim.keymap.set('n', '<leader>dj', vim.diagnostic.goto_next, opts)
 vim.keymap.set('n', '<leader>dl', vim.diagnostic.setloclist, opts)
 
-local signs = { Error = "❗️", Warn = "🔸", Hint = "🔹", Info = "🔹" }
-for type, icon in pairs(signs) do
-  local hl = "DiagnosticSign" .. type
-  vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
-end
-
--- Use an on_attach function to only map the following keys
--- after the language server attaches to the current buffer
 local on_attach = function(client, bufnr)
   -- Enable completion triggered by <c-x><c-o>
   vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
+
+  local bufopts = { noremap=true, silent=true, buffer=bufnr }
+  vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
+  vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
+  vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
+  vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
+  -- vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
+  -- vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, bufopts)
+  -- vim.keymap.set('n', '<space>D', vim.lsp.buf.type_definition, bufopts)
+  vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, bufopts)
+  vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, bufopts)
+  -- vim.keymap.set('n', '<leader>f', function() vim.lsp.buf.format { async = true } end, bufopts)
 end
 
 local lspconfig = require('lspconfig')
-lspconfig.tsserver.setup{
+lspconfig['tsserver'].setup{
   on_attach = on_attach
 }
-lspconfig.solargraph.setup{
+lspconfig['solargraph'].setup{
   on_attach = on_attach
 }
 EOF
-
-nnoremap <silent> gd <cmd>lua vim.lsp.buf.definition()<CR>
-nnoremap <silent> gD <cmd>lua vim.lsp.buf.declaration()<CR>
-nnoremap <silent> gr <cmd>lua vim.lsp.buf.references()<CR>
-nnoremap <silent> <leader>lic <cmd>lua vim.lsp.buf.incoming_calls()<CR>
-nnoremap <silent> <leader>loc <cmd>lua vim.lsp.buf.outgoing_calls()<CR>
-nnoremap <silent> K <cmd>lua vim.lsp.buf.hover()<CR>
-
-nnoremap <silent> ge <cmd>lua vim.diagnostic.setloclist()<CR>
-nnoremap <silent> <leader>dp <cmd>lua vim.diagnostic.goto_prev()<CR>
-nnoremap <silent> <leader>dn <cmd>lua vim.diagnostic.goto_next()<CR>
-
-nnoremap <silent> <leader>rn <cmd>lua vim.lsp.buf.rename()<CR>
-nnoremap <silent> <leader>ca <cmd>lua vim.lsp.buf.code_action()<CR>
-vnoremap <silent> ca <cmd>lua vim.lsp.buf.code_action()<CR>
-
 
 " ----- cmp -----
 set completeopt=menu,menuone,noselect
@@ -228,13 +217,11 @@ local cmp = require'cmp'
 cmp.setup({
   formatting = {
     format = function(entry, vim_item)
-      -- Add source to the result
       vim_item.menu = ({
         buffer = "[Buffer]",
         nvim_lsp = "[LSP]",
         luasnip = "[Snip]",
         nvim_lua = "[Lua]",
-        latex_symbols = "[LaTeX]"
       })[entry.source.name]
       return vim_item
     end
@@ -275,7 +262,6 @@ local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protoco
 
 -- ----- treesitter -----
 require('nvim-treesitter.configs').setup {
-  -- one of "all", "maintained" (parsers with maintainers), or a list of languages
   ensure_installed = { "javascript", "ruby", "elixir", "markdown", "comment" },
 }
 EOF
