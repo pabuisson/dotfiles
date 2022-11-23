@@ -10,18 +10,18 @@ if !has('nvim-0.5')
   finish
 endif
 
-" -- everforest --
-set bg=dark
-let g:everforest_disable_italic_comment = 1
-let g:everforest_background = 'hard'
-" standard hard dark :
-" fg:  ['#d3c6aa', '223']
-" bg0: ['#2b3339',   '235'],
-let g:everforest_colors_override = {
-\ 'fg':  ['#d8d0c0', '223'],
-\ 'bg0': ['#23292d', '235']
-\}
-color everforest
+" " -- everforest --
+" set bg=dark
+" let g:everforest_disable_italic_comment = 1
+" let g:everforest_background = 'hard'
+" " standard hard dark :
+" " fg:  ['#d3c6aa', '223']
+" " bg0: ['#2b3339',   '235'],
+" let g:everforest_colors_override = {
+" \ 'fg':  ['#d8d0c0', '223'],
+" \ 'bg0': ['#23292d', '235']
+" \}
+" color everforest
 
 " " -- kanagawa --
 " lua << EOF
@@ -42,6 +42,26 @@ color everforest
 " })
 " vim.cmd('color kanagawa')
 " EOF
+
+" -- nightfox
+lua << EOF
+require('nightfox').setup({
+  options = {
+    styles = {              -- Style to be applied to different syntax groups
+      keywords = "bold",
+    },
+    modules = {             -- List of various plugins and additional options
+      'gitsigns',
+      'native_lsp',
+      'treesitter'
+    },
+  },
+  palettes = {},
+  specs = {},
+  groups = {},
+})
+vim.cmd("color nightfox")
+EOF
 
 " " -- oceanic-next --
 " let g:oceanic_next_terminal_bold = 1
@@ -70,6 +90,12 @@ color everforest
 " require('onedark').load()
 " EOF
 
+" " -- tokyonight --
+" " color tokyonight-night
+" color tokyonight-storm
+" " color tokyonight-day
+" " color tokyonight-moon
+
 " ---------------------
 
 " " -- everforest --
@@ -82,15 +108,3 @@ color everforest
 " color everforest
 " let g:indentguides_conceal_color = 'ctermfg=151 ctermbg=NONE guifg=#c6c6c6 guibg=NONE'
 " let g:indentguides_specialkey_color = 'ctermfg=151 ctermbg=NONE guifg=#c6c6c6 guibg=NONE'
-
-" " -- onedark --
-" set bg=light
-" lua << EOF
-" require('onedark').setup {
-"   style = 'light',
-"   code_style = {
-"     keywords = 'bold',
-"   },
-" }
-" require('onedark').load()
-" EOF
