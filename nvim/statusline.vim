@@ -9,11 +9,12 @@ set statusline+=%#DiffText#%{(mode()=='r')?'\ \ R\ ':''}
 set statusline+=%#Cursor#%{IsVisual()?'\ \ V\ ':''}
 " Reset color
 set statusline+=%#Pmenu#
-set statusline+=⋮
-" set statusline+=%#ErrorMsg#%{LinterErrors()>0?\ LinterStatusText():''}
-" set statusline+=%#WarningMsg#%{LinterErrors()==0&&LinterWarnings()>0?\ LinterStatusText():''}
-" set statusline+=%#Pmenu#%{LinterErrors()==0&&LinterWarnings()==0?LinterStatusText():''}
-set statusline+=%#Pmenu#%{LinterStatusText()}
+set statusline+=\ ⋮%{UnbreakableSpace()}
+" TODO: what's a cleaner way to apply conditional color?
+set statusline+=%#Error#%{LspActiveClients()==0?LspActiveClientsIndicator():''}
+set statusline+=%#Pmenu#%{LspActiveClients()>0?LspActiveClientsIndicator():''}
+set statusline+=%{UnbreakableSpace()}
+set statusline+=⋮\ %#Pmenu#%{LinterStatusText()}
 " Reset color
 set statusline+=%#Pmenu#
 set statusline+=\ ⋮\ %.80f%{&modified?'\ [+]':''}
@@ -33,7 +34,7 @@ function! IsVisual()
 endfunction
 
 function! GitInfo()
-  let git = FugitiveHead()
+  let l:git = FugitiveHead()
   if git != ''
     return 'g:'.FugitiveHead()
   else
@@ -41,26 +42,18 @@ function! GitInfo()
   endif
 endfunction
 
-" errors = 'Error',
-" warnings = 'Warning',
-" info = 'Information',
-" hints = 'Hint'
+
+function! LspActiveClients() abort
+  return luaeval('#vim.lsp.get_active_clients({bufnr=0})')
+endfunction
+
+" TODO: I think this is not updated when the status changes? how can we do it?
+function! LspActiveClientsIndicator() abort
+  let l:active_indicator = LspActiveClients() == 0 ? '—' : '✓'
+  return printf('LSP: %s', active_indicator)
+endfunction
 
 " TODO: use native lsp instead of ALE (don't use ALE anymore)
-" function! LinterErrors() abort
-"   let l:all_errors = diagnostic.get(0, { 'severity' : 'Error' })
-"   " let l:counts = ale#statusline#Count(bufnr(''))
-"   " let l:all_errors = l:counts.error + l:counts.style_error
-"   return l:all_errors
-" endfunction
-
-" function! LinterWarnings() abort
-"   let l:counts = ale#statusline#Count(bufnr(''))
-"   let l:all_errors = l:counts.error + l:counts.style_error
-"   let l:all_non_errors = l:counts.total - l:all_errors
-"   return l:all_non_errors
-" endfunction
-
 function! LinterStatusText() abort
   " let l:counts = ale#statusline#Count(bufnr(''))
   " let l:all_errors = l:counts.error + l:counts.style_error
@@ -71,5 +64,5 @@ function! LinterStatusText() abort
   "       \   all_non_errors,
   "       \   all_errors
   "       \)
-  return ' --'
+  return 'E: -  W: - '
 endfunction
