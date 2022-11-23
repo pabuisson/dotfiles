@@ -20,7 +20,6 @@ Plug 'gabrielelana/vim-markdown', { 'for': 'markdown' }
 Plug 'junegunn/goyo.vim', { 'for': 'markdown' }
 " --- Plugins ---
 Plug 'ap/vim-buftabline'
-Plug 'mhinz/vim-signify'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'dense-analysis/ale'
@@ -30,10 +29,8 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-fugitive'
-" vim-fugitive adapter for github
-Plug 'tpope/vim-rhubarb'
-" vim-fugitive adapter for bitbucket
-" Plug 'tommcdo/vim-fubitive'
+Plug 'tpope/vim-rhubarb' " vim-fugitive adapter for github
+" Plug 'tommcdo/vim-fubitive' " vim-fugitive adapter for bitbucket
 Plug 'ap/vim-css-color', { 'for': ['css', 'sass', 'scss'] }
 Plug 'dominikduda/vim_current_word'
 if has('nvim-0.5')
@@ -54,6 +51,11 @@ if has('nvim-0.5')
   " snippet engine (required for cmp)
   Plug 'hrsh7th/cmp-vsnip'
   Plug 'hrsh7th/vim-vsnip'
+
+  Plug 'lewis6991/gitsigns.nvim'
+  Plug 'petertriho/nvim-scrollbar'
+else
+  Plug 'mhinz/vim-signify'
 endif
 
 call plug#end()
@@ -259,6 +261,12 @@ local capabilities = require('cmp_nvim_lsp').default_capabilities()
 local lspconfig = require('lspconfig')
 lspconfig.tsserver.setup { capabilities = capabilities }
 lspconfig.solargraph.setup { capabilities = capabilities }
+-- ----- gitsigns -----
+require('gitsigns').setup()
+
+-- ----- scrollbar -----
+require('scrollbar.handlers.gitsigns').setup()
+require('scrollbar').setup()
 
 -- ----- treesitter -----
 require('nvim-treesitter.configs').setup {
