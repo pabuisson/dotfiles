@@ -14,7 +14,9 @@ set statusline+=\ ⋮%{UnbreakableSpace()}
 set statusline+=%#Error#%{LspActiveClients()==0?LspActiveClientsIndicator():''}
 set statusline+=%#Pmenu#%{LspActiveClients()>0?LspActiveClientsIndicator():''}
 set statusline+=%{UnbreakableSpace()}
-set statusline+=⋮\ %#Pmenu#%{LinterStatusText()}
+set statusline+=⋮\ %#Error#%{HasLinterErrors()==1?LinterStatusText():''}
+set statusline+=\%#Error#%{HasNoLinterErrorButHasWarnings()==1?LinterStatusText():''}
+set statusline+=\%#Pmenu#%{HasNoErrorAndNoWarnings()==1?LinterStatusText():''}
 " Reset color
 set statusline+=%#Pmenu#
 set statusline+=\ ⋮\ %.80f%{&modified?'\ [+]':''}
@@ -53,16 +55,35 @@ function! LspActiveClientsIndicator() abort
   return printf('LSP: %s', active_indicator)
 endfunction
 
-" TODO: use native lsp instead of ALE (don't use ALE anymore)
-function! LinterStatusText() abort
-  " let l:counts = ale#statusline#Count(bufnr(''))
-  " let l:all_errors = l:counts.error + l:counts.style_error
-  " let l:all_non_errors = l:counts.total - l:all_errors
 
-  " return l:counts.total == 0 ? ' OK' : printf(
-  "       \   ' %dW %dE',
-  "       \   all_non_errors,
-  "       \   all_errors
-  "       \)
-  return 'E: -  W: - '
+function! LinterStatusText() abort
+  let l:errors = luaeval('#vim.diagnostic.get(0, { severity = vim.diagnostic.severity.ERROR })')
+  let l:warnings = luaeval('#vim.diagnostic.get(0, { severity = vim.diagnostic.severity.WARN })')
+  return l:errors.'e '.l:warnings.'w'
+endfunction
+
+function! HasLinterErrors() abort
+  let l:errors = luaeval('#vim.diagnostic.get(0, { severity = vim.diagnostic.severity.ERROR })')
+  if l:errors == 0
+    return 0
+  else
+    return 1
+  end
+endfunction
+
+function! HasNoLinterErrorButHasWarnings() abort
+  let l:warnings = luaeval('#vim.diagnostic.get(0, { severity = vim.diagnostic.severity.WARN })')
+  if HasLinterErrors() == 1
+    return 0
+  else
+    if l:warnings == 0
+      return 1
+    else
+      return 0
+    endif
+  endif
+endfunction
+
+function! HasNoErrorAndNoWarnings() abort
+  return HasLinterErrors() == 0 && HasNoLinterErrorButHasWarnings() == 0
 endfunction
