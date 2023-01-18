@@ -42,6 +42,9 @@ if has('nvim-0.5')
   Plug 'neovim/nvim-lspconfig'
   Plug 'mfussenegger/nvim-lint'
 
+  Plug 'lewis6991/gitsigns.nvim'
+  Plug 'petertriho/nvim-scrollbar'
+
   " -- nvim-cmp --
   Plug 'hrsh7th/cmp-nvim-lsp'
   Plug 'hrsh7th/cmp-buffer'
@@ -51,9 +54,6 @@ if has('nvim-0.5')
   " snippet engine (required for cmp)
   Plug 'hrsh7th/cmp-vsnip'
   Plug 'hrsh7th/vim-vsnip'
-
-  Plug 'lewis6991/gitsigns.nvim'
-  Plug 'petertriho/nvim-scrollbar'
 else
   Plug 'mhinz/vim-signify'
 endif
@@ -173,47 +173,37 @@ vim.api.nvim_create_autocmd({ "BufReadPost", "BufWritePost" }, {
 
 -- ----- mason, mason-lspconfig & lspconfig -----
 require("mason").setup()
-require("mason-lspconfig").setup {
+
+require("mason-lspconfig").setup({
   -- automatically install language servers setup below for lspconfig
   automatic_installation = true
-}
+})
 
--- Mappings.
--- See `:help vim.diagnostic.*` for documentation on any of the below functions
-local opts = { noremap=true, silent=true }
-vim.keymap.set('n', '<leader>dd', vim.diagnostic.open_float, opts)
-vim.keymap.set('n', '<leader>dk', vim.diagnostic.goto_prev, opts)
-vim.keymap.set('n', '<leader>dj', vim.diagnostic.goto_next, opts)
-vim.keymap.set('n', '<leader>dl', vim.diagnostic.setloclist, opts)
-
-local on_attach = function(client, bufnr)
+local on_attach = function(_, bufnr)
   -- Enable completion triggered by <c-x><c-o>
   vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
-  local bufopts = { noremap=true, silent=true, buffer=bufnr }
-  vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
-  vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
-  vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
-  vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
+  local opts = { noremap=true, silent=true }
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
+
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>dl', '<cmd>lua vim.diagnostic.setloclist()<CR>', opts)
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>dd', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
+
+  -- local bufopts = { noremap=true, silent=true, buffer=bufnr }
+  -- vim.keymap.set('n', 'gD', vim.lsp.buf.definition, bufopts)
   -- vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
   -- vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, bufopts)
   -- vim.keymap.set('n', '<space>D', vim.lsp.buf.type_definition, bufopts)
-  vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, bufopts)
-  vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, bufopts)
+  -- vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, bufopts)
+  -- vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, bufopts)
   -- vim.keymap.set('n', '<leader>f', function() vim.lsp.buf.format { async = true } end, bufopts)
 end
 
-local lspconfig = require('lspconfig')
-lspconfig.tsserver.setup{ on_attach = on_attach }
-lspconfig.solargraph.setup{ on_attach = on_attach }
-EOF
-
-" ----- cmp -----
-set completeopt=menu,menuone,noselect
-
-lua <<EOF
-local cmp = require'cmp'
-
+----- cmp -----
+vim.opt.completeopt = {'menu', 'menuone', 'noselect'}
+local cmp = require('cmp')
 cmp.setup({
   formatting = {
     format = function(entry, vim_item)
@@ -257,10 +247,19 @@ cmp.setup.cmdline(':', {
 
 -- Setup lspconfig.
 -- The nvim-cmp almost supports LSP's capabilities so You should advertise it to LSP servers..
-local capabilities = require('cmp_nvim_lsp').default_capabilities()
+-- local capabilities = require('cmp_nvim_lsp').default_capabilities()
 local lspconfig = require('lspconfig')
-lspconfig.tsserver.setup { capabilities = capabilities }
-lspconfig.solargraph.setup { capabilities = capabilities }
+lspconfig.tsserver.setup {
+--   -- capabilities = capabilities,
+  on_attach = on_attach
+}
+lspconfig.solargraph.setup {
+--   -- capabilities = capabilities,
+  on_attach = on_attach,
+  cmd = { "bundle", "exec", "solargraph", "stdio" }
+}
+
+
 -- ----- gitsigns -----
 require('gitsigns').setup()
 
