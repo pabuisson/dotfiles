@@ -8,8 +8,6 @@ Plug 'mhartington/oceanic-next'
 if has('nvim-0.5')
   Plug 'navarasu/onedark.nvim'
   Plug 'rebelot/kanagawa.nvim'
-  Plug 'EdenEast/nightfox.nvim'
-  Plug 'folke/tokyonight.nvim'
 else
   Plug 'joshdick/onedark.vim'
 endif

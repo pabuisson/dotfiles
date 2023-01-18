@@ -43,26 +43,6 @@ endif
 " vim.cmd('color kanagawa')
 " EOF
 
-" -- nightfox
-lua << EOF
-require('nightfox').setup({
-  options = {
-    styles = {              -- Style to be applied to different syntax groups
-      keywords = "bold",
-    },
-    modules = {             -- List of various plugins and additional options
-      'gitsigns',
-      'native_lsp',
-      'treesitter'
-    },
-  },
-  palettes = {},
-  specs = {},
-  groups = {},
-})
-vim.cmd("color nightfox")
-EOF
-
 " " -- oceanic-next --
 " let g:oceanic_next_terminal_bold = 1
 " let g:oceanic_next_terminal_italic = 1
