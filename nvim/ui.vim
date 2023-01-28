@@ -70,13 +70,18 @@ endif
 " require('onedark').load()
 " EOF
 
-" " -- tokyonight --
-" " color tokyonight-night
-" color tokyonight-storm
-" " color tokyonight-day
-" " color tokyonight-moon
-
 " ---------------------
+
+" " -- enfocado
+" set bg=light
+" let g:enfocado_style = 'nature'
+" let g:enfocado_plugins = [
+"   \   'cmp',
+"   \   'gitsigns',
+"   \   'lspconfig',
+"   \   'null-ls',
+"   \ ]
+" color enfocado
 
 " " -- everforest --
 " set bg=light
