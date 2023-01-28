@@ -31,6 +31,7 @@ Plug 'tpope/vim-rhubarb' " vim-fugitive adapter for github
 " Plug 'tommcdo/vim-fubitive' " vim-fugitive adapter for bitbucket
 Plug 'ap/vim-css-color', { 'for': ['css', 'sass', 'scss'] }
 Plug 'dominikduda/vim_current_word'
+Plug 'junegunn/goyo.vim', { 'for': ['markdown'] }
 if has('nvim-0.5')
   " NOTE: treesitter brings problems with % matching for ruby
   " stuff inside comments or 'it' tests are matched as if they were keywords
