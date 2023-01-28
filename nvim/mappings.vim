@@ -30,7 +30,7 @@ nnoremap <leader>yp :let @+ = systemlist("git ls-files ".expand("%:p"))[0]<CR>
 " TODO: what if the command returns nothing? handle this case
 nnoremap <leader>yl :let @+ = systemlist("git ls-files ".expand("%:p"))[0].":".line(".")<CR>
 " Copy whole file: yank inner file
-nnoremap <leader>yf ggVGy
+nnoremap <leader>yif ggVGy
 
 " All buffers delete/wipe
 nnoremap <leader>bda :%bd!<CR>
