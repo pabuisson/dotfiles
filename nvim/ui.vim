@@ -10,18 +10,19 @@ if !has('nvim-0.5')
   finish
 endif
 
-" " -- everforest --
-" set bg=dark
-" let g:everforest_disable_italic_comment = 1
-" let g:everforest_background = 'hard'
-" " standard hard dark :
-" " fg:  ['#d3c6aa', '223']
-" " bg0: ['#2b3339',   '235'],
-" let g:everforest_colors_override = {
-" \ 'fg':  ['#d8d0c0', '223'],
-" \ 'bg0': ['#23292d', '235']
-" \}
-" color everforest
+
+" -- everforest --
+set bg=dark
+let g:everforest_disable_italic_comment = 1
+let g:everforest_background = 'hard'
+" standard hard dark :
+" fg:  ['#d3c6aa', '223']
+" bg0: ['#2b3339',   '235'],
+let g:everforest_colors_override = {
+\ 'fg':  ['#d8d0c0', '223'],
+\ 'bg0': ['#202529', '235']
+\}
+color everforest
 
 " " -- kanagawa --
 " lua << EOF
@@ -53,12 +54,13 @@ endif
 " hi link BufTabLineFill StatusLine
 
 " " -- onedark --
-" set bg=dark
 " lua << EOF
+" vim.cmd("set bg=dark")
 " require('onedark').setup {
 "   -- Choose between 'dark', 'darker', 'cool', 'deep', 'warm', 'warmer'
 "   style = 'cool',
 "   code_style = {
+"     functions = 'bold',
 "     keywords = 'bold',
 "     comments = 'none',
 "   },
@@ -72,23 +74,12 @@ endif
 
 " ---------------------
 
-" " -- enfocado
-" set bg=light
-" let g:enfocado_style = 'nature'
-" let g:enfocado_plugins = [
-"   \   'cmp',
-"   \   'gitsigns',
-"   \   'lspconfig',
-"   \   'null-ls',
-"   \ ]
-" color enfocado
-
 " " -- everforest --
 " set bg=light
 " let g:everforest_background = 'hard'
 " " standard hard light 'bg0': ['#fff9e8',   '230'],
 " let g:everforest_colors_override = {
-" \ 'bg0': ['#fffdef', '230']
+" \ 'bg0': ['#fffef4', '230']
 " \}
 " color everforest
 " let g:indentguides_conceal_color = 'ctermfg=151 ctermbg=NONE guifg=#c6c6c6 guibg=NONE'
