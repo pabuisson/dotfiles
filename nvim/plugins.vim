@@ -26,15 +26,13 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-eunuch'
-Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rhubarb' " vim-fugitive adapter for github
 " Plug 'tommcdo/vim-fubitive' " vim-fugitive adapter for bitbucket
+Plug 'tpope/vim-fugitive'
 Plug 'ap/vim-css-color', { 'for': ['css', 'sass', 'scss'] }
 Plug 'dominikduda/vim_current_word'
 Plug 'junegunn/goyo.vim', { 'for': ['markdown'] }
 if has('nvim-0.5')
-  " NOTE: treesitter brings problems with % matching for ruby
-  " stuff inside comments or 'it' tests are matched as if they were keywords
   Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
   Plug 'williamboman/mason.nvim'
   Plug 'williamboman/mason-lspconfig.nvim'
@@ -87,9 +85,15 @@ let g:buftabline_show=1
 let g:buftabline_numbers=1
 
 
-" ----- vim commentary -----
+" ----- commentary -----
 nmap <leader>c gcc
 vmap <leader>c gc
+
+
+" ----- current_word -----
+let g:vim_current_word#highlight_delay = 500
+hi CurrentWordTwins gui=underline cterm=underline
+" hi CurrentWord gui=underline cterm=underline
 
 
 " ----- fugitive.vim -----
@@ -134,13 +138,6 @@ let g:fzf_commits_log_options = '--color=always --format="%C(auto)%h%d %C(green)
 
 " ----- javascript libraries ------
 let g:used_javascript_libs = 'react'
-
-
-" ----- vim_current_word -----
-let g:vim_current_word#highlight_delay = 500
-hi CurrentWordTwins gui=underline cterm=underline
-" hi CurrentWord gui=underline cterm=underline
-
 
 
 " =================================
