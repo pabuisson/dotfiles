@@ -19,8 +19,8 @@ set statusline+=\%#Error#%{HasNoLinterErrorButHasWarnings()==1?LinterStatusText(
 set statusline+=\%#Pmenu#%{HasNoErrorAndNoWarnings()==1?LinterStatusText():''}
 " Reset color
 set statusline+=%#Pmenu#
-set statusline+=\ ⋮\ %.80f%{&modified?'\ [+]':''}
-set statusline+=\ ⋮\ %.20{GitInfo()}
+set statusline+=\ ⋮\ %.90f%{&modified?'\ [+]':''}
+set statusline+=\ ⋮\ %.50{GitInfo()}
 " switch to the right side
 set statusline+=%=
 set statusline+=\ %l/%L
@@ -77,9 +77,9 @@ function! HasNoLinterErrorButHasWarnings() abort
     return 0
   else
     if l:warnings == 0
-      return 1
-    else
       return 0
+    else
+      return 1
     endif
   endif
 endfunction
