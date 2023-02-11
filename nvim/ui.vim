@@ -10,23 +10,27 @@ if !has('nvim-0.5')
   finish
 endif
 
+" -- deus --
+set background=dark    " Setting dark mode
+color deus
 
-" -- everforest --
-set bg=dark
-let g:everforest_disable_italic_comment = 1
-let g:everforest_background = 'hard'
-" standard hard dark :
-" fg:  ['#d3c6aa', '223']
-" bg0: ['#2b3339',   '235'],
-let g:everforest_colors_override = {
-\ 'fg':  ['#d8d0c0', '223'],
-\ 'bg0': ['#202529', '235']
-\}
-color everforest
+" " -- everforest --
+" set bg=dark
+" let g:everforest_disable_italic_comment = 1
+" let g:everforest_background = 'hard'
+" " standard hard dark :
+" " fg:  ['#d3c6aa', '223']
+" " bg0: ['#2b3339',   '235'],
+" let g:everforest_colors_override = {
+" \ 'fg':  ['#d8d0c0', '223'],
+" \ 'bg0': ['#202529', '235']
+" \}
+" color everforest
 
 " " -- kanagawa --
 " lua << EOF
 " -- color palette: https://github.com/rebelot/kanagawa.nvim/blob/master/lua/kanagawa/colors.lua
+" vim.cmd("set bg=dark")
 " require('kanagawa').setup({
 "     undercurl = true,
 "     commentStyle = { italic = false },
