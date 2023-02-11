@@ -32,6 +32,8 @@ Plug 'tpope/vim-fugitive'
 Plug 'ap/vim-css-color', { 'for': ['css', 'sass', 'scss'] }
 Plug 'dominikduda/vim_current_word'
 Plug 'junegunn/goyo.vim', { 'for': ['markdown'] }
+Plug 'rhysd/conflict-marker.vim'
+
 if has('nvim-0.5')
   Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
   Plug 'williamboman/mason.nvim'
@@ -88,6 +90,14 @@ let g:buftabline_numbers=1
 " ----- commentary -----
 nmap <leader>c gcc
 vmap <leader>c gc
+
+
+"----- conflict-marker -----
+highlight ConflictMarkerBegin guibg=#2f7366
+highlight ConflictMarkerOurs guibg=#2e5049
+highlight ConflictMarkerTheirs guibg=#344f69
+highlight ConflictMarkerEnd guibg=#2f628e
+highlight ConflictMarkerCommonAncestorsHunk guibg=#754a81
 
 
 " ----- current_word -----
