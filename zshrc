@@ -9,16 +9,55 @@ fi
 
 # COMPLETION
 autoload -Uz compinit
+# Don't error or list possibilities on ambiguous pattern, but insert the 1st option, then the 2nd, etc
+# Without this, I'd need another <TAB> press to get this
+setopt MENU_COMPLETE
+# Highlights each suggestion one by one instead of just completing the prompt
+zstyle ':completion:*' menu select
+# Tries case insensitive option if case sensitive does not matche
+# And matching can occur on both side of the word (ie. in the middle of filenames)
+# source: https://zsh.sourceforge.io/Doc/Release/Completion-System.html
+# source: https://stackoverflow.com/a/22627273/85076
+zstyle ':completion:*' matcher-list '' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}' '+l:|=* r:|=*'
 compinit
 
-# Tries case insensitive option if case sensitive does not matche
-# source: https://zsh.sourceforge.io/Doc/Release/Completion-System.html
-zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}'
 
 # VIM MODE
 # https://dougblack.io/words/zsh-vi-mode.html
 export KEYTIMEOUT=1
 bindkey -v
+
+VI_NORMAL_MODE_CHAR='◼︎'
+VI_INSERT_MODE_CHAR='▶'
+PROMPT_CHAR=
+
+# Change cursor shape for different vi modes
+# And sets the PROMPT_CHAR variable accordingly
+function zle-keymap-select () {
+  case $KEYMAP in
+    vicmd)
+      echo -ne '\e[1 q' # block
+      PROMPT_CHAR="%F{grey}$VI_NORMAL_MODE_CHAR%f"
+      ;;
+    viins|main)
+      echo -ne '\e[5 q' # beam
+      PROMPT_CHAR="%F{yellow}$VI_INSERT_MODE_CHAR%f"
+      ;;
+  esac
+  zle reset-prompt
+}
+
+# initiate vi insert as keymap and display "beam" characters as cursor
+zle-line-init(){
+  zle -K viins
+  echo -ne "\e[5 q"
+}
+zle -N zle-line-init
+echo -ne '\e[5 q' # Use beam shape cursor on startup.
+preexec() { echo -ne '\e[5 q' ;} # Use beam shape cursor for new prompts
+
+zle -N zle-keymap-select
+
 
 # STACK OF VISITED DIRECTORIES
 setopt AUTO_PUSHD           # Push the current directory visited on the stack.
@@ -57,23 +96,8 @@ setopt PROMPT_SUBST
 NEWLINE=$'\n'
 # Number of background jobs if any - https://stackoverflow.com/a/10194174/85076
 BACKGROUND_JOBS='%(1j.%B%F{red}[%j] %f%b.)'
-
-VI_NORMAL_MODE_CHAR='◼︎'
-VI_INSERT_MODE_CHAR='▶'
-
-INVITE_CHAR=$VI_INSERT_MODE_CHAR
-function zle-keymap-select {
-  if [[ "${KEYMAP}" == 'vicmd' ]]; then
-    INVITE_CHAR="%F{magenta}$VI_NORMAL_MODE_CHAR%f"
-  else
-    INVITE_CHAR="%F{yellow}$VI_INSERT_MODE_CHAR%f"
-  fi
-  zle reset-prompt
-}
-zle -N zle-keymap-select
-
 # INVITE=insert_mode
-PS1='$NEWLINE$BACKGROUND_JOBS%F{cyan}%n%f@%F{blue}%1d%f%F{green}${vcs_info_msg_0_}%f ${INVITE_CHAR} '
+PS1='$NEWLINE$BACKGROUND_JOBS%F{cyan}%n%f@%F{blue}%1d%f%F{green}${vcs_info_msg_0_}%f ${PROMPT_CHAR} '
 
 
 # HISTORY
@@ -99,6 +123,9 @@ bindkey "^[[B" down-line-or-history
 setopt NO_NOMATCH
 
 
+# CD-ING
+# Typing a directory without "cd" does cd to the directory
+setopt AUTO_CD
 # ----- SOURCING MORE CONFIG FILES -----
 
 source "$HOME/.dotfiles/zsh/runtime.zsh"
@@ -108,4 +135,4 @@ source "$HOME/.dotfiles/zsh/dependencies.zsh"
 
 # ----- OTHER SETTINGS -----
 
-export BAT_THEME="OneHalfDark"
+export BAT_THEME="ansi"
