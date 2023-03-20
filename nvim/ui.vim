@@ -10,10 +10,6 @@ if !has('nvim-0.5')
   finish
 endif
 
-" -- deus --
-set background=dark    " Setting dark mode
-color deus
-
 " " -- everforest --
 " set bg=dark
 " let g:everforest_disable_italic_comment = 1
