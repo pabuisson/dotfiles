@@ -31,7 +31,6 @@ Plug 'tpope/vim-rhubarb' " vim-fugitive adapter for github
 Plug 'tpope/vim-fugitive'
 Plug 'ap/vim-css-color', { 'for': ['css', 'sass', 'scss'] }
 Plug 'dominikduda/vim_current_word'
-Plug 'junegunn/goyo.vim', { 'for': ['markdown'] }
 Plug 'rhysd/conflict-marker.vim'
 
 if has('nvim-0.5')
@@ -78,13 +77,6 @@ let g:ale_fixers = {
 \   'typescript': ['prettier'],
 \   'typescriptreact': ['prettier'],
 \}
-
-
-" ----- buftabline -----
-" Display only if there are 2 buffers
-let g:buftabline_show=1
-" Display vim inner buffer number
-let g:buftabline_numbers=1
 
 
 " ----- commentary -----
