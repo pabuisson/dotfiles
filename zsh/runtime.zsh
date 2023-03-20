@@ -36,3 +36,12 @@ then
   add-zsh-hook chpwd load-nvmrc
   load-nvmrc
 fi
+
+# ASDF versions manager
+if [[ -e /usr/local/opt/asdf/libexec/asdf.sh ]]
+then
+  source /usr/local/opt/asdf/libexec/asdf.sh
+else
+  echo "You might need to install asdf to handle versions"
+  echo "$ brew install asdf"
+fi

@@ -19,15 +19,6 @@ else
   echo "$ brew install z"
 fi
 
-# # ASDF versions manager
-# if [[ -e /usr/local/opt/asdf/asdf.sh ]]
-# then
-#   source /usr/local/opt/asdf/asdf.sh
-# else
-#   echo "You might need to install asdf to handle versions"
-#   echo "$ brew install asdf"
-# fi
-
 # if [[ -f ~/.fzf.zsh ]]
 # then
 #   source ~/.fzf.zsh
