@@ -74,6 +74,7 @@ let g:ale_fixers = {
 \   '*': ['remove_trailing_lines', 'trim_whitespace'],
 \   'ruby': ['syntax_tree', 'prettier', 'remove_trailing_lines', 'trim_whitespace'],
 \   'javascript': ['prettier'],
+\   'javascriptreact': ['prettier'],
 \   'typescript': ['prettier'],
 \   'typescriptreact': ['prettier'],
 \}
@@ -158,6 +159,7 @@ lua <<EOF
 require('lint').linters_by_ft = {
   ruby = {'rubocop'},
   javascript = {'eslint'},
+  javascriptreact = {'eslint'},
   typescript = {'eslint'},
   typescriptreact = {'eslint'}
 }
