@@ -6,6 +6,8 @@
 set termguicolors
 
 if !has('nvim-0.5')
+  let g:oceanic_next_terminal_bold = 1
+  let g:oceanic_next_terminal_italic = 1
   color OceanicNext
   finish
 endif
@@ -43,15 +45,6 @@ endif
 " })
 " vim.cmd('color kanagawa')
 " EOF
-
-" " -- oceanic-next --
-" let g:oceanic_next_terminal_bold = 1
-" let g:oceanic_next_terminal_italic = 1
-" color OceanicNext
-" " hi link BufTabLineCurrent PmenuSbar
-" hi link BufTabLineActive PmenuSbar
-" hi link BufTabLineHidden Pmenu
-" hi link BufTabLineFill StatusLine
 
 " " -- onedark --
 " lua << EOF
