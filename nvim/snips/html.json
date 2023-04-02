@@ -1,0 +1,21 @@
+{
+  "HTML": {
+    "prefix": "HTML",
+    "body": [
+       "<!DOCTYPE html>",
+       "<html lang='en'>",
+       "<head>",
+       "\t<meta charset='utf-8'>",
+       "\t<title>Title</title>",
+       "\t<meta name='viewport' content='width=device-width,initial-scale=1'>",
+       "\t<link rel='stylesheet' href=''>",
+       "\t<script src=''></script>",
+       "</head>",
+       "<body>",
+       "\t$1",
+       "</body>",
+       "</html>"
+    ],
+    "description": "HTML skeleton template"
+  }
+}

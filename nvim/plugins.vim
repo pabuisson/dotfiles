@@ -202,7 +202,13 @@ local on_attach = function(_, bufnr)
 end
 
 ----- cmp -----
+
+vim.cmd([[
+let g:vsnip_snippet_dir = expand("~/.config/nvim/snips")
+]])
+
 vim.opt.completeopt = {'menu', 'menuone', 'noselect'}
+
 local cmp = require('cmp')
 cmp.setup({
   formatting = {
