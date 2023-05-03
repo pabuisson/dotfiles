@@ -58,5 +58,5 @@ alias hs="bundle exec hanami server"
 alias hc="bundle exec hanami console"
 # DOCKER
 alias dc="docker compose"
-# FIXME: quotes escaping, I guess
-alias brewdeps="brew list | while read cask; do echo -n $fg[blue] $cask $fg[white]; brew deps $cask | awk '{printf(\" %s \", $0)}'; echo ''; done"
+# PACKAGES
+alias brewleaves="brew leaves --installed-on-request | xargs -n1 brew desc --eval-all"
