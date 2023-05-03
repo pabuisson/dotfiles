@@ -45,6 +45,7 @@ set sw=2
 set ts=2    "number of spaces a TAB char counts for (when encountered in a file)
 set sts=2   "number of spaces a TAB char counts for (when performing editing operations)
 set et      "always use spaces instead of tabs
+set shiftround  "always round indentation level to a multiple of the number of spaces
 " === LOAD/SAVE VIEWS ===
 set viewoptions=cursor
 augroup bufferloadsave
