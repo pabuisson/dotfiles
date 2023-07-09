@@ -102,11 +102,6 @@ EOF
 " let g:indentguides_conceal_color = 'ctermfg=151 ctermbg=NONE guifg=#c0c9c0 guibg=NONE'
 " let g:indentguides_specialkey_color = 'ctermfg=151 ctermbg=NONE guifg=#c0c9c0 guibg=NONE'
 
-" " -- github --
-" color github_light
-" let g:indentguides_conceal_color = 'ctermfg=151 ctermbg=NONE guifg=#c0c0c9 guibg=NONE'
-" let g:indentguides_specialkey_color = 'ctermfg=151 ctermbg=NONE guifg=#c0c0c9 guibg=NONE'
-
 " " -- onedark --
 " lua << EOF
 " vim.cmd("set bg=light")
