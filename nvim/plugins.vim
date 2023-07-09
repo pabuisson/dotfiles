@@ -4,12 +4,11 @@ call plug#begin('~/.config/nvim/plugged')
 " --- Color schemes ---
 Plug 'sainnhe/everforest'
 Plug 'mhartington/oceanic-next'
+Plug 'sainnhe/edge'
 
 if has('nvim-0.5')
   Plug 'navarasu/onedark.nvim'
   Plug 'rebelot/kanagawa.nvim'
-else
-  Plug 'joshdick/onedark.vim'
 endif
 " --- Filetype related ---
 Plug 'othree/javascript-libraries-syntax.vim'
