@@ -29,6 +29,7 @@ set nowrap          "don't wrap long lines
 set colorcolumn=120
 set cursorline      "highlight current line
 set foldcolumn=1    "always enable foldcolumn
+set foldlevel=99    "always have all folds open by default
 let g:netrw_list_hide= '\.DS_Store$, *\.scssc$, *\.sassc$, \.sass-cache\/'
 set ignorecase      "ignore case for search and such
 set smartcase       "don't ignore case if there's an uppercase letter in the pattern
@@ -74,6 +75,8 @@ augroup configgroup
   au FileType ruby ab logmethod puts(__method__.to_s.center(50, '-'))
   au FileType ruby iabbr bdp binding.pry
   au FileType ruby iabbr mlog puts __method__.to_s.center(40, '-')
+  let ruby_foldable_groups = 'class module def'
+  let ruby_fold = 1
 
   " Other custom settings
   au FileType crystal   set sw=2 ts=2 sts=2 et wrap
