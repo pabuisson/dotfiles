@@ -27,9 +27,12 @@ alias gra='git rebase --abort'
 alias gst='git st'
 # Single quotes needed here, or what's inside subcommands get evaluated everytime (even when
 # initializing the shell and reading those aliases, which gives me errors 'not in a git repo')
-alias gitconflict='$EDITOR $(git status | grep both | cut -d ':' -f 2 | xargs)'
-alias giteditedfrommaster='$EDITOR $(git diff --name-only origin/master... | xargs)'
-alias giteditedfromlast='$EDITOR $(git diff --name-only head | xargs)'
+# NOTE: https://git-scm.com/docs/git-diff#Documentation/git-diff.txt---diff-filterACDMRTUXB82308203
+# TODO: remove the old alias once the new one is tested
+# alias gitconflict='$EDITOR $(git status | grep both | cut -d ':' -f 2 | xargs)'
+alias gitconflict='$EDITOR $(git diff --name-only --diff-filter=U origin/master... | xargs)'
+alias gitfrommaster='$EDITOR $(git diff --name-only --diff-filter=ACMRT origin/master... | xargs)'
+alias gitfromlast='$EDITOR $(git diff --name-only --diff-filter=ACMRT head | xargs)'
 alias gitdifffrommaster='git diff $(git merge-base head origin/master)'
 # Churn sur les 6 derniers mois (nombre de commits par fichier)
 alias gitchurn="git log --all -M -C --name-only --format='format:' $@ --since='6 months ago' | sort | grep -v '^$' | uniq -c | sort -n | tail -10"
