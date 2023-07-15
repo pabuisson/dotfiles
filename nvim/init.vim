@@ -71,10 +71,12 @@ augroup configgroup
   au FileType ruby match ErrorMsg /binding\.pry\|pry\|byebug\|debugger/
 
   " Custom abbreviation for certain filetypes
-  au FileType ruby ab fsl # frozen_string_literal: true
-  au FileType ruby ab logmethod puts(__method__.to_s.center(50, '-'))
-  au FileType ruby iabbr bdp binding.pry
-  au FileType ruby iabbr mlog puts __method__.to_s.center(40, '-')
+  au FileType ruby abbr fsl # frozen_string_literal: true
+  au FileType ruby abbr logmethod puts(__method__.to_s.center(50, '-'))
+  au FileType ruby iabbr <buffer> bdp binding.pry
+  au FileType ruby iabbr <buffer> mlog puts __method__.to_s.center(40, '-')
+  au FileType ruby iabbr <buffer> itdo it "" doend<esc>k0f"a
+  au FileType ruby iabbr <buffer> descdo describe "" doend<esc>k0f"a
   let ruby_foldable_groups = 'class module def'
   let ruby_fold = 1
 
