@@ -38,7 +38,7 @@ nnoremap <leader>bwa :%bw!<CR>
 " Buffer delete to the right/left
 nnoremap <leader>bdr :.,$bd!<CR>
 nnoremap <leader>bdl :1,.-bd!<CR>
-" TODO: buffer delete all but current one
+" TODO: buffer delete other: delete all but current one
 
 " Vim specific buffer cycle behaviour
 nnoremap <C-l> :bn<CR>

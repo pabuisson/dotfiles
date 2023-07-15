@@ -9,11 +9,11 @@ set statusline+=%#DiffText#%{(mode()=='r')?'\ \ R\ ':''}
 set statusline+=%#Cursor#%{IsVisual()?'\ \ V\ ':''}
 " Reset color
 set statusline+=%#Pmenu#
-set statusline+=\ ⋮%{UnbreakableSpace()}
+set statusline+=\ ⋮%{Nbsp()}
 " TODO: what's a cleaner way to apply conditional color?
 set statusline+=%#Error#%{LspActiveClients()==0?LspActiveClientsIndicator():''}
 set statusline+=%#Pmenu#%{LspActiveClients()>0?LspActiveClientsIndicator():''}
-set statusline+=%{UnbreakableSpace()}
+set statusline+=%{Nbsp()}
 set statusline+=⋮\ %#Error#%{HasLinterErrors()==1?LinterStatusText():''}
 set statusline+=\%#Error#%{HasNoLinterErrorButHasWarnings()==1?LinterStatusText():''}
 set statusline+=\%#Pmenu#%{HasNoErrorAndNoWarnings()==1?LinterStatusText():''}
@@ -25,9 +25,9 @@ set statusline+=\ ⋮\ %.50{GitInfo()}
 set statusline+=%=
 set statusline+=\ %l/%L
 set statusline+=\ ⋮\ %2p%%
-set statusline+=%{UnbreakableSpace()}
+set statusline+=%{Nbsp()}
 
-function! UnbreakableSpace()
+function! Nbsp()
   return ' '
 endfunction
 
