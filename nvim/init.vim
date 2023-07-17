@@ -12,6 +12,8 @@ source $HOME/.config/nvim/plugins.vim
 source $HOME/.config/nvim/ui.vim
 source $HOME/.config/nvim/functions.vim
 
+luafile $HOME/.config/nvim/lua/yaml_lua.lua
+
 
 " ================
 " === SETTINGS ===
