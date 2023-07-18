@@ -41,6 +41,7 @@ if has('nvim-0.5')
 
   Plug 'lewis6991/gitsigns.nvim'
   Plug 'petertriho/nvim-scrollbar'
+  Plug 'phaazon/hop.nvim'
 
   " -- nvim-cmp --
   Plug 'hrsh7th/cmp-nvim-lsp'
@@ -152,6 +153,13 @@ end
 
 
 lua <<EOF
+-- ----- hop -----
+require('hop').setup()
+vim.cmd([[
+nnoremap <leader>hh :HopWord<CR>
+]])
+
+
 -- ----- lint -----
 -- Solution to use external linters through the native LSP diagnostics
 -- Alternative (more complete): https://github.com/jose-elias-alvarez/null-ls.nvim
