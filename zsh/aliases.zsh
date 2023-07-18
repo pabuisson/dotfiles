@@ -30,7 +30,7 @@ alias gst='git st'
 # NOTE: https://git-scm.com/docs/git-diff#Documentation/git-diff.txt---diff-filterACDMRTUXB82308203
 # TODO: remove the old alias once the new one is tested
 # alias gitconflict='$EDITOR $(git status | grep both | cut -d ':' -f 2 | xargs)'
-alias gitconflict='$EDITOR $(git diff --name-only --diff-filter=U origin/master... | xargs)'
+alias gitconflict='$EDITOR $(git diff --name-only --diff-filter=U | xargs)'
 alias gitfrommaster='$EDITOR $(git diff --name-only --diff-filter=ACMRT origin/master... | xargs)'
 alias gitfromlast='$EDITOR $(git diff --name-only --diff-filter=ACMRT head | xargs)'
 alias gitdifffrommaster='git diff $(git merge-base head origin/master)'
