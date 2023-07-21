@@ -15,6 +15,7 @@ alias monip="ifconfig | grep 192 | cut -d' ' -f2"
 # GIT
 alias git='LANG=en_GB git'
 alias g='git'
+alias gap='git add -p'
 alias gd='git diff'
 alias gf='git fetch -p'
 alias gp='git pull -p'
