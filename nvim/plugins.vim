@@ -112,24 +112,25 @@ nnoremap <leader>gb  :Git blame<CR>
 " ---
 " Search with ripgrep for the word under the cursor
 " Source: https://coffeeandcontemplation.dev/2020/11/13/fuzzy-finding-in-vim/
-command! -bang -nargs=* RgCurrentWordExact
+command! -bang -nargs=* RgWordExact
   \ call fzf#vim#grep(
   \   'rg -F -w --column --line-number --no-heading --color=always -- '.shellescape(<q-args>), 1,
   \   fzf#vim#with_preview(), <bang>0)
 
-command! -bang -nargs=* RgCurrentWord
+command! -bang -nargs=* RgWord
   \ call fzf#vim#grep(
   \   'rg -F --column --line-number --no-heading --color=always -- '.shellescape(<q-args>), 1,
   \   fzf#vim#with_preview(), <bang>0)
 
-nnoremap <leader>fw :execute 'RgCurrentWord '.expand('<cword>')<CR>
-nnoremap <leader>fW :execute 'RgCurrentWordExact '.expand('<cword>')<CR>
+nnoremap <leader>fw :execute 'RgWord '.expand('<cword>')<CR>
+nnoremap <leader>fW :execute 'RgWordExact '.expand('<cword>')<CR>
 nnoremap <leader>ff :Files<CR>
 nnoremap <leader>fb :Buffers<CR>
 nnoremap <leader>fc :BCommits<CR>
 nnoremap <leader>fl :Lines<CR>
 nnoremap <leader>fo :BLines<CR>
 ca rg Rg
+ca rgw RgWordExact
 
 " Enable per-command history.
 " CTRL-N and CTRL-P will be automatically bound to next-history and
@@ -156,7 +157,7 @@ lua <<EOF
 -- ----- hop -----
 require('hop').setup()
 vim.cmd([[
-nnoremap <leader>hh :HopWord<CR>
+nnoremap <leader>h :HopWord<CR>
 ]])
 
 
