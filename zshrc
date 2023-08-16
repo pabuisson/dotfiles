@@ -95,9 +95,10 @@ setopt PROMPT_SUBST
 # %B starts bold, %b stops it
 NEWLINE=$'\n'
 # Number of background jobs if any - https://stackoverflow.com/a/10194174/85076
-BACKGROUND_JOBS='%(1j.%B%F{red}[%j] %f%b.)'
+BACKGROUND_JOBS='%(1j.%F{red}[%j] %f.)'
 # INVITE=insert_mode
-PS1='$NEWLINE$BACKGROUND_JOBS%F{cyan}%n%f@%F{blue}%1d%f%F{green}${vcs_info_msg_0_}%f ${PROMPT_CHAR} '
+PS1='$NEWLINE%B$BACKGROUND_JOBS%F{cyan}%n%f@%F{blue}%1d%f%F{green}${vcs_info_msg_0_}%f%b ${PROMPT_CHAR} '
+
 
 
 # HISTORY
