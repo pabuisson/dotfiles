@@ -53,6 +53,10 @@ augroup END
 augroup configgroup
   autocmd!
 
+  " Disable editorconfig for yaml file, for work
+  " (otherwise it messes up the whitespaces in yaml files)
+  au BufRead,BufNewFile *.yml let b:editorconfig = v:false
+
   " Specific filetype settings
   " FIXME: these don't work. the ft is still not set correctly
   " au BufRead,BufNewFile *.slim set ft=slim
