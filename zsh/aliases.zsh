@@ -32,9 +32,9 @@ alias gst='git st'
 # TODO: remove the old alias once the new one is tested
 # alias gitconflict='$EDITOR $(git status | grep both | cut -d ':' -f 2 | xargs)'
 alias gitconflict='$EDITOR $(git diff --name-only --diff-filter=U | xargs)'
-alias gitfrommaster='$EDITOR $(git diff --name-only --diff-filter=ACMRT origin/master... | xargs)'
-alias gitfromlast='$EDITOR $(git diff --name-only --diff-filter=ACMRT head | xargs)'
-alias gitdifffrommaster='git diff $(git merge-base head origin/master)'
+alias gfm='$EDITOR $(git diff --name-only --diff-filter=ACMRT origin/master... | xargs)'
+alias gfl='$EDITOR $(git diff --name-only --diff-filter=ACMRT head | xargs)'
+alias gdm='git diff $(git merge-base head origin/master)'
 # Churn sur les 6 derniers mois (nombre de commits par fichier)
 alias gitchurn="git log --all -M -C --name-only --format='format:' $@ --since='6 months ago' | sort | grep -v '^$' | uniq -c | sort -n | tail -10"
 # Get short SHA1 of HEAD in clipboard
