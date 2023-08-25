@@ -17,26 +17,20 @@ source $HOME/.config/nvim/functions.vim
 " === SETTINGS ===
 " ================
 
-set mouse=a         "enable mouse for all modes
 set nu              "display line numbers
 set nobackup        "don't write backup files
 set noswapfile      "don't write swap files (careful, all text will be in memory !)
-set hidden          "buffer behavior (allow to switch to other buffer even if current has been modified)
 set autowrite       "auto write to buffer when switching
-set vb              "visual bell instead of audio
 set linebreak       "don't cut words at the end of lines
 set nowrap          "don't wrap long lines
 set colorcolumn=120
 set cursorline      "highlight current line
-set foldcolumn=1    "always enable foldcolumn
-set foldlevel=99    "always have all folds open by default
 let g:netrw_list_hide= '\.DS_Store$, *\.scssc$, *\.sassc$, \.sass-cache\/'
 set ignorecase      "ignore case for search and such
 set smartcase       "don't ignore case if there's an uppercase letter in the pattern
 set scrolloff=4     "displays at least 4 lines around the cursor even when top/bottom of screen
 set clipboard+=unnamed
 set showmatch       "show matching parenthese
-set lazyredraw      "redraw only when we need to (especially on macros, registers and such)
 " === HIDDEN/NON VISIBLE CHARS ===
 set list
 set listchars=tab:▸\ ,eol:¬
@@ -50,20 +44,20 @@ set shiftround  "always round indentation level to a multiple of the number of s
 " === LOAD/SAVE VIEWS ===
 set viewoptions=cursor
 augroup bufferloadsave
-  au!
+  autocmd!
   au BufWinLeave *.* mkview!
   au BufWinEnter *.* silent! loadview
 augroup END
 
 
-" Ensures the autocmds are only applied once.
 augroup configgroup
   autocmd!
 
   " Specific filetype settings
-  au BufRead,BufNewFile *.slim set ft=slim
-  au BufRead,BufNewFile *.haml set ft=haml
-  au BufRead,BufNewFile *.yml set ft=yaml
+  " FIXME: these don't work. the ft is still not set correctly
+  " au BufRead,BufNewFile *.slim set ft=slim
+  " au BufRead,BufNewFile *.haml set ft=haml
+  " au BufRead,BufNewFile *.yml set ft=yaml
 
   " Custom highlightings
   " So that all assert matchers are highlighted as keywords
@@ -77,8 +71,6 @@ augroup configgroup
   au FileType ruby iabbr <buffer> mlog puts __method__.to_s.center(40, '-')
   au FileType ruby iabbr <buffer> itdo it "" doend<esc>k0f"a
   au FileType ruby iabbr <buffer> descdo describe "" doend<esc>k0f"a
-  let ruby_foldable_groups = 'class module def'
-  let ruby_fold = 1
 
   " Other custom settings
   au FileType crystal   set sw=2 ts=2 sts=2 et wrap
