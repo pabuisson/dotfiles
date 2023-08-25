@@ -70,6 +70,8 @@ let g:ale_linters = {}
 
 let g:ale_fix_on_save = 1
 let g:ale_ruby_syntax_tree_executable = 'bundle'
+" TODO: trailing lines and whitespace could be done natively using
+" a editorconfig file
 let g:ale_fixers = {
 \   '*': ['remove_trailing_lines', 'trim_whitespace'],
 \   'ruby': ['syntax_tree', 'prettier', 'remove_trailing_lines', 'trim_whitespace'],
@@ -157,7 +159,7 @@ lua <<EOF
 -- ----- hop -----
 require('hop').setup()
 vim.cmd([[
-nnoremap <leader>h :HopWord<CR>
+nnoremap <leader>w :HopWord<CR>
 ]])
 
 
@@ -173,7 +175,7 @@ require('lint').linters_by_ft = {
 }
 
 -- Autocmd to trigger linting
-vim.api.nvim_create_autocmd({ "BufReadPost", "BufWritePost" }, {
+vim.api.nvim_create_autocmd({ "BufWritePost" }, {
   callback = function()
     require("lint").try_lint()
   end,
@@ -181,7 +183,6 @@ vim.api.nvim_create_autocmd({ "BufReadPost", "BufWritePost" }, {
 
 -- ----- mason, mason-lspconfig & lspconfig -----
 require("mason").setup()
-
 require("mason-lspconfig").setup({
   -- automatically install language servers setup below for lspconfig
   automatic_installation = true
@@ -209,7 +210,7 @@ local on_attach = function(_, bufnr)
   -- vim.keymap.set('n', '<leader>f', function() vim.lsp.buf.format { async = true } end, bufopts)
 end
 
------ cmp -----
+-- ----- cmp -----
 
 vim.cmd([[
 let g:vsnip_snippet_dir = expand("~/.config/nvim/snips")
@@ -222,10 +223,10 @@ cmp.setup({
   formatting = {
     format = function(entry, vim_item)
       vim_item.menu = ({
-        buffer = "[Buffer]",
+        buffer = "[BFR]",
         nvim_lsp = "[LSP]",
-        luasnip = "[Snip]",
-        nvim_lua = "[Lua]",
+        luasnip = "[SNP]",
+        nvim_lua = "[LUA]",
       })[entry.source.name]
       return vim_item
     end
@@ -262,21 +263,22 @@ cmp.setup.cmdline(':', {
 
 -- Setup lspconfig.
 -- The nvim-cmp almost supports LSP's capabilities so You should advertise it to LSP servers..
--- local capabilities = require('cmp_nvim_lsp').default_capabilities()
+local capabilities = require('cmp_nvim_lsp').default_capabilities()
 local lspconfig = require('lspconfig')
 lspconfig.tsserver.setup {
---   -- capabilities = capabilities,
+  capabilities = capabilities,
   on_attach = on_attach
 }
 lspconfig.solargraph.setup {
---   -- capabilities = capabilities,
+  capabilities = capabilities,
   on_attach = on_attach,
   cmd = { "bundle", "exec", "solargraph", "stdio" }
 }
 
-
 -- ----- gitsigns -----
-require('gitsigns').setup()
+require('gitsigns').setup({
+  current_line_blame = true
+})
 
 -- ----- scrollbar -----
 require('scrollbar.handlers.gitsigns').setup()
