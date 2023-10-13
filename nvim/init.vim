@@ -34,7 +34,6 @@ set showmatch       "show matching parenthese
 " === HIDDEN/NON VISIBLE CHARS ===
 set list
 set listchars=tab:▸\ ,eol:¬
-match Error /\%o240/   "associate non-unicode space with the Error class
 " === INDENTATION ===
 set sw=2
 set ts=2    "number of spaces a TAB char counts for (when encountered in a file)
@@ -81,6 +80,7 @@ augroup configgroup
   au FileType gitcommit set tw=85
   au FileType markdown  set sw=4 ts=4 sts=4 et wrap
   au FileType markdown  set conceallevel=0
+  au FileType json set conceallevel=0
 
   " Removes all autocommands on commit messages (au!) + set cursor position on the first char
   au FileType gitcommit au! BufEnter COMMIT_EDITMSG call setpos('.', [0, 1, 1, 0])

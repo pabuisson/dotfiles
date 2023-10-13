@@ -4,7 +4,6 @@ call plug#begin('~/.config/nvim/plugged')
 " --- Color schemes ---
 Plug 'sainnhe/everforest'
 Plug 'mhartington/oceanic-next'
-Plug 'sainnhe/edge'
 
 if has('nvim-0.5')
   Plug 'navarasu/onedark.nvim'
@@ -41,6 +40,7 @@ if has('nvim-0.5')
 
   Plug 'lewis6991/gitsigns.nvim'
   Plug 'petertriho/nvim-scrollbar'
+  " NOTE: 202309 -> deprecated
   Plug 'phaazon/hop.nvim'
 
   " -- nvim-cmp --
