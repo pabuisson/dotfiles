@@ -10,8 +10,6 @@ if has('nvim-0.5')
   Plug 'rebelot/kanagawa.nvim'
 endif
 " --- Filetype related ---
-Plug 'othree/javascript-libraries-syntax.vim'
-Plug 'sheerun/vim-polyglot'
 Plug 'gabrielelana/vim-markdown', { 'for': 'markdown' }
 Plug 'junegunn/goyo.vim', { 'for': 'markdown' }
 " --- Plugins ---
@@ -27,7 +25,6 @@ Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-rhubarb' " vim-fugitive adapter for github
 " Plug 'tommcdo/vim-fubitive' " vim-fugitive adapter for bitbucket
 Plug 'tpope/vim-fugitive'
-Plug 'ap/vim-css-color', { 'for': ['css', 'sass', 'scss'] }
 Plug 'dominikduda/vim_current_word'
 Plug 'rhysd/conflict-marker.vim'
 
@@ -142,10 +139,6 @@ let g:fzf_history_dir = '~/.local/share/fzf-history'
 let g:fzf_commits_log_options = '--color=always --format="%C(auto)%h%d %C(green)%as %C(cyan)%an :: %C(reset)%s"'
 
 
-" ----- javascript libraries ------
-let g:used_javascript_libs = 'react'
-
-
 " =================================
 "       NVIM 0.5.0 SPECIFIC
 " =================================
@@ -196,6 +189,7 @@ local on_attach = function(_, bufnr)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
 
   vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>dl', '<cmd>lua vim.diagnostic.setloclist()<CR>', opts)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>dd', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
@@ -203,7 +197,6 @@ local on_attach = function(_, bufnr)
   -- local bufopts = { noremap=true, silent=true, buffer=bufnr }
   -- vim.keymap.set('n', 'gD', vim.lsp.buf.definition, bufopts)
   -- vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
-  -- vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, bufopts)
   -- vim.keymap.set('n', '<space>D', vim.lsp.buf.type_definition, bufopts)
   -- vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, bufopts)
   -- vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, bufopts)
@@ -276,16 +269,14 @@ lspconfig.solargraph.setup {
 }
 
 -- ----- gitsigns -----
-require('gitsigns').setup({
-  current_line_blame = true
-})
+require('gitsigns').setup()
 
 -- ----- scrollbar -----
 require('scrollbar.handlers.gitsigns').setup()
 require('scrollbar').setup()
 
 -- ----- treesitter -----
-require('nvim-treesitter.configs').setup {
-  ensure_installed = { "javascript", "ruby", "elixir", "markdown", "comment" },
-}
+require('nvim-treesitter.configs').setup({
+  ensure_installed = { "javascript", "ruby", "elixir", "markdown", "comment" }
+})
 EOF
