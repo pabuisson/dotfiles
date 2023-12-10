@@ -29,8 +29,6 @@ nnoremap <leader>yp :let @+ = systemlist("git ls-files ".expand("%:p"))[0]<CR>
 " Copy the current filename + :line from the git repo root : yank line
 " TODO: what if the command returns nothing? handle this case
 nnoremap <leader>yl :let @+ = systemlist("git ls-files ".expand("%:p"))[0].":".line(".")<CR>
-" Copy whole file: yank inner file
-nnoremap <leader>yif ggVGy
 
 " All buffers delete/wipe
 nnoremap <leader>bda :%bd!<CR>
