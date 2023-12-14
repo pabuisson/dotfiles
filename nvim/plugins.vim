@@ -93,10 +93,22 @@ highlight ConflictMarkerCommonAncestorsHunk guibg=#754a81
 
 
 " ----- current_word -----
-let g:vim_current_word#highlight_delay = 500
-hi CurrentWordTwins gui=underline cterm=underline
-" hi CurrentWord gui=underline cterm=underline
+let g:vim_current_word#highlight_delay = 800
+hi CurrentWord gui=bold,underline cterm=bold,underline
+hi CurrentWordTwins gui=standout cterm=standout
 
+" " NOTE: below is the native way of doing this, but I couldn't get it to work
+" " yet. Will need to dive deeper into this, maybe I can get rid of a plugin
+" source: https://chaos.social/@scy/111570077753908537
+"
+" set updatetime=1000
+" " TODO: trigger document_highlight only if the LSP server supports this
+" autocmd CursorHold  <buffer> lua vim.lsp.buf.document_highlight()
+" autocmd CursorHoldI <buffer> lua vim.lsp.buf.document_highlight()
+" " NOTE: shouldn't we do that for CursorMovedI too?
+" autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
+" highlight LspReferenceRead  guibg=#d20000
+" highlight LspReferenceWrite guibg=#d20000
 
 " ----- fugitive.vim -----
 nnoremap <leader>gst :Git<CR>
