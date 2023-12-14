@@ -58,8 +58,6 @@ matches:
 
   # Misc
 
-  - trigger: "nrfields"
-    replace: "timestamp, ssid, account_id, http.statusCode, request.method, name, path,request.headers.contentType, request.headers.contentLength"
 
   - trigger: "hl1"
     replace: "HEADLESS=1 "
@@ -85,7 +83,6 @@ matches:
         type: shell
         params:
           cmd: "tr 'N-ZA-Mn-za-m' 'A-Za-z' <<< 'tvguho.pbz/qbpgbyvo/qbpgbyvo'"
-
 
   # Obsidian
 
