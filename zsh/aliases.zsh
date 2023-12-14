@@ -52,6 +52,8 @@ alias rdbm="bundle exec rails db:migrate"
 alias rdbr="bundle exec rails db:rollback"
 alias rdbs="bundle exec rails db:seed"
 alias bd="bin/dev"
+# JAVASCRIPT
+alias nrt="npm run test"
 # RSPEC
 alias rsa="bundle exec rspec"
 alias rss="bundle exec rspec spec/serializers"
