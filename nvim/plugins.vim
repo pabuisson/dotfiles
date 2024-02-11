@@ -36,7 +36,16 @@ if has('nvim-0.5')
   Plug 'mfussenegger/nvim-lint'
 
   Plug 'lewis6991/gitsigns.nvim'
-  Plug 'petertriho/nvim-scrollbar'
+
+  Plug 'nvim-lua/plenary.nvim'
+  Plug 'folke/todo-comments.nvim'
+
+  if has('nvim-0.10')
+    Plug 'lewis6991/satellite.nvim'
+  else
+    Plug 'petertriho/nvim-scrollbar'
+  endif
+
   " NOTE: 202309 -> deprecated
   Plug 'phaazon/hop.nvim'
 
@@ -189,7 +198,6 @@ vim.api.nvim_create_autocmd({ "BufWritePost" }, {
 -- ----- mason, mason-lspconfig & lspconfig -----
 require("mason").setup()
 require("mason-lspconfig").setup({
-  -- automatically install language servers setup below for lspconfig
   automatic_installation = true
 })
 
@@ -228,7 +236,7 @@ cmp.setup({
   formatting = {
     format = function(entry, vim_item)
       vim_item.menu = ({
-        buffer = "[BFR]",
+        buffer = "[BUF]",
         nvim_lsp = "[LSP]",
         luasnip = "[SNP]",
         nvim_lua = "[LUA]",
@@ -283,12 +291,37 @@ lspconfig.solargraph.setup {
 -- ----- gitsigns -----
 require('gitsigns').setup()
 
--- ----- scrollbar -----
-require('scrollbar.handlers.gitsigns').setup()
-require('scrollbar').setup()
-
 -- ----- treesitter -----
 require('nvim-treesitter.configs').setup({
   ensure_installed = { "javascript", "ruby", "elixir", "markdown", "comment" }
 })
+
+if vim.fn.has('nvim-0.10') == 1 then
+  -- ----- satellite -----
+  require('satellite').setup({
+    width = 2,
+    handlers = {
+      cursor = {
+        enable = true,
+      },
+      search = {
+        enable = true,
+      },
+      diagnostic = {
+        enable = true,
+      },
+      gitsigns = {
+        enable = true,
+      },
+    },
+  })
+else
+  -- ----- scrollbar -----
+  require('scrollbar.handlers.gitsigns').setup()
+  require('scrollbar').setup()
+end
+
+-- ----- todo-comments -----
+require("todo-comments").setup({})
+
 EOF
