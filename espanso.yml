@@ -20,17 +20,19 @@ matches:
     replace: "{{output}}"
     vars:
       - name: output
-        type: shell
+        type: date
         params:
-          cmd: "date -v-1d +%Y%m%d"
+          format: "%Y%m%d"
+          offset: -86400
 
   - trigger: ":tomiso"
     replace: "{{output}}"
     vars:
       - name: output
-        type: shell
+        type: date
         params:
-          cmd: "date -v+1d +%Y%m%d"
+          format: "%Y%m%d"
+          offset: 86400
 
   - trigger: ":timeiso"
     replace: "{{output}}"
@@ -52,12 +54,12 @@ matches:
     replace: "{{output}}"
     vars:
       - name: output
-        type: shell
+        type: date
         params:
-          cmd: "export LANG=fr_FR.UTF-8 && date +%A %d %B %Y"
+          format: "+%A %d %B %Y"
+          locale: "fr-FR"
 
   # Misc
-
 
   - trigger: "hl1"
     replace: "HEADLESS=1 "
