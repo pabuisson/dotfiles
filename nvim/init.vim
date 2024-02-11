@@ -48,8 +48,7 @@ augroup bufferloadsave
   au BufWinEnter *.* silent! loadview
 augroup END
 
-
-augroup configgroup
+augroup ftgroup
   autocmd!
 
   " Disable editorconfig for yaml file, for work
@@ -79,8 +78,6 @@ augroup configgroup
   au FileType crystal   set sw=2 ts=2 sts=2 et wrap
   au FileType gitcommit set tw=85
   au FileType markdown  set sw=4 ts=4 sts=4 et wrap
-  au FileType markdown  set conceallevel=0
-  au FileType json set conceallevel=0
 
   " Removes all autocommands on commit messages (au!) + set cursor position on the first char
   au FileType gitcommit au! BufEnter COMMIT_EDITMSG call setpos('.', [0, 1, 1, 0])

@@ -79,24 +79,24 @@ com! FormatJSON %!python -m json.tool
 " https://vi.stackexchange.com/a/13519/7021
 
 function! YAMLTree()
-    let l:list = []
-    let l:cur = getcurpos()[1]
-    " Retrieve the current line indentation
-    let l:indent = indent(l:cur) + 1
-    " Loop from the cursor position to the top of the file
-    for l:n in reverse(range(1, l:cur))
-        let l:i = indent(l:n)
-        let l:line = getline(l:n)
-        let l:key = substitute(l:line, '^\s*\(\<\w\+\>\):.*', "\\1", '')
-        " If the indentation decreased and the pattern matched
-        if (l:i < l:indent && l:key !=# l:line)
-            let l:list = add(l:list, l:key)
-            let l:indent = l:i
-        endif
-    endfor
-    let l:list = reverse(l:list)
-    let @+ = join(l:list, '.')
-    echo join(l:list, '.')
+  let l:list = []
+  let l:cur = getcurpos()[1]
+  " Retrieve the current line indentation
+  let l:indent = indent(l:cur) + 1
+  " Loop from the cursor position to the top of the file
+  for l:n in reverse(range(1, l:cur))
+      let l:i = indent(l:n)
+      let l:line = getline(l:n)
+      let l:key = substitute(l:line, '^\s*\(\<\w\+\>\):.*', "\\1", '')
+      " If the indentation decreased and the pattern matched
+      if (l:i < l:indent && l:key !=# l:line)
+          let l:list = add(l:list, l:key)
+          let l:indent = l:i
+      endif
+  endfor
+  let l:list = reverse(l:list)
+  let @+ = join(l:list, '.')
+  echo join(l:list, '.')
 endfunction
 
 nnoremap <leader>yml :call YAMLTree()<CR>
