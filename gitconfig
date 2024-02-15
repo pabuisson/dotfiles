@@ -33,7 +33,7 @@
   default = simple
   autoSetupRemote = true
 [interactive]
-  diffFilter = delta
+  diffFilter = delta --color-only
 [delta]
   navigate = true
   ; light = true
