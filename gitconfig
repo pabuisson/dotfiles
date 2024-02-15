@@ -14,12 +14,12 @@
   pp = pull -p
   sw = switch
 [user]
-  name = Pierre-Adrien
+  name = Pierre-Adrien Buisson
   email = pabuisson@gmail.com
 [core]
   editor = nvim
   excludesfile = /Users/pabuisson/.gitignore_global
-  pager = delta
+  pager = delta --keep-plus-minus-markers
 [color]
   ui = true
 [log]
@@ -33,7 +33,7 @@
   default = simple
   autoSetupRemote = true
 [interactive]
-  diffFilter = delta --color-only
+  diffFilter = delta --keep-plus-minus-markers
 [delta]
   navigate = true
   ; light = true
