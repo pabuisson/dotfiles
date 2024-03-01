@@ -88,6 +88,22 @@ matches:
           shell: sh
           cmd: "tr 'N-ZA-Mn-za-m' 'A-Za-z' <<< 'tvguho.pbz/qbpgbyvo/qbpgbyvo'"
 
+  # Progress bars
+
+  - trigger: "pg00"
+    replace: "□□□□□"
+  - trigger: "pg20"
+    replace: "■□□□□"
+  - trigger: "pg40"
+    replace: "■■□□□"
+  - trigger: "pg60"
+    replace: "■■■□□"
+  - trigger: "pg80"
+    replace: "■■■■□"
+  - trigger: "pg100"
+    replace: "■■■■■"
+
+
   # Obsidian
 
   - trigger: ":ddtod"
