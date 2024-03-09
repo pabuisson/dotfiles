@@ -32,8 +32,10 @@ set scrolloff=4     "displays at least 4 lines around the cursor even when top/b
 set clipboard+=unnamed
 set showmatch       "show matching parenthese
 " === HIDDEN/NON VISIBLE CHARS ===
+" multispace option allows to emulate indent lines without needing a dedicated plugin
+" source: https://github.com/thaerkh/vim-indentguides
 set list
-set listchars=tab:▸\ ,eol:¬
+autocmd OptionSet shiftwidth execute 'setlocal listchars=tab:▸\ ,eol:·,tab:│\ ,multispace:┆' . repeat('\ ', &sw - 1)
 " === INDENTATION ===
 set sw=2
 set ts=2    "number of spaces a TAB char counts for (when encountered in a file)
