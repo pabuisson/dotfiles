@@ -6,8 +6,8 @@ Plug 'sainnhe/everforest'
 Plug 'mhartington/oceanic-next'
 
 if has('nvim-0.5')
-  Plug 'navarasu/onedark.nvim'
   Plug 'rebelot/kanagawa.nvim'
+  Plug 'navarasu/onedark.nvim'
 endif
 " --- Filetype related ---
 Plug 'gabrielelana/vim-markdown', { 'for': 'markdown' }
@@ -117,6 +117,7 @@ hi CurrentWordTwins gui=standout cterm=standout
 " autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
 " highlight LspReferenceRead  guibg=#d20000
 " highlight LspReferenceWrite guibg=#d20000
+
 
 " ----- fugitive.vim -----
 nnoremap <leader>gst :Git<CR>
@@ -281,19 +282,20 @@ lspconfig.tsserver.setup {
   capabilities = capabilities,
   on_attach = on_attach
 }
-lspconfig.solargraph.setup {
+lspconfig.ruby_ls.setup {
   capabilities = capabilities,
   on_attach = on_attach,
-  cmd = { "bundle", "exec", "solargraph", "stdio" }
 }
 
 -- ----- gitsigns -----
 require('gitsigns').setup()
 
+
 -- ----- treesitter -----
 require('nvim-treesitter.configs').setup({
-  ensure_installed = { "javascript", "ruby", "elixir", "markdown", "comment" }
+  ensure_installed = { "javascript", "ruby", "elixir", "markdown" }
 })
+
 
 if vim.fn.has('nvim-0.10') == 1 then
   -- ----- satellite -----
@@ -319,6 +321,7 @@ else
   require('scrollbar.handlers.gitsigns').setup()
   require('scrollbar').setup()
 end
+
 
 -- ----- todo-comments -----
 require("todo-comments").setup({})
