@@ -12,6 +12,8 @@ endif
 " --- Filetype related ---
 Plug 'gabrielelana/vim-markdown', { 'for': 'markdown' }
 Plug 'junegunn/goyo.vim', { 'for': 'markdown' }
+Plug 'elixir-editors/vim-elixir', { 'for': 'elixir' }
+
 " --- Plugins ---
 Plug 'ap/vim-buftabline'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
