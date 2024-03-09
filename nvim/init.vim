@@ -44,41 +44,9 @@ set shiftround  "always round indentation level to a multiple of the number of s
 set viewoptions=cursor
 augroup bufferloadsave
   autocmd!
-  au BufWinLeave *.* mkview!
-  au BufWinEnter *.* silent! loadview
-augroup END
-
-augroup ftgroup
-  autocmd!
-
-  " Disable editorconfig for yaml file, for work
-  " (otherwise it messes up the whitespaces in yaml files)
-  au BufRead,BufNewFile *.yml let b:editorconfig = v:false
-
-  " Specific filetype settings
-  " FIXME: these don't work. the ft is still not set correctly
-  " au BufRead,BufNewFile *.slim set ft=slim
-  " au BufRead,BufNewFile *.haml set ft=haml
-  " au BufRead,BufNewFile *.yml set ft=yaml
-
-  " Custom highlightings
-  " So that all assert matchers are highlighted as keywords
-  au FileType ruby match Keyword /assert_\w\+/
-  au FileType ruby match ErrorMsg /binding\.pry\|pry\|byebug\|debugger/
-
-  " Custom abbreviation for certain filetypes
-  au FileType ruby abbr fsl # frozen_string_literal: true
-  au FileType ruby abbr logmethod puts(__method__.to_s.center(50, '-'))
-  au FileType ruby iabbr <buffer> bdp binding.pry
-  au FileType ruby iabbr <buffer> mlog puts __method__.to_s.center(40, '-')
-  au FileType ruby iabbr <buffer> itdo it "" doend<esc>k0f"a
-  au FileType ruby iabbr <buffer> descdo describe "" doend<esc>k0f"a
-
-  " Other custom settings
-  au FileType crystal   set sw=2 ts=2 sts=2 et wrap
-  au FileType gitcommit set tw=85
-  au FileType markdown  set sw=4 ts=4 sts=4 et wrap
-
-  " Removes all autocommands on commit messages (au!) + set cursor position on the first char
-  au FileType gitcommit au! BufEnter COMMIT_EDITMSG call setpos('.', [0, 1, 1, 0])
+  " au BufWinLeave *.* mkview!
+  " au BufWinEnter *.* silent! loadview
+  " NOTE: testing this, may help me get rid of the setpos I do on gitcommits
+  autocmd BufWinLeave *.* if &filetype !=# 'gitcommit' | mkview! | endif
+  autocmd BufWinEnter *.* if &filetype !=# 'gitcommit' | silent! loadview | endif
 augroup END
