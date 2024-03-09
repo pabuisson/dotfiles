@@ -12,6 +12,11 @@ nnoremap <leader>pc :PlugClean<CR>
 
 nnoremap <leader>vrc  :e $MYVIMRC<CR>
 
+" command! overwrites existing command with same name
+" nargs=0 means that the command takes no argument
+command! -nargs=0 SourceUIVim so ~/.config/nvim/ui.vim
+nnoremap <leader>sui :SourceUIVim<CR>
+
 " File explorer
 nnoremap <leader>e :Explore<CR>
 nnoremap <leader>he :Sexplore<CR>
