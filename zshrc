@@ -12,6 +12,11 @@ autoload -Uz compinit
 # Don't error or list possibilities on ambiguous pattern, but insert the 1st option, then the 2nd, etc
 # Without this, I'd need another <TAB> press to get this
 setopt MENU_COMPLETE
+# Try to correct the spelling of commands.
+# The shell variable CORRECT_IGNORE may be set to a pattern to match words that will never be offered as corrections.
+setopt CORRECT
+# Make globbing (filename generation) case insensitive
+setopt NO_CASE_GLOB
 # Highlights each suggestion one by one instead of just completing the prompt
 zstyle ':completion:*' menu select
 # Tries case insensitive option if case sensitive does not matche
@@ -137,3 +142,12 @@ source "$HOME/.dotfiles/zsh/dependencies.zsh"
 # ----- OTHER SETTINGS -----
 
 export BAT_THEME="ansi"
+
+
+# ----- CUSTOM FUNCTIONS ----
+
+# Go to project root
+r () {
+  cd "$(git rev-parse --show-toplevel 2>/dev/null)"
+}
+source /Users/pabuisson/.doctolib/profile
