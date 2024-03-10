@@ -7,6 +7,8 @@ Plug 'mhartington/oceanic-next'
 
 if has('nvim-0.5')
   Plug 'rebelot/kanagawa.nvim'
+  " Plug 'fynnfluegge/monet.nvim'
+  " Plug 'loctvl842/monokai-pro.nvim'
   Plug 'navarasu/onedark.nvim'
 endif
 " --- Filetype related ---
