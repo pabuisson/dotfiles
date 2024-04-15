@@ -36,6 +36,10 @@ function! IsVisual()
 endfunction
 
 function! GitInfo()
+  if !exists("*FugitiveHead")
+    return ''
+  endif
+
   let l:git = FugitiveHead()
   if git != ''
     return 'g:'.FugitiveHead()
