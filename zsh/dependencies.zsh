@@ -14,6 +14,9 @@ then
 elif [[ -e /opt/homebrew/etc/profile.d/z.sh ]]
 then
   source /opt/homebrew/etc/profile.d/z.sh
+elif [[ -r /usr/share/z/z.sh ]]
+then
+  source /usr/share/z/z.sh
 else
   echo "You might need to install Z for quick-jump"
   echo "$ brew install z"
