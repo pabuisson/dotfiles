@@ -150,4 +150,3 @@ export BAT_THEME="ansi"
 r () {
   cd "$(git rev-parse --show-toplevel 2>/dev/null)"
 }
-source /Users/pabuisson/.doctolib/profile
