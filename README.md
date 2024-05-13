@@ -3,9 +3,9 @@
 ## Setup in a new environment
 
 ```bash
-ln -S $HOME/.dotfiles/zshrc $HOME/.zshrc
-ln -S $HOME/.dotfiles/commonrc $HOME/.commonrc
-ln -S $HOME/.dotfiles/gitconfig $HOME/.gitconfig
+ln -s $HOME/.dotfiles/zshrc $HOME/.zshrc
+ln -s $HOME/.dotfiles/commonrc $HOME/.commonrc
+ln -s $HOME/.dotfiles/gitconfig $HOME/.gitconfig
 ln -s $HOME/.dotfiles/nvim $HOME/.config/nvim
 ```
 
