@@ -1,9 +1,3 @@
-# RBENV
-if command -v rbenv > /dev/null
-then
-  eval "$(rbenv init -)";
-fi
-
 # ASDF versions manager
 if [[ -e /usr/local/opt/asdf/libexec/asdf.sh ]]
 then
