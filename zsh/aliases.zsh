@@ -17,6 +17,7 @@ alias git='LANG=en_GB git'
 alias g='git'
 alias gap='git add -p'
 alias gd='git diff'
+alias gds='git diff --staged'
 alias gf='git fetch -p'
 alias gp='git pull -p'
 alias gpr='git pull -p --rebase'
@@ -66,3 +67,6 @@ alias hc="bundle exec hanami console"
 alias dc="docker compose"
 # PACKAGES
 alias brewleaves="brew leaves --installed-on-request | xargs -n1 brew desc --eval-all"
+# ELIXIR
+alias mt="mix test"
+alias mtw="mix test.watch"
