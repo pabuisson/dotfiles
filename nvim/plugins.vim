@@ -297,7 +297,8 @@ require('gitsigns').setup()
 
 -- ----- treesitter -----
 require('nvim-treesitter.configs').setup({
-  ensure_installed = { "javascript", "ruby", "elixir", "markdown" }
+  ensure_installed = { "javascript", "ruby", "eex", "elixir", "erlang", "heex", "markdown" },
+  highlight = { enable = true }
 })
 
 
