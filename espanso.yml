@@ -61,32 +61,8 @@ matches:
 
   # Misc
 
-  - trigger: "hl1"
-    replace: "HEADLESS=1 "
-
-  - trigger: "prr1"
-    replace: "PRY_RESCUE_RAILS=1 "
-
   - trigger: "ETQ"
     replace: "en tant que"
-
-  - trigger: "pab@@"
-    replace: "{{output}}"
-    vars:
-      - name: output
-        type: shell
-        params:
-          shell: sh
-          cmd: "tr 'N-ZA-Mn-za-m' 'A-Za-z' <<< 'cvreer-nqevra.ohvffba@qbpgbyvo.pbz'"
-
-  - trigger: "gdd"
-    replace: "{{output}}"
-    vars:
-      - name: output
-        type: shell
-        params:
-          shell: sh
-          cmd: "tr 'N-ZA-Mn-za-m' 'A-Za-z' <<< 'tvguho.pbz/qbpgbyvo/qbpgbyvo'"
 
   # Progress bars
 
