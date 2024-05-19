@@ -79,11 +79,11 @@ let g:ale_linters = {}
 
 let g:ale_fix_on_save = 1
 let g:ale_ruby_syntax_tree_executable = 'bundle'
-" TODO: trailing lines and whitespace could be done natively using
-" a editorconfig file
+" TODO: trailing lines and whitespace could be done natively using an editorconfig file
 let g:ale_fixers = {
 \   '*': ['remove_trailing_lines', 'trim_whitespace'],
-\   'ruby': ['syntax_tree', 'prettier', 'remove_trailing_lines', 'trim_whitespace'],
+\   'ruby': ['syntax_tree', 'prettier'],
+\   'elixir': ['mix_format'],
 \   'javascript': ['prettier'],
 \   'javascriptreact': ['prettier'],
 \   'typescript': ['prettier'],
