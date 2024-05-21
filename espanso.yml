@@ -117,3 +117,12 @@ matches:
         params:
           shell: sh
           cmd: "export LANG=fr_FR.UTF-8 && cat ~/MEGA/NOTES/_zettelkasten_template.md | sed \"s/%date%/$(date +'%Y%m%d')/g\""
+
+  - trigger: "pab@@"
+    replace: "{{output}}"
+    vars:
+      - name: output
+        type: shell
+        params:
+          shell: sh
+          cmd: "source ~/.workrc && echo $WORK_EMAIL"
