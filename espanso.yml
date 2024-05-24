@@ -89,7 +89,7 @@ matches:
         type: shell
         params:
           shell: sh
-          cmd: "export LANG=fr_FR.UTF-8 && cat ~/MEGA/NOTES/DOCTONOTES/_daily_template.md | sed \"s/%date%/$(date +'%A %d %B %Y')/g\" | sed \"s/%yesterday%/$(date -v-1d +'%Y%m%d')/g\" | sed \"s/%tomorrow%/$(date -v+1d +'%Y%m%d')/g\""
+          cmd: "export LANG=fr_FR.UTF-8 && cat ~/Sync/MEGA/NOTES/DOCTONOTES/_daily_template.md | sed \"s/%date%/$(date +'%A %d %B %Y')/g\" | sed \"s/%yesterday%/$(date -v-1d +'%Y%m%d')/g\" | sed \"s/%tomorrow%/$(date -v+1d +'%Y%m%d')/g\""
 
   - trigger: ":ddtom"
     replace: "{{output}}"
@@ -98,7 +98,7 @@ matches:
         type: shell
         params:
           shell: sh
-          cmd: "export LANG=fr_FR.UTF-8 && cat ~/MEGA/NOTES/DOCTONOTES/_daily_template.md | sed \"s/%date%/$(date -v+1d +'%A %d %B %Y')/g\" | sed \"s/%yesterday%/$(date +'%Y%m%d')/g\" | sed \"s/%tomorrow%/$(date -v+2d +'%Y%m%d')/g\""
+          cmd: "export LANG=fr_FR.UTF-8 && cat ~/Sync/MEGA/NOTES/DOCTONOTES/_daily_template.md | sed \"s/%date%/$(date -v+1d +'%A %d %B %Y')/g\" | sed \"s/%yesterday%/$(date +'%Y%m%d')/g\" | sed \"s/%tomorrow%/$(date -v+2d +'%Y%m%d')/g\""
 
   - trigger: ":ddyes"
     replace: "{{output}}"
@@ -107,7 +107,7 @@ matches:
         type: shell
         params:
           shell: sh
-          cmd: "export LANG=fr_FR.UTF-8 && cat ~/MEGA/NOTES/DOCTONOTES/_daily_template.md | sed \"s/%date%/$(date -v-1d +'%A %d %B %Y')/g\" | sed \"s/%yesterday%/$(date -v-2d +'%Y%m%d')/g\" | sed \"s/%tomorrow%/$(date +'%Y%m%d')/g\""
+          cmd: "export LANG=fr_FR.UTF-8 && cat ~/Sync/MEGA/NOTES/DOCTONOTES/_daily_template.md | sed \"s/%date%/$(date -v-1d +'%A %d %B %Y')/g\" | sed \"s/%yesterday%/$(date -v-2d +'%Y%m%d')/g\" | sed \"s/%tomorrow%/$(date +'%Y%m%d')/g\""
 
   - trigger: ":znote"
     replace: "{{output}}"
@@ -116,7 +116,7 @@ matches:
         type: shell
         params:
           shell: sh
-          cmd: "export LANG=fr_FR.UTF-8 && cat ~/MEGA/NOTES/_zettelkasten_template.md | sed \"s/%date%/$(date +'%Y%m%d')/g\""
+          cmd: "export LANG=fr_FR.UTF-8 && cat ~/Sync/MEGA/NOTES/_zettelkasten_template.md | sed \"s/%date%/$(date +'%Y%m%d')/g\""
 
   - trigger: "pab@@"
     replace: "{{output}}"
