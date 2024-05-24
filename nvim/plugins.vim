@@ -41,6 +41,8 @@ if has('nvim-0.5')
   Plug 'nvim-lua/plenary.nvim'
   Plug 'folke/todo-comments.nvim'
 
+  Plug 'backdround/global-note.nvim'
+
   if has('nvim-0.10')
     Plug 'lewis6991/satellite.nvim'
   else
@@ -172,6 +174,18 @@ end
 
 
 lua <<EOF
+-- ----- global-note -----
+-- NOTE: possibility to create a different file by project or git branch, dynamically.
+--       Check https://github.com/backdround/global-note.nvim
+local global_note = require("global-note")
+global_note.setup({
+  filename = "vim.md",
+  directory = "~/Sync/MEGA/NOTES/",
+})
+vim.keymap.set("n", "<leader>n", global_note.toggle_note, {
+  desc = "Toggle global note",
+})
+
 -- ----- hop -----
 require('hop').setup()
 vim.cmd([[
