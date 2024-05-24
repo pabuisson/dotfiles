@@ -325,7 +325,7 @@ require('gitsigns').setup()
 
 -- ----- treesitter -----
 require('nvim-treesitter.configs').setup({
-  ensure_installed = { "javascript", "ruby", "eex", "elixir", "erlang", "heex", "markdown" },
+  ensure_installed = { "javascript", "ruby", "eex", "elixir", "erlang", "heex", "markdown", "lua" },
   highlight = { enable = true }
 })
 
@@ -357,6 +357,15 @@ end
 
 
 -- ----- todo-comments -----
-require("todo-comments").setup({})
+require("todo-comments").setup({
+  keywords = {
+    TODO = { icon = "!" },
+    WARN = { icon = "!" },
+    NOTE = { icon = "!" },
+  },
+  highlight = {
+    pattern = [[.*<(KEYWORDS)\s+]], -- pattern or table of patterns, used for highlighting (vim regex)
+  },
+})
 
 EOF

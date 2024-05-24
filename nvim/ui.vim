@@ -74,7 +74,7 @@ function s:SetDarkMode()
 " EOF
 
 " lua << EOF
-"   require 'nordic' .setup {
+"   require('nordic').setup {
 "     italic_comments = false,
 "     reduced_blue = true,
 "     -- This callback can be used to override the colors used in the palette.
