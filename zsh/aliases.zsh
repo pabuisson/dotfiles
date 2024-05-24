@@ -70,3 +70,4 @@ alias brewleaves="brew leaves --installed-on-request | xargs -n1 brew desc --eva
 # ELIXIR
 alias mt="mix test"
 alias mtw="mix test.watch"
+alias mps="mix phx.server"
