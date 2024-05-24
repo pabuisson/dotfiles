@@ -21,10 +21,10 @@ function! ReplaceNonUnicodeWhitespaces()
 endfunction
 
 augroup customfunctions
-  au!
-  " au BufWrite * :call StripTrailingWhitespaces()
-  au BufWrite * :call ReplaceNonUnicodeWhitespaces()
-  au FileType yaml let b:noAutoWhitespaceFix=1
+  autocmd!
+  " autocmd BufWrite * :call StripTrailingWhitespaces()
+  autocmd BufWrite * :call ReplaceNonUnicodeWhitespaces()
+  autocmd FileType yaml let b:noAutoWhitespaceFix=1
 augroup END
 
 

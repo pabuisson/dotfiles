@@ -106,8 +106,8 @@ highlight ConflictMarkerCommonAncestorsHunk guibg=#754a81
 
 " ----- current_word -----
 let g:vim_current_word#highlight_delay = 800
-hi CurrentWord gui=bold,underline cterm=bold,underline
-hi CurrentWordTwins gui=standout cterm=standout
+highlight CurrentWord gui=bold cterm=bold
+highlight CurrentWordTwins gui=undercurl cterm=undercurl
 
 " " NOTE: below is the native way of doing this, but I couldn't get it to work
 " " yet. Will need to dive deeper into this, maybe I can get rid of a plugin
@@ -164,9 +164,9 @@ let g:fzf_history_dir = '~/.local/share/fzf-history'
 let g:fzf_commits_log_options = '--color=always --format="%C(auto)%h%d %C(green)%as %C(cyan)%an :: %C(reset)%s"'
 
 
-" =================================
-"       NVIM 0.5.0 SPECIFIC
-" =================================
+" ==========================
+"       NVIM SPECIFIC
+" ==========================
 
 if !has('nvim-0.5')
   finish
@@ -203,7 +203,6 @@ require('lint').linters_by_ft = {
   typescript = {'eslint'},
   typescriptreact = {'eslint'}
 }
-
 -- Autocmd to trigger linting
 vim.api.nvim_create_autocmd({ "BufWritePost" }, {
   callback = function()

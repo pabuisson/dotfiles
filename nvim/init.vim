@@ -17,7 +17,7 @@ source $HOME/.config/nvim/functions.vim
 " === SETTINGS ===
 " ================
 
-set nu              "display line numbers
+set number          "display line numbers
 set nobackup        "don't write backup files
 set noswapfile      "don't write swap files (careful, all text will be in memory !)
 set autowrite       "auto write to buffer when switching
@@ -37,11 +37,11 @@ set showmatch       "show matching parenthese
 set list
 autocmd OptionSet shiftwidth execute 'setlocal listchars=tab:▸\ ,eol:·,tab:│\ ,multispace:┆' . repeat('\ ', &sw - 1)
 " === INDENTATION ===
-set sw=2
-set ts=2    "number of spaces a TAB char counts for (when encountered in a file)
-set sts=2   "number of spaces a TAB char counts for (when performing editing operations)
-set et      "always use spaces instead of tabs
-set shiftround  "always round indentation level to a multiple of the number of spaces
+set shiftwidth=2
+set tabstop=2       "number of spaces a TAB char counts for (when encountered in a file)
+set softtabstop=2   "number of spaces a TAB char counts for (when performing editing operations)
+set expandtab       "always use spaces instead of tabs
+set shiftround      "always round indentation level to a multiple of the number of spaces
 " === LOAD/SAVE VIEWS ===
 set viewoptions=cursor
 augroup bufferloadsave
