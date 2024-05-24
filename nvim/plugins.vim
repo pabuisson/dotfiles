@@ -294,14 +294,30 @@ cmp.setup.cmdline(':', {
 -- The nvim-cmp almost supports LSP's capabilities so You should advertise it to LSP servers..
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 local lspconfig = require('lspconfig')
+
+-- JS / TS
 lspconfig.tsserver.setup {
   capabilities = capabilities,
   on_attach = on_attach
 }
+-- Ruby
 lspconfig.ruby_lsp.setup {
   capabilities = capabilities,
   on_attach = on_attach,
 }
+-- Elixir
+local path_to_elixirls = vim.fn.expand("~/dev/elixir-ls/release/language_server.sh")
+lspconfig.elixirls.setup({
+  cmd = { path_to_elixirls },
+  capabilities = capabilities,
+  on_attach = on_attach,
+  settings = {
+    elixirLS = {
+      dialyzerEnabled = false,
+      fetchDeps = false
+    }
+  }
+})
 
 -- ----- gitsigns -----
 require('gitsigns').setup()
