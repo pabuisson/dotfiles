@@ -1,9 +1,5 @@
 # vim:set ft=zsh :
 
-export PATH="/usr/local/sbin:$PATH"
-export PATH="/usr/local/bin:$PATH"
-export PATH="/opt/homebrew/bin:$PATH"
-export PATH="$PATH:$HOME/Applications:$HOME/Applications/scripts:/opt/local/bin"
 
 # SSH: Add my identity so that I can use SSH forwarding
 ssh-add &> /dev/null

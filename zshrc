@@ -1,9 +1,12 @@
-source $HOME/.commonrc
 
-if [[ -e $HOME/.workrc ]]
-then
-  source $HOME/.workrc
-fi
+
+# ----- PATH AND GENERIC STUFF ----
+
+export PATH="/usr/local/sbin:$PATH"
+export PATH="/usr/local/bin:$PATH"
+export PATH="/opt/homebrew/bin:$PATH"
+export PATH="$PATH:$HOME/Applications:$HOME/Applications/scripts:/opt/local/bin"
+
 
 # ----- ZSH CONFIGURATION -----
 
@@ -105,7 +108,6 @@ BACKGROUND_JOBS='%(1j.%F{red}[%j] %f.)'
 PS1='$NEWLINE%B$BACKGROUND_JOBS%F{cyan}%n%f@%F{blue}%1d%f%F{green}${vcs_info_msg_0_}%f%b ${PROMPT_CHAR} '
 
 
-
 # HISTORY
 export HISTFILESIZE=1000
 export HISTSIZE=1000
@@ -128,10 +130,11 @@ bindkey "^[[B" down-line-or-history
 # when trying to use HEAD^ in a git command
 setopt NO_NOMATCH
 
-
 # CD-ING
 # Typing a directory without "cd" does cd to the directory
 setopt AUTO_CD
+
+
 # ----- SOURCING MORE CONFIG FILES -----
 
 source "$HOME/.dotfiles/zsh/runtime.zsh"
@@ -150,3 +153,13 @@ export BAT_THEME="ansi"
 r () {
   cd "$(git rev-parse --show-toplevel 2>/dev/null)"
 }
+
+# ----- SOURCE OTHER FILES -----
+# Do this at the end of the file so that they take precedence
+# over what's already been defined in here
+
+source $HOME/.commonrc
+if [[ -e $HOME/.workrc ]]
+then
+  source $HOME/.workrc
+fi
