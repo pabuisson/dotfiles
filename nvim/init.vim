@@ -52,3 +52,10 @@ augroup bufferloadsave
   autocmd BufWinLeave *.* if &filetype !=# 'gitcommit' | mkview! | endif
   autocmd BufWinEnter *.* if &filetype !=# 'gitcommit' | silent! loadview | endif
 augroup END
+
+augroup filetypes
+  autocmd!
+  " Cheatsheets are Markdown files with the .cheatmd extension
+  " reference: https://elixirforum.com/t/cheatsheets-in-exdoc-v0-29/51255
+  autocmd BufNewFile,BufRead *.cheatmd set filetype=markdown
+augroup END
