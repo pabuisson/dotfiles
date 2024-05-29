@@ -20,8 +20,6 @@ function s:SetDarkMode()
   " \ 'bg0': ['#182124', '235']
   " \}
   " color everforest
-  " " let g:indentguides_conceal_color = 'ctermfg=151 ctermbg=NONE guifg=#223922 guibg=NONE'
-  " " let g:indentguides_specialkey_color = 'ctermfg=151 ctermbg=NONE guifg=#223922 guibg=NONE'
 
   " " -- kanagawa --
 " lua << EOF
@@ -88,8 +86,6 @@ function s:SetDarkMode()
   " " -- oceanic next --
   " let g:oceanic_next_terminal_bold = 0
   " color OceanicNext
-  " let g:indentguides_conceal_color = 'ctermfg=151 ctermbg=NONE guifg=#3e5759 guibg=NONE'
-  " let g:indentguides_specialkey_color = 'ctermfg=151 ctermbg=NONE guifg=#3e5759 guibg=NONE'
 
   " -- onedark --
 lua << EOF
@@ -122,8 +118,6 @@ function s:SetLightMode()
   " \ 'bg0': ['#fefffc', '230'],
   " \}
   " color everforest
-  " let g:indentguides_conceal_color = 'ctermfg=151 ctermbg=NONE guifg=#c0c9c0 guibg=NONE'
-  " let g:indentguides_specialkey_color = 'ctermfg=151 ctermbg=NONE guifg=#c0c9c0 guibg=NONE'
 
   " -- onedark --
 lua << EOF
@@ -143,8 +137,6 @@ lua << EOF
   }
   require('onedark').load()
 EOF
-  " let g:indentguides_conceal_color = 'ctermfg=151 ctermbg=NONE guifg=#c0c0c9 guibg=NONE'
-  " let g:indentguides_specialkey_color = 'ctermfg=151 ctermbg=NONE guifg=#c0c0c9 guibg=NONE'
 
   return
 endfunction
