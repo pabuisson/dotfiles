@@ -21,7 +21,6 @@ Plug 'junegunn/fzf.vim'
 Plug 'dense-analysis/ale'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
-Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-rhubarb' " vim-fugitive adapter for github
 " Plug 'tommcdo/vim-fubitive' " vim-fugitive adapter for bitbucket
@@ -89,11 +88,6 @@ let g:ale_fixers = {
 \   'typescript': ['prettier'],
 \   'typescriptreact': ['prettier'],
 \}
-
-
-" ----- commentary -----
-nmap <leader>c gcc
-vmap <leader>c gc
 
 
 "----- conflict-marker -----
