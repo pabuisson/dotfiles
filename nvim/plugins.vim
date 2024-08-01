@@ -42,11 +42,7 @@ if has('nvim-0.5')
 
   Plug 'backdround/global-note.nvim'
 
-  if has('nvim-0.10')
-    Plug 'lewis6991/satellite.nvim'
-  else
-    Plug 'petertriho/nvim-scrollbar'
-  endif
+  Plug 'petertriho/nvim-scrollbar'
 
   " NOTE: 202309 -> deprecated
   Plug 'phaazon/hop.nvim'
@@ -316,37 +312,16 @@ lspconfig.elixirls.setup({
 require('gitsigns').setup()
 
 
+-- ----- scrollbar -----
+require('scrollbar.handlers.gitsigns').setup()
+require('scrollbar').setup()
+
+
 -- ----- treesitter -----
 require('nvim-treesitter.configs').setup({
   ensure_installed = { "javascript", "ruby", "eex", "elixir", "erlang", "heex", "markdown", "lua" },
   highlight = { enable = true }
 })
-
-
-if vim.fn.has('nvim-0.10') == 1 then
-  -- ----- satellite -----
-  require('satellite').setup({
-    width = 2,
-    handlers = {
-      cursor = {
-        enable = true,
-      },
-      search = {
-        enable = true,
-      },
-      diagnostic = {
-        enable = true,
-      },
-      gitsigns = {
-        enable = true,
-      },
-    },
-  })
-else
-  -- ----- scrollbar -----
-  require('scrollbar.handlers.gitsigns').setup()
-  require('scrollbar').setup()
-end
 
 
 -- ----- todo-comments -----
