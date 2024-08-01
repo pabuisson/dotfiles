@@ -4,13 +4,5 @@
 # SSH: Add my identity so that I can use SSH forwarding
 ssh-add &> /dev/null
 
-# Rails dev
-export HTTPS=1
-export DISABLE_SPRING="of_course"
-export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
-
-# CRYSTAL
-export PKG_CONFIG_PATH=/usr/local/opt/openssl/lib/pkgconfig
-
 # sysctl kern.maxfilesperproc -> 24576
 ulimit -n 24576
