@@ -46,9 +46,6 @@ set shiftround      "always round indentation level to a multiple of the number 
 set viewoptions=cursor
 augroup bufferloadsave
   autocmd!
-  " au BufWinLeave *.* mkview!
-  " au BufWinEnter *.* silent! loadview
-  " NOTE: testing this, may help me get rid of the setpos I do on gitcommits
   autocmd BufWinLeave *.* if &filetype !=# 'gitcommit' | mkview! | endif
   autocmd BufWinEnter *.* if &filetype !=# 'gitcommit' | silent! loadview | endif
 augroup END
