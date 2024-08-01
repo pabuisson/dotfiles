@@ -6,6 +6,7 @@
 ln -s $HOME/.dotfiles/zshrc $HOME/.zshrc
 ln -s $HOME/.dotfiles/commonrc $HOME/.commonrc
 ln -s $HOME/.dotfiles/gitconfig $HOME/.gitconfig
+ln -s $HOME/.dotfiles/psqlrc $HOME/.psqlrc
 ln -s $HOME/.dotfiles/nvim $HOME/.config/
 ln -s $HOME/.dotfiles/espanso.yml $HOME/Library/Application\ Support/espanso/match/own.yml
 ```
