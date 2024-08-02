@@ -1,0 +1,29 @@
+{
+  "defmod": {
+    "prefix": ["defmod"],
+    "body": [
+      "defmodule $1 do",
+      "  $2",
+      "end"
+    ],
+    "description": "Module definition template"
+  },
+  "defdo": {
+    "prefix": ["defdo"],
+    "body": [
+      "def $1 do",
+      "  $2",
+      "end"
+    ],
+    "description": "Function definition template"
+  },
+  "testconn": {
+    "prefix": ["testconn"],
+    "body": [
+      "test \"$1\", %{conn: conn} do",
+      "  $2",
+      "end"
+    ],
+    "description": "Controller test with conn param"
+  }
+}
