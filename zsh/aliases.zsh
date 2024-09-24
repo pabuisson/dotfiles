@@ -15,31 +15,41 @@ alias monip="ifconfig | grep 192 | cut -d' ' -f2"
 # GIT
 alias git='LANG=en_GB git'
 alias g='git'
+alias gca='git commit -a'
 alias gap='git add -p'
 alias gd='git diff'
 alias gds='git diff --staged'
 alias gf='git fetch -p'
 alias gp='git pull -p'
 alias gpr='git pull -p --rebase'
-alias gsm='git switch master'
-alias gsfm='git switch -f master'
-alias grom='git rebase origin/master'
 alias grc='git rebase --continue'
 alias gra='git rebase --abort'
 alias gst='git st'
-# Single quotes needed here, or what's inside subcommands get evaluated everytime (even when
-# initializing the shell and reading those aliases, which gives me errors 'not in a git repo')
-# NOTE: https://git-scm.com/docs/git-diff#Documentation/git-diff.txt---diff-filterACDMRTUXB82308203
-# TODO: remove the old alias once the new one is tested
-# alias gitconflict='$EDITOR $(git status | grep both | cut -d ':' -f 2 | xargs)'
+alias gmb='git merge-base'
 alias gitconflict='$EDITOR $(git diff --name-only --diff-filter=U | xargs)'
-alias gfm='$EDITOR $(git diff --name-only --diff-filter=ACMRT origin/master... | xargs)'
-alias gfl='$EDITOR $(git diff --name-only --diff-filter=ACMRT head | xargs)'
-alias gdm='git diff $(git merge-base head origin/master)'
-# Churn sur les 6 derniers mois (nombre de commits par fichier)
+# Churn on past 6 months (number of commits per file)
 alias gitchurn="git log --all -M -C --name-only --format='format:' $@ --since='6 months ago' | sort | grep -v '^$' | uniq -c | sort -n | tail -10"
 # Get short SHA1 of HEAD in clipboard
 alias githead='git rev-parse HEAD | cut -c 1-8 | pbcopy'
+
+# Set of aliases involving a reference branch name
+# TODO: improve the prompt: maybe show last committer and last commit date
+#       check https://chatgpt.com/c/ef296795-b4b7-42aa-a804-a1cff334b526
+alias gbdm="git branch --merged | grep -v 'master\|develop' | xargs -p -n 1 git branch -d"
+alias gsm='git switch master'
+alias gsd='git switch develop'
+alias gsfm='git switch -f master'
+alias gsfd='git switch -f develop'
+alias grom='git rebase origin/master'
+alias grod='git rebase origin/develop'
+# Single quotes needed here, or what's inside subcommands get evaluated everytime (even when
+# initializing the shell and reading those aliases, which gives me errors 'not in a git repo')
+# NOTE: https://git-scm.com/docs/git-diff#Documentation/git-diff.txt---diff-filterACDMRTUXB82308203
+alias gdm='git diff $(git merge-base head origin/master)'
+alias gdd='git diff $(git merge-base head origin/develop)'
+alias gfm='$EDITOR $(git diff --name-only --diff-filter=ACMRT origin/master... | xargs)'
+alias gfd='$EDITOR $(git diff --name-only --diff-filter=ACMRT origin/develop... | xargs)'
+alias gfl='$EDITOR $(git diff --name-only --diff-filter=ACMRT head | xargs)'
 
 # RAILS / RUBY
 alias ru="rackup"
