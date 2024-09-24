@@ -1,8 +1,0 @@
-# vim:set ft=zsh :
-
-
-# SSH: Add my identity so that I can use SSH forwarding
-ssh-add &> /dev/null
-
-# sysctl kern.maxfilesperproc -> 24576
-ulimit -n 24576
