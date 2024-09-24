@@ -71,3 +71,14 @@ vnoremap <Tab> >gv
 
 " Reselect pasted text
 nnoremap gp `[v`]
+
+" Vertically center the screen after search
+nnoremap n nzz
+nnoremap N Nzz
+
+" Close buffers without killing the window arrangement
+" https://superuser.com/questions/289285/how-to-close-buffer-without-closing-the-window
+" NOTE: more variations in the link above, may cover some edge cases too
+command! BD :bn|:bd#
+command! BW :bn|:bw#
+
