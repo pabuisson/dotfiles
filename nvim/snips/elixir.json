@@ -17,6 +17,13 @@
     ],
     "description": "Function definition template"
   },
+  "fnfn": {
+    "prefix": ["fnfn"],
+    "body": [
+      "fn $1 -> $2 end"
+    ],
+    "description": "One line anonymous functions"
+  },
   "testconn": {
     "prefix": ["testconn"],
     "body": [
