@@ -5,7 +5,7 @@ call plug#begin('~/.config/nvim/plugged')
 Plug 'sainnhe/everforest'
 Plug 'mhartington/oceanic-next'
 
-if has('nvim-0.5')
+if has('nvim')
   Plug 'rebelot/kanagawa.nvim'
   Plug 'navarasu/onedark.nvim'
 endif
@@ -28,7 +28,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'dominikduda/vim_current_word'
 Plug 'rhysd/conflict-marker.vim'
 
-if has('nvim-0.5')
+if has('nvim')
   Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
   Plug 'williamboman/mason.nvim'
   Plug 'williamboman/mason-lspconfig.nvim'
@@ -44,8 +44,7 @@ if has('nvim-0.5')
 
   Plug 'petertriho/nvim-scrollbar'
 
-  " NOTE: 202309 -> deprecated
-  Plug 'phaazon/hop.nvim'
+  Plug 'smoka7/hop.nvim'
 
   " -- nvim-cmp --
   Plug 'hrsh7th/cmp-nvim-lsp'
