@@ -158,7 +158,6 @@ r () {
 # Do this at the end of the file so that they take precedence
 # over what's already been defined in here
 
-source $HOME/.commonrc
 if [[ -e $HOME/.workrc ]]
 then
   source $HOME/.workrc
