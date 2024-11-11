@@ -54,7 +54,7 @@ alias gfl='$EDITOR $(git diff --name-only --diff-filter=ACMRT head | xargs)'
 # RAILS / RUBY
 alias ru="rackup"
 alias be="bundle exec"
-alias mm="middleman"
+alias mm="bundle exec middleman"
 alias rt="rails t"
 alias rs="bundle exec bin/rails server || bundle exec rails server"
 alias rc="bundle exec bin/rails console || bundle exec rails console"
