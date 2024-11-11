@@ -70,15 +70,16 @@ alias rsa="bundle exec rspec"
 alias rss="bundle exec rspec spec/serializers"
 alias rsc="bundle exec rspec spec/controllers"
 alias rsm="bundle exec rspec spec/models"
-# HANAMI
-alias hs="bundle exec hanami server"
-alias hc="bundle exec hanami console"
 # DOCKER
 alias dc="docker compose"
 # PACKAGES
 alias brewleaves="brew leaves --installed-on-request | xargs -n1 brew desc --eval-all"
 # ELIXIR
+alias mdg="mix deps.get"
 alias mt="mix test"
+alias mtt="mix test --trace"
 alias mtw="mix test.watch"
 alias mps="iex -S mix phx.server"
 alias mpr="mix phx.routes"
+alias mc="iex -S mix"
+alias mcp="mix compile"
