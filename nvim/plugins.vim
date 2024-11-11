@@ -30,6 +30,7 @@ Plug 'rhysd/conflict-marker.vim'
 
 if has('nvim')
   Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+  Plug 'nvim-treesitter/nvim-treesitter-context'
   Plug 'williamboman/mason.nvim'
   Plug 'williamboman/mason-lspconfig.nvim'
   Plug 'neovim/nvim-lspconfig'
@@ -331,6 +332,18 @@ require('nvim-treesitter.configs').setup({
   ensure_installed = { "javascript", "ruby", "eex", "elixir", "erlang", "heex", "markdown", "lua" },
   highlight = { enable = true }
 })
+
+require'treesitter-context'.setup{
+  max_lines = 3,            -- How many lines the window should span. Values <= 0 mean no limit.
+  min_window_height = 0,    -- Minimum editor window height to enable context. Values <= 0 mean no limit.
+  multiline_threshold = 2,  -- Maximum number of lines to show for a single context
+  trim_scope = 'inner',     -- Which context lines to discard if `max_lines` is exceeded. Choices: 'inner', 'outer'
+}
+-- Creates a fake bottom border under the context
+vim.cmd([[
+  hi TreesitterContextBottom gui=underline guisp=Grey
+  hi TreesitterContextLineNumberBottom gui=underline guisp=Grey
+]])
 
 
 -- ----- todo-comments -----
