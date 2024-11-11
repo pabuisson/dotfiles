@@ -20,7 +20,7 @@ set statusline+=\%#Pmenu#%{HasNoErrorAndNoWarnings()==1?LinterStatusText():''}
 " Reset color
 set statusline+=%#Pmenu#
 set statusline+=\ ⋮\ %.90f%{&modified?'\ [+]':''}
-set statusline+=\ ⋮\ %.50{GitInfo()}
+set statusline+=\ ⋮\ %.60{GitInfo()}
 " switch to the right side
 set statusline+=%=
 set statusline+=\ %l/%L

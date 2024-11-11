@@ -80,7 +80,7 @@ let g:ale_fixers = {
 \   '*': ['remove_trailing_lines', 'trim_whitespace'],
 \   'ruby': ['syntax_tree', 'prettier'],
 \   'elixir': ['mix_format', 'trim_whitespace', 'remove_trailing_lines'],
-\   'heex': ['mix_format'],
+\   'heex': ['mix_format', 'trim_whitespace', 'remove_trailing_lines'],
 \   'javascript': ['prettier'],
 \   'javascriptreact': ['prettier'],
 \   'typescript': ['prettier'],
@@ -94,12 +94,14 @@ highlight ConflictMarkerOurs guibg=#2e5049
 highlight ConflictMarkerTheirs guibg=#344f69
 highlight ConflictMarkerEnd guibg=#2f628e
 highlight ConflictMarkerCommonAncestorsHunk guibg=#754a81
+nmap <leader>gcn <Plug>(conflict-marker-next-hunk)
+nmap <leader>gcp <Plug>(conflict-marker-prev-hunk)
 
 
 " ----- current_word -----
 let g:vim_current_word#highlight_delay = 800
 highlight CurrentWord gui=bold cterm=bold
-highlight CurrentWordTwins gui=undercurl cterm=undercurl
+highlight CurrentWordTwins gui=underline cterm=underline
 
 " " NOTE: below is the native way of doing this, but I couldn't get it to work
 " " yet. Will need to dive deeper into this, maybe I can get rid of a plugin
@@ -121,6 +123,8 @@ nnoremap <leader>gci :Git commit<CR>
 nnoremap <leader>gr  :Gread<CR>
 nnoremap <leader>gw  :Gwrite<CR>
 nnoremap <leader>gb  :Git blame<CR>
+nnoremap <leader>gdv :Gvdiffsplit<CR>
+nnoremap <leader>gdh :Gdiffsplit<CR>
 
 
 " ----- fzf -----
@@ -156,6 +160,15 @@ let g:fzf_history_dir = '~/.local/share/fzf-history'
 let g:fzf_commits_log_options = '--color=always --format="%C(auto)%h%d %C(green)%as %C(cyan)%an :: %C(reset)%s"'
 
 
+
+" ---- vsnip ----
+let g:vsnip_snippet_dir = expand("~/.config/nvim/snips")
+" mappings
+imap <expr> <Tab>   vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<Tab>'
+smap <expr> <Tab>   vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<Tab>'
+imap <expr> <S-Tab> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-Tab>'
+smap <expr> <S-Tab> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-Tab>'
+
 " ==========================
 "       NVIM SPECIFIC
 " ==========================
@@ -181,20 +194,39 @@ vim.keymap.set("n", "<leader>n", global_note.toggle_note, {
 -- ----- hop -----
 require('hop').setup()
 vim.cmd([[
-nnoremap <leader>w :HopWord<CR>
+nnoremap <leader>jw :HopWord<CR>
+nnoremap <leader>jc :HopCamelCase<CR>
 ]])
 
 
 -- ----- lint -----
 -- Solution to use external linters through the native LSP diagnostics
--- Alternative (more complete): https://github.com/jose-elias-alvarez/null-ls.nvim
-require('lint').linters_by_ft = {
+local nvim_lint = require('lint')
+-- FIXME: fallback on the default path if this one does not exist
+--        I need to dynamically and recursively look for the closest
+--        node_modules/ folders to look for the eslint binary
+--
+-- Check: https://github.com/mfussenegger/nvim-lint/issues/482
+--
+-- ⬇ maybe put these in my autocmd hook?
+-- local get_clients = vim.lsp.get_clients or vim.lsp.get_active_clients
+-- local client = get_clients({ bufnr = 0 })[1] or {}
+-- lint.try_lint(nil, { cwd = client.root_dir })
+--------------------------------------------------------------------
+local stylelint = nvim_lint.linters.stylelint
+local eslint = nvim_lint.linters.eslint
+stylelint.cmd = "./assets/node_modules/.bin/stylelint"
+eslint.cmd = "./e2e/node_modules/.bin/eslint"
+nvim_lint.linters_by_ft = {
   ruby = {'rubocop'},
+  css = {'stylelint'},
+  scss = {'stylelint'},
   javascript = {'eslint'},
   javascriptreact = {'eslint'},
   typescript = {'eslint'},
   typescriptreact = {'eslint'}
 }
+
 -- Autocmd to trigger linting
 vim.api.nvim_create_autocmd({ "BufWritePost" }, {
   callback = function()
@@ -232,20 +264,24 @@ end
 
 -- ----- cmp -----
 
-vim.cmd([[
-let g:vsnip_snippet_dir = expand("~/.config/nvim/snips")
-]])
-
 vim.opt.completeopt = {'menu', 'menuone', 'noselect'}
 
 local cmp = require('cmp')
 cmp.setup({
+  sources = cmp.config.sources({
+    { name = 'nvim_lsp' },
+    { name = 'vsnip' }
+  }, {
+    { name = 'buffer' },
+    { name = 'path' }
+  }),
   formatting = {
     format = function(entry, vim_item)
       vim_item.menu = ({
         buffer = "[BUF]",
         nvim_lsp = "[LSP]",
         luasnip = "[SNP]",
+        vsnip = "[SNP]",
         nvim_lua = "[LUA]",
       })[entry.source.name]
       return vim_item
@@ -262,13 +298,6 @@ cmp.setup({
     ['<C-Space>'] = cmp.mapping.complete(),
     ['<C-e>'] = cmp.mapping.abort(),
     ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
-  }),
-  sources = cmp.config.sources({
-    { name = 'nvim_lsp' },
-    { name = 'vsnip' }
-  }, {
-    { name = 'buffer' },
-    { name = 'path' }
   })
 })
 
@@ -329,7 +358,7 @@ require('scrollbar').setup()
 
 -- ----- treesitter -----
 require('nvim-treesitter.configs').setup({
-  ensure_installed = { "javascript", "ruby", "eex", "elixir", "erlang", "heex", "markdown", "lua" },
+  ensure_installed = { "javascript", "ruby", "eex", "elixir", "erlang", "heex", "markdown", "markdown_inline", "html", "lua" },
   highlight = { enable = true }
 })
 
@@ -349,12 +378,12 @@ vim.cmd([[
 -- ----- todo-comments -----
 require("todo-comments").setup({
   keywords = {
-    TODO = { icon = "!" },
-    WARN = { icon = "!" },
-    NOTE = { icon = "!" },
+    TODO = { icon = "⏺" },
+    WARN = { icon = "⏺" },
+    NOTE = { icon = "⏺" },
   },
   highlight = {
-    pattern = [[.*<(KEYWORDS)\s+]], -- pattern or table of patterns, used for highlighting (vim regex)
+    pattern = [[.*<(KEYWORDS):?\s+]], -- pattern or table of patterns, used for highlighting (vim regex)
   },
 })
 

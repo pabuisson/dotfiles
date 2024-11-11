@@ -25,6 +25,7 @@ augroup customfunctions
   " autocmd BufWrite * :call StripTrailingWhitespaces()
   autocmd BufWrite * :call ReplaceNonUnicodeWhitespaces()
   autocmd FileType yaml let b:noAutoWhitespaceFix=1
+  autocmd FileType po let b:noAutoWhitespaceFix=1
 augroup END
 
 

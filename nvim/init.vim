@@ -31,6 +31,7 @@ set smartcase       "don't ignore case if there's an uppercase letter in the pat
 set scrolloff=4     "displays at least 4 lines around the cursor even when top/bottom of screen
 set clipboard+=unnamed
 set showmatch       "show matching parenthese
+set foldcolumn=auto "show folding column
 " === HIDDEN/NON VISIBLE CHARS ===
 " multispace option allows to emulate indent lines without needing a dedicated plugin
 " source: https://github.com/thaerkh/vim-indentguides
@@ -49,7 +50,7 @@ augroup bufferloadsave
   autocmd BufWinLeave *.* if &filetype !=# 'gitcommit' | mkview! | endif
   autocmd BufWinEnter *.* if &filetype !=# 'gitcommit' | silent! loadview | endif
 augroup END
-
+" === FILETYPE SPECIFICS THAT DO NOT HAVE THEIR OWN FT CONFIG FILE ===
 augroup filetypes
   autocmd!
   " Cheatsheets are Markdown files with the .cheatmd extension
