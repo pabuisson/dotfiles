@@ -121,15 +121,24 @@ function s:MacOsUIMode()
   endif
 endfunction
 
-if has('nvim-0.5')
-  if s:MacOsUIMode() == 'Light'
-    call s:SetLightMode()
+function s:SetMode()
+  if has('nvim-0.5')
+    if s:MacOsUIMode() == 'Light'
+      call s:SetLightMode()
+    else
+      call s:SetDarkMode()
+    endif
   else
-    call s:SetDarkMode()
+    let g:oceanic_next_terminal_bold = 1
+    let g:oceanic_next_terminal_italic = 1
+    color OceanicNext
+    finish
   endif
-else
-  let g:oceanic_next_terminal_bold = 1
-  let g:oceanic_next_terminal_italic = 1
-  color OceanicNext
-  finish
-endif
+endfunction
+
+augroup lightdarkmode
+  autocmd!
+  autocmd WinEnter * call s:SetMode()
+augroup END
+
+call s:SetMode()
