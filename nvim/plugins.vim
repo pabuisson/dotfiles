@@ -46,6 +46,8 @@ if has('nvim')
 
   Plug 'smoka7/hop.nvim'
 
+  Plug 'lukas-reineke/indent-blankline.nvim'
+
   " -- nvim-cmp --
   Plug 'hrsh7th/cmp-nvim-lsp'
   Plug 'hrsh7th/cmp-buffer'
@@ -310,6 +312,14 @@ lspconfig.elixirls.setup({
 -- ----- gitsigns -----
 require('gitsigns').setup()
 
+
+-- ----- indent-blankline ----
+require("ibl").setup({
+  indent = {
+    char = "│"
+    -- char = "┃" thicker center-aligned char, see :help ibl.config.indent.char for more alternatives
+  }
+})
 
 -- ----- scrollbar -----
 require('scrollbar.handlers.gitsigns').setup()
