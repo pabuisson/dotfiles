@@ -163,7 +163,6 @@ let g:fzf_commits_log_options = '--color=always --format="%C(auto)%h%d %C(green)
 
 " ---- vsnip ----
 let g:vsnip_snippet_dir = expand("~/.config/nvim/snips")
-" mappings
 imap <expr> <Tab>   vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<Tab>'
 smap <expr> <Tab>   vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<Tab>'
 imap <expr> <S-Tab> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-Tab>'
@@ -320,11 +319,13 @@ lspconfig.tsserver.setup {
   capabilities = capabilities,
   on_attach = on_attach
 }
+
 -- Ruby
 lspconfig.ruby_lsp.setup {
   capabilities = capabilities,
   on_attach = on_attach,
 }
+
 -- Elixir
 local path_to_elixirls = vim.fn.expand("~/dev/elixir-ls/release/language_server.sh")
 lspconfig.elixirls.setup({
@@ -362,7 +363,7 @@ require('nvim-treesitter.configs').setup({
   highlight = { enable = true }
 })
 
-require'treesitter-context'.setup{
+require('treesitter-context').setup{
   max_lines = 3,            -- How many lines the window should span. Values <= 0 mean no limit.
   min_window_height = 0,    -- Minimum editor window height to enable context. Values <= 0 mean no limit.
   multiline_threshold = 2,  -- Maximum number of lines to show for a single context

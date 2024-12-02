@@ -57,3 +57,7 @@ augroup filetypes
   " reference: https://elixirforum.com/t/cheatsheets-in-exdoc-v0-29/51255
   autocmd BufNewFile,BufRead *.cheatmd set filetype=markdown
 augroup END
+
+" === GENERIC ABBREVIATIONS ===
+iabbr >> »
+iabbr --> →
