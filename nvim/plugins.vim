@@ -8,6 +8,7 @@ Plug 'mhartington/oceanic-next'
 if has('nvim')
   Plug 'rebelot/kanagawa.nvim'
   Plug 'navarasu/onedark.nvim'
+  Plug 'EdenEast/nightfox.nvim'
 endif
 " --- Filetype related ---
 Plug 'gabrielelana/vim-markdown', { 'for': 'markdown' }
@@ -23,7 +24,6 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-rhubarb' " vim-fugitive adapter for github
-" Plug 'tommcdo/vim-fubitive' " vim-fugitive adapter for bitbucket
 Plug 'tpope/vim-fugitive'
 Plug 'dominikduda/vim_current_word'
 Plug 'rhysd/conflict-marker.vim'
@@ -38,6 +38,7 @@ if has('nvim')
 
   Plug 'lewis6991/gitsigns.nvim'
 
+  " -- plenary and plugins depending on it
   Plug 'nvim-lua/plenary.nvim'
   Plug 'folke/todo-comments.nvim'
 
@@ -58,6 +59,8 @@ if has('nvim')
   " snippet engine (required for cmp)
   Plug 'hrsh7th/cmp-vsnip'
   Plug 'hrsh7th/vim-vsnip'
+
+  Plug 'stevearc/aerial.nvim'
 else
   Plug 'mhinz/vim-signify'
 endif
@@ -151,6 +154,8 @@ nnoremap <leader>fl :Lines<CR>
 nnoremap <leader>fo :BLines<CR>
 ca rg Rg
 ca rgw RgWordExact
+" list buffer symbols via aerial
+nnoremap <silent> <leader>fa <cmd>call aerial#fzf()<cr>
 
 " Enable per-command history.
 " CTRL-N and CTRL-P will be automatically bound to next-history and
@@ -160,13 +165,14 @@ let g:fzf_history_dir = '~/.local/share/fzf-history'
 let g:fzf_commits_log_options = '--color=always --format="%C(auto)%h%d %C(green)%as %C(cyan)%an :: %C(reset)%s"'
 
 
-
 " ---- vsnip ----
 let g:vsnip_snippet_dir = expand("~/.config/nvim/snips")
 imap <expr> <Tab>   vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<Tab>'
 smap <expr> <Tab>   vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<Tab>'
 imap <expr> <S-Tab> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-Tab>'
 smap <expr> <S-Tab> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-Tab>'
+
+
 
 " ==========================
 "       NVIM SPECIFIC
@@ -188,7 +194,45 @@ global_note.setup({
 })
 vim.keymap.set("n", "<leader>n", global_note.toggle_note, {
   desc = "Toggle global note",
+-- ----- aerial -----
+require("aerial").setup({
+  layout = {
+    min_width = 20,
+    width = 0.2,
+    max_width = 50
+  },
+  nerd_font = true,
+   -- Run this command after jumping to a symbol (false will disable)
+  post_jump_cmd = "normal! zt",
+  -- set keymaps when aerial has attached to a buffer
+  -- on_attach = function(bufnr)
+  --   vim.keymap.set("n", "{", "<cmd>AerialPrev<CR>", { buffer = bufnr })
+  --   vim.keymap.set("n", "}", "<cmd>AerialNext<CR>", { buffer = bufnr })
+  -- end,
+
+  -- NOTE: one of the following 2 callbacks should allow me to show private functions differently
+  --
+  -- Invoked after each symbol is parsed, can be used to modify the parsed item,
+  -- or to filter it by returning false.
+  --
+  -- bufnr: a neovim buffer number
+  -- item: of type aerial.Symbol
+  -- ctx: a record containing the following fields:
+  --   * backend_name: treesitter, lsp, man...
+  --   * lang: info about the language
+  --   * symbols?: specific to the lsp backend
+  --   * symbol?: specific to the lsp backend
+  --   * syntax_tree?: specific to the treesitter backend
+  --   * match?: specific to the treesitter backend, TS query match
+  post_parse_symbol = function(bufnr, item, ctx)
+    return true
+  end,
+  -- Set this function to override the highlight groups for certain symbols
+  get_highlight = function(symbol, is_icon, is_collapsed)
+  -- return "MyHighlight" .. symbol.kind
+  end,
 })
+vim.keymap.set("n", "<leader>a", "<cmd>AerialToggle!<CR>")
 
 -- ----- hop -----
 require('hop').setup()
