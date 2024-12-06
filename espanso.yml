@@ -1,13 +1,13 @@
-# espanso configuration file
-
-# This is the default configuration file, change it as you like it
-# You can refer to the official documentation:
-# https://espanso.org/docs/
-
-# Matches are the substitution rules, when you type the "trigger" string
-# it gets replaced by the "replace" string.
 matches:
   # Dates
+  - trigger: ":dateiso"
+    replace: "{{output}}"
+    vars:
+      - name: output
+        type: date
+        params:
+          format: "%Y-%m-%d"
+
   - trigger: ":todiso"
     replace: "{{output}}"
     vars:
@@ -34,13 +34,21 @@ matches:
           format: "%Y%m%d"
           offset: 86400
 
-  - trigger: ":timeiso"
+  - trigger: ":datetimeiso"
     replace: "{{output}}"
     vars:
       - name: output
         type: date
         params:
           format: "%Y-%m-%d %H:%M"
+
+  - trigger: ":timestamp"
+    replace: "{{output}}"
+    vars:
+      - name: output
+        type: date
+        params:
+          format: "%Y%m%d%H%M%S"
 
   - trigger: ":now"
     replace: "{{output}}"
