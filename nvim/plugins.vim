@@ -145,8 +145,27 @@ command! -bang -nargs=* RgWord
   \   'rg -F --column --line-number --no-heading --color=always -- '.shellescape(<q-args>), 1,
   \   fzf#vim#with_preview(), <bang>0)
 
+command! -bang -nargs=* RgDefWithArg
+  \ call fzf#vim#grep(
+  \   'rg --column --line-number --no-heading --color=always "^[\s\t]*\b(def|defp|defmodule)\b '.<q-args>.'"', 1,
+  \   fzf#vim#with_preview(), <bang>0)
+
+command! -bang -nargs=* RgDefFn
+  \ call fzf#vim#grep(
+  \   'rg --column --line-number --no-heading --color=always "^[\s\t]*\b(def|defp)\b"', 1,
+  \   fzf#vim#with_preview(), <bang>0)
+
+command! -bang -nargs=* RgDefMod
+  \ call fzf#vim#grep(
+  \   'rg --column --line-number --no-heading --color=always "^[\s\t]*\bdefmodule\b"', 1,
+  \   fzf#vim#with_preview(), <bang>0)
+
+
 nnoremap <leader>fw :execute 'RgWord '.expand('<cword>')<CR>
 nnoremap <leader>fW :execute 'RgWordExact '.expand('<cword>')<CR>
+nnoremap <leader>fd :execute 'RgDefWithArg '.expand('<cword>')<CR>
+nnoremap <leader>fme :execute 'RgDefFn'<CR>
+nnoremap <leader>fmo :execute 'RgDefMod'<CR>
 nnoremap <leader>ff :Files<CR>
 nnoremap <leader>fb :Buffers<CR>
 nnoremap <leader>fc :BCommits<CR>
@@ -370,19 +389,39 @@ lspconfig.ruby_lsp.setup {
   on_attach = on_attach,
 }
 
--- Elixir
-local path_to_elixirls = vim.fn.expand("~/dev/elixir-ls/release/language_server.sh")
-lspconfig.elixirls.setup({
-  cmd = { path_to_elixirls },
+-- -- Elixir
+-- -- https://github.com/elixir-lsp/elixir-ls?tab=readme-ov-file#elixirls-configuration-settings
+-- local path_to_elixirls = vim.fn.expand("~/dev/elixir-ls/release/language_server.sh")
+-- lspconfig.elixirls.setup({
+--   cmd = { path_to_elixirls },
+--   capabilities = capabilities,
+--   on_attach = on_attach,
+--   settings = {
+--     elixirLS = {
+--       fetchDeps = false,
+--       dialyzerEnabled = false,
+--       incrementalDialyzer = true,
+--       suggestSpecs = false,
+--       -- Nov 2024: had to add this to make the LSP work again, not sure why, I didn't need it before
+--       mixEnv = "lsp",
+--       mixTarget = "lsp"
+--     }
+--   }
+-- })
+
+-- NOTE: should be able to use lexical/bin/start_lexical.sh but I get an error if I use this
+-- |-> https://github.com/lexical-lsp/lexical/issues/799
+local path_to_lexical = vim.fn.expand("~/dev/lexical/_build/dev/package/lexical/bin/start_lexical.sh")
+lspconfig.lexical.setup({
+  cmd = { path_to_lexical },
   capabilities = capabilities,
   on_attach = on_attach,
-  settings = {
-    elixirLS = {
-      dialyzerEnabled = false,
-      fetchDeps = false
-    }
-  }
+  root_dir = function(fname)
+    return lspconfig.util.root_pattern("mix.exs", ".git")(fname) or vim.loop.cwd()
+  end,
+  settings = {}
 })
+
 
 -- ----- gitsigns -----
 require('gitsigns').setup()
