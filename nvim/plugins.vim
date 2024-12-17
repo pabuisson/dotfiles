@@ -11,7 +11,7 @@ if has('nvim')
   Plug 'EdenEast/nightfox.nvim'
 endif
 " --- Filetype related ---
-Plug 'gabrielelana/vim-markdown', { 'for': 'markdown' }
+" Plug 'gabrielelana/vim-markdown', { 'for': 'markdown' }
 Plug 'junegunn/goyo.vim', { 'for': 'markdown' }
 Plug 'elixir-editors/vim-elixir', { 'for': 'elixir' }
 
@@ -23,12 +23,12 @@ Plug 'dense-analysis/ale'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-eunuch'
-Plug 'tpope/vim-rhubarb' " vim-fugitive adapter for github
 Plug 'tpope/vim-fugitive'
 Plug 'dominikduda/vim_current_word'
 Plug 'rhysd/conflict-marker.vim'
 
 if has('nvim')
+  " -- treesitter and lsp --
   Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
   Plug 'nvim-treesitter/nvim-treesitter-context'
   Plug 'williamboman/mason.nvim'
@@ -36,19 +36,12 @@ if has('nvim')
   Plug 'neovim/nvim-lspconfig'
   Plug 'mfussenegger/nvim-lint'
 
-  Plug 'lewis6991/gitsigns.nvim'
-
-  " -- plenary and plugins depending on it
+  " -- plenary and plugins depending on it --
   Plug 'nvim-lua/plenary.nvim'
   Plug 'folke/todo-comments.nvim'
 
-  Plug 'backdround/global-note.nvim'
-
+  " -- scrollbar --
   Plug 'petertriho/nvim-scrollbar'
-
-  Plug 'smoka7/hop.nvim'
-
-  Plug 'lukas-reineke/indent-blankline.nvim'
 
   " -- nvim-cmp --
   Plug 'hrsh7th/cmp-nvim-lsp'
@@ -60,6 +53,10 @@ if has('nvim')
   Plug 'hrsh7th/cmp-vsnip'
   Plug 'hrsh7th/vim-vsnip'
 
+  "Plug 'backdround/global-note.nvim'
+  Plug 'lewis6991/gitsigns.nvim'
+  Plug 'smoka7/hop.nvim'
+  Plug 'nvimdev/indentmini.nvim'
   Plug 'stevearc/aerial.nvim'
 else
   Plug 'mhinz/vim-signify'
@@ -81,7 +78,7 @@ let g:ale_fix_on_save = 1
 let g:ale_ruby_syntax_tree_executable = 'bundle'
 let g:ale_fixers = {
 \   '*': ['remove_trailing_lines', 'trim_whitespace'],
-\   'ruby': ['syntax_tree', 'prettier'],
+\   'ruby': ['remove_trailing_lines', 'trim_whitespace', 'syntax_tree', 'prettier'],
 \   'elixir': ['mix_format', 'trim_whitespace', 'remove_trailing_lines'],
 \   'heex': ['mix_format', 'trim_whitespace', 'remove_trailing_lines'],
 \   'javascript': ['prettier'],
@@ -160,10 +157,16 @@ command! -bang -nargs=* RgDefMod
   \   'rg --column --line-number --no-heading --color=always "^[\s\t]*\bdefmodule\b"', 1,
   \   fzf#vim#with_preview(), <bang>0)
 
+" Find usage of word under cursor, excluding fn and module definition
+command! -bang -nargs=* RgFindReferences
+  \ call fzf#vim#grep(
+  \   'rg --column --line-number --no-heading --color=always --pcre2 "^(?!.*\b(def|defp|defmodule|alias|require|spec)\b).*\b'.<q-args>.'\b"', 1,
+  \   fzf#vim#with_preview(), <bang>0)
 
 nnoremap <leader>fw :execute 'RgWord '.expand('<cword>')<CR>
 nnoremap <leader>fW :execute 'RgWordExact '.expand('<cword>')<CR>
 nnoremap <leader>fd :execute 'RgDefWithArg '.expand('<cword>')<CR>
+nnoremap <leader>fr :execute 'RgFindReferences '.expand('<cword>')<CR>
 nnoremap <leader>fme :execute 'RgDefFn'<CR>
 nnoremap <leader>fmo :execute 'RgDefMod'<CR>
 nnoremap <leader>ff :Files<CR>
@@ -213,7 +216,10 @@ global_note.setup({
 })
 vim.keymap.set("n", "<leader>n", global_note.toggle_note, {
   desc = "Toggle global note",
+
 -- ----- aerial -----
+-- NOTE: neovim LSP is supposed to provide this but I couldn't get it to work yet.
+-- https://neovim.io/doc/user/lsp.html#vim.lsp.buf.document_symbol()
 require("aerial").setup({
   layout = {
     min_width = 20,
@@ -307,21 +313,17 @@ local on_attach = function(_, bufnr)
   vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
   local opts = { noremap=true, silent=true }
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>zz', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
+  -- NOTE: these should already be set, but isn't
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', 'grr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', 'grn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
+
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gdd', '<cmd>lua vim.lsp.buf.definition()<CR>zz', opts)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
 
   vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>dl', '<cmd>lua vim.diagnostic.setloclist()<CR>', opts)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>dd', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
 
-  -- local bufopts = { noremap=true, silent=true, buffer=bufnr }
-  -- vim.keymap.set('n', 'gD', vim.lsp.buf.definition, bufopts)
-  -- vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
-  -- vim.keymap.set('n', '<space>D', vim.lsp.buf.type_definition, bufopts)
-  -- vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, bufopts)
-  -- vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, bufopts)
-  -- vim.keymap.set('n', '<leader>f', function() vim.lsp.buf.format { async = true } end, bufopts)
 end
 
 -- ----- cmp -----
@@ -378,7 +380,7 @@ local capabilities = require('cmp_nvim_lsp').default_capabilities()
 local lspconfig = require('lspconfig')
 
 -- JS / TS
-lspconfig.tsserver.setup {
+lspconfig.ts_ls.setup {
   capabilities = capabilities,
   on_attach = on_attach
 }
@@ -427,13 +429,8 @@ lspconfig.lexical.setup({
 require('gitsigns').setup()
 
 
--- ----- indent-blankline ----
-require("ibl").setup({
-  indent = {
-    char = "│"
-    -- char = "┃" thicker center-aligned char, see :help ibl.config.indent.char for more alternatives
-  }
-})
+-- ----- indentmini -----
+require("indentmini").setup()
 
 -- ----- scrollbar -----
 require('scrollbar.handlers.gitsigns').setup()
@@ -466,9 +463,9 @@ require("todo-comments").setup({
     WARN = { icon = "⏺" },
     NOTE = { icon = "⏺" },
   },
-  highlight = {
-    pattern = [[.*<(KEYWORDS):?\s+]], -- pattern or table of patterns, used for highlighting (vim regex)
-  },
+  -- highlight = {
+  --   pattern = [[.*<(KEYWORDS)\s+:]], -- pattern or table of patterns, used for highlighting (vim regex)
+  -- },
 })
 
 EOF
