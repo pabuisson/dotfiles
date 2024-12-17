@@ -169,3 +169,7 @@ then
   source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
   # bindkey '^I' autosuggest-accept
 fi
+
+# ---- ELIXIR -----
+
+export ERL_AFLAGS="-kernel shell_history enabled"
