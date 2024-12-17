@@ -1,5 +1,3 @@
-
-
 # ----- PATH AND GENERIC STUFF ----
 
 export PATH="/usr/local/sbin:$PATH"
@@ -160,4 +158,14 @@ r () {
 if [[ -e $HOME/.workrc ]]
 then
   source $HOME/.workrc
+fi
+
+# ----- PLUGINS -----
+
+# Command auto-suggestion. Depends on "brew install zsh-autosuggestions"
+# https://github.com/zsh-users/zsh-autosuggestions
+if [[ -e $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh ]]
+then
+  source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+  # bindkey '^I' autosuggest-accept
 fi
