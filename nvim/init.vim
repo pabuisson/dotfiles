@@ -61,3 +61,4 @@ augroup END
 " === GENERIC ABBREVIATIONS ===
 iabbr >> »
 iabbr --> →
+iabbr <-- ←
