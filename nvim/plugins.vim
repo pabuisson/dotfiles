@@ -26,7 +26,6 @@ Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-rhubarb'
 Plug 'tpope/vim-fugitive'
 Plug 'dominikduda/vim_current_word'
-Plug 'rhysd/conflict-marker.vim'
 
 if has('nvim')
   " -- treesitter and lsp --
@@ -71,7 +70,6 @@ call plug#end()
 let g:ale_disable_lsp = 1
 let g:ale_linters_explicit = 1
 let g:ale_linters = {}
-
 let g:ale_fix_on_save = 1
 let g:ale_ruby_syntax_tree_executable = 'bundle'
 let g:ale_fixers = {
@@ -86,16 +84,6 @@ let g:ale_fixers = {
 \}
 
 
-"----- conflict-marker -----
-highlight ConflictMarkerBegin guibg=#2f7366
-highlight ConflictMarkerOurs guibg=#2e5049
-highlight ConflictMarkerTheirs guibg=#344f69
-highlight ConflictMarkerEnd guibg=#2f628e
-highlight ConflictMarkerCommonAncestorsHunk guibg=#754a81
-nmap <leader>gcn <Plug>(conflict-marker-next-hunk)
-nmap <leader>gcp <Plug>(conflict-marker-prev-hunk)
-
-
 " ----- current_word -----
 let g:vim_current_word#highlight_delay = 800
 highlight CurrentWord gui=bold cterm=bold
@@ -104,7 +92,6 @@ highlight CurrentWordTwins gui=underline cterm=underline
 " " NOTE: below is the native way of doing this, but I couldn't get it to work
 " " yet. Will need to dive deeper into this, maybe I can get rid of a plugin
 " source: https://chaos.social/@scy/111570077753908537
-"
 " set updatetime=1000
 " " TODO: trigger document_highlight only if the LSP server supports this
 " autocmd CursorHold  <buffer> lua vim.lsp.buf.document_highlight()
