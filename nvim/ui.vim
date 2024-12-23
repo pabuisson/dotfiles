@@ -29,14 +29,14 @@ function s:SetDarkMode()
 "  require('kanagawa').setup({
 "      undercurl = true,
 "      commentStyle = { italic = false },
-"      functionStyle = { bold = true },
 "      keywordStyle = { italic = false },
+"      functionStyle = { bold = true },
 "      statementStyle = { bold = true },
 "      colors = {
 "        palette = {
 "            fujiWhite = "#dbd8c5",  -- fg: a bit less saturated
-"            fujiGray = "#6a6b77",   -- more blue-ish, less brown-ish
-"            sumiInk3 = "#202025",   -- bg: more blue-ish, less saturated
+"            fujiGray = "#7c7e8c",   -- more blue-ish, less brown-ish
+"            sumiInk3 = "#222123",   -- bg: more blue-ish, less saturated
 "            sumiInk4 = "#232428",   -- bg_p1: more blue-ish, less saturated
 "        },
 "        theme = {
@@ -53,15 +53,37 @@ function s:SetDarkMode()
 "  vim.cmd('color kanagawa-wave')
 "EOF
 
-   " -- onedark --
+"" -- nightfox --
+"lua << EOF
+"  require('nightfox').setup({
+"    options = {
+"      styles = { keywords = "bold" },
+"    },
+"    palettes = {
+"      -- Custom duskfox with black background
+"      nordfox = {
+"        bg1 = "#1c2026", -- Black background
+"        bg3 = "#2c333f",
+"      }
+"    },
+"    specs = {},
+"    groups = {},
+"  })
+"  -- DARK: nightfox, nordfox // LIGHT: dayfox, dawnfox
+"  -- not too fond of the other ones
+"  -- vim.cmd("colorscheme nightfox")
+"  vim.cmd("colorscheme nordfox")
+"EOF
+
+" -- onedark --
 lua << EOF
   require('onedark').setup {
     -- Choose between 'dark', 'darker', 'cool', 'deep'
     -- Don't like 'warm' or 'warmer'
     style = 'cool',
     code_style = {
-      keywords = 'bold',
-      comments = 'none'
+      comments = 'none',
+      keywords = 'none',
     },
     colors = {
       fg = '#d2d2d2', -- whiter foreground color
