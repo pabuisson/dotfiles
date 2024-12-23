@@ -41,9 +41,6 @@ if has('nvim')
   Plug 'nvim-lua/plenary.nvim'
   Plug 'folke/todo-comments.nvim'
 
-  " -- scrollbar --
-  Plug 'petertriho/nvim-scrollbar'
-
   " -- nvim-cmp --
   Plug 'hrsh7th/cmp-nvim-lsp'
   Plug 'hrsh7th/cmp-buffer'
@@ -59,6 +56,7 @@ if has('nvim')
   Plug 'smoka7/hop.nvim'
   Plug 'nvimdev/indentmini.nvim'
   Plug 'stevearc/aerial.nvim'
+  Plug 'dstein64/nvim-scrollview'
 else
   Plug 'mhinz/vim-signify'
 endif
@@ -235,7 +233,6 @@ require("aerial").setup({
   --   vim.keymap.set("n", "{", "<cmd>AerialPrev<CR>", { buffer = bufnr })
   --   vim.keymap.set("n", "}", "<cmd>AerialNext<CR>", { buffer = bufnr })
   -- end,
-
   -- NOTE: one of the following 2 callbacks should allow me to show private functions differently
   --
   -- Invoked after each symbol is parsed, can be used to modify the parsed item,
@@ -433,9 +430,14 @@ require('gitsigns').setup()
 -- ----- indentmini -----
 require("indentmini").setup()
 
--- ----- scrollbar -----
-require('scrollbar.handlers.gitsigns').setup()
-require('scrollbar').setup()
+
+-- ----- scrollview -----
+require('scrollview.contrib.gitsigns').setup()
+require('scrollview').setup({
+  excluded_filetypes = {},
+  signs_on_startup = {'conflicts', 'cursor', 'diagnostics', 'loclist', 'marks', 'quickfix', 'search'},
+  diagnostics_severities = {vim.diagnostic.severity.ERROR}
+})
 
 
 -- ----- treesitter -----
