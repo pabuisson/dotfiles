@@ -161,8 +161,6 @@ nnoremap <leader>fl :Lines<CR>
 nnoremap <leader>fo :BLines<CR>
 ca rg Rg
 ca rgw RgWordExact
-" list buffer symbols via aerial
-nnoremap <silent> <leader>fa <cmd>call aerial#fzf()<cr>
 
 " Enable per-command history.
 " CTRL-N and CTRL-P will be automatically bound to next-history and
@@ -204,16 +202,8 @@ require("aerial").setup({
   nerd_font = true,
    -- Run this command after jumping to a symbol (false will disable)
   post_jump_cmd = "normal! zt",
-  -- set keymaps when aerial has attached to a buffer
-  -- on_attach = function(bufnr)
-  --   vim.keymap.set("n", "{", "<cmd>AerialPrev<CR>", { buffer = bufnr })
-  --   vim.keymap.set("n", "}", "<cmd>AerialNext<CR>", { buffer = bufnr })
-  -- end,
-  -- NOTE: one of the following 2 callbacks should allow me to show private functions differently
-  --
   -- Invoked after each symbol is parsed, can be used to modify the parsed item,
   -- or to filter it by returning false.
-  --
   -- bufnr: a neovim buffer number
   -- item: of type aerial.Symbol
   -- ctx: a record containing the following fields:
@@ -225,11 +215,7 @@ require("aerial").setup({
   --   * match?: specific to the treesitter backend, TS query match
   post_parse_symbol = function(bufnr, item, ctx)
     return true
-  end,
-  -- Set this function to override the highlight groups for certain symbols
-  get_highlight = function(symbol, is_icon, is_collapsed)
-  -- return "MyHighlight" .. symbol.kind
-  end,
+  end
 })
 vim.keymap.set("n", "<leader>a", "<cmd>AerialToggle!<CR>")
 
@@ -366,27 +352,9 @@ lspconfig.ruby_lsp.setup {
   on_attach = on_attach,
 }
 
--- -- Elixir
--- -- https://github.com/elixir-lsp/elixir-ls?tab=readme-ov-file#elixirls-configuration-settings
--- local path_to_elixirls = vim.fn.expand("~/dev/elixir-ls/release/language_server.sh")
--- lspconfig.elixirls.setup({
---   cmd = { path_to_elixirls },
---   capabilities = capabilities,
---   on_attach = on_attach,
---   settings = {
---     elixirLS = {
---       fetchDeps = false,
---       dialyzerEnabled = false,
---       incrementalDialyzer = true,
---       suggestSpecs = false,
---       -- Nov 2024: had to add this to make the LSP work again, not sure why, I didn't need it before
---       mixEnv = "lsp",
---       mixTarget = "lsp"
---     }
---   }
--- })
-
--- NOTE: should be able to use lexical/bin/start_lexical.sh but I get an error if I use this
+-- Elixir
+-- NOTE: should be able to use lexical/bin/start_lexical.sh but I get an error if I use this,
+--       so I ended up using the one located in _build
 -- |-> https://github.com/lexical-lsp/lexical/issues/799
 local path_to_lexical = vim.fn.expand("~/dev/lexical/_build/dev/package/lexical/bin/start_lexical.sh")
 lspconfig.lexical.setup({
@@ -425,7 +393,6 @@ require('nvim-treesitter.configs').setup({
 
 require('treesitter-context').setup{
   max_lines = 3,            -- How many lines the window should span. Values <= 0 mean no limit.
-  min_window_height = 0,    -- Minimum editor window height to enable context. Values <= 0 mean no limit.
   multiline_threshold = 2,  -- Maximum number of lines to show for a single context
   trim_scope = 'inner',     -- Which context lines to discard if `max_lines` is exceeded. Choices: 'inner', 'outer'
 }
