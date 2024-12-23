@@ -51,7 +51,6 @@ if has('nvim')
   Plug 'hrsh7th/cmp-vsnip'
   Plug 'hrsh7th/vim-vsnip'
 
-  "Plug 'backdround/global-note.nvim'
   Plug 'lewis6991/gitsigns.nvim'
   Plug 'smoka7/hop.nvim'
   Plug 'nvimdev/indentmini.nvim'
@@ -205,16 +204,6 @@ end
 
 
 lua <<EOF
--- ----- global-note -----
--- NOTE: possibility to create a different file by project or git branch, dynamically.
---       Check https://github.com/backdround/global-note.nvim
-local global_note = require("global-note")
-global_note.setup({
-  filename = "vim.md",
-  directory = "~/Sync/MEGA/NOTES/",
-})
-vim.keymap.set("n", "<leader>n", global_note.toggle_note, {
-  desc = "Toggle global note",
 
 -- ----- aerial -----
 -- NOTE: neovim LSP is supposed to provide this but I couldn't get it to work yet.
@@ -256,6 +245,7 @@ require("aerial").setup({
   end,
 })
 vim.keymap.set("n", "<leader>a", "<cmd>AerialToggle!<CR>")
+
 
 -- ----- hop -----
 require('hop').setup()
