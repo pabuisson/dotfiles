@@ -38,3 +38,5 @@
   ; light = true
 [diff]
   colorMoved = default
+[branch]
+	sort = -committerdate

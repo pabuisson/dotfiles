@@ -35,7 +35,7 @@ alias githead='git rev-parse HEAD | cut -c 1-8 | pbcopy'
 # Set of aliases involving a reference branch name
 # TODO: improve the prompt: maybe show last committer and last commit date
 #       check https://chatgpt.com/c/ef296795-b4b7-42aa-a804-a1cff334b526
-alias gbdm="git branch --merged | grep -v 'master\|develop' | xargs -p -n 1 git branch -d"
+alias gbdm="git branch --format='%(refname:short)' --merged | grep -v 'master\|develop' | xargs -p -n 1 git branch -d"
 alias gsm='git switch master'
 alias gsd='git switch develop'
 alias gsfm='git switch -f master'
