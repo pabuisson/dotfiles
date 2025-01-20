@@ -5,8 +5,8 @@
   co = checkout
   cp = cherry-pick
   d = diff
-  lg = "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
-  lgiso = "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%ci) %C(bold blue)<%an>%Creset' --abbrev-commit"
+  lg = "log --color --graph --pretty=format:'%Cred%h%Creset %s %Cgreen(%cr) %C(bold blue)%an%Creset%C(yellow)%d%Creset' --abbrev-commit"
+  lgiso = "log --color --graph --pretty=format:'%Cred%h%Creset %s %Cgreen(%ci) %C(bold blue)%an%Creset%C(yellow)%d%Creset' --abbrev-commit"
   st = status -sb
   fp = fetch -p
   recent  = "!r() { cur=$(git rev-parse --abbrev-ref HEAD); git for-each-ref --sort=-committerdate refs/heads/ --format='%(color:yellow)%(refname:short)|%(color:green)%(committerdate:relative)|%(color:magenta)%(authorname)%(color:reset)' | sed \"s/m${cur}|/m* ${cur}|/\" | column -ts'|'; }; r"
@@ -38,5 +38,7 @@
   ; light = true
 [diff]
   colorMoved = default
+[rebase]
+  autoSquash = true
 [branch]
 	sort = -committerdate
