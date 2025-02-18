@@ -129,17 +129,17 @@ command! -bang -nargs=* RgWord
 
 command! -bang -nargs=* RgDefWithArg
   \ call fzf#vim#grep(
-  \   'rg --column --line-number --no-heading --color=always "^[\s\t]*\b(def|defp|defmodule)\b '.<q-args>.'"', 1,
+  \   'rg --column --line-number --no-heading --color=always "^\s*\b(def|defp|defmodule)\b [\w\.]*\b'.<q-args>.'\b"', 1,
   \   fzf#vim#with_preview(), <bang>0)
 
 command! -bang -nargs=* RgDefFn
   \ call fzf#vim#grep(
-  \   'rg --column --line-number --no-heading --color=always "^[\s\t]*\b(def|defp)\b"', 1,
+  \   'rg --column --line-number --no-heading --color=always "^\s*\b(def|defp)\b"', 1,
   \   fzf#vim#with_preview(), <bang>0)
 
 command! -bang -nargs=* RgDefMod
   \ call fzf#vim#grep(
-  \   'rg --column --line-number --no-heading --color=always "^[\s\t]*\bdefmodule\b"', 1,
+  \   'rg --column --line-number --no-heading --color=always "^\s*\bdefmodule\b"', 1,
   \   fzf#vim#with_preview(), <bang>0)
 
 " Find usage of word under cursor, excluding fn and module definition
