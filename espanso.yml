@@ -34,7 +34,7 @@ matches:
           format: "%Y%m%d"
           offset: 86400
 
-  - trigger: ":datetimeiso"
+  - trigger: ":dtiso"
     replace: "{{output}}"
     vars:
       - name: output
