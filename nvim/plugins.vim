@@ -67,7 +67,6 @@ call plug#end()
 " =======================
 
 " " ----- ale -----
-let g:ale_disable_lsp = 1
 let g:ale_linters_explicit = 1
 let g:ale_linters = {}
 let g:ale_fix_on_save = 1
@@ -145,7 +144,7 @@ command! -bang -nargs=* RgDefMod
 " Find usage of word under cursor, excluding fn and module definition
 command! -bang -nargs=* RgFindReferences
   \ call fzf#vim#grep(
-  \   'rg --column --line-number --no-heading --color=always --pcre2 "^(?!.*\b(def|defp|defmodule|alias|require|spec)\b).*\b'.<q-args>.'\b"', 1,
+  \   'rg --column --line-number --no-heading --color=always --pcre2 "^(?!(.*\b(def|defp|defmodule|alias|require|spec)\b)|(\s*#)).*\b'.<q-args>.'\b"', 1,
   \   fzf#vim#with_preview(), <bang>0)
 
 nnoremap <leader>fw :execute 'RgWord '.expand('<cword>')<CR>
@@ -219,11 +218,11 @@ require("aerial").setup({
 })
 vim.keymap.set("n", "<leader>a", "<cmd>AerialToggle!<CR>")
 
-
 -- ----- hop -----
 require('hop').setup()
 vim.cmd([[
 nnoremap <leader>jw :HopWord<CR>
+nnoremap <leader>jl :HopLine<CR>
 nnoremap <leader>jc :HopCamelCase<CR>
 ]])
 
@@ -234,7 +233,6 @@ local nvim_lint = require('lint')
 -- FIXME: fallback on the default path if this one does not exist
 --        I need to dynamically and recursively look for the closest
 --        node_modules/ folders to look for the eslint binary
---
 -- Check: https://github.com/mfussenegger/nvim-lint/issues/482
 --
 -- ⬇ maybe put these in my autocmd hook?
@@ -255,7 +253,6 @@ nvim_lint.linters_by_ft = {
   typescript = {'eslint'},
   typescriptreact = {'eslint'}
 }
-
 -- Autocmd to trigger linting
 vim.api.nvim_create_autocmd({ "BufWritePost" }, {
   callback = function()
@@ -284,7 +281,6 @@ local on_attach = function(_, bufnr)
 
   vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>dl', '<cmd>lua vim.diagnostic.setloclist()<CR>', opts)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>dd', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
-
 end
 
 -- ----- cmp -----
@@ -387,7 +383,7 @@ require('scrollview').setup({
 
 -- ----- treesitter -----
 require('nvim-treesitter.configs').setup({
-  ensure_installed = { "javascript", "ruby", "eex", "elixir", "erlang", "heex", "markdown", "markdown_inline", "html", "lua" },
+  ensure_installed = { "javascript", "ruby", "eex", "elixir", "erlang", "heex", "markdown", "markdown_inline", "html", "lua", "typescript" },
   highlight = { enable = true }
 })
 
@@ -406,13 +402,10 @@ vim.cmd([[
 -- ----- todo-comments -----
 require("todo-comments").setup({
   keywords = {
-    TODO = { icon = "⏺" },
-    WARN = { icon = "⏺" },
+    TODO = { icon = "⬣" },
+    WARN = { icon = "▲" },
     NOTE = { icon = "⏺" },
   },
-  -- highlight = {
-  --   pattern = [[.*<(KEYWORDS)\s+:]], -- pattern or table of patterns, used for highlighting (vim regex)
-  -- },
 })
 
 EOF
