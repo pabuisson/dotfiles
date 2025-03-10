@@ -3,6 +3,9 @@
     "prefix": ["defmod"],
     "body": [
       "defmodule $1 do",
+      "  @moduledoc \"\"\"",
+      " \"\"\"",
+      "",
       "  $2",
       "end"
     ],
