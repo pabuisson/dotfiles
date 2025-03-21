@@ -25,6 +25,7 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-rhubarb'
 Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-projectionist'
 Plug 'dominikduda/vim_current_word'
 
 if has('nvim')
