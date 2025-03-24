@@ -83,16 +83,17 @@ lua << EOF
     style = 'cool',
     code_style = {
       comments = 'none',
-      keywords = 'none',
+      keywords = 'bold',
+      functions = 'bold'
     },
     colors = {
-      fg = '#d2d2d2', -- whiter foreground color
-      comment_gray = '#667788'
+      fg = '#d8dee9',  -- whiter foreground color → nordic.nvim white1
+      bg0 = '#242933', -- darker background color → nordic.nvim gray0
     },
-    highlights = {
-      ["comments"] = {fg = '$comment_gray', fmt = 'none'},
-      ["@comment"] = {fg = '$comment_gray', fmt = 'none'},
-    }
+    -- highlights = {
+    --   ["comments"] = {fg = '$comment_gray', fmt = 'none'},
+    --   ["@comment"] = {fg = '$comment_gray', fmt = 'none'},
+    -- }
   }
   require('onedark').load()
 EOF
@@ -119,12 +120,15 @@ lua << EOF
     code_style = {
       comments = 'none',
       keywords = 'bold',
+      functions = 'none',
     },
     colors = {
+      bg0 = '#fefffd',
       green = '#1d936a',
-      red = '#c65959',
+      red = '#ce4646',
       blue = '#2d689b',
-      yellow = '#ce993d'
+      orange = '#bf7c42',
+      yellow = '#d6a63e'
     },
   }
   require('onedark').load()
