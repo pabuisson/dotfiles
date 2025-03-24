@@ -395,6 +395,7 @@ require("todo-comments").setup({
   keywords = {
     TODO = { icon = "⬣" },
     WARN = { icon = "▲" },
+    FIXME = { icon = "▲" },
     NOTE = { icon = "⏺" },
   },
 })
