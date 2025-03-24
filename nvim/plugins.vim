@@ -114,6 +114,11 @@ nnoremap <leader>gdh :Gdiffsplit<CR>
 
 " ----- fzf -----
 " Escape C-a and C-d in iTerm2 : https://github.com/junegunn/fzf.vim/issues/54
+
+let g:fzf_vim = {
+      \ 'preview_window': ['right,50%', 'ctrl-p']
+      \ }
+
 " ---
 " Search with ripgrep for the word under the cursor
 " Source: https://coffeeandcontemplation.dev/2020/11/13/fuzzy-finding-in-vim/
