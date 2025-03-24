@@ -211,11 +211,9 @@ vim.keymap.set("n", "<leader>a", "<cmd>AerialToggle!<CR>")
 
 -- ----- hop -----
 require('hop').setup()
-vim.cmd([[
-nnoremap <leader>jw :HopWord<CR>
-nnoremap <leader>jl :HopLine<CR>
-nnoremap <leader>jc :HopCamelCase<CR>
-]])
+vim.keymap.set("n", "<leader>jw", "<cmd>HopWord<CR>")
+vim.keymap.set("n", "<leader>jl", "<cmd>HopLine<CR>")
+vim.keymap.set("n", "<leader>jc", "<cmd>HopCamelCale<CR>")
 
 
 -- ----- lint -----
