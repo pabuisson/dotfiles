@@ -75,21 +75,36 @@ function s:SetDarkMode()
 "  vim.cmd("colorscheme nordfox")
 "EOF
 
+
 " -- onedark --
 lua << EOF
+  --- Merges a table into another table. Returns a whole new table.
+  -- @param t1 first table
+  -- @param t2 second table
+  -- @return a new table containing t2 values merged into t1
+  function merge(t1, t2)
+    local result = {}
+    for k, v in pairs(t1) do result[k] = v end
+    for k, v in pairs(t2) do result[k] = v end
+    return result
+  end
+
+  local style = 'dark'
+  local palette = require("onedark.palette")
+
   require('onedark').setup {
     -- Choose between 'dark', 'darker', 'cool', 'deep'
     -- Don't like 'warm' or 'warmer'
-    style = 'cool',
+    style = style,
     code_style = {
       comments = 'none',
       keywords = 'bold',
       functions = 'bold'
     },
-    colors = {
+    colors = merge(palette[style], {
       fg = '#d8dee9',  -- whiter foreground color → nordic.nvim white1
       bg0 = '#242933', -- darker background color → nordic.nvim gray0
-    },
+    }),
     -- highlights = {
     --   ["comments"] = {fg = '$comment_gray', fmt = 'none'},
     --   ["@comment"] = {fg = '$comment_gray', fmt = 'none'},
@@ -115,21 +130,35 @@ function s:SetLightMode()
 
   " -- onedark --
 lua << EOF
+  --- Merges a table into another table. Returns a whole new table.
+  -- @param t1 first table
+  -- @param t2 second table
+  -- @return a new table containing t2 values merged into t1
+  function merge(t1, t2)
+    local result = {}
+    for k, v in pairs(t1) do result[k] = v end
+    for k, v in pairs(t2) do result[k] = v end
+    return result
+  end
+
+  local style = 'light'
+  local palette = require("onedark.palette")
+
   require('onedark').setup {
-    style = 'light',
+    style = style,
     code_style = {
       comments = 'none',
       keywords = 'bold',
       functions = 'none',
     },
-    colors = {
-      bg0 = '#fefffd',
+    colors = merge(palette[style], {
+      -- bg0 = '#fefffd',
       green = '#1d936a',
       red = '#ce4646',
       blue = '#2d689b',
-      orange = '#bf7c42',
-      yellow = '#d6a63e'
-    },
+      -- orange = '#bf7c42',
+      yellow = '#c69d43'
+    }),
   }
   require('onedark').load()
 EOF
