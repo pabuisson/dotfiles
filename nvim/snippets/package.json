@@ -1,0 +1,9 @@
+{
+  "name": "personal-snippets",
+  "contributes": {
+    "snippets": [
+      { "language": "elixir", "path": "./elixir.json" },
+      { "language": "html", "path": "./html.json" }
+    ]
+  }
+}

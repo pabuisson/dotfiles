@@ -36,21 +36,13 @@ if has('nvim')
   Plug 'williamboman/mason-lspconfig.nvim'
   Plug 'neovim/nvim-lspconfig'
   Plug 'mfussenegger/nvim-lint'
+  Plug 'saghen/blink.cmp', { 'tag': 'v1.0.0' }
 
   " -- plenary and plugins depending on it --
   Plug 'nvim-lua/plenary.nvim'
   Plug 'folke/todo-comments.nvim'
 
-  " -- nvim-cmp --
-  Plug 'hrsh7th/cmp-nvim-lsp'
-  Plug 'hrsh7th/cmp-buffer'
-  Plug 'hrsh7th/cmp-path'
-  Plug 'hrsh7th/cmp-cmdline'
-  Plug 'hrsh7th/nvim-cmp'
-  " snippet engine (required for cmp)
-  Plug 'hrsh7th/cmp-vsnip'
-  Plug 'hrsh7th/vim-vsnip'
-
+  " -- other plugins --
   Plug 'lewis6991/gitsigns.nvim'
   Plug 'smoka7/hop.nvim'
   Plug 'nvimdev/indentmini.nvim'
@@ -175,13 +167,6 @@ let g:fzf_history_dir = '~/.local/share/fzf-history'
 let g:fzf_commits_log_options = '--color=always --format="%C(auto)%h%d %C(green)%as %C(cyan)%an :: %C(reset)%s"'
 
 
-" ---- vsnip ----
-let g:vsnip_snippet_dir = expand("~/.config/nvim/snips")
-imap <expr> <Tab>   vsnip#jumpable(1)  ? '<Plug>(vsnip-jump-next)' : '<Tab>'
-smap <expr> <Tab>   vsnip#jumpable(1)  ? '<Plug>(vsnip-jump-next)' : '<Tab>'
-imap <expr> <S-Tab> vsnip#jumpable(-1) ? '<Plug>(vsnip-jump-prev)' : '<S-Tab>'
-smap <expr> <S-Tab> vsnip#jumpable(-1) ? '<Plug>(vsnip-jump-prev)' : '<S-Tab>'
-
 
 " ==========================
 "       NVIM SPECIFIC
@@ -190,7 +175,6 @@ smap <expr> <S-Tab> vsnip#jumpable(-1) ? '<Plug>(vsnip-jump-prev)' : '<S-Tab>'
 if !has('nvim-0.5')
   finish
 end
-
 
 lua <<EOF
 
@@ -208,6 +192,15 @@ require("aerial").setup({
 })
 vim.keymap.set("n", "<leader>a", "<cmd>AerialToggle!<CR>")
 
+
+-- ----- blink -----
+
+require("blink.cmp").setup({
+  keymap = { preset = 'enter' },
+  sources = {
+    default = { 'lsp', 'path', 'snippets', 'buffer' },
+  },
+})
 
 -- ----- hop -----
 require('hop').setup()
@@ -272,75 +265,20 @@ local on_attach = function(_, bufnr)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>dd', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
 end
 
--- ----- cmp -----
-
-vim.opt.completeopt = {'menu', 'menuone', 'noselect'}
-
-local cmp = require('cmp')
-cmp.setup({
-  sources = cmp.config.sources({
-    { name = 'nvim_lsp' },
-    { name = 'vsnip' }
-  }, {
-    { name = 'buffer' },
-    { name = 'path' }
-  }),
-  formatting = {
-    format = function(entry, vim_item)
-      vim_item.menu = ({
-        buffer = "[BUF]",
-        nvim_lsp = "[LSP]",
-        luasnip = "[SNP]",
-        vsnip = "[SNP]",
-        nvim_lua = "[LUA]",
-      })[entry.source.name]
-      return vim_item
-    end
-  },
-  snippet = {
-    expand = function(args)
-      vim.fn["vsnip#anonymous"](args.body)
-    end
-  },
-  mapping = cmp.mapping.preset.insert({
-    ['<C-b>'] = cmp.mapping.scroll_docs(-4),
-    ['<C-f>'] = cmp.mapping.scroll_docs(4),
-    ['<C-Space>'] = cmp.mapping.complete(),
-    ['<C-e>'] = cmp.mapping.abort(),
-    ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
-  })
-})
-
--- Use cmdline & path source for ':'.
-cmp.setup.cmdline(':', {
-  sources = cmp.config.sources({
-    { name = 'path' }
-  }, {
-    { name = 'cmdline' }
-  })
-})
-
 -- Setup lspconfig.
--- The nvim-cmp almost supports LSP's capabilities so You should advertise it to LSP servers..
-local capabilities = require('cmp_nvim_lsp').default_capabilities()
+local capabilities = require('blink.cmp').get_lsp_capabilities()
 local lspconfig = require('lspconfig')
-
--- JS / TS
 lspconfig.ts_ls.setup {
   capabilities = capabilities,
   on_attach = on_attach
 }
-
--- Ruby
 lspconfig.ruby_lsp.setup {
   capabilities = capabilities,
   on_attach = on_attach,
 }
-
--- Elixir
--- NOTE: should be able to use lexical/bin/start_lexical.sh but I get an error if I use this,
---       so I ended up using the one located in _build
--- |-> https://github.com/lexical-lsp/lexical/issues/799
+-- NOTE: should be able to use lexical/bin/start_lexical.sh but I get an error if
+--       I use this, so I ended up using the one located in _build
+--       |-> https://github.com/lexical-lsp/lexical/issues/799
 local path_to_lexical = vim.fn.expand("~/dev/lexical/_build/dev/package/lexical/bin/start_lexical.sh")
 lspconfig.lexical.setup({
   cmd = { path_to_lexical },

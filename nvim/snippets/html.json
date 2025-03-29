@@ -1,6 +1,6 @@
 {
-  "HTML": {
-    "prefix": "HTML",
+  "html": {
+    "prefix": "html",
     "body": [
        "<!DOCTYPE html>",
        "<html lang='en'>",
