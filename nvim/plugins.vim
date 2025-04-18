@@ -100,7 +100,7 @@ nnoremap <leader>gst :Git<CR>
 nnoremap <leader>gci :Git commit<CR>
 nnoremap <leader>gr  :Gread<CR>
 nnoremap <leader>gw  :Gwrite<CR>
-nnoremap <leader>gb  :Git blame<CR>
+nnoremap <leader>gbf :Git blame<CR>
 nnoremap <leader>gdv :Gvdiffsplit<CR>
 nnoremap <leader>gdh :Gdiffsplit<CR>
 
@@ -310,6 +310,9 @@ lspconfig.lexical.setup({
 
 -- ----- gitsigns -----
 require('gitsigns').setup()
+local opts = { noremap=true, silent=true }
+vim.api.nvim_set_keymap('n', '<leader>gph', ':Gitsigns preview_hunk<CR>', opts)
+vim.api.nvim_set_keymap('n', '<leader>gbl', ':Gitsigns blame_line<CR>', opts)
 
 
 -- ----- indentmini -----
