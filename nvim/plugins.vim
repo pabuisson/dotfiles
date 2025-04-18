@@ -166,6 +166,8 @@ ca rgw RgWordExact
 let g:fzf_history_dir = '~/.local/share/fzf-history'
 let g:fzf_commits_log_options = '--color=always --format="%C(auto)%h%d %C(green)%as %C(cyan)%an :: %C(reset)%s"'
 
+" ----- projectionist -----
+nnoremap <leader>a :A<CR>
 
 
 " ==========================
@@ -190,11 +192,10 @@ require("aerial").setup({
   nerd_font = true,
   post_jump_cmd = "normal! zt",
 })
-vim.keymap.set("n", "<leader>a", "<cmd>AerialToggle!<CR>")
+vim.keymap.set("n", "<leader>o", "<cmd>AerialToggle!<CR>")
 
 
 -- ----- blink -----
-
 require("blink.cmp").setup({
   keymap = { preset = 'enter' },
   sources = {
