@@ -24,33 +24,17 @@ function s:SetDarkMode()
 "" -- kanagawa --
 "lua << EOF
 "  -- palette: https://github.com/rebelot/kanagawa.nvim/blob/master/lua/kanagawa/colors.lua
-"  local colors = require("kanagawa.colors").setup({theme = "wave"})
-"  local palette = colors.palette
+"  -- local colors = require("kanagawa.colors").setup({theme = "wave"})
+"  -- local palette = colors.palette
 "  require('kanagawa').setup({
-"      undercurl = true,
-"      commentStyle = { italic = false },
-"      keywordStyle = { italic = false },
-"      functionStyle = { bold = true },
-"      statementStyle = { bold = true },
-"      colors = {
-"        palette = {
-"            fujiWhite = "#dbd8c5",  -- fg: a bit less saturated
-"            fujiGray = "#7c7e8c",   -- more blue-ish, less brown-ish
-"            sumiInk3 = "#222123",   -- bg: more blue-ish, less saturated
-"            sumiInk4 = "#232428",   -- bg_p1: more blue-ish, less saturated
-"        },
-"        theme = {
-"          wave = {
-"            ui = {
-"              pmenu = {
-"                bg = palette.sumiInk5,
-"              },
-"            },
-"          },
-"        },
-"      }
+"    undercurl = true,
+"    commentStyle = { italic = false },
+"    keywordStyle = { italic = false },
+"    functionStyle = { bold = false },
+"    statementStyle = { bold = false }
+"    -- TODO: more blue comment color
 "  })
-"  vim.cmd('color kanagawa-wave')
+"  vim.cmd.colorscheme('kanagawa-wave')
 "EOF
 
 "lua << EOF
