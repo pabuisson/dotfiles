@@ -334,10 +334,11 @@ require('nvim-treesitter.configs').setup({
   highlight = { enable = true }
 })
 
+-- ----- treesitter-context -----
 require('treesitter-context').setup{
-  max_lines = 3,            -- How many lines the window should span. Values <= 0 mean no limit.
-  multiline_threshold = 2,  -- Maximum number of lines to show for a single context
-  trim_scope = 'inner',     -- Which context lines to discard if `max_lines` is exceeded. Choices: 'inner', 'outer'
+  max_lines = 3,
+  multiline_threshold = 2,
+  trim_scope = 'inner',
 }
 -- Creates a fake bottom border under the context
 vim.cmd([[
