@@ -37,6 +37,9 @@ if has('nvim')
   Plug 'neovim/nvim-lspconfig'
   Plug 'mfussenegger/nvim-lint'
   Plug 'saghen/blink.cmp', { 'tag': 'v1.0.0' }
+  " -- formatter --
+  " NOTE: can't use for now, see configuration section for more details
+  " Plug 'stevearc/conform.nvim'
 
   " -- plenary and plugins depending on it --
   Plug 'nvim-lua/plenary.nvim'
@@ -70,9 +73,7 @@ let g:ale_fixers = {
 \   'elixir': ['mix_format', 'trim_whitespace', 'remove_trailing_lines'],
 \   'heex': ['mix_format', 'trim_whitespace', 'remove_trailing_lines'],
 \   'javascript': ['prettier'],
-\   'javascriptreact': ['prettier'],
 \   'typescript': ['prettier'],
-\   'typescriptreact': ['prettier'],
 \}
 
 
@@ -201,6 +202,22 @@ require("blink.cmp").setup({
     default = { 'lsp', 'path', 'snippets', 'buffer' },
   },
 })
+
+-- -- ----- conform -----
+-- -- FIXME: can't use right now, mix format prepends log lines to the formatted files...
+-- -- TODO: ruby: syntax_tree / prettier ruby
+-- require("conform").setup({
+--   formatters_by_ft = {
+--     elixir = { 'mix', 'trim_whitespace', 'trim_newlines' },
+--     heex = { 'mix', 'trim_whitespace', 'trim_newlines' },
+--     javascript = { 'prettier' },
+--     typescript = { 'prettier' }
+--   },
+--   format_on_save = {
+--     lsp_format = "fallback",
+--     timeout_ms = 1500,
+--   },
+-- })
 
 -- ----- hop -----
 require('hop').setup()
