@@ -8,7 +8,6 @@ Plug 'mhartington/oceanic-next'
 if has('nvim')
   Plug 'rebelot/kanagawa.nvim'
   Plug 'navarasu/onedark.nvim'
-  Plug 'EdenEast/nightfox.nvim'
 endif
 " --- Filetype related ---
 " Plug 'gabrielelana/vim-markdown', { 'for': 'markdown' }

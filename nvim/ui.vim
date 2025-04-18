@@ -53,26 +53,8 @@ function s:SetDarkMode()
 "  vim.cmd('color kanagawa-wave')
 "EOF
 
-"" -- nightfox --
 "lua << EOF
-"  require('nightfox').setup({
-"    options = {
-"      styles = { keywords = "bold" },
 "    },
-"    palettes = {
-"      -- Custom duskfox with black background
-"      nordfox = {
-"        bg1 = "#1c2026", -- Black background
-"        bg3 = "#2c333f",
-"      }
-"    },
-"    specs = {},
-"    groups = {},
-"  })
-"  -- DARK: nightfox, nordfox // LIGHT: dayfox, dawnfox
-"  -- not too fond of the other ones
-"  -- vim.cmd("colorscheme nightfox")
-"  vim.cmd("colorscheme nordfox")
 "EOF
 
 
