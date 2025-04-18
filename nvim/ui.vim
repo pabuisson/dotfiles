@@ -37,9 +37,6 @@ function s:SetDarkMode()
 "  vim.cmd.colorscheme('kanagawa-wave')
 "EOF
 
-"lua << EOF
-"    },
-"EOF
 
 
 " -- onedark --
