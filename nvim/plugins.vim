@@ -107,11 +107,15 @@ nnoremap <leader>gdh :Gdiffsplit<CR>
 " ----- fzf -----
 " Escape C-a and C-d in iTerm2 : https://github.com/junegunn/fzf.vim/issues/54
 
-let g:fzf_vim = {
-      \ 'preview_window': ['right,50%', 'ctrl-p']
-      \ }
+let $FZF_DEFAULT_OPTS="--bind ctrl-k:prev-history,ctrl-j:next-history"
+let g:fzf_vim = { 'preview_window': ['right,50%', 'ctrl-p'] }
+" Enable per-command history.
+" CTRL-N and CTRL-P will be automatically bound to next-history and
+" previous-history instead of down and up. If you don't like the change,
+" explicitly bind the keys to down and up in your $FZF_DEFAULT_OPTS.
+let g:fzf_history_dir = '~/.local/share/fzf-history'
+let g:fzf_commits_log_options = '--color=always --format="%C(auto)%h%d %C(green)%as %C(cyan)%an :: %C(reset)%s"'
 
-" ---
 " Search with ripgrep for the word under the cursor
 " Source: https://coffeeandcontemplation.dev/2020/11/13/fuzzy-finding-in-vim/
 command! -bang -nargs=* RgWordExact
@@ -159,12 +163,6 @@ nnoremap <leader>fo :BLines<CR>
 ca rg Rg
 ca rgw RgWordExact
 
-" Enable per-command history.
-" CTRL-N and CTRL-P will be automatically bound to next-history and
-" previous-history instead of down and up. If you don't like the change,
-" explicitly bind the keys to down and up in your $FZF_DEFAULT_OPTS.
-let g:fzf_history_dir = '~/.local/share/fzf-history'
-let g:fzf_commits_log_options = '--color=always --format="%C(auto)%h%d %C(green)%as %C(cyan)%an :: %C(reset)%s"'
 
 " ----- projectionist -----
 nnoremap <leader>a :A<CR>
