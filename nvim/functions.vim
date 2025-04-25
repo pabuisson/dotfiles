@@ -45,7 +45,7 @@ function! HandleURI()
   endif
 endfunction
 
-nnoremap <Leader>o :call HandleURI()<CR>
+nnoremap <Leader>w :call HandleURI()<CR>
 
 
 " ==============================================
