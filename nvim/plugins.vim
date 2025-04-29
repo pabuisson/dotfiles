@@ -118,41 +118,40 @@ let g:fzf_commits_log_options = '--color=always --format="%C(auto)%h%d %C(green)
 
 " Search with ripgrep for the word under the cursor
 " Source: https://coffeeandcontemplation.dev/2020/11/13/fuzzy-finding-in-vim/
-command! -bang -nargs=* RgWordExact
-  \ call fzf#vim#grep(
-  \   'rg -F -w --column --line-number --no-heading --color=always -- '.shellescape(<q-args>), 1,
-  \   fzf#vim#with_preview(), <bang>0)
-
-command! -bang -nargs=* RgWord
+command -nargs=* RgWordWithArg
   \ call fzf#vim#grep(
   \   'rg -F --column --line-number --no-heading --color=always -- '.shellescape(<q-args>), 1,
-  \   fzf#vim#with_preview(), <bang>0)
+  \   fzf#vim#with_preview(), 0)
 
-command! -bang -nargs=* RgDefWithArg
+command -nargs=* RgWordExactWithArg
+      \ call fzf#vim#grep(
+      \   'rg -F -w --column --line-number --no-heading --color=always -- '.shellescape(<q-args>), 1,
+      \   fzf#vim#with_preview(), 0)
+
+command -nargs=* RgDefWithArg
   \ call fzf#vim#grep(
   \   'rg --column --line-number --no-heading --color=always "^\s*\b(def|defp|defmodule)\b [\w\.]*\b'.<q-args>.'\b"', 1,
-  \   fzf#vim#with_preview(), <bang>0)
+  \   fzf#vim#with_preview(), 0)
 
-command! -bang -nargs=* RgDefFn
+command -nargs=* RgDefFn
   \ call fzf#vim#grep(
   \   'rg --column --line-number --no-heading --color=always "^\s*\b(def|defp)\b"', 1,
-  \   fzf#vim#with_preview(), <bang>0)
+  \   fzf#vim#with_preview(), 0)
 
-command! -bang -nargs=* RgDefMod
+command -nargs=* RgDefMod
   \ call fzf#vim#grep(
   \   'rg --column --line-number --no-heading --color=always "^\s*\bdefmodule\b"', 1,
-  \   fzf#vim#with_preview(), <bang>0)
+  \   fzf#vim#with_preview(), 0)
 
-" Find usage of word under cursor, excluding fn and module definition
-command! -bang -nargs=* RgFindReferences
+command -nargs=* RgFindReferencesWithArg
   \ call fzf#vim#grep(
   \   'rg --column --line-number --no-heading --color=always --pcre2 "^(?!(.*\b(def|defp|defmodule|alias|require|spec)\b)|(\s*#)).*\b'.<q-args>.'\b"', 1,
-  \   fzf#vim#with_preview(), <bang>0)
+  \   fzf#vim#with_preview(), 0)
 
-nnoremap <leader>fw :execute 'RgWord '.expand('<cword>')<CR>
-nnoremap <leader>fW :execute 'RgWordExact '.expand('<cword>')<CR>
+nnoremap <leader>fw :execute 'RgWordWithArg '.expand('<cword>')<CR>
+nnoremap <leader>fW :execute 'RgWordExactWithArg '.expand('<cword>')<CR>
 nnoremap <leader>fd :execute 'RgDefWithArg '.expand('<cword>')<CR>
-nnoremap <leader>fr :execute 'RgFindReferences '.expand('<cword>')<CR>
+nnoremap <leader>fr :execute 'RgFindReferencesWithArg '.expand('<cword>')<CR>
 nnoremap <leader>fme :execute 'RgDefFn'<CR>
 nnoremap <leader>fmo :execute 'RgDefMod'<CR>
 nnoremap <leader>ff :Files<CR>
