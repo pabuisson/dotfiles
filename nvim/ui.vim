@@ -147,9 +147,7 @@ function s:SetMode()
       call s:SetDarkMode()
     endif
   else
-    let g:oceanic_next_terminal_bold = 1
-    let g:oceanic_next_terminal_italic = 1
-    color OceanicNext
+    color retrobox
     finish
   endif
 endfunction
