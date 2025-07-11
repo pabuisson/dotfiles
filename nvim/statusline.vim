@@ -3,10 +3,10 @@ set laststatus=2
 set noshowmode
 
 set statusline=%#Pmenu#
-set statusline+=%{(mode()=='n')?'\ \ N\ ':''}
-set statusline+=%#DiffAdded#%{(mode()=='i')?'\ \ I\ ':''}
-set statusline+=%#DiffText#%{(mode()=='r')?'\ \ R\ ':''}
-set statusline+=%#Cursor#%{IsVisual()?'\ \ V\ ':''}
+set statusline+=%{(mode()=='n')?'\ \ N':''}
+set statusline+=%#DiffAdded#%{(mode()=='i')?'\ \ I':''}
+set statusline+=%#DiffText#%{(mode()=='r')?'\ \ R':''}
+set statusline+=%#Cursor#%{IsVisual()?'\ \ V':''}
 " Reset color
 set statusline+=%#Pmenu#
 set statusline+=\ ⋮%{Nbsp()}
@@ -56,7 +56,7 @@ endfunction
 " TODO: I think this is not updated when the status changes? how can we do it?
 function! LspActiveClientsIndicator() abort
   let l:active_indicator = LspActiveClients() == 0 ? '—' : '✓'
-  return printf('LSP: %s', active_indicator)
+  return printf('LSP %s', active_indicator)
 endfunction
 
 
