@@ -11,8 +11,8 @@
   fp = fetch -p
   # Requires column to be updated to a recent version to keep colors
   # On MacOS, install the util-linux package for this
-  recent  = "!r() { git for-each-ref --color=always --sort=-committerdate refs/heads/ --format='%(refname:short)|%(color:green)%(committerdate:relative)|%(color:magenta)%(authorname)%(color:reset)' | column --table --separator '|'; }; r"
-  rrecent = "!r() { git for-each-ref --color=always --sort=-committerdate refs/remotes/ --format='%(refname:short)|%(color:green)%(committerdate:relative)|%(color:magenta)%(authorname)%(color:reset)' | column --table --separator '|'; }; r"
+  recent  = "!r() { git for-each-ref --color=always --sort=-committerdate refs/heads/ --format='%(refname:short)|%(color:green)%(committerdate:relative)|%(color:magenta)%(authorname)%(color:reset)' | grep -vE '^(main|master|develop)\\|' | column --table --separator '|'; }; r"
+  rrecent = "!r() { git for-each-ref --color=always --sort=-committerdate refs/remotes/ --format='%(refname:short)|%(color:green)%(committerdate:relative)|%(color:magenta)%(authorname)%(color:reset)' | grep -vE '^(main|master|develop)\\|' | column --table --separator '|'; }; r"
   pp = pull -p
   sw = switch
 [user]
