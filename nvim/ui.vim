@@ -8,18 +8,18 @@ set termguicolors
 function s:SetDarkMode()
   set bg=dark
 
-   "" -- everforest --
-   "" -- palette: https://github.com/sainnhe/everforest/blob/master/autoload/everforest.vim
-   "let g:everforest_disable_italic_comment = 1
-   "let g:everforest_background = 'hard'
-   "" standard hard dark :
-   "" fg:  ['#d3c6aa', '223']
-   "" bg0: ['#2b3339',   '235'],
-   "let g:everforest_colors_override = {
-   "\ 'fg':  ['#d6d6d4', '223'],
-   "\ 'bg0': ['#191e23', '235']
-   "\}
-   "color everforest
+  "" -- everforest --
+  "" -- palette: https://github.com/sainnhe/everforest/blob/master/autoload/everforest.vim
+  "let g:everforest_disable_italic_comment = 1
+  "let g:everforest_background = 'hard'
+  "" standard hard dark :
+  "" fg:  ['#d3c6aa', '223']
+  "" bg0: ['#2b3339', '235'],
+  "let g:everforest_colors_override = {
+  "\ 'fg':  ['#d6d6cf', '223'],
+  "\ 'bg0': ['#1d211f', '235']
+  "\}
+  "color everforest
 
 "" -- kanagawa --
 "lua << EOF
@@ -33,11 +33,10 @@ function s:SetDarkMode()
 "    functionStyle = { bold = false },
 "    statementStyle = { bold = false }
 "    -- TODO: more blue comment color
+"    -- TODO: more white default fg color
 "  })
 "  vim.cmd.colorscheme('kanagawa-wave')
 "EOF
-
-
 
 " -- onedark --
 lua << EOF
@@ -51,30 +50,34 @@ lua << EOF
     for k, v in pairs(t2) do result[k] = v end
     return result
   end
-
+  -- dark, darker, cool, deep, warm or warmer
   local style = 'dark'
   local palette = require("onedark.palette")
-
   require('onedark').setup {
-    -- Choose between 'dark', 'darker', 'cool', 'deep'
-    -- Don't like 'warm' or 'warmer'
     style = style,
     code_style = {
       comments = 'none',
-      keywords = 'bold',
-      functions = 'bold'
+      keywords = 'none',
+      functions = 'none'
     },
     colors = merge(palette[style], {
       fg = '#d8dee9',  -- whiter foreground color → nordic.nvim white1
-      bg0 = '#242933', -- darker background color → nordic.nvim gray0
+      lighter_gray = "#6c7689", -- new color used for comments
     }),
-    -- highlights = {
-    --   ["comments"] = {fg = '$comment_gray', fmt = 'none'},
-    --   ["@comment"] = {fg = '$comment_gray', fmt = 'none'},
-    -- }
+    highlights = {
+      ["comments"] = {fg = '$lighter_gray', fmt = 'none'},
+      ["@comment"] = {fg = '$lighter_gray', fmt = 'none'},
+    }
   }
   require('onedark').load()
 EOF
+
+
+" Colors are applied automatically based on user-defined highlight groups.
+" There is no default value.
+hi IndentLine guifg=#444455
+" Current indent line highlight
+hi IndentLineCurrent guifg=#777788
 
   return
 endfunction
@@ -82,14 +85,17 @@ endfunction
 function s:SetLightMode()
   set bg=light
 
-   "" -- everforest --
-   "" palette: https://github.com/sainnhe/everforest/blob/master/autoload/everforest.vim
-   "let g:everforest_background = 'hard'
-   "let g:everforest_colors_override = {
-   "\ 'fg':  ['#40494f', '242'],
-   "\ 'bg0': ['#fefffc', '230'],
-   "\}
-   "color everforest
+  "" -- everforest --
+  "" palette: https://github.com/sainnhe/everforest/blob/master/autoload/everforest.vim
+  "let g:everforest_disable_italic_comment = 1
+  "let g:everforest_background = 'hard'
+  "let g:everforest_colors_override = {
+  "\ 'fg':  ['#40494f', '242'],
+  "\ 'bg0': ['#fffbf7', '230'],
+  "\ 'bg1': ['#faf7f0', '230'],
+  "\ 'bg2': ['#f5f0ee', '230'],
+  "\}
+  "color everforest
 
   " -- onedark --
 lua << EOF
@@ -103,15 +109,13 @@ lua << EOF
     for k, v in pairs(t2) do result[k] = v end
     return result
   end
-
   local style = 'light'
   local palette = require("onedark.palette")
-
   require('onedark').setup {
     style = style,
     code_style = {
       comments = 'none',
-      keywords = 'bold',
+      keywords = 'none',
       functions = 'none',
     },
     colors = merge(palette[style], {
@@ -125,6 +129,12 @@ lua << EOF
   }
   require('onedark').load()
 EOF
+
+" Colors are applied automatically based on user-defined highlight groups.
+" There is no default value.
+hi IndentLine guifg=#bbbbbb
+" Current indent line highlight
+hi IndentLineCurrent guifg=#888888
 
   return
 endfunction
