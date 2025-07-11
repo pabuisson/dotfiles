@@ -67,11 +67,6 @@ matches:
           format: "+%A %d %B %Y"
           locale: "fr-FR"
 
-  # Misc
-
-  - trigger: "ETQ"
-    replace: "en tant que"
-
   # Progress bars
 
   - trigger: "pg00"
