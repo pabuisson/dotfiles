@@ -42,6 +42,7 @@ alias gsfm='git switch -f master'
 alias gsfd='git switch -f develop'
 alias grom='git rebase origin/master'
 alias grod='git rebase origin/develop'
+alias gsl='git stash list'
 # Single quotes needed here, or what's inside subcommands get evaluated everytime (even when
 # initializing the shell and reading those aliases, which gives me errors 'not in a git repo')
 # NOTE: https://git-scm.com/docs/git-diff#Documentation/git-diff.txt---diff-filterACDMRTUXB82308203
