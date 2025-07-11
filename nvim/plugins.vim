@@ -3,7 +3,6 @@ call plug#begin('~/.config/nvim/plugged')
 
 " --- Color schemes ---
 Plug 'sainnhe/everforest'
-Plug 'mhartington/oceanic-next'
 
 if has('nvim')
   Plug 'rebelot/kanagawa.nvim'
