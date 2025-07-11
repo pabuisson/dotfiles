@@ -36,8 +36,7 @@ if has('nvim')
   Plug 'mfussenegger/nvim-lint'
   Plug 'saghen/blink.cmp', { 'tag': 'v1.2.0' }
   " -- formatter --
-  " NOTE: can't use for now, see configuration section for more details
-  " Plug 'stevearc/conform.nvim'
+  Plug 'stevearc/conform.nvim'
 
   " -- plenary and plugins depending on it --
   Plug 'nvim-lua/plenary.nvim'
@@ -64,16 +63,10 @@ call plug#end()
 let g:ale_linters_explicit = 1
 let g:ale_linters = {}
 let g:ale_fix_on_save = 1
-let g:ale_ruby_syntax_tree_executable = 'bundle'
 let g:ale_fixers = {
-\   '*': ['remove_trailing_lines', 'trim_whitespace'],
-\   'ruby': ['remove_trailing_lines', 'trim_whitespace', 'syntax_tree', 'prettier'],
-\   'elixir': ['mix_format', 'trim_whitespace', 'remove_trailing_lines'],
-\   'heex': ['mix_format', 'trim_whitespace', 'remove_trailing_lines'],
-\   'javascript': ['prettier'],
-\   'typescript': ['prettier'],
+\   'elixir': ['mix_format'],
+\   'heex': ['mix_format'],
 \}
-
 
 " ----- current_word -----
 let g:vim_current_word#highlight_delay = 800
@@ -199,21 +192,23 @@ require("blink.cmp").setup({
   },
 })
 
--- -- ----- conform -----
--- -- FIXME: can't use right now, mix format prepends log lines to the formatted files...
--- -- TODO: ruby: syntax_tree / prettier ruby
--- require("conform").setup({
---   formatters_by_ft = {
---     elixir = { 'mix', 'trim_whitespace', 'trim_newlines' },
---     heex = { 'mix', 'trim_whitespace', 'trim_newlines' },
---     javascript = { 'prettier' },
---     typescript = { 'prettier' }
---   },
---   format_on_save = {
---     lsp_format = "fallback",
---     timeout_ms = 1500,
---   },
--- })
+-- ----- conform -----
+-- FIXME: (2025-07-11) can't use mix format right now, it prepends log lines to the formatted files
+--       look into it and maybe configure differently or make a PR to conform.nvim
+require("conform").setup({
+  formatters_by_ft = {
+    -- elixir = { 'mix' },
+    -- heex = { 'mix' },
+    ruby = { 'syntax_tree' },
+    javascript = { 'prettier' },
+    typescript = { 'prettier' },
+    ['*'] = { 'trim_whitespace', 'trim_newlines' }
+  },
+  format_on_save = {
+    lsp_format = "fallback",
+    timeout_ms = 500,
+  },
+})
 
 -- ----- hop -----
 require('hop').setup()
