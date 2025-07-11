@@ -9,8 +9,10 @@
   lgiso = "log --color --graph --pretty=format:'%Cred%h%Creset %s %Cgreen(%ci) %C(bold blue)%an%Creset%C(yellow)%d%Creset' --abbrev-commit"
   st = status -sb
   fp = fetch -p
-  recent  = "!r() { cur=$(git rev-parse --abbrev-ref HEAD); git for-each-ref --sort=-committerdate refs/heads/ --format='%(color:yellow)%(refname:short)|%(color:green)%(committerdate:relative)|%(color:magenta)%(authorname)%(color:reset)' | sed \"s/m${cur}|/m* ${cur}|/\" | column -ts'|'; }; r"
-  rrecent = "!r() { cur=$(git rev-parse --abbrev-ref HEAD); git for-each-ref --sort=-committerdate refs/remotes/ --format='%(color:yellow)%(refname:short)|%(color:green)%(committerdate:relative)|%(color:magenta)%(authorname)%(color:reset)' | sed \"s/m${cur}|/m* ${cur}|/\" | column -ts'|'; }; r"
+  # Requires column to be updated to a recent version to keep colors
+  # On MacOS, install the util-linux package for this
+  recent  = "!r() { git for-each-ref --color=always --sort=-committerdate refs/heads/ --format='%(refname:short)|%(color:green)%(committerdate:relative)|%(color:magenta)%(authorname)%(color:reset)' | column --table --separator '|'; }; r"
+  rrecent = "!r() { git for-each-ref --color=always --sort=-committerdate refs/remotes/ --format='%(refname:short)|%(color:green)%(committerdate:relative)|%(color:magenta)%(authorname)%(color:reset)' | column --table --separator '|'; }; r"
   pp = pull -p
   sw = switch
 [user]
