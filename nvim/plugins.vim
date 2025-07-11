@@ -34,7 +34,7 @@ if has('nvim')
   Plug 'williamboman/mason-lspconfig.nvim'
   Plug 'neovim/nvim-lspconfig'
   Plug 'mfussenegger/nvim-lint'
-  Plug 'saghen/blink.cmp', { 'tag': 'v1.2.0' }
+  Plug 'saghen/blink.cmp', {'tag': 'v1.4.1'}
   " -- formatter --
   Plug 'stevearc/conform.nvim'
 
@@ -188,7 +188,7 @@ vim.keymap.set("n", "<leader>o", "<cmd>AerialToggle!<CR>")
 require("blink.cmp").setup({
   keymap = { preset = 'enter' },
   sources = {
-    default = { 'lsp', 'path', 'snippets', 'buffer' },
+    default = { 'lsp', 'path', 'snippets', 'buffer', 'cmdline', 'omni' },
   },
 })
 
