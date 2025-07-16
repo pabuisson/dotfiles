@@ -14,7 +14,6 @@ Plug 'junegunn/goyo.vim', { 'for': 'markdown' }
 Plug 'elixir-editors/vim-elixir', { 'for': 'elixir' }
 
 " --- Plugins ---
-Plug 'ap/vim-buftabline'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'dense-analysis/ale'
@@ -43,6 +42,7 @@ if has('nvim')
   Plug 'folke/todo-comments.nvim'
 
   " -- other plugins --
+  Plug 'echasnovski/mini.tabline'
   Plug 'lewis6991/gitsigns.nvim'
   Plug 'smoka7/hop.nvim'
   Plug 'nvimdev/indentmini.nvim'
@@ -317,6 +317,9 @@ require('scrollview').setup({
   signs_on_startup = {'conflicts', 'cursor', 'diagnostics', 'loclist', 'marks', 'quickfix', 'search'},
   diagnostics_severities = {vim.diagnostic.severity.ERROR}
 })
+
+-- ----- (mini.)tabline -----
+require('mini.tabline').setup()
 
 
 -- ----- treesitter -----
