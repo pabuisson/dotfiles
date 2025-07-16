@@ -24,16 +24,21 @@ function s:SetDarkMode()
 "" -- kanagawa --
 "lua << EOF
 "  -- palette: https://github.com/rebelot/kanagawa.nvim/blob/master/lua/kanagawa/colors.lua
-"  -- local colors = require("kanagawa.colors").setup({theme = "wave"})
-"  -- local palette = colors.palette
 "  require('kanagawa').setup({
 "    undercurl = true,
 "    commentStyle = { italic = false },
 "    keywordStyle = { italic = false },
 "    functionStyle = { bold = false },
-"    statementStyle = { bold = false }
-"    -- TODO: more blue comment color
-"    -- TODO: more white default fg color
+"    statementStyle = { bold = false },
+"    colors = {
+"      palette = {
+"        -- TODO: these should ideally only be customized for the wave theme, not for all themes
+"        --       but I only use the wave theme anyway so I guess it's good enough for now
+"        fujiWhite = "#dbd8c9",  -- whiter foreground color
+"        fujiGray = "#76747a",   -- more blue/purple comment color
+"      },
+"      theme = {}
+"    }
 "  })
 "  vim.cmd.colorscheme('kanagawa-wave')
 "EOF
