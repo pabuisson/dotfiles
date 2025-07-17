@@ -48,8 +48,6 @@ if has('nvim')
   Plug 'nvimdev/indentmini.nvim'
   Plug 'stevearc/aerial.nvim'
   Plug 'dstein64/nvim-scrollview'
-else
-  Plug 'mhinz/vim-signify'
 endif
 
 call plug#end()
