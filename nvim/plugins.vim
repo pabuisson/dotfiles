@@ -40,6 +40,10 @@ if has('nvim')
   " -- plenary and plugins depending on it --
   Plug 'nvim-lua/plenary.nvim'
   Plug 'folke/todo-comments.nvim'
+  " -- codecompanion.nvim --
+  " depends on plenary and treesitter
+  Plug 'github/copilot.vim'
+  Plug 'olimorris/codecompanion.nvim', { 'branch': 'main' }
 
   " -- other plugins --
   Plug 'echasnovski/mini.tabline'
@@ -137,7 +141,6 @@ command -nargs=* RgFindReferencesWithArg
   \ call fzf#vim#grep(
   \   'rg --column --line-number --no-heading --color=always --pcre2 "^(?!(.*\b(def|defp|defmodule|alias|require|spec)\b)|(\s*#)).*\b'.<q-args>.'\b"', 1,
   \   fzf#vim#with_preview(), 0)
-
 nnoremap <leader>fw :execute 'RgWordWithArg '.expand('<cword>')<CR>
 nnoremap <leader>fW :execute 'RgWordExactWithArg '.expand('<cword>')<CR>
 nnoremap <leader>fd :execute 'RgDefWithArg '.expand('<cword>')<CR>
@@ -190,6 +193,12 @@ require("blink.cmp").setup({
   },
 })
 
+
+-- ----- codecompanion -----
+require("codecompanion").setup()
+vim.keymap.set("n", "<leader>ccc", "<cmd>CodeCompanionChat<CR>")
+
+
 -- ----- conform -----
 -- FIXME: (2025-07-11) can't use mix format right now, it prepends log lines to the formatted files
 --       look into it and maybe configure differently or make a PR to conform.nvim
@@ -207,6 +216,7 @@ require("conform").setup({
     timeout_ms = 500,
   },
 })
+
 
 -- ----- hop -----
 require('hop').setup()
@@ -247,6 +257,7 @@ vim.api.nvim_create_autocmd({ "BufWritePost" }, {
     require("lint").try_lint()
   end,
 })
+
 
 -- ----- mason, mason-lspconfig & lspconfig -----
 require("mason").setup()
@@ -316,15 +327,18 @@ require('scrollview').setup({
   diagnostics_severities = {vim.diagnostic.severity.ERROR}
 })
 
+
 -- ----- (mini.)tabline -----
 require('mini.tabline').setup()
 
 
 -- ----- treesitter -----
 require('nvim-treesitter.configs').setup({
-  ensure_installed = { "javascript", "ruby", "eex", "elixir", "erlang", "heex", "markdown", "markdown_inline", "html", "lua", "typescript" },
+  -- NOTE: yaml, markdown and markdown_inline are required for CodeCompanion
+  ensure_installed = { "javascript", "ruby", "eex", "elixir", "erlang", "heex", "markdown", "markdown_inline", "html", "lua", "typescript", "yaml" },
   highlight = { enable = true }
 })
+
 
 -- ----- treesitter-context -----
 require('treesitter-context').setup{
