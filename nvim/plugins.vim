@@ -62,6 +62,12 @@ call plug#end()
 " =======================
 
 " " ----- ale -----
+" NOTE: I've already migrated linting to nvim-lint, and I'm currently in the
+" process of migrating formatting to conform.nvim. ale is great but does a lot
+" of things (lint, fix, LSP...) and either I only use it, or I stop using it
+" altogether.
+" FIXME: (2025-07-11) can't migrate mix format yet, it prepends log lines to the formatted files
+"       look into it and maybe configure differently or make a PR to conform.nvim
 let g:ale_linters_explicit = 1
 let g:ale_linters = {}
 let g:ale_fix_on_save = 1
@@ -231,7 +237,6 @@ local nvim_lint = require('lint')
 -- FIXME: fallback on the default path if this one does not exist
 --        I need to dynamically and recursively look for the closest
 --        node_modules/ folders to look for the eslint binary
--- Check: https://github.com/mfussenegger/nvim-lint/issues/482
 --
 -- ⬇ maybe put these in my autocmd hook?
 -- local get_clients = vim.lsp.get_clients or vim.lsp.get_active_clients
@@ -244,6 +249,7 @@ stylelint.cmd = "./assets/node_modules/.bin/stylelint"
 eslint.cmd = "./e2e/node_modules/.bin/eslint"
 nvim_lint.linters_by_ft = {
   ruby = {'rubocop'},
+  elixir = {'credo'},
   css = {'stylelint'},
   scss = {'stylelint'},
   javascript = {'eslint'},
@@ -254,9 +260,13 @@ nvim_lint.linters_by_ft = {
 -- Autocmd to trigger linting
 vim.api.nvim_create_autocmd({ "BufWritePost" }, {
   callback = function()
-    require("lint").try_lint()
+    -- Don't throw an error if linter is missing or fails
+    require("lint").try_lint(nil, { ignore_errors = true })
   end,
 })
+local opts = { noremap=true, silent=true }
+vim.api.nvim_set_keymap('n', '<leader>dl', '<cmd>lua vim.diagnostic.setloclist()<CR>', opts)
+vim.api.nvim_set_keymap('n', '<leader>dd', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
 
 
 -- ----- mason, mason-lspconfig & lspconfig -----
