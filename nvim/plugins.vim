@@ -269,51 +269,31 @@ vim.api.nvim_set_keymap('n', '<leader>dl', '<cmd>lua vim.diagnostic.setloclist()
 vim.api.nvim_set_keymap('n', '<leader>dd', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
 
 
--- ----- mason, mason-lspconfig & lspconfig -----
+-- ----- lsp: mason, mason-lspconfig -----
 require("mason").setup()
-require("mason-lspconfig").setup({
-  automatic_installation = true
+require("mason-lspconfig").setup()
+-- Enable the LSP servers I do use
+vim.lsp.enable({'ruby_lsp', 'lexical', 'ts_ls'})
+-- Customize key mappings when LSP gets attached to a buffer
+vim.api.nvim_create_autocmd('LspAttach', {
+  callback = function(args)
+    local opts = { noremap=true, silent=true }
+    -- Enable completion triggered by <c-x><c-o>
+    vim.api.nvim_buf_set_option(args.buf, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
+    -- Redefine LSP and diagnostics keymappings
+    vim.api.nvim_buf_set_keymap(args.buf, 'n', 'gdd', '<cmd>lua vim.lsp.buf.definition()<CR>zz', opts)
+    -- Remapping K to customize the hover border
+    -- TODO: what's the difference between vim.keymap.set and vim.api.nvim_buf_set_keymap
+    vim.keymap.set('n', 'K', function()
+      vim.lsp.buf.hover({ border = 'single' })
+    end)
+  end
 })
-
-local on_attach = function(_, bufnr)
-  -- Enable completion triggered by <c-x><c-o>
-  vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
-
-  local opts = { noremap=true, silent=true }
-  -- NOTE: these should already be set, but isn't
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', 'grr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', 'grn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
-
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gdd', '<cmd>lua vim.lsp.buf.definition()<CR>zz', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
-
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>dl', '<cmd>lua vim.diagnostic.setloclist()<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>dd', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
-end
-
--- Setup lspconfig.
-local capabilities = require('blink.cmp').get_lsp_capabilities()
-local lspconfig = require('lspconfig')
-lspconfig.ts_ls.setup {
-  capabilities = capabilities,
-  on_attach = on_attach
-}
-lspconfig.ruby_lsp.setup {
-  capabilities = capabilities,
-  on_attach = on_attach,
-}
 -- NOTE: should be able to use lexical/bin/start_lexical.sh but I get an error if
 --       I use this, so I ended up using the one located in _build
 --       |-> https://github.com/lexical-lsp/lexical/issues/799
-local path_to_lexical = vim.fn.expand("~/dev/lexical/_build/dev/package/lexical/bin/start_lexical.sh")
-lspconfig.lexical.setup({
-  cmd = { path_to_lexical },
-  capabilities = capabilities,
-  on_attach = on_attach,
-  root_dir = function(fname)
-    return lspconfig.util.root_pattern("mix.exs", ".git")(fname) or vim.loop.cwd()
-  end,
+vim.lsp.config('lexical', {
+  cmd = { vim.fn.expand("~/dev/lexical/_build/dev/package/lexical/bin/start_lexical.sh") },
   settings = {}
 })
 
