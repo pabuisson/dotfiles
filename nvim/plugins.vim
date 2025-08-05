@@ -120,27 +120,32 @@ let g:fzf_commits_log_options = '--color=always --format="%C(auto)%h%d %C(green)
 " Source: https://coffeeandcontemplation.dev/2020/11/13/fuzzy-finding-in-vim/
 command -nargs=* RgWordWithArg
   \ call fzf#vim#grep(
-  \   'rg -F --column --line-number --no-heading --color=always -- '.shellescape(<q-args>), 1,
+  \   'rg -F --column --line-number --no-heading --color=always -- '.shellescape(<q-args>),
+  \   1,
   \   fzf#vim#with_preview(), 0)
 
 command -nargs=* RgWordExactWithArg
-      \ call fzf#vim#grep(
-      \   'rg -F -w --column --line-number --no-heading --color=always -- '.shellescape(<q-args>), 1,
-      \   fzf#vim#with_preview(), 0)
+  \ call fzf#vim#grep(
+  \   'rg -F -w --column --line-number --no-heading --color=always -- '.shellescape(<q-args>),
+  \   1,
+  \   fzf#vim#with_preview(), 0)
 
 command -nargs=* RgDefWithArg
   \ call fzf#vim#grep(
-  \   'rg --column --line-number --no-heading --color=always "^\s*\b(def|defp|defmodule)\b [\w\.]*\b'.<q-args>.'\b"', 1,
+  \   'rg --column --line-number --no-heading --color=always "^\s*\b(def|defp|defmodule)\b [\w\.]*\b'.<q-args>.'\b"',
+  \   1,
   \   fzf#vim#with_preview(), 0)
 
 command -nargs=* RgDefFn
   \ call fzf#vim#grep(
-  \   'rg --column --line-number --no-heading --color=always "^\s*\b(def|defp)\b"', 1,
+  \   'rg --column --line-number --no-heading --color=always "^\s*\b(def|defp)\b"',
+  \   1,
   \   fzf#vim#with_preview(), 0)
 
 command -nargs=* RgDefMod
   \ call fzf#vim#grep(
-  \   'rg --column --line-number --no-heading --color=always "^\s*\bdefmodule\b"', 1,
+  \   'rg --column --line-number --no-heading --color=always "^\s*\bdefmodule\b"',
+  \   1,
   \   fzf#vim#with_preview(), 0)
 
 command -nargs=* RgFindReferencesWithArg
