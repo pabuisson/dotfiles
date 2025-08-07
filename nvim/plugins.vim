@@ -281,13 +281,16 @@ vim.api.nvim_set_keymap('n', '<leader>dd', '<cmd>lua vim.diagnostic.open_float()
 require("mason").setup()
 require("mason-lspconfig").setup()
 -- Enable the LSP servers I do use
-vim.lsp.enable({'ruby_lsp', 'lexical', 'ts_ls'})
+vim.lsp.enable({'ruby_lsp', 'nextls', 'ts_ls'})
 -- Customize key mappings when LSP gets attached to a buffer
 vim.api.nvim_create_autocmd('LspAttach', {
   callback = function(args)
     local opts = { noremap=true, silent=true }
+    local keymap_opts = { buffer = args.buf, noremap = true, silent = true }
+
     -- Enable completion triggered by <c-x><c-o>
     vim.api.nvim_buf_set_option(args.buf, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
+
     -- Redefine LSP and diagnostics keymappings
     vim.api.nvim_buf_set_keymap(args.buf, 'n', 'gdd', '<cmd>lua vim.lsp.buf.definition()<CR>zz', opts)
     -- Remapping K to customize the hover border
@@ -296,13 +299,6 @@ vim.api.nvim_create_autocmd('LspAttach', {
       vim.lsp.buf.hover({ border = 'single' })
     end)
   end
-})
--- NOTE: should be able to use lexical/bin/start_lexical.sh but I get an error if
---       I use this, so I ended up using the one located in _build
---       |-> https://github.com/lexical-lsp/lexical/issues/799
-vim.lsp.config('lexical', {
-  cmd = { vim.fn.expand("~/dev/lexical/_build/dev/package/lexical/bin/start_lexical.sh") },
-  settings = {}
 })
 
 
@@ -324,7 +320,6 @@ require('scrollview').setup({
   signs_on_startup = {'conflicts', 'cursor', 'diagnostics', 'loclist', 'marks', 'quickfix', 'search'},
   diagnostics_severities = {vim.diagnostic.severity.ERROR}
 })
-
 
 -- ----- (mini.)tabline -----
 require('mini.tabline').setup()
