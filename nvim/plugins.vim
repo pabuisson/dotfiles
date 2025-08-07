@@ -198,6 +198,9 @@ vim.keymap.set("n", "<leader>o", "<cmd>AerialToggle!<CR>")
 
 -- ----- blink -----
 require("blink.cmp").setup({
+  enabled = function()
+    return not vim.tbl_contains({ "gitcommit" }, vim.bo.filetype)
+  end,
   keymap = { preset = 'enter' },
   sources = {
     default = { 'lsp', 'path', 'snippets', 'buffer', 'cmdline', 'omni' },
