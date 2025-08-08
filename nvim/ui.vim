@@ -78,11 +78,13 @@ lua << EOF
 EOF
 
 
-" Colors are applied automatically based on user-defined highlight groups.
-" There is no default value.
+" -- mini.indent --
 hi IndentLine guifg=#444455
-" Current indent line highlight
 hi IndentLineCurrent guifg=#777788
+" --- hop.nvim ---
+hi! HopNextKey guifg=#ff521b gui=bold
+hi! HopNextKey1 guifg=#fc9e4f gui=bold
+hi! HopNextKey2 guifg=#edd382 gui=bold
 
   return
 endfunction
@@ -137,9 +139,14 @@ EOF
 
 " Colors are applied automatically based on user-defined highlight groups.
 " There is no default value.
+
+" -- mini.indent --
 hi IndentLine guifg=#bbbbbb
-" Current indent line highlight
 hi IndentLineCurrent guifg=#888888
+" --- hop.nvim ---
+hi! HopNextKey guifg=#cc3f46 gui=bold
+hi! HopNextKey1 guifg=#bf702f gui=bold
+hi! HopNextKey2 guifg=#e0b22a gui=bold
 
   return
 endfunction
