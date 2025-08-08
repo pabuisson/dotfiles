@@ -134,7 +134,6 @@ setopt AUTO_CD
 
 # ----- SOURCING MORE CONFIG FILES -----
 
-source "$HOME/.dotfiles/zsh/runtime.zsh"
 source "$HOME/.dotfiles/zsh/aliases.zsh"
 source "$HOME/.dotfiles/zsh/dependencies.zsh"
 
