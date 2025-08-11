@@ -118,13 +118,13 @@ let g:fzf_commits_log_options = '--color=always --format="%C(auto)%h%d %C(green)
 
 " Search with ripgrep for the word under the cursor
 " Source: https://coffeeandcontemplation.dev/2020/11/13/fuzzy-finding-in-vim/
-command -nargs=* RgWordWithArg
+command -nargs=* RgWithArg
   \ call fzf#vim#grep(
   \   'rg -F --column --line-number --no-heading --color=always -- '.shellescape(<q-args>),
   \   1,
   \   fzf#vim#with_preview(), 0)
 
-command -nargs=* RgWordExactWithArg
+command -nargs=* RgExactWithArg
   \ call fzf#vim#grep(
   \   'rg -F -w --column --line-number --no-heading --color=always -- '.shellescape(<q-args>),
   \   1,
@@ -152,8 +152,8 @@ command -nargs=* RgFindReferencesWithArg
   \ call fzf#vim#grep(
   \   'rg --column --line-number --no-heading --color=always --pcre2 "^(?!(.*\b(def|defp|defmodule|alias|require|spec)\b)|(\s*#)).*\b'.<q-args>.'\b"', 1,
   \   fzf#vim#with_preview(), 0)
-nnoremap <leader>fw :execute 'RgWordWithArg '.expand('<cword>')<CR>
-nnoremap <leader>fW :execute 'RgWordExactWithArg '.expand('<cword>')<CR>
+nnoremap <leader>fw :execute 'RgWithArg '.expand('<cword>')<CR>
+nnoremap <leader>fW :execute 'RgExactWithArg '.expand('<cword>')<CR>
 nnoremap <leader>fd :execute 'RgDefWithArg '.expand('<cword>')<CR>
 nnoremap <leader>fr :execute 'RgFindReferencesWithArg '.expand('<cword>')<CR>
 nnoremap <leader>fme :execute 'RgDefFn'<CR>
@@ -164,7 +164,7 @@ nnoremap <leader>fc :BCommits<CR>
 nnoremap <leader>fl :Lines<CR>
 nnoremap <leader>fo :BLines<CR>
 ca rg Rg
-ca rgw RgWordExact
+ca rgw RgExact
 
 
 " ----- projectionist -----
