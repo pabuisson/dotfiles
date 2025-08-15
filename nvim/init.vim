@@ -32,6 +32,7 @@ set scrolloff=4     "displays at least 4 lines around the cursor even when top/b
 set clipboard+=unnamed
 set showmatch       "show matching parenthese
 set foldcolumn=auto "show folding column
+set signcolumn=yes
 " === HIDDEN/NON VISIBLE CHARS ===
 " multispace option allows to emulate indent lines without needing a dedicated plugin
 " source: https://github.com/thaerkh/vim-indentguides
