@@ -193,6 +193,7 @@ require("aerial").setup({
   nerd_font = true,
   post_jump_cmd = "normal! zt",
 })
+vim.keymap.set("n", "<leader>ft", "<cmd>call aerial#fzf()<CR>")
 vim.keymap.set("n", "<leader>o", "<cmd>AerialToggle!<CR>")
 
 
