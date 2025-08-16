@@ -42,7 +42,7 @@ if has('nvim')
   Plug 'folke/todo-comments.nvim'
   " -- codecompanion.nvim --
   " depends on plenary and treesitter
-  Plug 'github/copilot.vim'
+  Plug 'zbirenbaum/copilot.lua'
   Plug 'olimorris/codecompanion.nvim', { 'branch': 'main' }
 
   " -- other plugins --
@@ -209,6 +209,34 @@ require("blink.cmp").setup({
 
 
 -- ----- codecompanion -----
+-- TODO: check this plugin for better copilot/blink integration → https://github.com/fang2hou/blink-copilot
+require("copilot").setup({
+  suggestion = {
+    enabled = true,
+    auto_trigger = true,
+    keymap = {
+      accept = "<Tab>",
+    }
+  },
+  filetypes = {
+    elixir = true,
+    ruby = true,
+    ["*"] = false
+  }
+})
+-- hide copilot suggestion when blink completion menu is open
+vim.api.nvim_create_autocmd("User", {
+  pattern = "BlinkCmpMenuOpen",
+  callback = function()
+    vim.b.copilot_suggestion_hidden = true
+  end,
+})
+vim.api.nvim_create_autocmd("User", {
+  pattern = "BlinkCmpMenuClose",
+  callback = function()
+    vim.b.copilot_suggestion_hidden = false
+  end,
+})
 require("codecompanion").setup()
 vim.keymap.set("n", "<leader>ccc", "<cmd>CodeCompanionChat<CR>")
 
