@@ -301,8 +301,10 @@ vim.api.nvim_create_autocmd({ "BufWritePost" }, {
   end,
 })
 local opts = { noremap=true, silent=true }
-vim.api.nvim_set_keymap('n', '<leader>dl', '<cmd>lua vim.diagnostic.setloclist()<CR>', opts)
-vim.api.nvim_set_keymap('n', '<leader>dd', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
+vim.keymap.set('n', '<leader>dl', '<cmd>lua vim.diagnostic.setloclist()<CR>', opts)
+vim.keymap.set('n', '<leader>dd', function()
+  vim.diagnostic.open_float({ border = 'rounded' })
+end, opts)
 
 
 -- ----- lsp: mason, mason-lspconfig -----
@@ -320,12 +322,15 @@ vim.api.nvim_create_autocmd('LspAttach', {
     vim.api.nvim_buf_set_option(args.buf, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
     -- Redefine LSP and diagnostics keymappings
-    vim.api.nvim_buf_set_keymap(args.buf, 'n', 'gdd', '<cmd>lua vim.lsp.buf.definition()<CR>zz', opts)
-    -- Remapping K to customize the hover border
-    -- TODO: what's the difference between vim.keymap.set and vim.api.nvim_buf_set_keymap
+    vim.keymap.set('n', 'gdd', function()
+      vim.lsp.buf.definition()
+      vim.cmd('normal! zt') -- move the definition to the top of screen
+    end, keymap_opts)
+
+    -- Remap K to customize the hover border
     vim.keymap.set('n', 'K', function()
-      vim.lsp.buf.hover({ border = 'single' })
-    end)
+      vim.lsp.buf.hover({ border = 'rounded' })
+      end, keymap_opts)
   end
 })
 
@@ -333,8 +338,8 @@ vim.api.nvim_create_autocmd('LspAttach', {
 -- ----- gitsigns -----
 require('gitsigns').setup()
 local opts = { noremap=true, silent=true }
-vim.api.nvim_set_keymap('n', '<leader>gph', ':Gitsigns preview_hunk<CR>', opts)
-vim.api.nvim_set_keymap('n', '<leader>gbl', ':Gitsigns blame_line<CR>', opts)
+vim.keymap.set('n', '<leader>gph', ':Gitsigns preview_hunk<CR>', opts)
+vim.keymap.set('n', '<leader>gbl', ':Gitsigns blame_line<CR>', opts)
 
 
 -- ----- indentmini -----
@@ -345,11 +350,11 @@ require("indentmini").setup()
 require('scrollview.contrib.gitsigns').setup()
 require('scrollview').setup({
   excluded_filetypes = {},
-  signs_on_startup = {'conflicts', 'cursor', 'diagnostics', 'loclist', 'marks', 'quickfix', 'search'},
-  diagnostics_severities = {vim.diagnostic.severity.ERROR}
+  signs_on_startup = { 'conflicts', 'cursor', 'diagnostics', 'keywords', 'marks', 'search' },
+  diagnostics_severities = { vim.diagnostic.severity.ERROR }
 })
 
--- ----- (mini.)tabline -----
+-- ----- (mini.tabline -----
 require('mini.tabline').setup()
 
 
@@ -362,11 +367,11 @@ require('nvim-treesitter.configs').setup({
 
 
 -- ----- treesitter-context -----
-require('treesitter-context').setup{
+require('treesitter-context').setup({
   max_lines = 3,
   multiline_threshold = 2,
   trim_scope = 'inner',
-}
+})
 -- Creates a fake bottom border under the context
 vim.cmd([[
   hi TreesitterContextBottom gui=underline guisp=Grey
