@@ -37,7 +37,7 @@ set signcolumn=yes
 " multispace option allows to emulate indent lines without needing a dedicated plugin
 " source: https://github.com/thaerkh/vim-indentguides
 set list
-autocmd OptionSet shiftwidth execute 'setlocal listchars=tab:▸\ ,eol:·,tab:│\ '
+setlocal listchars=tab:▸\ ,eol:·
 " === INDENTATION ===
 set shiftwidth=2
 set tabstop=2       "number of spaces a TAB char counts for (when encountered in a file)
