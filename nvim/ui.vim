@@ -2,110 +2,120 @@
 " === UI SETTINGS ====
 " ====================
 
-" Enable true colors for better colorschemes
 set termguicolors
 
-function s:SetDarkMode()
-  set bg=dark
+" ----------------------------------------------------------------------------
+" Below are the configuration function for each theme. I stick to one function
+" per theme, and use a mode argument (either 'Dark' or 'Light', check
+" `MacOsUIMode()` for more details) reflecting which mode is asked.
+"
+" These functions are then called from `SetLightTheme()` or `SetDarkTheme()`.
+" ----------------------------------------------------------------------------
 
-  "" -- everforest --
-  "" -- palette: https://github.com/sainnhe/everforest/blob/master/autoload/everforest.vim
-  "let g:everforest_disable_italic_comment = 1
-  "let g:everforest_background = 'hard'
-  "" standard hard dark :
-  "" fg:  ['#d3c6aa', '223']
-  "" bg0: ['#2b3339', '235'],
-  "let g:everforest_colors_override = {
-  "\ 'fg':  ['#d6d6cf', '223'],
-  "\ 'bg0': ['#1d211f', '235']
-  "\}
-  "color everforest
+" """
+" Everforest theme
+" """
+function! s:SetupEverforest(mode)
+  let g:everforest_disable_italic_comment = 1
+  let g:everforest_background = 'hard'
 
-"" -- kanagawa --
-"lua << EOF
-"  -- palette: https://github.com/rebelot/kanagawa.nvim/blob/master/lua/kanagawa/colors.lua
-"  require('kanagawa').setup({
-"    undercurl = true,
-"    commentStyle = { italic = false },
-"    keywordStyle = { italic = false },
-"    functionStyle = { bold = false },
-"    statementStyle = { bold = false },
-"    colors = {
-"      palette = {
-"        -- TODO: these should ideally only be customized for the wave theme, not for all themes
-"        --       but I only use the wave theme anyway so I guess it's good enough for now
-"        fujiWhite = "#dbd8c9",  -- whiter foreground color
-"        fujiGray = "#76747a",   -- more blue/purple comment color
-"      },
-"      theme = {}
-"    }
-"  })
-"  vim.cmd.colorscheme('kanagawa-wave')
-"EOF
+  if a:mode == 'Dark'
+    let g:everforest_colors_override = {
+    \ 'fg':  ['#d6d6c2', '223'],
+    \ 'bg0': ['#212322', '235'],
+    \}
+  elseif a:mode == 'Light'
+    let g:everforest_colors_override = {
+    \ 'fg':  ['#40494f', '242'],
+    \ 'bg0': ['#fffbf7', '230'],
+    \ 'bg1': ['#faf7f0', '230'],
+    \ 'bg2': ['#f5f0ee', '230'],
+    \}
+  else
+    echom "Invalid mode: '" . a:mode . "'. Use 'Dark' or 'Light'."
+    return
+  endif
 
-" -- onedark --
-lua << EOF
-  --- Merges a table into another table. Returns a whole new table.
-  -- @param t1 first table
-  -- @param t2 second table
-  -- @return a new table containing t2 values merged into t1
-  function merge(t1, t2)
-    local result = {}
-    for k, v in pairs(t1) do result[k] = v end
-    for k, v in pairs(t2) do result[k] = v end
-    return result
-  end
-  -- dark, darker, cool, deep, warm or warmer
-  local style = 'dark'
-  local palette = require("onedark.palette")
-  require('onedark').setup {
-    style = style,
-    code_style = {
-      comments = 'none',
-      keywords = 'none',
-      functions = 'none'
-    },
-    colors = merge(palette[style], {
-      fg = '#d8dee9',  -- whiter foreground color → nordic.nvim white1
-      lighter_gray = "#6c7689", -- new color used for comments
-    }),
-    highlights = {
-      ["comments"] = {fg = '$lighter_gray', fmt = 'none'},
-      ["@comment"] = {fg = '$lighter_gray', fmt = 'none'},
-    }
-  }
-  require('onedark').load()
-EOF
-
-
-" -- mini.indent --
-hi IndentLine guifg=#444455
-hi IndentLineCurrent guifg=#777788
-" --- hop.nvim ---
-hi! HopNextKey guifg=#ff521b gui=bold
-hi! HopNextKey1 guifg=#fc9e4f gui=bold
-hi! HopNextKey2 guifg=#edd382 gui=bold
-
+  color everforest
   return
 endfunction
 
-function s:SetLightMode()
-  set bg=light
+" """
+" Github theme
+" """
+function s:SetupGithub(mode)
+  if a:mode !=# 'Dark' && a:mode !=# 'Light'
+    echom "Invalid mode: '" . a:mode . "'. Use 'Dark' or 'Light'."
+    return
+  endif
 
-  "" -- everforest --
-  "" palette: https://github.com/sainnhe/everforest/blob/master/autoload/everforest.vim
-  "let g:everforest_disable_italic_comment = 1
-  "let g:everforest_background = 'hard'
-  "let g:everforest_colors_override = {
-  "\ 'fg':  ['#40494f', '242'],
-  "\ 'bg0': ['#fffbf7', '230'],
-  "\ 'bg1': ['#faf7f0', '230'],
-  "\ 'bg2': ['#f5f0ee', '230'],
-  "\}
-  "color everforest
-
-  " -- onedark --
 lua << EOF
+  local mode = vim.api.nvim_eval('a:mode')
+  local theme = mode == 'Dark' and 'github_dark_dimmed' or 'github_light_default'
+
+  require('github-theme').setup({
+    options = {
+      styles = {                 -- Style to be applied to different syntax groups
+        comments = 'NONE',       -- Value is any valid attr-list value `:help attr-list`
+        functions = 'NONE',
+        keywords = 'NONE',
+        variables = 'NONE',
+        conditionals = 'NONE',
+        constants = 'NONE',
+        numbers = 'NONE',
+        operators = 'NONE',
+        strings = 'NONE',
+        types = 'NONE',
+      },
+      -- https://github.com/projekt0n/github-nvim-theme/blob/main/Usage.md#modules
+      modules = {
+        'diagnostic', 'native_lsp', 'treesitter',
+        'blink', 'fzf', 'gitsigns', 'treesitter_context'
+      }
+    },
+  })
+  vim.cmd.colorscheme(theme)
+EOF
+  return
+endfunction
+
+" """
+" Kanagawa theme
+" """
+function s:SetupKanagawa()
+lua << EOF
+  -- palette: https://github.com/rebelot/kanagawa.nvim/blob/master/lua/kanagawa/colors.lua
+  require('kanagawa').setup({
+    undercurl = true,
+    commentStyle = { italic = false },
+    keywordStyle = { italic = false },
+    functionStyle = { bold = false },
+    statementStyle = { bold = false },
+    colors = {
+      palette = {
+        -- TODO: these should ideally only be customized for the wave theme, not for all themes
+        --       but I only use the wave theme anyway so I guess it's good enough for now
+        fujiWhite = "#dbd8c9",  -- whiter foreground color
+        fujiGray = "#8c8993",   -- more blue/purple comment color
+      },
+      theme = {}
+    }
+  })
+  vim.cmd.colorscheme('kanagawa-wave')
+EOF
+  return
+endfunction
+
+" """
+" One Dark theme
+" """
+function s:SetupOneDark(mode)
+  if a:mode != 'Dark' && a:mode != 'Light'
+    echom 'Invalid mode: ' . a:mode . '. Must be either "Dark" or "Light".'
+    return
+  endif
+
+  lua << EOF
   --- Merges a table into another table. Returns a whole new table.
   -- @param t1 first table
   -- @param t2 second table
@@ -116,37 +126,93 @@ lua << EOF
     for k, v in pairs(t2) do result[k] = v end
     return result
   end
-  local style = 'light'
+
+  local mode = vim.api.nvim_eval('a:mode')
+  local theme = mode == 'Dark' and 'github_dark_dimmed' or 'github_light_default'
   local palette = require("onedark.palette")
-  require('onedark').setup {
-    style = style,
-    code_style = {
-      comments = 'none',
-      keywords = 'none',
-      functions = 'none',
-    },
-    colors = merge(palette[style], {
+  local palette_style = mode == 'Dark' and 'dark' or 'light'
+
+  local custom_colors = {}
+  local custom_highlights = {}
+
+  if mode == 'Dark' then
+    custom_colors = {
+      fg = '#d8dee9',           -- whiter foreground color → nordic.nvim white1
+      lighter_gray = "#6c7689", -- new color used for comments
+    }
+
+    custom_highlights = {
+      ["comments"] = {fg = '$lighter_gray', fmt = 'none'},
+      ["@comment"] = {fg = '$lighter_gray', fmt = 'none'},
+    }
+  else
+    custom_colors = {
       -- bg0 = '#fefffd',
       green = '#1d936a',
       red = '#ce4646',
       blue = '#2d689b',
       -- orange = '#bf7c42',
       yellow = '#c69d43'
-    }),
-  }
+    }
+  end
+
+  require('onedark').setup({
+    style = palette_style,
+    code_style = {
+      comments = 'none',
+      keywords = 'none',
+      functions = 'none',
+    },
+    colors = merge(palette[palette_style], custom_colors),
+    highlights = custom_highlights,
+  })
   require('onedark').load()
 EOF
+  return
+endfunction
 
-" Colors are applied automatically based on user-defined highlight groups.
-" There is no default value.
 
-" -- mini.indent --
-hi IndentLine guifg=#bbbbbb
-hi IndentLineCurrent guifg=#888888
-" --- hop.nvim ---
-hi! HopNextKey guifg=#cc3f46 gui=bold
-hi! HopNextKey1 guifg=#bf702f gui=bold
-hi! HopNextKey2 guifg=#e0b22a gui=bold
+" ----------------------------------------------------------------------------
+" We reach the end of the theme configuration functions. Below is the logic to
+" detect automatically the OS theme, and the 2 `SetLightTheme()` and
+" `SetDarkTheme()` functions that setup the proper theme and some additionnal
+" custom highlighting according to the desired theme.
+" ----------------------------------------------------------------------------
+
+
+function s:SetDarkTheme()
+  set bg=dark
+
+  "call s:SetupEverforest('Dark')
+  "call s:SetupGithub('Dark')
+  call s:SetupKanagawa()
+  "call s:SetupOneDark('Dark')
+
+  " -- mini.indent --
+  hi IndentLine guifg=#444455
+  hi IndentLineCurrent guifg=#777788
+  " --- hop.nvim ---
+  hi! HopNextKey guifg=#ff521b gui=bold
+  hi! HopNextKey1 guifg=#fc9e4f gui=bold
+  hi! HopNextKey2 guifg=#edd382 gui=bold
+
+  return
+endfunction
+
+function s:SetLightTheme()
+  set bg=light
+
+  "call s:SetupEverforest('Light')
+  call s:SetupGithub('Light')
+  "call s:SetupOneDark('Light')
+
+  " -- mini.indent --
+  hi IndentLine guifg=#bbbbbb
+  hi IndentLineCurrent guifg=#888888
+  " --- hop.nvim ---
+  hi! HopNextKey guifg=#cc3f46 gui=bold
+  hi! HopNextKey1 guifg=#bf702f gui=bold
+  hi! HopNextKey2 guifg=#e0b22a gui=bold
 
   return
 endfunction
@@ -161,22 +227,17 @@ function s:MacOsUIMode()
   endif
 endfunction
 
-function s:SetMode()
-  if has('nvim-0.5')
-    if s:MacOsUIMode() == 'Light'
-      call s:SetLightMode()
-    else
-      call s:SetDarkMode()
-    endif
+function s:LoadTheme()
+  if s:MacOsUIMode() == 'Light'
+    call s:SetLightTheme()
   else
-    color retrobox
-    finish
+    call s:SetDarkTheme()
   endif
 endfunction
 
 augroup lightdarkmode
   autocmd!
-  autocmd WinEnter * call s:SetMode()
+  autocmd WinEnter * call s:LoadTheme()
 augroup END
 
-call s:SetMode()
+call s:LoadTheme()
