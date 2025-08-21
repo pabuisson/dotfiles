@@ -7,6 +7,7 @@ Plug 'sainnhe/everforest'
 if has('nvim')
   Plug 'rebelot/kanagawa.nvim'
   Plug 'navarasu/onedark.nvim'
+  Plug 'projekt0n/github-nvim-theme'
 endif
 " --- Filetype related ---
 " Plug 'gabrielelana/vim-markdown', { 'for': 'markdown' }
