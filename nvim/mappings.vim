@@ -24,17 +24,6 @@ nnoremap <leader>he :Sexplore<CR>
 " Undo last search (to remove the highlighting)
 nnoremap <esc> :nohlsearch<Bar>:echo<CR>
 
-" Copy current file path to the clipboard: yank absolute path
-nnoremap <leader>yap :let @+ = expand("%:p")<CR>
-" Copy current file path + :line to the clipboard: yank absolute line
-nnoremap <leader>yal :let @+ = expand("%:p").":".line(".")<CR>
-" Copy the current filename from the git repo root : yank path
-" TODO: what if the command returns nothing? handle this case
-nnoremap <leader>yp :let @+ = systemlist("git ls-files ".expand("%:p"))[0]<CR>
-" Copy the current filename + :line from the git repo root : yank line
-" TODO: what if the command returns nothing? handle this case
-nnoremap <leader>yl :let @+ = systemlist("git ls-files ".expand("%:p"))[0].":".line(".")<CR>
-
 " All buffers delete/wipe
 nnoremap <leader>bda :%bd!<CR>
 nnoremap <leader>bwa :%bw!<CR>
@@ -81,4 +70,3 @@ nnoremap N Nzz
 " NOTE: more variations in the link above, may cover some edge cases too
 command! BD :bn|:bd#
 command! BW :bn|:bw#
-

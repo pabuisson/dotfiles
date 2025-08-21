@@ -103,6 +103,29 @@ endfunction
 nnoremap <leader>yml :call YAMLTree()<CR>
 
 
+" ==============================
+" === Yank current file path ===
+" ==============================
+function! YankPath(mode)
+  if a:mode == 'absolute'
+    let @+ = expand("%:p")
+  elseif a:mode == 'absolute_line'
+    let @+ = expand("%:p").":".line(".")
+  elseif a:mode == 'repo'
+    let @+ = systemlist("git ls-files --full-name ".expand("%:p"))[0]
+  elseif a:mode == 'repo_line'
+    let @+ = systemlist("git ls-files --full-name ".expand("%:p"))[0].":".line(".")
+  endif
+  echo "Yanked: ".@+
+endfunction
+
+nnoremap <leader>yap :call YankPath('absolute')<CR>
+nnoremap <leader>yal :call YankPath('absolute_line')<CR>
+nnoremap <leader>yp :call YankPath('repo')<CR>
+nnoremap <leader>yl :call YankPath('repo_line')<CR>
+
+
+
 " ========================================
 " ===  Remove item from quickfix list  ===
 " ========================================
