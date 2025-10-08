@@ -21,6 +21,7 @@ set statusline+=\%#Pmenu#%{HasNoErrorAndNoWarnings()==1?LinterStatusText():''}
 set statusline+=%#Pmenu#
 set statusline+=\ ⋮\ %.90f%{&modified?'\ [+]':''}
 set statusline+=\ ⋮\ \ %.60{GitInfo()}
+set statusline+=\ %{get(b:,'gitsigns_status','')}
 " switch to the right side
 set statusline+=%=
 set statusline+=\ %l/%L
