@@ -159,7 +159,7 @@ function s:SetupOneDark(mode)
     }
     mini_tabline_colors = {
       ["MiniTablineCurrent"] = { bg = palette[style].bg_blue, fg = palette[style].black },
-      ["MiniTablineModifiedCurrent"] = { bg = palette[style].orange, fg = palette[style].black },
+      ["MiniTablineModifiedCurrent"] = { bg = palette[style].bg_yellow, fg = palette[style].black },
       ["MiniTablineVisible"] = { bg = palette[style].bg_d, fg = palette[style].black }
     }
   end
