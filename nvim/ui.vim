@@ -128,9 +128,10 @@ function s:SetupOneDark(mode)
   end
 
   local mode = vim.api.nvim_eval('a:mode')
-  local theme = mode == 'Dark' and 'github_dark_dimmed' or 'github_light_default'
+
+  -- https://github.com/navarasu/onedark.nvim/blob/master/lua/onedark/palette.lua
   local palette = require("onedark.palette")
-  local palette_style = mode == 'Dark' and 'dark' or 'light'
+  local style = mode == 'Dark' and 'dark' or 'light'
 
   local custom_colors = {}
   local custom_highlights = {}
@@ -140,33 +141,50 @@ function s:SetupOneDark(mode)
       fg = '#d8dee9',           -- whiter foreground color → nordic.nvim white1
       lighter_gray = "#6c7689", -- new color used for comments
     }
-
     custom_highlights = {
       ["comments"] = {fg = '$lighter_gray', fmt = 'none'},
       ["@comment"] = {fg = '$lighter_gray', fmt = 'none'},
     }
+    mini_tabline_colors = {
+      ["MiniTablineCurrent"] = { bg = palette[style].blue, fg = palette[style].black },
+      ["MiniTablineModifiedCurrent"] = { bg = palette[style].orange, fg = palette[style].black },
+      ["MiniTablineVisible"] = { bg = palette[style].grey, fg = "#eceff4" }
+    }
   else
     custom_colors = {
-      -- bg0 = '#fefffd',
       green = '#1d936a',
       red = '#ce4646',
       blue = '#2d689b',
-      -- orange = '#bf7c42',
       yellow = '#c69d43'
+    }
+    mini_tabline_colors = {
+      ["MiniTablineCurrent"] = { bg = palette[style].bg_blue, fg = palette[style].black },
+      ["MiniTablineModifiedCurrent"] = { bg = palette[style].orange, fg = palette[style].black },
+      ["MiniTablineVisible"] = { bg = palette[style].bg_d, fg = palette[style].black }
     }
   end
 
   require('onedark').setup({
-    style = palette_style,
+    style = style,
     code_style = {
       comments = 'none',
       keywords = 'none',
       functions = 'none',
     },
-    colors = merge(palette[palette_style], custom_colors),
+    colors = merge(palette[style], custom_colors),
     highlights = custom_highlights,
   })
   require('onedark').load()
+
+  -- `MiniTablineCurrent` - buffer is current (has cursor in it).
+  -- `MiniTablineVisible` - buffer is visible (displayed in some window).
+  -- `MiniTablineHidden` - buffer is hidden (not displayed).
+  -- `MiniTablineModifiedCurrent` - buffer is modified and current.
+  -- `MiniTablineModifiedVisible` - buffer is modified and visible.
+  -- `MiniTablineModifiedHidden` - buffer is modified and hidden.
+  for k, v in pairs(mini_tabline_colors) do
+    vim.api.nvim_set_hl(0, k, v)
+  end
 EOF
   return
 endfunction
