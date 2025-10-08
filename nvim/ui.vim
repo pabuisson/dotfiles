@@ -144,6 +144,7 @@ function s:SetupOneDark(mode)
     custom_highlights = {
       ["comments"] = {fg = '$lighter_gray', fmt = 'none'},
       ["@comment"] = {fg = '$lighter_gray', fmt = 'none'},
+      ["Comment"] = {fg = '$lighter_gray', fmt = 'none'},
     }
     mini_tabline_colors = {
       ["MiniTablineCurrent"] = { bg = palette[style].blue, fg = palette[style].black },
