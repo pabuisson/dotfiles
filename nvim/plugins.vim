@@ -34,7 +34,7 @@ if has('nvim')
   Plug 'williamboman/mason-lspconfig.nvim'
   Plug 'neovim/nvim-lspconfig'
   Plug 'mfussenegger/nvim-lint'
-  Plug 'saghen/blink.cmp', {'tag': 'v1.5.1'}
+  Plug 'saghen/blink.cmp', { 'tag': 'v1.7.0' }
   " -- formatter --
   Plug 'stevearc/conform.nvim'
 
@@ -206,6 +206,17 @@ require("blink.cmp").setup({
   keymap = { preset = 'enter' },
   sources = {
     default = { 'lsp', 'path', 'snippets', 'buffer', 'cmdline', 'omni' },
+  },
+  completion = {
+    menu = { border = 'single' },
+    documentation = { window = { border = 'single' } },
+  },
+  signature = {
+    window = { border = 'single' }
+  },
+  menu = {
+    -- Don't automatically show the completion menu
+    auto_show = true,
   },
 })
 
