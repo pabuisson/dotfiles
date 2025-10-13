@@ -349,10 +349,18 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
 
 -- ----- gitsigns -----
-require('gitsigns').setup()
+require('gitsigns').setup({
+  preview_config = {
+    border = 'single'
+  }
+})
 local opts = { noremap=true, silent=true }
-vim.keymap.set('n', '<leader>gph', ':Gitsigns preview_hunk<CR>', opts)
-vim.keymap.set('n', '<leader>gbl', ':Gitsigns blame_line<CR>', opts)
+
+vim.keymap.set('n', '<leader>hj', ':Gitsigns nav_hunk next<CR>', opts)
+vim.keymap.set('n', '<leader>hk', ':Gitsigns nav_hunk prev<CR>', opts)
+vim.keymap.set('n', '<leader>hp', ':Gitsigns preview_hunk<CR>', opts)
+vim.keymap.set('n', '<leader>bl', ':Gitsigns blame_line<CR>', opts)
+vim.keymap.set('n', '<leader>bf', ':Gitsigns blame<CR>', opts)
 
 
 -- ----- indentmini -----
@@ -367,7 +375,7 @@ require('scrollview').setup({
   diagnostics_severities = { vim.diagnostic.severity.ERROR }
 })
 
--- ----- (mini.tabline -----
+-- ----- mini.tabline -----
 require('mini.tabline').setup()
 
 
