@@ -172,3 +172,8 @@ fi
 # ---- ELIXIR -----
 
 export ERL_AFLAGS="-kernel shell_history enabled"
+
+# Elixir 1.19: optimize compilation. Should be set to half the number of CPU Cores
+export MIX_OS_DEPS_COMPILE_PARTITION_COUNT=$(sysctl -n hw.ncpu | awk '{print int($1/2)}')
+
+
