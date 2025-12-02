@@ -25,6 +25,7 @@ Plug 'tpope/vim-rhubarb'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-projectionist'
 Plug 'dominikduda/vim_current_word'
+Plug 'vim-crystal/vim-crystal'
 
 if has('nvim')
   " -- treesitter and lsp --
@@ -205,7 +206,10 @@ require("blink.cmp").setup({
   end,
   keymap = { preset = 'enter' },
   sources = {
-    default = { 'lsp', 'path', 'snippets', 'buffer', 'cmdline', 'omni' },
+    default = { 'lsp', 'path', 'snippets', 'buffer', 'cmdline', 'omni', 'copilot' },
+    per_filetype = {
+      crystal = { 'path', 'snippets', 'buffer', 'cmdline', 'omni', 'copilot' },
+    },
   },
   completion = {
     menu = { border = 'single' },
