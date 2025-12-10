@@ -35,7 +35,7 @@ if has('nvim')
   Plug 'williamboman/mason-lspconfig.nvim'
   Plug 'neovim/nvim-lspconfig'
   Plug 'mfussenegger/nvim-lint'
-  Plug 'saghen/blink.cmp', { 'tag': 'v1.7.0' }
+  Plug 'saghen/blink.cmp', { 'tag': 'v1.8.0' }
   " -- formatter --
   Plug 'stevearc/conform.nvim'
 
@@ -45,6 +45,9 @@ if has('nvim')
   " -- codecompanion.nvim --
   " depends on plenary and treesitter
   Plug 'zbirenbaum/copilot.lua'
+  " NOTE: there's another blink integration named `blink-copilot`. Worth
+  "       checking if this one does not work as expected
+  Plug 'giuxtaposition/blink-cmp-copilot'
   Plug 'olimorris/codecompanion.nvim', { 'branch': 'main' }
 
   " -- other plugins --
@@ -210,17 +213,25 @@ require("blink.cmp").setup({
     per_filetype = {
       crystal = { 'path', 'snippets', 'buffer', 'cmdline', 'omni', 'copilot' },
     },
+    providers = {
+      copilot = {
+        name = "copilot",
+        module = "blink-cmp-copilot",
+        score_offset = 100,
+        async = true,
+      },
+    },
   },
   completion = {
     menu = { border = 'single' },
     documentation = { window = { border = 'single' } },
+    -- https://cmp.saghen.dev/configuration/completion#list
+    list = {
+      selection = { preselect = true, auto_insert = false }
+    },
   },
   signature = {
     window = { border = 'single' }
-  },
-  menu = {
-    -- Don't automatically show the completion menu
-    auto_show = true,
   },
 })
 
@@ -228,31 +239,13 @@ require("blink.cmp").setup({
 -- ----- codecompanion -----
 -- TODO: check this plugin for better copilot/blink integration → https://github.com/fang2hou/blink-copilot
 require("copilot").setup({
-  suggestion = {
-    enabled = true,
-    auto_trigger = true,
-    keymap = {
-      accept = "<Tab>",
-    }
-  },
+  suggestion = { enabled = false },
+  panel = { enabled = false },
   filetypes = {
     elixir = true,
     ruby = true,
     ["*"] = false
   }
-})
--- hide copilot suggestion when blink completion menu is open
-vim.api.nvim_create_autocmd("User", {
-  pattern = "BlinkCmpMenuOpen",
-  callback = function()
-    vim.b.copilot_suggestion_hidden = true
-  end,
-})
-vim.api.nvim_create_autocmd("User", {
-  pattern = "BlinkCmpMenuClose",
-  callback = function()
-    vim.b.copilot_suggestion_hidden = false
-  end,
 })
 require("codecompanion").setup()
 vim.keymap.set("n", "<leader>ccc", "<cmd>CodeCompanionChat<CR>")
