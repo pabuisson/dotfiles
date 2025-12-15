@@ -26,9 +26,9 @@ alias grc='git rebase --continue'
 alias gra='git rebase --abort'
 alias gst='git st'
 alias gmb='git merge-base'
-alias gitconflict='$EDITOR $(git diff --name-only --diff-filter=U | xargs)'
+alias gconflict='$EDITOR $(git diff --name-only --diff-filter=U | xargs)'
 # Churn on past 6 months (number of commits per file)
-alias gitchurn="git log --all -M -C --name-only --format='format:' $@ --since='6 months ago' | sort | grep -v '^$' | uniq -c | sort -n | tail -10"
+alias gchurn="git log --all -M -C --name-only --format='format:' $@ --since='6 months ago' | sort | grep -v '^$' | uniq -c | sort -n | tail -10"
 # Get short SHA1 of HEAD in clipboard
 alias githead='git rev-parse HEAD | cut -c 1-8 | pbcopy'
 
