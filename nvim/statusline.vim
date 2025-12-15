@@ -24,7 +24,7 @@ set statusline+=\ ⋮\ \ %.60{GitInfo()}
 set statusline+=\ %{get(b:,'gitsigns_status','')}
 " switch to the right side
 set statusline+=%=
-set statusline+=\ %l/%L
+set statusline+=\ %l:%c/%L
 set statusline+=\ ⋮\ %2p%%
 set statusline+=%{Nbsp()}
 

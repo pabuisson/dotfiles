@@ -33,6 +33,9 @@ set clipboard+=unnamed
 set showmatch       "show matching parenthese
 set foldcolumn=auto "show folding column
 set signcolumn=yes
+" Which column to wrap at with `gq`
+set textwidth=90
+set formatoptions-=t
 " === HIDDEN/NON VISIBLE CHARS ===
 " multispace option allows to emulate indent lines without needing a dedicated plugin
 " source: https://github.com/thaerkh/vim-indentguides
