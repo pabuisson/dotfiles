@@ -377,11 +377,9 @@ require('mini.tabline').setup()
 
 
 -- ----- treesitter -----
-require('nvim-treesitter.configs').setup({
-  -- NOTE: yaml, markdown and markdown_inline are required for CodeCompanion
-  ensure_installed = { "javascript", "ruby", "eex", "elixir", "erlang", "heex", "markdown", "markdown_inline", "html", "lua", "typescript", "yaml" },
-  highlight = { enable = true }
-})
+require('nvim-treesitter').install(
+  { "javascript", "ruby", "eex", "elixir", "erlang", "heex", "markdown", "markdown_inline", "html", "lua", "typescript", "yaml" }
+)
 
 
 -- ----- treesitter-context -----
