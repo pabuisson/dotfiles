@@ -261,6 +261,8 @@ require("conform").setup({
     ruby = { 'syntax_tree' },
     javascript = { 'prettier' },
     typescript = { 'prettier' },
+    css = { 'prettier' },
+    scss = { 'prettier' },
     ['*'] = { 'trim_whitespace', 'trim_newlines' }
   },
   format_on_save = {
@@ -320,8 +322,14 @@ end, opts)
 -- ----- lsp: mason, mason-lspconfig -----
 require("mason").setup()
 require("mason-lspconfig").setup()
+vim.lsp.config['elixirls'] = {
+  settings = {
+    dialyzerEnabled = false,
+    fetchDeps = false,
+  }
+}
 -- Enable the LSP servers I do use
-vim.lsp.enable({'ruby_lsp', 'nextls', 'ts_ls'})
+vim.lsp.enable({'ruby_lsp', 'elixirls', 'ts_ls'})
 -- Customize key mappings when LSP gets attached to a buffer
 vim.api.nvim_create_autocmd('LspAttach', {
   callback = function(args)
@@ -369,7 +377,7 @@ require('scrollview.contrib.gitsigns').setup()
 require('scrollview').setup({
   excluded_filetypes = {},
   signs_on_startup = { 'conflicts', 'cursor', 'diagnostics', 'keywords', 'marks', 'search' },
-  diagnostics_severities = { vim.diagnostic.severity.ERROR }
+  diagnostics_severities = { vim.diagnostic.severity.WARN }
 })
 
 -- ----- mini.tabline -----
