@@ -173,6 +173,9 @@ fi
 
 export ERL_AFLAGS="-kernel shell_history enabled"
 
+# Ensure Erlang is built with documentation, otherwise it messed ElixirLS up
+export KERL_BUILD_DOCS=yes
+
 # Elixir 1.19: optimize compilation. Should be set to half the number of CPU Cores
 export MIX_OS_DEPS_COMPILE_PARTITION_COUNT=$(sysctl -n hw.ncpu | awk '{print int($1/2)}')
 
