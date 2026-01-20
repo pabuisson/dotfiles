@@ -401,7 +401,15 @@ require('mini.tabline').setup()
 require('nvim-treesitter').install(
   { "javascript", "ruby", "eex", "elixir", "erlang", "heex", "markdown", "markdown_inline", "html", "lua", "typescript", "yaml" }
 )
-
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = {
+    'javascript', 'typescript', 'html', 'css',
+    'elixir', 'heex', 'ruby',
+    'markdown',
+    'lua'
+  },
+  callback = function() vim.treesitter.start() end,
+})
 
 -- ----- treesitter-context -----
 require('treesitter-context').setup({
