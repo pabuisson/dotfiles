@@ -22,7 +22,7 @@ function! s:SetupEverforest(mode)
   if a:mode == 'Dark'
     let g:everforest_colors_override = {
     \ 'fg':  ['#d6d6c2', '223'],
-    \ 'bg0': ['#212322', '235'],
+    \ 'bg0': ['#1f2120', '235'],
     \}
   elseif a:mode == 'Light'
     let g:everforest_colors_override = {
@@ -99,7 +99,13 @@ lua << EOF
         fujiGray = "#8c8993",   -- more blue/purple comment color
       },
       theme = {}
-    }
+    },
+    overrides = function()
+      -- Solution provided here: https://github.com/rebelot/kanagawa.nvim/issues/216
+      return {
+        ["@variable.builtin"] = { italic = false },
+      }
+    end
   })
   vim.cmd.colorscheme('kanagawa-wave')
 EOF
@@ -131,19 +137,20 @@ function s:SetupOneDark(mode)
 
   -- https://github.com/navarasu/onedark.nvim/blob/master/lua/onedark/palette.lua
   local palette = require("onedark.palette")
-  local style = mode == 'Dark' and 'dark' or 'light'
+  local style = mode == 'Dark' and 'darker' or 'light'
 
   local custom_colors = {}
   local custom_highlights = {}
 
   if mode == 'Dark' then
     custom_colors = {
-      fg = '#d8dee9',           -- whiter foreground color → nordic.nvim white1
+      fg = '#e1e5ed',           -- whiter foreground color → nordic.nvim white1
       lighter_gray = "#6c7689", -- new color used for comments
     }
     custom_highlights = {
       ["comments"] = {fg = '$lighter_gray', fmt = 'none'},
       ["@comment"] = {fg = '$lighter_gray', fmt = 'none'},
+      ["@comment.documentation"] = {fg = '$lighter_gray', fmt = 'none'},
       ["Comment"] = {fg = '$lighter_gray', fmt = 'none'},
     }
     mini_tabline_colors = {
