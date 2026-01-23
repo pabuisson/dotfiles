@@ -5,8 +5,8 @@
   co = checkout
   cp = cherry-pick
   d = diff
-  lg = "log --color --graph --pretty=format:'%Cred%h%Creset %s %Cgreen(%cr) %C(bold blue)%an%Creset%C(yellow)%d%Creset' --abbrev-commit"
-  lgiso = "log --color --graph --pretty=format:'%Cred%h%Creset %s %Cgreen(%ci) %C(bold blue)%an%Creset%C(yellow)%d%Creset' --abbrev-commit"
+  lg = "log --color --graph --pretty=format:'%C(yellow)%h%Creset %s %Cgreen(%cr) %C(blue)%an%Creset%C(red)%d%Creset' --abbrev-commit"
+  lgiso = "log --color --graph --pretty=format:'%C(yellow)%h%Creset %s %Cgreen(%ci) %C(blue)%an%Creset%C(red)%d%Creset' --abbrev-commit"
   st = status -sb
   fp = fetch -p
   # Requires column to be updated to a recent version to keep colors
