@@ -48,9 +48,9 @@ alias gsl='git stash list'
 # NOTE: https://git-scm.com/docs/git-diff#Documentation/git-diff.txt---diff-filterACDMRTUXB82308203
 alias gdm='git diff $(git merge-base head origin/master)'
 alias gdd='git diff $(git merge-base head origin/develop)'
-alias gfm='$EDITOR $(git diff --name-only --diff-filter=ACMRT origin/master... | xargs)'
-alias gfd='$EDITOR $(git diff --name-only --diff-filter=ACMRT origin/develop... | xargs)'
-alias gfl='$EDITOR $(git diff --name-only --diff-filter=ACMRT head | xargs)'
+alias gfm='$EDITOR $(git diff --name-only --diff-filter=d origin/master... | xargs)'
+alias gfd='$EDITOR $(git diff --name-only --diff-filter=d origin/develop... | xargs)'
+alias gfl='$EDITOR $(git diff --name-only --diff-filter=d head | xargs)'
 
 # RAILS / RUBY
 alias ru="rackup"
