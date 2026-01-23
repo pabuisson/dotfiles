@@ -39,3 +39,37 @@ autocmd User ProjectionistDetect call projectionist#append(getcwd(),
       \     ]
       \   }
       \ })
+
+
+" ===================================
+" === Toggle @tag :focus in tests ===
+" ===================================
+function! ToggleTestFocus()
+  " Save the current cursor position
+  let l:save_cursor = getpos(".")
+
+  " Search backward for the test line
+  let l:test_line = search('^\s*test\s\+', 'bcnW')
+
+  " If test line found
+  if l:test_line > 0
+    " Check if the previous line has @tag :focus
+    let l:prev_line = l:test_line - 1
+    let l:prev_line_content = getline(l:prev_line)
+
+    if l:prev_line_content =~ '^\s*@tag\s\+:focus\s*$'
+      " Remove the @tag :focus line
+      execute l:prev_line . "delete"
+    else
+      " Add @tag :focus before the test line
+      let l:indent = matchstr(getline(l:test_line), '^\s*')
+      call append(l:test_line - 1, l:indent . "@tag :focus")
+    endif
+  endif
+
+  " Restore cursor position
+  call setpos('.', l:save_cursor)
+endfunction
+
+:command! ToggleTestFocus :call ToggleTestFocus()
+nnoremap <leader>tt :call ToggleTestFocus()<CR>
