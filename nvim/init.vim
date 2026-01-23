@@ -71,3 +71,22 @@ augroup highlight_yank
   autocmd!
   autocmd TextYankPost * silent! lua vim.highlight.on_yank { higroup='IncSearch', timeout=500 }
 augroup END
+
+lua << EOF
+if vim.g.neovide then
+  vim.o.guifont = "JetbrainsMono Nerd Font:h16"
+
+  vim.g.neovide_position_animation_length = 0
+  vim.g.neovide_position_animation_length = 0
+  vim.g.neovide_scroll_animation_length = 0
+  vim.g.neovide_cursor_animation_length = 0
+  vim.g.neovide_cursor_short_animation_length = 0
+
+  vim.keymap.set('n', '<D-s>', ':w<CR>') -- Save
+  vim.keymap.set('v', '<D-c>', '"+y') -- Copy
+  vim.keymap.set('n', '<D-v>', '"+P') -- Paste normal mode
+  vim.keymap.set('v', '<D-v>', '"+P') -- Paste visual mode
+  vim.keymap.set('i', '<D-v>', '<ESC>"+Pi') -- Paste insert mode
+  vim.keymap.set('c', '<D-v>', '<C-R>+') -- Paste command mode
+end
+EOF
