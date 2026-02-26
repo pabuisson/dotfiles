@@ -12,7 +12,7 @@ endif
 " --- Filetype related ---
 " Plug 'gabrielelana/vim-markdown', { 'for': 'markdown' }
 Plug 'junegunn/goyo.vim', { 'for': 'markdown' }
-Plug 'elixir-editors/vim-elixir', { 'for': 'elixir' }
+Plug 'elixir-editors/vim-elixir', { 'for': ['elixir', 'heex'] }
 
 " --- Plugins ---
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
@@ -80,6 +80,7 @@ let g:ale_fix_on_save = 1
 let g:ale_fixers = {
 \   'elixir': ['mix_format'],
 \   'heex': ['mix_format'],
+\   'eelixir': ['mix_format']
 \}
 
 " ----- current_word -----

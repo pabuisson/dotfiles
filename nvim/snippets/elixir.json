@@ -100,5 +100,15 @@
       "  end",
       "end"
     ]
+  },
+  "phxcomp": {
+    "prefix": ["phxcomp"],
+    "body": [
+      "def $1(assigns) do",
+      "  ~H\"\"\"",
+      "    $2",
+      "  \"\"\"",
+      "end"
+    ]
   }
 }
