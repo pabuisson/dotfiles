@@ -51,7 +51,7 @@ function s:SetupGithub(mode)
 
 lua << EOF
   local mode = vim.api.nvim_eval('a:mode')
-  local theme = mode == 'Dark' and 'github_dark_dimmed' or 'github_light_default'
+  local theme = mode == 'Dark' and 'github_dark' or 'github_light_tritanopia'
 
   require('github-theme').setup({
     options = {
@@ -205,14 +205,13 @@ endfunction
 " custom highlighting according to the desired theme.
 " ----------------------------------------------------------------------------
 
-
 function s:SetDarkTheme()
   set bg=dark
 
-  "call s:SetupEverforest('Dark')
-  "call s:SetupGithub('Dark')
   call s:SetupKanagawa()
   "call s:SetupOneDark('Dark')
+  "call s:SetupGithub('Dark')
+  "call s:SetupEverforest('Dark')
 
   " -- mini.indent --
   hi IndentLine guifg=#444455
@@ -229,8 +228,8 @@ function s:SetLightTheme()
   set bg=light
 
   "call s:SetupEverforest('Light')
-  call s:SetupGithub('Light')
-  "call s:SetupOneDark('Light')
+  "call s:SetupGithub('Light')
+  call s:SetupOneDark('Light')
 
   " -- mini.indent --
   hi IndentLine guifg=#bbbbbb
