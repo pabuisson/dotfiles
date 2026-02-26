@@ -35,7 +35,7 @@ if has('nvim')
   Plug 'williamboman/mason-lspconfig.nvim'
   Plug 'neovim/nvim-lspconfig'
   Plug 'mfussenegger/nvim-lint'
-  Plug 'saghen/blink.cmp', { 'tag': 'v1.8.0' }
+  Plug 'saghen/blink.cmp', { 'tag': 'v1.9.1' }
   Plug 'kevinhwang91/nvim-hlslens'
   " -- formatter --
   Plug 'stevearc/conform.nvim'
