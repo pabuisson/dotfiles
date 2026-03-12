@@ -15,6 +15,7 @@
   rrecent = "!r() { git for-each-ref --color=always --sort=-committerdate refs/remotes/ --format='%(refname:short)|%(color:green)%(committerdate:relative)|%(color:magenta)%(authorname)%(color:reset)' | grep -vE '^(main|master|develop)\\|' | column --table --separator '|'; }; r"
   pp = pull -p
   sw = switch
+  wt = worktree
 [user]
   name = Pierre-Adrien Buisson
   email = pabuisson@gmail.com
