@@ -1,3 +1,5 @@
+" vim: foldmethod=marker
+
 " ====================
 " === UI SETTINGS ====
 " ====================
@@ -12,9 +14,7 @@ set termguicolors
 " These functions are then called from `SetLightTheme()` or `SetDarkTheme()`.
 " ----------------------------------------------------------------------------
 
-" """
-" Everforest theme
-" """
+" Everforest theme {{{
 function! s:SetupEverforest(mode)
   let g:everforest_disable_italic_comment = 1
   let g:everforest_background = 'hard'
@@ -39,10 +39,9 @@ function! s:SetupEverforest(mode)
   color everforest
   return
 endfunction
+" }}}
 
-" """
-" Github theme
-" """
+" Github theme {{{
 function s:SetupGithub(mode)
   if a:mode !=# 'Dark' && a:mode !=# 'Light'
     echom "Invalid mode: '" . a:mode . "'. Use 'Dark' or 'Light'."
@@ -78,10 +77,9 @@ lua << EOF
 EOF
   return
 endfunction
+" }}}
 
-" """
-" Kanagawa theme
-" """
+" Kanagawa theme {{{
 function s:SetupKanagawa()
 lua << EOF
   -- palette: https://github.com/rebelot/kanagawa.nvim/blob/master/lua/kanagawa/colors.lua
@@ -111,10 +109,9 @@ lua << EOF
 EOF
   return
 endfunction
+" }}}
 
-" """
-" One Dark theme
-" """
+" One Dark theme {{{
 function s:SetupOneDark(mode)
   if a:mode != 'Dark' && a:mode != 'Light'
     echom 'Invalid mode: ' . a:mode . '. Must be either "Dark" or "Light".'
@@ -196,6 +193,7 @@ function s:SetupOneDark(mode)
 EOF
   return
 endfunction
+" }}}
 
 
 " ----------------------------------------------------------------------------
