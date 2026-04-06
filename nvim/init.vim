@@ -68,12 +68,17 @@ iabbr >> »
 iabbr --> →
 iabbr <-- ←
 
-augroup highlight_yank
-  autocmd!
-  autocmd TextYankPost * silent! lua vim.highlight.on_yank { higroup='IncSearch', timeout=500 }
-augroup END
-
 lua << EOF
+
+
+-- ------------------------------------------
+-- ----- BRIEFLY HIGHLIGHT YANKED TEXT -----
+-- ------------------------------------------
+vim.api.nvim_create_autocmd("TextYankPost", {
+  callback = function()
+    vim.hl.on_yank({ timeout=400 })
+  end
+})
 
 
 -- ---------------------------------
