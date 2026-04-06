@@ -1,66 +1,78 @@
-filetype off
-call plug#begin('~/.config/nvim/plugged')
+" vim: foldmethod=marker
 
-" --- Color schemes ---
-Plug 'sainnhe/everforest'
+lua << EOF
 
-if has('nvim')
-  Plug 'rebelot/kanagawa.nvim'
-  Plug 'navarasu/onedark.nvim'
-  Plug 'projekt0n/github-nvim-theme'
-endif
-" --- Filetype related ---
-" Plug 'gabrielelana/vim-markdown', { 'for': 'markdown' }
-Plug 'junegunn/goyo.vim', { 'for': 'markdown' }
-Plug 'elixir-editors/vim-elixir', { 'for': ['elixir', 'heex'] }
+-- Package list {{{
+local gh = function(x) return 'https://github.com/' .. x end
+vim.pack.add({
+  -- VIM PLUGINS
+  gh('tpope/vim-surround'),
+  gh('tpope/vim-repeat'),
+  gh('tpope/vim-eunuch'),
+  gh('tpope/vim-rhubarb'),
+  gh('tpope/vim-fugitive'),
+  gh('tpope/vim-projectionist'),
+  gh('dominikduda/vim_current_word'),
+  gh('dense-analysis/ale'),
+  gh('junegunn/fzf'),
+  gh('junegunn/fzf.vim'),
+  -- THEMES
+  -- gh('sainnhe/everforest'),
+  gh('projekt0n/github-nvim-theme'),
+  gh('rebelot/kanagawa.nvim'),
+  gh('navarasu/onedark.nvim'),
+  -- NEOVIM STANDALONE
+  -- gh('stevearc/aerial.nvim'),
+  -- gh('dstein64/nvim-scrollview'),
+  gh('stevearc/conform.nvim'),
+  gh('sindrets/diffview.nvim'),
+  gh('lewis6991/gitsigns.nvim'),
+  gh('smoka7/hop.nvim'),
+  gh('nvimdev/indentmini.nvim'),
+  gh('echasnovski/mini.tabline'),
+  { src = gh('saghen/blink.cmp'), version = 'v1.10.0' },
+  -- TREESITTER
+  -- LSP & TREESITTER
+  gh('nvim-treesitter/nvim-treesitter'),
+  gh('nvim-treesitter/nvim-treesitter-context'),
+  gh('williamboman/mason.nvim'),
+  -- NOTE: should not be needed anymore
+  -- gh('williamboman/mason-lspconfig.nvim'),
+  gh('neovim/nvim-lspconfig'),
+  gh('mfussenegger/nvim-lint'),
+  -- PLUGINS WITH DEPS
+  gh('nvim-lua/plenary.nvim'),
+  -- depends on plenary and treesitter
+  gh('zbirenbaum/copilot.lua'),
+  gh('giuxtaposition/blink-cmp-copilot'),
+  { src = gh('olimorris/codecompanion.nvim'), version = 'main' }
+})
+-- }}}
 
-" --- Plugins ---
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
-Plug 'dense-analysis/ale'
-Plug 'tpope/vim-surround'
-Plug 'tpope/vim-repeat'
-Plug 'tpope/vim-eunuch'
-Plug 'tpope/vim-rhubarb'
-Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-projectionist'
-Plug 'dominikduda/vim_current_word'
-Plug 'vim-crystal/vim-crystal'
+-- Post install {{{
+vim.api.nvim_create_autocmd('PackChanged', {
+  callback = function(ev)
+    if ev.data.spec.name == 'fzf' then
+      vim.fn.call('fzf#install', {})
+    end
 
-if has('nvim')
-  " -- treesitter and lsp --
-  Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-  Plug 'nvim-treesitter/nvim-treesitter-context'
-  Plug 'williamboman/mason.nvim'
-  Plug 'williamboman/mason-lspconfig.nvim'
-  Plug 'neovim/nvim-lspconfig'
-  Plug 'mfussenegger/nvim-lint'
-  Plug 'saghen/blink.cmp', { 'tag': 'v1.9.1' }
-  Plug 'kevinhwang91/nvim-hlslens'
-  " -- formatter --
-  Plug 'stevearc/conform.nvim'
+    if ev.data.spec.name == 'nvim-treesitter' then
+      vim.cmd('TSUpdate')
+    end
+  end
+})
+-- }}}
 
-  " -- plenary and plugins depending on it --
-  Plug 'nvim-lua/plenary.nvim'
-  Plug 'folke/todo-comments.nvim'
-  " -- codecompanion.nvim --
-  " depends on plenary and treesitter
-  Plug 'zbirenbaum/copilot.lua'
-  " NOTE: there's another blink integration named `blink-copilot`. Worth
-  "       checking if this one does not work as expected
-  Plug 'giuxtaposition/blink-cmp-copilot'
-  Plug 'olimorris/codecompanion.nvim', { 'branch': 'main' }
 
-  " -- other plugins --
-  Plug 'echasnovski/mini.tabline'
-  Plug 'lewis6991/gitsigns.nvim'
-  Plug 'smoka7/hop.nvim'
-  Plug 'nvimdev/indentmini.nvim'
-  Plug 'stevearc/aerial.nvim'
-  Plug 'dstein64/nvim-scrollview'
-endif
+-- ---------------------------------------------------------------------------
+--  NOTE: migrating to vim.pack + updating config for neovim 0.12
+--        still not sure if I get rid of these ones, or not
+--
+-- Plug 'elixir-editors/vim-elixir', { 'for': ['elixir', 'heex'] }
+-- Plug 'kevinhwang91/nvim-hlslens'
+-- ---------------------------------------------------------------------------
 
-call plug#end()
+EOF
 
 
 " =======================
@@ -280,17 +292,18 @@ vim.keymap.set("n", "<leader>jw", "<cmd>HopWord<CR>")
 vim.keymap.set("n", "<leader>jl", "<cmd>HopLine<CR>")
 vim.keymap.set("n", "<leader>jc", "<cmd>HopCamelCale<CR>")
 
-
--- ----- hslens -----
-require('hlslens').setup()
-local kopts = {noremap = true, silent = true}
-vim.api.nvim_set_keymap('n', 'n', [[<Cmd>execute('normal! ' . v:count1 . 'n')<CR><Cmd>lua require('hlslens').start()<CR>]], kopts)
-vim.api.nvim_set_keymap('n', 'N', [[<Cmd>execute('normal! ' . v:count1 . 'N')<CR><Cmd>lua require('hlslens').start()<CR>]], kopts)
-vim.api.nvim_set_keymap('n', '*', [[*<Cmd>lua require('hlslens').start()<CR>]], kopts)
-vim.api.nvim_set_keymap('n', '#', [[#<Cmd>lua require('hlslens').start()<CR>]], kopts)
-vim.api.nvim_set_keymap('n', 'g*', [[g*<Cmd>lua require('hlslens').start()<CR>]], kopts)
-vim.api.nvim_set_keymap('n', 'g#', [[g#<Cmd>lua require('hlslens').start()<CR>]], kopts)
-vim.api.nvim_set_keymap('n', '<Leader>l', '<Cmd>noh<CR>', kopts)
+-- -- ----- hslens ----- {{{
+-- -- TODO: still not sure if I keep this one, migrate to another one, or drop entirely
+-- require('hlslens').setup()
+-- local kopts = {noremap = true, silent = true}
+-- vim.api.nvim_set_keymap('n', 'n', [[<Cmd>execute('normal! ' . v:count1 . 'n')<CR><Cmd>lua require('hlslens').start()<CR>]], kopts)
+-- vim.api.nvim_set_keymap('n', 'N', [[<Cmd>execute('normal! ' . v:count1 . 'N')<CR><Cmd>lua require('hlslens').start()<CR>]], kopts)
+-- vim.api.nvim_set_keymap('n', '*', [[*<Cmd>lua require('hlslens').start()<CR>]], kopts)
+-- vim.api.nvim_set_keymap('n', '#', [[#<Cmd>lua require('hlslens').start()<CR>]], kopts)
+-- vim.api.nvim_set_keymap('n', 'g*', [[g*<Cmd>lua require('hlslens').start()<CR>]], kopts)
+-- vim.api.nvim_set_keymap('n', 'g#', [[g#<Cmd>lua require('hlslens').start()<CR>]], kopts)
+-- vim.api.nvim_set_keymap('n', '<Leader>l', '<Cmd>noh<CR>', kopts)
+-- }}}
 
 
 -- ----- lint -----

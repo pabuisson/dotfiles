@@ -5,11 +5,6 @@
 " <Leader> set to , instead of \
 let mapleader = ","
 
-" Plugin install/update/clean mappings
-nnoremap <leader>pi :PlugInstall<CR>
-nnoremap <leader>pu :PlugUpdate<CR>
-nnoremap <leader>pc :PlugClean<CR>
-
 nnoremap <leader>vrc  :e $MYVIMRC<CR>
 
 " command! overwrites existing command with same name

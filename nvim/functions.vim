@@ -177,3 +177,73 @@ endfunction
 
 :command! RemoveQFItem :call RemoveQFItem()
 autocmd FileType qf map <buffer> dd :RemoveQFItem<cr>
+
+
+lua << EOF
+-- -----------------------------------------
+-- A few function to complement vim.pack,
+-- especially regarding inactive plugins
+-- and plugin deletion.
+-- -----------------------------------------
+
+function GetInactivePackages()
+  return vim.iter(vim.pack.get())
+    :filter(function(p) return not p.active end)
+    :totable()
+end
+
+function ListInactivePacks()
+  local inactive = GetInactivePackages()
+
+  if #inactive == 0 then
+    print("No inactive plugin.")
+  else
+    print("Inactive plugins (" .. #inactive .. ") :")
+    for _, pack in ipairs(inactive) do
+      print("- " .. pack.spec.name)
+    end
+  end
+end
+
+function CleanInactivePacks()
+  local inactive = GetInactivePackages()
+
+  if #inactive == 0 then
+    vim.notify("No inactive plugin.")
+    return
+  end
+
+  -- Show list of plugins to delete
+  local msg = "Inactive plugins (" .. #inactive .. ") :\n"
+  for _, pack in ipairs(inactive) do
+    msg = msg .. "- " .. pack.spec.name .. " (" .. pack.path .. ")\n"
+  end
+  vim.notify(msg)
+
+  -- Confirm
+  local response = vim.fn.input("Delete these " .. #inactive .. " plugin(s) ? (y/N): ")
+  if response:lower() ~= 'y' then
+    vim.notify("Cancelled.")
+    return
+  end
+
+  -- Supprimer les plugins
+  local deleted = 0
+  for _, pack in ipairs(inactive) do
+    local ok, err = pcall(vim.pack.del, {pack.spec.name})
+    if ok then
+      -- vim.pack.del prints a success message on deletion
+      deleted = deleted + 1
+    else
+      vim.notify("✗ Error when deleting " .. pack.spec.name .. ": " .. tostring(err))
+    end
+  end
+
+  vim.notify(deleted .. " plugin(s) deleted")
+end
+
+vim.keymap.set('n', '<leader>pi', ListInactivePacks)
+vim.keymap.set('n', '<leader>pc', CleanInactivePacks)
+vim.keymap.set('n', '<leader>pu', vim.pack.update)
+
+EOF
