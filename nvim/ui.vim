@@ -56,15 +56,15 @@ lua << EOF
     options = {
       styles = {                 -- Style to be applied to different syntax groups
         comments = 'NONE',       -- Value is any valid attr-list value `:help attr-list`
-        functions = 'NONE',
-        keywords = 'NONE',
-        variables = 'NONE',
         conditionals = 'NONE',
         constants = 'NONE',
+        functions = 'NONE',
+        keywords = 'NONE',
         numbers = 'NONE',
         operators = 'NONE',
         strings = 'NONE',
         types = 'NONE',
+        variables = 'NONE',
       },
       -- https://github.com/projekt0n/github-nvim-theme/blob/main/Usage.md#modules
       modules = {
@@ -241,6 +241,7 @@ function s:SetLightTheme()
 endfunction
 
 
+" Theme helpers {{{
 function s:MacOsUIMode()
   let s:result = system('defaults read -g AppleInterfaceStyle')
   if s:result =~ 'Dark'
@@ -262,5 +263,6 @@ augroup lightdarkmode
   autocmd!
   autocmd WinEnter * call s:LoadTheme()
 augroup END
+" }}}
 
 call s:LoadTheme()
