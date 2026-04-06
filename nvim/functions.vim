@@ -102,6 +102,42 @@ endfunction
 
 nnoremap <leader>yml :call YAMLTree()<CR>
 
+" ========================================
+" === Show current path in a XML file ===
+" ========================================
+
+function! XMLTree()
+  let l:list = []
+  let l:cur = getcurpos()[1]
+  let l:indent = indent(l:cur)
+
+  " Loop from the cursor position to the top of the file
+  for l:n in reverse(range(1, l:cur))
+    let l:line = getline(l:n)
+    let l:i = indent(l:n)
+
+    " Match opening tags: <tagname> or <tagname attr="value">
+    " Ignore self-closing tags: <tagname />
+    " Ignore closing tags: </tagname>
+    if l:line =~# '^\s*<[^/?!]' && l:line !~# '/>\s*$'
+      " Extract tag name
+      let l:tag = substitute(l:line, '^\s*<\([a-zA-Z0-9_:-]\+\).*', '\1', '')
+
+      " If we found a valid tag and indentation is less than current
+      if l:tag !=# l:line && l:i < l:indent
+        let l:list = add(l:list, l:tag)
+        let l:indent = l:i
+      endif
+    endif
+  endfor
+
+  let l:list = reverse(l:list)
+  let @+ = join(l:list, '/')
+  echo join(l:list, '/')
+endfunction
+
+nnoremap <leader>xml :call XMLTree()<CR>
+
 
 " ==============================
 " === Yank current file path ===
