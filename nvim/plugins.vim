@@ -75,17 +75,17 @@ vim.api.nvim_create_autocmd('PackChanged', {
 EOF
 
 
-" =======================
-" === PLUGIN SETTINGS ===
-" =======================
+"" =======================
+""     PLUGIN SETTINGS
+"" =======================
 
-" " ----- ale -----
-" NOTE: I've already migrated linting to nvim-lint, and I'm currently in the
-" process of migrating formatting to conform.nvim. ale is great but does a lot
-" of things (lint, fix, LSP...) and either I only use it, or I stop using it
-" altogether.
-" FIXME: (2025-07-11) can't migrate mix format yet, it prepends log lines to the formatted files
-"       look into it and maybe configure differently or make a PR to conform.nvim
+" " ----- ale ----- {{{
+" NOTE: I've already migrated linting to nvim-lint, and I'm currently migrating
+"       formatting to conform.nvim. ale is great but does a lot of things (lint,
+"       fix, LSP...) and either I only use it, or I stop using it entirely.
+" FIXME: (2025-07) can't migrate mix format yet, it prepends log lines to the
+"        formatted files look into it and maybe configure differently or make
+"        a PR to conform.nvim
 let g:ale_linters_explicit = 1
 let g:ale_linters = {}
 let g:ale_fix_on_save = 1
@@ -94,34 +94,25 @@ let g:ale_fixers = {
 \   'heex': ['mix_format'],
 \   'eelixir': ['mix_format']
 \}
+" }}}
 
-" ----- current_word -----
-let g:vim_current_word#highlight_delay = 800
-highlight CurrentWord gui=bold cterm=bold
-highlight CurrentWordTwins gui=underline cterm=underline
+lua << EOF
+-- ----- vim_current_word ----- {{{
+vim.api.nvim_set_hl(0, "CurrentWord", { underline=true, bold=true }),
+vim.api.nvim_set_hl(0, "CurrentWordTwins", { underline=true, bold=true })
+-- }}}
 
-" " NOTE: below is the native way of doing this, but I couldn't get it to work
-" " yet. Will need to dive deeper into this, maybe I can get rid of a plugin
-" source: https://chaos.social/@scy/111570077753908537
-" set updatetime=1000
-" " TODO: trigger document_highlight only if the LSP server supports this
-" autocmd CursorHold  <buffer> lua vim.lsp.buf.document_highlight()
-" autocmd CursorHoldI <buffer> lua vim.lsp.buf.document_highlight()
-" " NOTE: shouldn't we do that for CursorMovedI too?
-" autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
-" highlight LspReferenceRead  guibg=#d20000
-" highlight LspReferenceWrite guibg=#d20000
-
-
-" ----- fugitive.vim -----
-nnoremap <leader>gst :Git<CR>
-nnoremap <leader>gci :Git commit<CR>
-nnoremap <leader>gr  :Gread<CR>
-nnoremap <leader>gw  :Gwrite<CR>
-nnoremap <leader>gbf :Git blame<CR>
-nnoremap <leader>gdv :Gvdiffsplit<CR>
-nnoremap <leader>gdh :Gdiffsplit<CR>
-
+-- ----- fugitive.vim ----- {{{
+local opts = { noremap=true, silent=true }
+vim.keymap.set('n', '<leader>gst', ':Git<CR>', opts)
+vim.keymap.set('n', '<leader>gci', ':Git commit<CR>', opts)
+vim.keymap.set('n', '<leader>gr',  ':Gread<CR>', opts)
+vim.keymap.set('n', '<leader>gw',  ':Gwrite<CR>', opts)
+vim.keymap.set('n', '<leader>gbf', ':Git blame<CR>', opts)
+vim.keymap.set('n', '<leader>gdv', ':Gvdiffsplit<CR>', opts)
+vim.keymap.set('n', '<leader>gdh', ':Gdiffsplit<CR>', opts)
+-- }}}
+EOF
 
 " ----- fzf / fzf.vim ----- {{{
 " Escape C-a and C-d in iTerm2 : https://github.com/junegunn/fzf.vim/issues/54
@@ -195,29 +186,35 @@ nnoremap <leader>a :A<CR>
 "       NVIM SPECIFIC
 " ==========================
 
-if !has('nvim-0.5')
-  finish
-end
-
 lua <<EOF
 
--- ----- aerial -----
--- NOTE: neovim LSP is supposed to provide this but I couldn't get it to work yet.
--- https://neovim.io/doc/user/lsp.html#vim.lsp.buf.document_symbol()
-require("aerial").setup({
-  layout = {
-    min_width = 20,
-    width = 0.2,
-    max_width = 50
-  },
-  nerd_font = true,
-  post_jump_cmd = "normal! zt",
+-- ----- neovim built-in ----- {{{
+-- avoids many “Press ENTER” interruptions
+-- avoids delays from warnings like W10
+-- highlights the command line as you type
+-- exposes the pager as a regular buffer + window
+require('vim._core.ui2').enable({
+  enable = true
 })
-vim.keymap.set("n", "<leader>ft", "<cmd>call aerial#fzf()<CR>")
-vim.keymap.set("n", "<leader>o", "<cmd>AerialToggle!<CR>")
+-- }}}
 
+-- -- ----- aerial ----- {{{
+-- -- NOTE: neovim LSP is supposed to provide this but I couldn't get it to work yet.
+-- -- https://neovim.io/doc/user/lsp.html#vim.lsp.buf.document_symbol()
+-- require("aerial").setup({
+--   layout = {
+--     min_width = 20,
+--     width = 0.2,
+--     max_width = 50
+--   },
+--   nerd_font = true,
+--   post_jump_cmd = "normal! zt",
+-- })
+-- vim.keymap.set("n", "<leader>ft", "<cmd>call aerial#fzf()<CR>")
+-- vim.keymap.set("n", "<leader>o", "<cmd>AerialToggle!<CR>")
+-- }}}
 
--- ----- blink -----
+-- ----- blink ----- {{{
 require("blink.cmp").setup({
   enabled = function()
     return not vim.tbl_contains({ "gitcommit" }, vim.bo.filetype)
@@ -249,10 +246,9 @@ require("blink.cmp").setup({
     window = { border = 'single' }
   },
 })
+-- }}}
 
-
--- ----- codecompanion -----
--- TODO: check this plugin for better copilot/blink integration → https://github.com/fang2hou/blink-copilot
+-- ----- codecompanion & copilot ----- {{{
 require("copilot").setup({
   suggestion = { enabled = false },
   panel = { enabled = false },
@@ -262,12 +258,24 @@ require("copilot").setup({
     ["*"] = false
   }
 })
-require("codecompanion").setup()
+require("codecompanion").setup({
+  tools = {
+    ["file_search"] = {
+      opts = { require_cmd_approval = false, },
+    },
+    ["grep_search"] = {
+      opts = {
+        require_approval_before = true,
+        require_cmd_approval = true,
+      }
+    }
+  }
+})
 vim.keymap.set("n", "<leader>ccc", "<cmd>CodeCompanionChat<CR>")
+-- }}}
 
-
--- ----- conform -----
--- FIXME: (2025-07-11) can't use mix format right now, it prepends log lines to the formatted files
+-- ----- conform ----- {{{
+-- FIXME: (2025-07) can't use mix format right now, it prepends log lines to the formatted files
 --       look into it and maybe configure differently or make a PR to conform.nvim
 require("conform").setup({
   formatters_by_ft = {
@@ -285,13 +293,26 @@ require("conform").setup({
     timeout_ms = 500,
   },
 })
+-- }}}
 
+-- ---- diffview ---- {{{
+require('diffview').setup({
+  use_icons = false,
+  enhanced_diff_hl = true,
+  file_panel = {
+    listing_style = 'list',  -- 'list' or 'tree'
+  }
+})
+vim.keymap.set('n', '<leader>dvo', '<cmd>DiffviewOpen<CR>')
+vim.keymap.set('n', '<leader>dvc', '<cmd>DiffviewClose<CR>')
+-- }}}
 
--- ----- hop -----
+-- ----- hop ----- {{{
 require('hop').setup()
 vim.keymap.set("n", "<leader>jw", "<cmd>HopWord<CR>")
 vim.keymap.set("n", "<leader>jl", "<cmd>HopLine<CR>")
 vim.keymap.set("n", "<leader>jc", "<cmd>HopCamelCale<CR>")
+-- }}}
 
 -- -- ----- hslens ----- {{{
 -- -- TODO: still not sure if I keep this one, migrate to another one, or drop entirely
@@ -306,11 +327,10 @@ vim.keymap.set("n", "<leader>jc", "<cmd>HopCamelCale<CR>")
 -- vim.api.nvim_set_keymap('n', '<Leader>l', '<Cmd>noh<CR>', kopts)
 -- }}}
 
-
--- ----- lint -----
+-- ----- lint ----- {{{
 -- Solution to use external linters through the native LSP diagnostics
 local nvim_lint = require('lint')
--- FIXME: fallback on the default path if this one does not exist
+-- FIXME: fallback on the default path if phoenix one does not exist
 --        I need to dynamically and recursively look for the closest
 --        node_modules/ folders to look for the eslint binary
 --
@@ -322,9 +342,10 @@ local nvim_lint = require('lint')
 local stylelint = nvim_lint.linters.stylelint
 local eslint = nvim_lint.linters.eslint
 stylelint.cmd = "./assets/node_modules/.bin/stylelint"
-eslint.cmd = "./e2e/node_modules/.bin/eslint"
+eslint.cmd = "./assets/node_modules/.bin/eslint"
 nvim_lint.linters_by_ft = {
-  ruby = {'rubocop'},
+  -- TODO: can I add rubocop back?
+  ruby = {},
   elixir = {'credo'},
   css = {'stylelint'},
   scss = {'stylelint'},
@@ -340,113 +361,123 @@ vim.api.nvim_create_autocmd({ "BufWritePost" }, {
     require("lint").try_lint(nil, { ignore_errors = true })
   end,
 })
-local opts = { noremap=true, silent=true }
-vim.keymap.set('n', '<leader>dl', '<cmd>lua vim.diagnostic.setloclist()<CR>', opts)
-vim.keymap.set('n', '<leader>dd', function()
-  vim.diagnostic.open_float({ border = 'rounded' })
-end, opts)
+-- }}}
 
-
--- ----- lsp: mason, mason-lspconfig -----
+-- ----- LSP: mason, and lspconfig ----- {{{
 require("mason").setup()
-require("mason-lspconfig").setup()
-vim.lsp.config['elixirls'] = {
-  settings = {
-    dialyzerEnabled = false,
-    fetchDeps = false,
-  }
-}
--- Enable the LSP servers I do use
-vim.lsp.enable({'ruby_lsp', 'elixirls', 'ts_ls'})
+-- -- TODO: still not sure if I keep this one, migrate to another one, or drop entirely
+-- require("mason-lspconfig").setup()
+-- -- Enable the LSP servers I do use
+-- vim.lsp.enable({'ruby_lsp', 'expert', 'ts_ls'})
+
+-- Enable installed LSP servers: maps the LSP name to the config name
+-- to be able to call the builtin `vim.lsp.enable` for the config
+-- Replaces mason-lspconfig, more or less
+-- src: https://www.reddit.com/r/neovim/comments/1p0a576/comment/nphwtrg/
+-- another src: https://www.reddit.com/r/neovim/comments/1p1y73n/automatically_downloading_and_installing_lsps/
+local installed_packs = require("mason-registry").get_installed_packages()
+local lsp_config_names = vim.iter(installed_packs):fold({}, function(acc, pack)
+	table.insert(acc, pack.spec.neovim and pack.spec.neovim.lspconfig)
+	return acc
+end)
+vim.lsp.enable(lsp_config_names)
 -- Customize key mappings when LSP gets attached to a buffer
 vim.api.nvim_create_autocmd('LspAttach', {
   callback = function(args)
-    local opts = { noremap=true, silent=true }
-    local keymap_opts = { buffer = args.buf, noremap = true, silent = true }
+    -- NOTE: to check if a LSP feature is available
+    -- local client = assert(vim.lsp.get_client_by_id(ev.data.client_id))
+    -- if client:supports_method('textDocument/implementation') then
 
-    -- Enable completion triggered by <c-x><c-o>
-    vim.api.nvim_buf_set_option(args.buf, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
+    local opts = { buffer = args.buf, noremap = true, silent = true }
+
+    -- FIXME: do I even use this?
+    -- -- Enable completion triggered by <c-x><c-o>
+    -- vim.api.nvim_buf_set_option(args.buf, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
     -- Redefine LSP and diagnostics keymappings
-    vim.keymap.set('n', 'gdd', function()
+    vim.keymap.set('n', 'grd', function()
       vim.lsp.buf.definition()
       vim.cmd('normal! zt') -- move the definition to the top of screen
-    end, keymap_opts)
+    end, opts)
 
     -- Remap K to customize the hover border
     vim.keymap.set('n', 'K', function()
       vim.lsp.buf.hover({ border = 'rounded' })
-      end, keymap_opts)
+      end, opts)
   end
 })
+-- }}}
 
-
--- ----- gitsigns -----
-require('gitsigns').setup({
-  preview_config = {
-    border = 'single'
-  }
+-- ----- gitsigns ----- {{{
+local gitsigns = require('gitsigns')
+gitsigns.setup({
+  preview_config = { border = 'single' }
 })
+
 local opts = { noremap=true, silent=true }
+vim.keymap.set('n', '<leader>hj', function() gitsigns.nav_hunk('next') end, opts)
+vim.keymap.set('n', '<leader>hk', function() gitsigns.nav_hunk('prev') end, opts)
+vim.keymap.set('n', '<leader>hp', gitsigns.preview_hunk, opts)
+vim.keymap.set('n', '<leader>hi', gitsigns.preview_hunk_inline, opts)
+vim.keymap.set('n', '<leader>bf', function() gitsigns.blame_line({ full = true }) end, opts)
+-- Other features that could be useful / replace other plugins
+-- vim.keymap.set('n', '<leader>hS', gitsigns.stage_buffer, opts)
+-- vim.keymap.set('n', '<leader>hR', gitsigns.reset_buffer, opts)
+-- }}}
 
-vim.keymap.set('n', '<leader>hj', ':Gitsigns nav_hunk next<CR>', opts)
-vim.keymap.set('n', '<leader>hk', ':Gitsigns nav_hunk prev<CR>', opts)
-vim.keymap.set('n', '<leader>hp', ':Gitsigns preview_hunk<CR>', opts)
-vim.keymap.set('n', '<leader>bl', ':Gitsigns blame_line<CR>', opts)
-vim.keymap.set('n', '<leader>bf', ':Gitsigns blame<CR>', opts)
-
-
--- ----- indentmini -----
+-- ----- indentmini ----- {{{
 require("indentmini").setup()
+-- }}}
 
+-- -- TODO: still not sure if I keep this one, migrate to another one, or drop entirely
+-- -- ----- scrollview ----- {{{
+-- require('scrollview.contrib.gitsigns').setup()
+-- require('scrollview').setup({
+--   excluded_filetypes = {},
+--   signs_on_startup = { 'conflicts', 'cursor', 'diagnostics', 'keywords', 'marks', 'search' },
+--   diagnostics_severities = { vim.diagnostic.severity.WARN }
+-- })
+-- }}}
 
--- ----- scrollview -----
-require('scrollview.contrib.gitsigns').setup()
-require('scrollview').setup({
-  excluded_filetypes = {},
-  signs_on_startup = { 'conflicts', 'cursor', 'diagnostics', 'keywords', 'marks', 'search' },
-  diagnostics_severities = { vim.diagnostic.severity.WARN }
-})
-
--- ----- mini.tabline -----
+-- ----- mini.tabline ----- {{{
 require('mini.tabline').setup()
+-- }}}
 
-
--- ----- treesitter -----
-require('nvim-treesitter').install(
-  { "javascript", "ruby", "eex", "elixir", "erlang", "heex", "markdown", "markdown_inline", "html", "lua", "typescript", "yaml" }
-)
+-- ----- treesitter ----- {{{
+require('nvim-treesitter').install({
+  'javascript', 'typescript', 'html',
+  'elixir', 'eex', 'erlang', 'heex',
+  'ruby',
+  'markdown', 'markdown_inline',
+  'lua',
+})
 vim.api.nvim_create_autocmd('FileType', {
   pattern = {
     'javascript', 'typescript', 'html', 'css',
-    'elixir', 'heex', 'ruby',
+    'elixir', 'heex',
+    'ruby',
     'markdown',
     'lua'
   },
-  callback = function() vim.treesitter.start() end,
+  callback = function()
+    pcall(vim.treesitter.start)
+  end,
 })
+-- }}}
 
--- ----- treesitter-context -----
+-- ----- treesitter-context ----- {{{
 require('treesitter-context').setup({
   max_lines = 3,
   multiline_threshold = 2,
   trim_scope = 'inner',
 })
 -- Creates a fake bottom border under the context
-vim.cmd([[
-  hi TreesitterContextBottom gui=underline guisp=Grey
-  hi TreesitterContextLineNumberBottom gui=underline guisp=Grey
-]])
-
-
--- ----- todo-comments -----
-require("todo-comments").setup({
-  keywords = {
-    TODO = { icon = "⬣" },
-    WARN = { icon = "▲" },
-    FIXME = { icon = "▲" },
-    NOTE = { icon = "⏺" },
-  },
+vim.api.nvim_create_autocmd({ 'ColorScheme' }, {
+  callback = function(args)
+    -- NOTE: ensures the 'fg' used in highlights is updated when I switch theme
+    vim.api.nvim_set_hl(0, 'TreesitterContextBottom', { underline = true, sp='fg' })
+    vim.api.nvim_set_hl(0, 'TreesitterContextLineNumberBottom', { underline = true, sp='fg' })
+  end
 })
-
+-- }}}
 EOF
