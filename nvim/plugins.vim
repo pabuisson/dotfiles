@@ -123,7 +123,7 @@ nnoremap <leader>gdv :Gvdiffsplit<CR>
 nnoremap <leader>gdh :Gdiffsplit<CR>
 
 
-" ----- fzf -----
+" ----- fzf / fzf.vim ----- {{{
 " Escape C-a and C-d in iTerm2 : https://github.com/junegunn/fzf.vim/issues/54
 
 let $FZF_DEFAULT_OPTS="--bind ctrl-k:prev-history,ctrl-j:next-history"
@@ -157,7 +157,7 @@ command -nargs=* RgDefWithArg
 
 command -nargs=* RgDefFn
   \ call fzf#vim#grep(
-  \   'rg --column --line-number --no-heading --color=always "^\s*\b(def|defp)\b"',
+  \   'rg --column --line-number --no-heading --color=always "^\s*\b(def|defp|defmacro)\b"',
   \   1,
   \   fzf#vim#with_preview(), 0)
 
@@ -184,6 +184,7 @@ nnoremap <leader>fl :Lines<CR>
 nnoremap <leader>fo :BLines<CR>
 ca rg Rg
 ca rgw RgExact
+" }}}
 
 
 " ----- projectionist -----
