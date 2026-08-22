@@ -1,6 +1,6 @@
 lua << EOF
 if vim.g.neovide then
-  vim.o.guifont = "JetbrainsMono Nerd Font:h14"
+  vim.o.guifont = "JetbrainsMono Nerd Font:h12"
 
   vim.g.neovide_position_animation_length = 0
   vim.g.neovide_position_animation_length = 0
@@ -14,5 +14,14 @@ if vim.g.neovide then
   vim.keymap.set('v', '<D-v>', '"+P') -- Paste visual mode
   vim.keymap.set('i', '<D-v>', '<ESC>"+Pi') -- Paste insert mode
   vim.keymap.set('c', '<D-v>', '<C-R>+') -- Paste command mode
+
+  -- Font size +/-
+  vim.g.neovide_scale_factor = 1.0
+  vim.keymap.set('n', '<D-+>', function()
+    vim.g.neovide_scale_factor = vim.g.neovide_scale_factor * 1.1
+  end)
+  vim.keymap.set('n', '<D-->', function()
+  vim.g.neovide_scale_factor = vim.g.neovide_scale_factor * 1/1.1
+  end)
 end
 EOF
