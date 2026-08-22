@@ -23,9 +23,6 @@ vim.pack.add({
   gh('projekt0n/github-nvim-theme'),
   gh('rebelot/kanagawa.nvim'),
   gh('navarasu/onedark.nvim'),
-  -- NEOVIM STANDALONE
-  -- gh('stevearc/aerial.nvim'),
-  -- gh('dstein64/nvim-scrollview'),
   -- }}}
 
   -- NEOVIM STANDALONE {{{
