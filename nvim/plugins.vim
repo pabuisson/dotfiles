@@ -17,6 +17,7 @@ vim.pack.add({
   gh('junegunn/fzf'),
   gh('junegunn/fzf.vim'),
   -- gh('sainnhe/everforest'),
+  gh('elixir-editors/vim-elixir'),
   -- }}}
 
   -- THEMES {{{
@@ -74,8 +75,6 @@ vim.api.nvim_create_autocmd('PackChanged', {
 -- ---------------------------------------------------------------------------
 --  NOTE: migrating to vim.pack + updating config for neovim 0.12
 --        still not sure if I get rid of these ones, or not
---
--- Plug 'elixir-editors/vim-elixir', { 'for': ['elixir', 'heex'] }
 -- Plug 'kevinhwang91/nvim-hlslens'
 -- ---------------------------------------------------------------------------
 
