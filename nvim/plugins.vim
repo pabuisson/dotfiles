@@ -2,10 +2,10 @@
 
 lua << EOF
 
--- Package list {{{
 local gh = function(x) return 'https://github.com/' .. x end
+
 vim.pack.add({
-  -- VIM PLUGINS
+  -- VIM PLUGINS {{{
   gh('tpope/vim-surround'),
   gh('tpope/vim-repeat'),
   gh('tpope/vim-eunuch'),
@@ -16,14 +16,19 @@ vim.pack.add({
   gh('dense-analysis/ale'),
   gh('junegunn/fzf'),
   gh('junegunn/fzf.vim'),
-  -- THEMES
   -- gh('sainnhe/everforest'),
+  -- }}}
+
+  -- THEMES {{{
   gh('projekt0n/github-nvim-theme'),
   gh('rebelot/kanagawa.nvim'),
   gh('navarasu/onedark.nvim'),
   -- NEOVIM STANDALONE
   -- gh('stevearc/aerial.nvim'),
   -- gh('dstein64/nvim-scrollview'),
+  -- }}}
+
+  -- NEOVIM STANDALONE {{{
   gh('stevearc/conform.nvim'),
   gh('sindrets/diffview.nvim'),
   gh('lewis6991/gitsigns.nvim'),
@@ -31,8 +36,9 @@ vim.pack.add({
   gh('nvimdev/indentmini.nvim'),
   gh('echasnovski/mini.tabline'),
   { src = gh('saghen/blink.cmp'), version = 'v1.10.0' },
-  -- TREESITTER
-  -- LSP & TREESITTER
+  -- }}}
+
+  -- LSP & TREESITTER {{{
   gh('nvim-treesitter/nvim-treesitter'),
   gh('nvim-treesitter/nvim-treesitter-context'),
   gh('williamboman/mason.nvim'),
@@ -40,14 +46,16 @@ vim.pack.add({
   -- gh('williamboman/mason-lspconfig.nvim'),
   gh('neovim/nvim-lspconfig'),
   gh('mfussenegger/nvim-lint'),
-  -- PLUGINS WITH DEPS
+  -- }}}
+
+  -- PLUGINS WITH DEPS {{{
   gh('nvim-lua/plenary.nvim'),
   -- depends on plenary and treesitter
   gh('zbirenbaum/copilot.lua'),
   gh('giuxtaposition/blink-cmp-copilot'),
   { src = gh('olimorris/codecompanion.nvim'), version = 'main' }
+  -- }}}
 })
--- }}}
 
 -- Post install {{{
 vim.api.nvim_create_autocmd('PackChanged', {
