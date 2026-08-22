@@ -29,6 +29,8 @@ vim.pack.add({
   -- }}}
 
   -- NEOVIM STANDALONE {{{
+  gh('stevearc/aerial.nvim'),
+  gh('dstein64/nvim-scrollview'),
   gh('stevearc/conform.nvim'),
   gh('sindrets/diffview.nvim'),
   gh('lewis6991/gitsigns.nvim'),
@@ -204,22 +206,23 @@ lua <<EOF
 require('vim._core.ui2').enable({
   enable = true
 })
+vim.cmd.packadd('nvim.undotree')
 -- }}}
 
--- -- ----- aerial ----- {{{
--- -- NOTE: neovim LSP is supposed to provide this but I couldn't get it to work yet.
--- -- https://neovim.io/doc/user/lsp.html#vim.lsp.buf.document_symbol()
--- require("aerial").setup({
---   layout = {
---     min_width = 20,
---     width = 0.2,
---     max_width = 50
---   },
---   nerd_font = true,
---   post_jump_cmd = "normal! zt",
--- })
--- vim.keymap.set("n", "<leader>ft", "<cmd>call aerial#fzf()<CR>")
--- vim.keymap.set("n", "<leader>o", "<cmd>AerialToggle!<CR>")
+-- ----- aerial ----- {{{
+-- NOTE: neovim LSP is supposed to provide this but I couldn't get it to work yet.
+-- https://neovim.io/doc/user/lsp.html#vim.lsp.buf.document_symbol()
+require("aerial").setup({
+  layout = {
+    min_width = 20,
+    width = 0.2,
+    max_width = 50
+  },
+  nerd_font = true,
+  post_jump_cmd = "normal! zt",
+})
+vim.keymap.set("n", "<leader>ft", "<cmd>call aerial#fzf()<CR>")
+vim.keymap.set("n", "<leader>o", "<cmd>AerialToggle!<CR>")
 -- }}}
 
 -- ----- blink ----- {{{
@@ -438,14 +441,14 @@ vim.keymap.set('n', '<leader>bf', function() gitsigns.blame_line({ full = true }
 require("indentmini").setup()
 -- }}}
 
--- -- TODO: still not sure if I keep this one, migrate to another one, or drop entirely
--- -- ----- scrollview ----- {{{
--- require('scrollview.contrib.gitsigns').setup()
--- require('scrollview').setup({
---   excluded_filetypes = {},
---   signs_on_startup = { 'conflicts', 'cursor', 'diagnostics', 'keywords', 'marks', 'search' },
---   diagnostics_severities = { vim.diagnostic.severity.WARN }
--- })
+-- TODO: still not sure if I keep this one, migrate to another one, or drop entirely
+-- ----- scrollview ----- {{{
+require('scrollview.contrib.gitsigns').setup()
+require('scrollview').setup({
+  excluded_filetypes = {},
+  signs_on_startup = { 'conflicts', 'cursor', 'diagnostics', 'keywords', 'marks', 'search' },
+  diagnostics_severities = { vim.diagnostic.severity.WARN }
+})
 -- }}}
 
 -- ----- mini.tabline ----- {{{
