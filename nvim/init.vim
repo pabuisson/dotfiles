@@ -71,6 +71,54 @@ iabbr <-- ←
 lua << EOF
 
 
+-- --------------------------------------
+-- ----- DIAGNOSTIC CONFIGURATION   -----
+-- ----- USED BY NVIM-LINT AND SUCH -----
+-- --------------------------------------
+local opts = { noremap=true, silent=true }
+vim.keymap.set('n', '<leader>dl', vim.diagnostic.setloclist, opts)
+vim.keymap.set('n', '<leader>dd', vim.diagnostic.open_float, opts)
+vim.keymap.set('n', '<leader>dj', vim.diagnostic.get_next, opts)
+vim.keymap.set('n', '<leader>dk', vim.diagnostic.get_prev, opts)
+
+-- Some more diagnostics tuning, initially copy-pasted and adapted from
+-- https://tduyng.com/blog/neovim-basic-setup/#my-diagnostics-configuration
+vim.api.nvim_set_hl(0, "DiagnosticErrorLine",{ bg = '#51202a', blend = 20 })
+vim.api.nvim_set_hl(0, "DiagnosticWarnLine", { bg = '#3b3b1b', blend = 15 })
+vim.api.nvim_set_hl(0, "DiagnosticInfoLine", { bg = '#1f3342', blend = 10 })
+vim.api.nvim_set_hl(0, "DiagnosticHintLine", { bg = '#1e2e1e', blend = 10 })
+vim.diagnostic.config({
+  -- keep underline & severity_sort on for quick scanning
+  underline = true,
+  severity_sort = true,
+  update_in_insert = false, -- less flicker
+  float = {
+    border = 'rounded',
+    source = true,
+  },
+  signs = {
+    text = {
+      [vim.diagnostic.severity.ERROR] = " ",
+      [vim.diagnostic.severity.WARN] = " ",
+      [vim.diagnostic.severity.INFO] = " ",
+      [vim.diagnostic.severity.HINT] = "󰌵 ",
+    },
+  },
+  virtual_text = {
+    spacing = 4,
+    source = "if_many",
+    prefix = "●",
+  },
+  -- Nvim 0.11+ — dim whole line
+  linehl = {
+    [vim.diagnostic.severity.ERROR] = "DiagnosticErrorLine",
+    [vim.diagnostic.severity.WARN] = "DiagnosticWarnLine",
+    [vim.diagnostic.severity.INFO] = "DiagnosticInfoLine",
+    [vim.diagnostic.severity.HINT] = "DiagnosticHintLine",
+  },
+})
+
+
 -- ------------------------------------------
 -- ----- BRIEFLY HIGHLIGHT YANKED TEXT -----
 -- ------------------------------------------
