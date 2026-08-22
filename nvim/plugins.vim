@@ -368,19 +368,20 @@ require("mason").setup()
 -- -- TODO: still not sure if I keep this one, migrate to another one, or drop entirely
 -- require("mason-lspconfig").setup()
 -- -- Enable the LSP servers I do use
--- vim.lsp.enable({'ruby_lsp', 'expert', 'ts_ls'})
+vim.lsp.enable({'ruby_lsp', 'expert', 'ts_ls'})
 
--- Enable installed LSP servers: maps the LSP name to the config name
--- to be able to call the builtin `vim.lsp.enable` for the config
--- Replaces mason-lspconfig, more or less
--- src: https://www.reddit.com/r/neovim/comments/1p0a576/comment/nphwtrg/
--- another src: https://www.reddit.com/r/neovim/comments/1p1y73n/automatically_downloading_and_installing_lsps/
-local installed_packs = require("mason-registry").get_installed_packages()
-local lsp_config_names = vim.iter(installed_packs):fold({}, function(acc, pack)
-	table.insert(acc, pack.spec.neovim and pack.spec.neovim.lspconfig)
-	return acc
-end)
-vim.lsp.enable(lsp_config_names)
+-- FIXME: this does not seem to work anymore
+-- -- Enable installed LSP servers: maps the LSP name to the config name
+-- -- to be able to call the builtin `vim.lsp.enable` for the config
+-- -- Replaces mason-lspconfig, more or less
+-- -- src: https://www.reddit.com/r/neovim/comments/1p0a576/comment/nphwtrg/
+-- -- another src: https://www.reddit.com/r/neovim/comments/1p1y73n/automatically_downloading_and_installing_lsps/
+-- local installed_packs = require("mason-registry").get_installed_packages()
+-- local lsp_config_names = vim.iter(installed_packs):fold({}, function(acc, pack)
+-- 	table.insert(acc, pack.spec.neovim and pack.spec.neovim.lspconfig)
+-- 	return acc
+-- end)
+-- vim.lsp.enable(lsp_config_names)
 -- Customize key mappings when LSP gets attached to a buffer
 vim.api.nvim_create_autocmd('LspAttach', {
   callback = function(args)
@@ -395,7 +396,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
     -- vim.api.nvim_buf_set_option(args.buf, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
     -- Redefine LSP and diagnostics keymappings
-    vim.keymap.set('n', 'grd', function()
+    vim.keymap.set('n', 'gdd', function()
       vim.lsp.buf.definition()
       vim.cmd('normal! zt') -- move the definition to the top of screen
     end, opts)
