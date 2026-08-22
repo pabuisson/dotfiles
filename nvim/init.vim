@@ -37,6 +37,8 @@ set signcolumn=yes
 " Which column to wrap at with `gq`
 set textwidth=90
 set formatoptions-=t
+set modeline
+set modelines=2
 " === HIDDEN/NON VISIBLE CHARS ===
 " multispace option allows to emulate indent lines without needing a dedicated plugin
 " source: https://github.com/thaerkh/vim-indentguides
