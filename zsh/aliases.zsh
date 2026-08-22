@@ -36,10 +36,23 @@ alias gconflict='$EDITOR $(git diff --name-only --diff-filter=U | xargs)'
 alias gchurn="git log --all -M -C --name-only --format='format:' $@ --since='6 months ago' | sort | grep -v '^$' | uniq -c | sort -n | tail -10"
 # Get short SHA1 of HEAD in clipboard
 alias githead='git rev-parse HEAD | cut -c 1-8 | pbcopy'
-# Set of aliases involving a reference branch name
-# TODO: improve the prompt: maybe show last committer and last commit date
-#       check https://chatgpt.com/c/ef296795-b4b7-42aa-a804-a1cff334b526
-alias gbdm='git branch --format="%(refname:short)" --merged | grep -v "master\|develop" | xargs -p -n 1 git branch -d'
+# Interactive local-branch cleanup with fzf. Lists every local branch (except
+# master/develop) with last-commit date and author
+# TAB to (un)select, ENTER to delete the selection (git branch -D, forced).
+gbrm() {
+  local selected
+  selected=$(
+    git for-each-ref --color=always --sort=committerdate refs/heads/ \
+      --format='%(refname:short)|%(color:green)%(committerdate:relative)|%(color:magenta)%(authorname)%(color:reset)' |
+      grep -vE '^(master|develop)\|' |
+      column --table --separator '|' |
+      fzf --ansi --multi --reverse \
+          --header='TAB: (un)select  ENTER: delete (-D)  ESC: cancel' |
+      awk '{print $1}'
+  )
+  [ -z "$selected" ] && { echo 'gbrm: nothing selected'; return 0; }
+  echo "$selected" | xargs git branch -D
+}
 alias gsm='git switch master'
 alias gsd='git switch develop'
 alias gsfm='git switch -f master'
