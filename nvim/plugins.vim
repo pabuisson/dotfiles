@@ -458,19 +458,19 @@ require('nvim-treesitter').install({
   'elixir', 'eex', 'erlang', 'heex',
   'ruby',
   'markdown', 'markdown_inline',
+  'xml', 'yaml',
   'lua',
 })
 vim.api.nvim_create_autocmd('FileType', {
   pattern = {
     'javascript', 'typescript', 'html', 'css',
-    'elixir', 'heex',
+    'elixir', 'eelixir', 'heex',
     'ruby',
     'markdown',
+    'xml', 'yaml',
     'lua'
   },
-  callback = function()
-    pcall(vim.treesitter.start)
-  end,
+  callback = function() vim.treesitter.start() end,
 })
 -- }}}
 
