@@ -45,15 +45,10 @@ vim.pack.add({
   -- NOTE: should not be needed anymore
   -- gh('williamboman/mason-lspconfig.nvim'),
   gh('neovim/nvim-lspconfig'),
-  gh('mfussenegger/nvim-lint'),
+  gh('mfussenegger/nvim-lint')
   -- }}}
 
   -- PLUGINS WITH DEPS {{{
-  gh('nvim-lua/plenary.nvim'),
-  -- depends on plenary and treesitter
-  gh('zbirenbaum/copilot.lua'),
-  gh('giuxtaposition/blink-cmp-copilot'),
-  { src = gh('olimorris/codecompanion.nvim'), version = 'main' }
   -- }}}
 })
 
@@ -70,13 +65,6 @@ vim.api.nvim_create_autocmd('PackChanged', {
   end
 })
 -- }}}
-
-
--- ---------------------------------------------------------------------------
---  NOTE: migrating to vim.pack + updating config for neovim 0.12
---        still not sure if I get rid of these ones, or not
--- Plug 'kevinhwang91/nvim-hlslens'
--- ---------------------------------------------------------------------------
 
 EOF
 
@@ -228,17 +216,9 @@ require("blink.cmp").setup({
   end,
   keymap = { preset = 'enter' },
   sources = {
-    default = { 'lsp', 'path', 'snippets', 'buffer', 'cmdline', 'omni', 'copilot' },
+    default = { 'lsp', 'path', 'snippets', 'buffer', 'cmdline', 'omni' },
     per_filetype = {
-      crystal = { 'path', 'snippets', 'buffer', 'cmdline', 'omni', 'copilot' },
-    },
-    providers = {
-      copilot = {
-        name = "copilot",
-        module = "blink-cmp-copilot",
-        score_offset = 100,
-        async = true,
-      },
+      crystal = { 'path', 'snippets', 'buffer', 'cmdline', 'omni' },
     },
   },
   completion = {
@@ -253,32 +233,6 @@ require("blink.cmp").setup({
     window = { border = 'single' }
   },
 })
--- }}}
-
--- ----- codecompanion & copilot ----- {{{
-require("copilot").setup({
-  suggestion = { enabled = false },
-  panel = { enabled = false },
-  filetypes = {
-    elixir = true,
-    ruby = true,
-    ["*"] = false
-  }
-})
-require("codecompanion").setup({
-  tools = {
-    ["file_search"] = {
-      opts = { require_cmd_approval = false, },
-    },
-    ["grep_search"] = {
-      opts = {
-        require_approval_before = true,
-        require_cmd_approval = true,
-      }
-    }
-  }
-})
-vim.keymap.set("n", "<leader>ccc", "<cmd>CodeCompanionChat<CR>")
 -- }}}
 
 -- ----- conform ----- {{{
@@ -421,7 +375,6 @@ local gitsigns = require('gitsigns')
 gitsigns.setup({
   preview_config = { border = 'single' }
 })
-
 local opts = { noremap=true, silent=true }
 vim.keymap.set('n', '<leader>hj', function() gitsigns.nav_hunk('next') end, opts)
 vim.keymap.set('n', '<leader>hk', function() gitsigns.nav_hunk('prev') end, opts)
