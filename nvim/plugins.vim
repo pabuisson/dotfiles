@@ -16,14 +16,14 @@ vim.pack.add({
   gh('dense-analysis/ale'),
   gh('junegunn/fzf'),
   gh('junegunn/fzf.vim'),
-  -- gh('sainnhe/everforest'),
   gh('elixir-editors/vim-elixir'),
   -- }}}
 
   -- THEMES {{{
-  gh('projekt0n/github-nvim-theme'),
   gh('rebelot/kanagawa.nvim'),
   gh('navarasu/onedark.nvim'),
+  gh('projekt0n/github-nvim-theme'),
+  gh('sainnhe/everforest'),
   -- }}}
 
   -- NEOVIM STANDALONE {{{

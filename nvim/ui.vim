@@ -134,7 +134,7 @@ function s:SetupOneDark(mode)
 
   -- https://github.com/navarasu/onedark.nvim/blob/master/lua/onedark/palette.lua
   local palette = require("onedark.palette")
-  local style = mode == 'Dark' and 'darker' or 'light'
+  local style = mode == 'Dark' and 'warm' or 'light'
 
   local custom_colors = {}
   local custom_highlights = {}
@@ -157,6 +157,7 @@ function s:SetupOneDark(mode)
     }
   else
     custom_colors = {
+      bg0 = '#fcfbf9', -- a tiny bit warmer
       green = '#1d936a',
       red = '#ce4646',
       blue = '#2d689b',
