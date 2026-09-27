@@ -65,3 +65,7 @@ nnoremap N Nzz
 " NOTE: more variations in the link above, may cover some edge cases too
 command! BD :bn|:bd#
 command! BW :bn|:bw#
+
+" NOTE: I could use -nargs=+ instead but I don't know how to format them correctly afterwards
+"       let's start with an easy and good enough version, I won't use this daily anyway
+command! -nargs=1 Uninstall lua vim.pack.del({ <args> })
