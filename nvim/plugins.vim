@@ -30,7 +30,7 @@ vim.pack.add({
   gh('stevearc/aerial.nvim'),
   gh('dstein64/nvim-scrollview'),
   gh('stevearc/conform.nvim'),
-  gh('sindrets/diffview.nvim'),
+  gh('dlyongemallo/diffview-plus.nvim'),
   gh('lewis6991/gitsigns.nvim'),
   gh('smoka7/hop.nvim'),
   gh('nvimdev/indentmini.nvim'),
