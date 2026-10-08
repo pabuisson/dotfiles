@@ -140,9 +140,6 @@ source "$HOME/.dotfiles/zsh/dependencies.zsh"
 
 # ----- OTHER SETTINGS -----
 
-export BAT_THEME="ansi"
-
-
 # ----- CUSTOM FUNCTIONS ----
 
 # Go to project root

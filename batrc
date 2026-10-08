@@ -1,0 +1,16 @@
+# ~/.config/bat/config
+
+# Theme settings
+--theme="ansi"
+
+# Tab width
+--tabs=2
+
+# Always output color
+--color=always
+
+# Display line numbers and Git changes
+--style="-numbers,changes,header"
+
+# Pager settings
+--pager="less -FR"

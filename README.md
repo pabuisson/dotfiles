@@ -5,6 +5,7 @@
 ```bash
 ln -s $HOME/.dotfiles/zshrc $HOME/.zshrc
 ln -s $HOME/.dotfiles/commonrc $HOME/.commonrc
+ln -s $HOME/.dotfiles/batrc $HOME/.config/bat/config
 ln -s $HOME/.dotfiles/gitconfig $HOME/.gitconfig
 ln -s $HOME/.dotfiles/psqlrc $HOME/.psqlrc
 ln -s $HOME/.dotfiles/nvim $HOME/.config/
@@ -20,5 +21,6 @@ For Neovim initialization: see installation guidelines on [vim-plug](https://git
 - `ripgrep` for fast search: https://github.com/BurntSushi/ripgrep
 - `asdf`, one version manager to rule them all: https://asdf-vm.com/
 - `espanso`, an open-source text-expander: https://espanso.org/
+- `bat`, for a (better) cat alternative
 
 NOTE: `fzf` will come as a dependency of `fzf.vim` so there should be no need to install it separately
